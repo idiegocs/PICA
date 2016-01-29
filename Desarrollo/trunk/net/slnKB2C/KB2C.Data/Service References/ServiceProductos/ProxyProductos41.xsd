@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema xmlns:ft="http://www.kallsony.com/util/filtro" targetNamespace="http://www.kallsony.com/util/filtro" xmlns="http://www.w3.org/2001/XMLSchema">
+  <complexType name="Filtro">
+    <sequence>
+      <element name="tipoFiltro" type="string" />
+      <element name="valorFiltro" type="string" />
+      <element name="pagina" type="int" />
+    </sequence>
+  </complexType>
+  <complexType name="RespuestaFiltro">
+    <sequence minOccurs="0">
+      <element minOccurs="0" name="totalElementos" type="long" />
+      <element minOccurs="0" name="pagina" type="int" />
+    </sequence>
+  </complexType>
+</schema>

@@ -1,0 +1,12 @@
+<adapter-config name="CompraJMS" adapter="JMS Adapter" wsdlLocation="CompraJMS.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/Queue/compra" UIJmsProvider="WLSJMS" UIConnectionName="SOA_AppServerConnection"/>
+  <endpoint-activation portType="Consume_Message_ptt" operation="Consume_Message">
+    <activation-spec className="oracle.tip.adapter.jms.inbound.JmsConsumeActivationSpec">
+      <property name="PayloadType" value="TextMessage"/>
+      <property name="UseMessageListener" value="false"/>
+      <property name="DestinationName" value="jms/compraQueue"/>
+    </activation-spec>
+  </endpoint-activation>
+
+</adapter-config>

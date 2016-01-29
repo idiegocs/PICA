@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WL5G3N0:definitions xmlns:WL5G3N2="http://www.kallsony.com/util/falta" xmlns:WL5G3N1="http://www.kallsony.com/operacion/consultaproducto" xmlns:WL5G3N4="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:WL5G3N3="http://www.kallsony.com/final/operacion/consultaproducto" name="Productos" targetNamespace="http://www.kallsony.com/final/operacion/consultaproducto" xmlns:WL5G3N0="http://schemas.xmlsoap.org/wsdl/">
+  <WL5G3N0:documentation>
+        http://DiegoPC:8001/soa-infra/services/default/ProjectProductos!1.0/Producto.wsdl
+    </WL5G3N0:documentation>
+  <WL5G3N0:types>
+    <xsd:schema xmlns:wkcuf="http://www.kallsony.com/util/falta" xmlns:tns="http://www.kallsony.com/final/operacion/consultaproducto" xmlns:wkcoc="http://www.kallsony.com/operacion/consultaproducto" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://www.kallsony.com/final/operacion/consultaproducto" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:import schemaLocation="http://192.168.2.6:7002/OSBKallsonys/ProxyService/ProxyProductos?SCHEMA%2FOSBProductos%2FXSD%2FXMLSchema_294058203" namespace="http://www.kallsony.com/operacion/consultaproducto" />
+      <xsd:import schemaLocation="http://192.168.2.6:7002/OSBKallsonys/ProxyService/ProxyProductos?SCHEMA%2FOSBProductos%2FXSD%2FXMLSchema_1778274107" namespace="http://www.kallsony.com/util/falta" />
+    </xsd:schema>
+  </WL5G3N0:types>
+  <WL5G3N0:message name="ProductoDetalle_ConsultaProductoEntrada">
+    <WL5G3N0:part name="ConsultaProductosEntrada" element="WL5G3N1:consultaProductoEntrada" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ProductoDetalle_ConsultaProductoSalida">
+    <WL5G3N0:part name="ConsultaProductosSalida" element="WL5G3N1:consultaProductoSalida" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="ProductoDeralle_FaltaProducto">
+    <WL5G3N0:part name="ConsultaProductosFalta" element="WL5G3N2:falta" />
+  </WL5G3N0:message>
+  <WL5G3N0:portType name="ProductosPort">
+    <WL5G3N0:operation name="ConsultarProductos">
+      <WL5G3N0:input message="WL5G3N3:ProductoDetalle_ConsultaProductoEntrada" />
+      <WL5G3N0:output message="WL5G3N3:ProductoDetalle_ConsultaProductoSalida" />
+      <WL5G3N0:fault name="FaltaProductos" message="WL5G3N3:ProductoDeralle_FaltaProducto" />
+    </WL5G3N0:operation>
+  </WL5G3N0:portType>
+  <WL5G3N0:binding name="ProductosPortSOAP11Binding" type="WL5G3N3:ProductosPort">
+    <WL5G3N4:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <WL5G3N0:operation name="ConsultarProductos">
+      <WL5G3N4:operation soapAction="pro:Producto/ConsultarProductos" style="document" />
+      <WL5G3N0:input>
+        <WL5G3N4:body use="literal" parts="ConsultaProductosEntrada" />
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N4:body use="literal" parts="ConsultaProductosSalida" />
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="FaltaProductos">
+        <WL5G3N4:fault use="literal" name="FaltaProductos" namespace="" />
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+  </WL5G3N0:binding>
+  <WL5G3N0:service name="ServiceProductos">
+    <WL5G3N0:port name="ProductosPort_pt" binding="WL5G3N3:ProductosPortSOAP11Binding">
+      <WL5G3N4:address location="http://DiegoPC:7002/OSBKallsonys/ProxyService/ProxyProductos" />
+    </WL5G3N0:port>
+  </WL5G3N0:service>
+</WL5G3N0:definitions>

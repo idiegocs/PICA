@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:tr="http://www.kallsony.com/entidad/tarjeta"
+            targetNamespace="http://www.kallsony.com/entidad/tarjeta"
+            >
+  <complexType name="Tarjeta">
+    <sequence>
+      <element name="nombreTitular" type="string" minOccurs="0"/>
+      <element name="numeroTarjeta" type="string" minOccurs="0"/>
+      <element name="codigoSeguridad" type="string" minOccurs="0"/>
+      <element name="fechaExpiracion" type="dateTime" minOccurs="0"/>
+    </sequence>
+  </complexType>
+</schema>

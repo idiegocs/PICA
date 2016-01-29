@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="d16c6e8f-ddc7-4e37-823c-f85421307b85" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://192.168.2.6:8001/soa-infra/services/default/ProjectConsultaOrdenes/ServiceConsultaOrden?WSDL" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ServiceConsultaOrden.wsdl" MetadataType="Wsdl" ID="cf7166ff-a5d1-43dc-ad6a-2347532c2df6" SourceId="1" SourceUrl="http://192.168.2.6:8001/soa-infra/services/default/ProjectConsultaOrdenes/ServiceConsultaOrden?WSDL" />
+    <MetadataFile FileName="Falta1.xsd" MetadataType="Schema" ID="d999ea6c-8cf9-4f18-bff8-bfc41fc027a7" SourceId="1" SourceUrl="http://192.168.2.6:8001/soa-infra/services/default/ProjectConsultaOrdenes/ServiceConsultaOrden?XSD=xsd/Falta.xsd" />
+    <MetadataFile FileName="Producto1.xsd" MetadataType="Schema" ID="fef9c091-2b96-40bf-b171-ed8f1948d291" SourceId="1" SourceUrl="http://192.168.2.6:8001/soa-infra/services/default/ProjectConsultaOrdenes/ServiceConsultaOrden?XSD=xsd/Producto.xsd" />
+    <MetadataFile FileName="ConsultaOrden.xsd" MetadataType="Schema" ID="53c61238-b6ef-4e8f-8999-3fe944ad5b2b" SourceId="1" SourceUrl="http://192.168.2.6:8001/soa-infra/services/default/ProjectConsultaOrdenes/ServiceConsultaOrden?XSD=xsd/ConsultaOrden.xsd" />
+    <MetadataFile FileName="Direccion1.xsd" MetadataType="Schema" ID="435c5f7f-4cea-41f4-80db-eef503120973" SourceId="1" SourceUrl="http://192.168.2.6:8001/soa-infra/services/default/ProjectConsultaOrdenes/ServiceConsultaOrden?XSD=xsd/Direccion.xsd" />
+    <MetadataFile FileName="Usuario1.xsd" MetadataType="Schema" ID="7e177f2c-4ed0-40fa-b9f7-4b303c377adf" SourceId="1" SourceUrl="http://192.168.2.6:8001/soa-infra/services/default/ProjectConsultaOrdenes/ServiceConsultaOrden?XSD=xsd/Usuario.xsd" />
+    <MetadataFile FileName="Orden1.xsd" MetadataType="Schema" ID="91899e5a-b524-418e-a61a-90179dc90a74" SourceId="1" SourceUrl="http://192.168.2.6:8001/soa-infra/services/default/ProjectConsultaOrdenes/ServiceConsultaOrden?XSD=xsd/Orden.xsd" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

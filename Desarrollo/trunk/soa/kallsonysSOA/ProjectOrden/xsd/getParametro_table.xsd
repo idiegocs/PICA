@@ -1,0 +1,33 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/getParametro" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/getParametro" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="ParametricaCollection" type="ParametricaCollection"/>
+   <xs:complexType name="ParametricaCollection">
+      <xs:sequence>
+         <xs:element name="Parametrica" type="Parametrica" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="Parametrica">
+      <xs:sequence>
+         <xs:element name="paramNombre" nillable="true">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:maxLength value="20"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:element>
+         <xs:element name="paramValor" nillable="true">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:maxLength value="20"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="getParametroSelect_paramNombreInputParameters" type="getParametroSelect_paramNombre"/>
+   <xs:complexType name="getParametroSelect_paramNombre">
+      <xs:sequence>
+         <xs:element name="paramNombre" type="xs:string" minOccurs="1" maxOccurs="1"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

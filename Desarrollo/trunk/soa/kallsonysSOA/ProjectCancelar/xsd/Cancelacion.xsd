@@ -1,0 +1,21 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:co="http://www.kallsony.com/operacion/cancelarcompra"
+        targetNamespace="http://www.kallsony.com/operacion/cancelarcompra"
+        elementFormDefault="qualified">
+  
+    <complexType name="CancelarEntrada">
+        <sequence>
+            <element name="idOrden" type="int"/>
+            <element name="nombreUsuario" type="string" minOccurs="0"/>
+            <element name="comentario" type="string" minOccurs="0"/>
+        </sequence>
+    </complexType>
+    <complexType name="CancelarSalida">
+        <sequence>
+            <element name="estado" type="boolean" minOccurs="1"/>
+        </sequence>
+    </complexType>
+    <element name="cancelarEntrada" type="co:CancelarEntrada"/>
+    <element name="cancelarSalida" type="co:CancelarSalida"/>
+</schema>

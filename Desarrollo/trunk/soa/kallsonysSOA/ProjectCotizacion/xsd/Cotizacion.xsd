@@ -1,0 +1,31 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:cz="http://www.kallsony.com/operacion/cotizarcompra"
+       xmlns:us="http://www.kallsony.com/entidad/usuario"
+       xmlns:or="http://www.kallsony.com/entidad/orden"
+        targetNamespace="http://www.kallsony.com/operacion/cotizarcompra"
+        elementFormDefault="qualified">
+   <import schemaLocation="Usuario.xsd"
+            namespace="http://www.kallsony.com/entidad/usuario"/>
+<import schemaLocation="Orden.xsd"
+            namespace="http://www.kallsony.com/entidad/orden"/>
+    <complexType name="CotizacionEntrada">
+        <sequence>
+            <element name="idOrden" type="int"/>
+            <element name="nombreCotizacion" type="string" minOccurs="0"/>
+            <element name="tipoDestino" type="boolean" minOccurs="0"/>
+            <element name="nombreFabricante" type="string" minOccurs="0"/>
+            <element name="usuarioEnvio" type="us:Usuario"/>
+            <element name="orden" type="or:Orden"/>
+        </sequence>
+    </complexType>
+    <complexType name="CotizacionSalida">
+        <sequence>
+            <element name="estado" type="boolean" minOccurs="1"/>
+            <element name="proveedor" type="string" minOccurs="1"/>
+            <element name="valorCotizacion" type="double" minOccurs="0"/>
+        </sequence>
+    </complexType>
+    <element name="cotizacionEntrada" type="cz:CotizacionEntrada"/>
+    <element name="cotizacionSalida" type="cz:CotizacionSalida"/>
+</schema>

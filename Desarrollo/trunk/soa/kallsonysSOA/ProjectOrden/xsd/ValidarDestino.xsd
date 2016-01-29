@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:ds="http://www.kallsony.com.destino"
+            targetNamespace="http://www.kallsony.com.destino"
+            elementFormDefault="qualified">
+  
+    
+  <element name="ValidarDestinoEntrada">
+    <complexType>
+      <sequence>
+        <element name="tipoDestino" type="boolean"/>
+        <element name="nombreFabricante" type="string"/>
+      </sequence>
+    </complexType>
+  </element>
+  <element name="ValidarDestinoSalida">
+    <complexType>
+      <sequence>
+        <element name="nombreProveedor" type="string"/>
+        <element name="codigoProveedor" type="long"/>
+      </sequence>
+    </complexType>
+  </element>
+</schema>

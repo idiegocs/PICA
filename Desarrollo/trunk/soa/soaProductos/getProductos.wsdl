@@ -1,0 +1,25 @@
+<?binding.jca getProductos_db.jca?>
+<wsdl:definitions name="getProductos" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/kallSonysApp/productos/getProductos" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/kallSonysApp/productos/getProductos" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/getProductos">
+    <plt:partnerLinkType name="getProductos_plt">
+        <plt:role name="getProductos_role">
+            <plt:portType name="tns:getProductos_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/getProductos" schemaLocation="xsd/getProductos_table.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="getProductosSelect_inputParameters">
+        <wsdl:part name="getProductosSelect_inputParameters" element="top:getProductosSelect_tipoBusqueda_valorBusqueda_tamanioPagina_paginaInputParameters"/>
+    </wsdl:message>
+    <wsdl:message name="ProductoCollection_msg">
+        <wsdl:part name="ProductoCollection" element="top:ProductoCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="getProductos_ptt">
+        <wsdl:operation name="getProductosSelect">
+            <wsdl:input message="tns:getProductosSelect_inputParameters"/>
+            <wsdl:output message="tns:ProductoCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

@@ -1,0 +1,32 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ct="http://www.kallsony.com/entidad/categoria"
+    xmlns:st="http://www.kallsony.com/entidad/categoria"
+     targetNamespace="http://www.kallsony.com/entidad/categoria">
+    <complexType name="Tipo">
+        <sequence>
+            <element name="idTipo" type="int" minOccurs="0"/>
+            <element name="nombreTipo" type="string" minOccurs="0"/>
+        </sequence>
+    </complexType>
+    <complexType name="SubCategoria">
+        <sequence>
+            <element name="tipoSubCategoria" type="st:Tipo" minOccurs="0"/>
+        </sequence>
+    </complexType>
+    <complexType name="SubCategorias">
+        <sequence>
+            <element name="subCategoria" type="ct:SubCategoria" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+    <complexType name="Categoria">
+        <sequence>
+            <element name="tipoCategoria" type="ct:Tipo" minOccurs="0"/>
+            <element name="listaSubCategorias" type="ct:SubCategorias" minOccurs="0"/>
+        </sequence>
+    </complexType>
+    <complexType name="Categorias">
+        <sequence>
+            <element name="categoria" type="ct:Categoria" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+</schema>

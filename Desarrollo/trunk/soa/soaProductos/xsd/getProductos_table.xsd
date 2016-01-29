@@ -1,0 +1,43 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/getProductos" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/getProductos" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="ProductoCollection" type="ProductoCollection"/>
+   <xs:complexType name="ProductoCollection">
+      <xs:sequence>
+         <xs:element name="Producto" type="Producto" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="Producto">
+      <xs:sequence>
+         <xs:element name="IdProducto" type="xs:int" nillable="true"/>
+         <xs:element name="CodigoProducto" type="xs:string" minOccurs="0"/>
+         <xs:element name="NombreProducto" type="xs:string" minOccurs="0"/>
+         <xs:element name="DescripcionProducto" type="xs:string" minOccurs="0"/>
+         <xs:element name="NombreFabricante" type="xs:string" minOccurs="0"/>
+         <xs:element name="NombreImagenProducto" type="xs:string" minOccurs="0"/>
+         <xs:element name="PrecioUnitario" type="xs:decimal" minOccurs="0"/>
+         <xs:element name="IdSubcategoria" type="Subcategoria" minOccurs="0" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="Subcategoria">
+      <xs:sequence>
+         <xs:element name="IdSubcategoria" type="xs:int" nillable="true"/>
+         <xs:element name="NombreSubcategoria" type="xs:string" minOccurs="0"/>
+         <xs:element name="IdCategoria" type="Categoria" minOccurs="0" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="Categoria">
+      <xs:sequence>
+         <xs:element name="IdCategoria" type="xs:int" nillable="true"/>
+         <xs:element name="NombreCategoria" type="xs:string" minOccurs="0"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="getProductosSelect_valorBusqueda_tipoBusqueda_pagina_tamanioPaginaInputParameters" type="getProductosSelect_valorBusqueda_tipoBusqueda_pagina_tamanioPagina"/>
+   <xs:complexType name="getProductosSelect_valorBusqueda_tipoBusqueda_pagina_tamanioPagina">
+      <xs:sequence>
+         <xs:element name="valorBusqueda" type="xs:string" minOccurs="1" maxOccurs="1"/>
+         <xs:element name="tipoBusqueda" type="xs:string" minOccurs="1" maxOccurs="1"/>
+         <xs:element name="pagina" type="xs:string" minOccurs="1" maxOccurs="1"/>
+         <xs:element name="tamanioPagina" type="xs:string" minOccurs="1" maxOccurs="1"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

@@ -1,0 +1,42 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="BPELCotizacion"
+     targetNamespace="http://xmlns.oracle.com/Appkallsonys/ProjectCotizacion/BPELCotizacion"
+     xmlns:ns2="http://www.kallsony.com.validcot"
+     xmlns:ns1="http://www.kallsony.com/operacion/cotizarcompra"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:client="http://xmlns.oracle.com/Appkallsonys/ProjectCotizacion/BPELCotizacion"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    >
+    <plnk:partnerLinkType name="BPELCotizacion">
+        <plnk:role name="BPELCotizacionProvider">
+            <plnk:portType name="client:BPELCotizacion"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.kallsony.com.validcot"
+             xmlns:ns1="http://www.kallsony.com/operacion/cotizarcompra" xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+             xmlns:client="http://xmlns.oracle.com/Appkallsonys/ProjectCotizacion/BPELCotizacion"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+            <import namespace="http://www.kallsony.com/operacion/cotizarcompra" schemaLocation="xsd/Cotizacion.xsd"/>
+        </schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.kallsony.com.validcot"
+             xmlns:ns1="http://www.kallsony.com/operacion/cotizarcompra" xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+             xmlns:client="http://xmlns.oracle.com/Appkallsonys/ProjectCotizacion/BPELCotizacion"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+            <xsd:import namespace="http://www.kallsony.com.validcot" schemaLocation="xsd/ValidarCotizacion.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="BPELCotizacionRequestMessage">
+        <wsdl:part name="payload" element="ns1:cotizacionEntrada"/>
+    </wsdl:message>
+    <wsdl:message name="BPELCotizacionResponseMessage">
+        <wsdl:part name="payload" element="ns1:cotizacionSalida"/>
+    </wsdl:message>
+    <wsdl:portType name="BPELCotizacion">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:BPELCotizacionRequestMessage"/>
+            <wsdl:output message="client:BPELCotizacionResponseMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

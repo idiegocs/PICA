@@ -1,0 +1,13 @@
+<adapter-config name="getPreorden" adapter="Database Adapter" wsdlLocation="getPreorden.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/DB/omsordenDatabase" UIConnectionName="OMSOrden" adapterRef=""/>
+  <endpoint-interaction portType="getPreorden_ptt" operation="getPreorden">
+    <interaction-spec className="oracle.tip.adapter.db.DBPureSQLInteractionSpec">
+      <property name="SqlString" value="SELECT SEQ_PRE_ORDEN.NEXTVAL  AS PREORDEN FROM DUAL"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+    <input/>
+    <output/>
+  </endpoint-interaction>
+
+</adapter-config>

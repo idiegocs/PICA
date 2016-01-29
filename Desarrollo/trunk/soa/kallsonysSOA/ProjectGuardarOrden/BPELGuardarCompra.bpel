@@ -1,0 +1,266 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Sun May 31 10:28:17 COT 2015
+  Author:  Diego
+  Type: BPEL 1.1 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="BPELGuardarCompra"
+               targetNamespace="http://kallsony.com/guardarcompra"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://kallsony.com/guardarcompra"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+          xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/db/Appkallsonys/ProjectGuardarOrden/setOrden"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/Appkallsonys/ProjectGuardarOrden/getUsuario"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/Appkallsonys/ProjectGuardarOrden/setItemOrden"
+         xmlns:ns4="http://www.kallsony.com/entidad/orden"
+         xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns5="http://xmlns.oracle.com/pcbpel/adapter/db/top/getUsuario"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns6="http://xmlns.oracle.com/pcbpel/adapter/db/top/setOrden"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns7="http://www.kallsony.com/operacion/guardarcompra"
+         xmlns:ns8="http://xmlns.oracle.com/pcbpel/adapter/db/Appkallsonys/ProjectGuardarOrden/setEnvio">
+
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="ServiceGuardarCompra" partnerLinkType="client:BPELGuardarCompra" myRole="BPELGuardarCompraProvider"/>
+   <partnerLink name="setOrden" partnerLinkType="ns1:setOrden_plt"
+                 partnerRole="setOrden_role"/>
+    <partnerLink name="getUsuario" partnerLinkType="ns2:getUsuario_plt"
+                 partnerRole="getUsuario_role"/>
+    <partnerLink name="setItemOrden" partnerLinkType="ns3:setItemOrden_plt"
+                 partnerRole="setItemOrden_role"/>
+    <partnerLink name="setEnvio" partnerLinkType="ns8:setEnvio_plt"
+                 partnerRole="setEnvio_role"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:BPELGuardarCompraRequestMessage"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="client:BPELGuardarCompraResponseMessage"/>
+  <variable name="VariableOrden" element="ns4:unaOrden"/>
+    <variable name="InvokeGetUser_InputVariable"
+              messageType="ns2:getUsuarioSelect_inputParameters"/>
+    <variable name="InvokeGetUser_OutputVariable"
+              messageType="ns2:UsuarioCollection_msg"/>
+    <variable name="VariableUser" element="ns4:unUsuario"/>
+    <variable name="InvokeSetOrden_InputVariable"
+              messageType="ns1:OrdenCollection_msg"/>
+    <variable name="InvokeSetOrden_OutputVariable"
+              messageType="ns1:OrdenCollection_msg"/>
+    <variable name="VariableCountItem" type="xsd:int"/>
+    <variable name="VariableMaximoItem" type="xsd:int"/>
+     <variable name="VariableItem" element="ns4:unItem"/>
+    <variable name="InvokeSetItem_InputVariable"
+              messageType="ns3:ItemOrdenCollection_msg"/>
+    <variable name="InvokeSetItem_OutputVariable"
+              messageType="ns3:ItemOrdenCollection_msg"/>
+    <variable name="InvokeEnvio_InputVariable"
+              messageType="ns8:EnvioCollection_msg"/>
+    <variable name="InvokeEnvio_OutputVariable"
+              messageType="ns8:EnvioCollection_msg"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in BPELGuardarCompra.wsdl) -->
+    <receive name="receiveInput" partnerLink="ServiceGuardarCompra" portType="client:BPELGuardarCompra" operation="guardarCompra" variable="inputVariable" createInstance="yes"/>
+<assign name="TransformOrden">
+      <bpelx:annotation>
+        <bpelx:pattern>transformation</bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from expression="ora:doXSLTransformForDoc('xsl/Transformation_Orden.xsl', $inputVariable.payload)"/>
+        <to variable="VariableOrden"/>
+      </copy>
+    </assign>
+    <scope name="ScopeRegistroOrden" variableAccessSerializable="no">
+      <faultHandlers>
+        <catchAll>
+          <assign name="Assignerror">
+            <copy>
+              <from expression="boolean('false')"/>
+              <to variable="outputVariable" part="payload"
+                  query="/ns7:guardarCompraSalida/ns7:estadoTarjeta"/>
+            </copy>
+          </assign>
+        </catchAll>
+      </faultHandlers>
+      <sequence name="SequenceRegistroOrden">
+        <assign name="AssignUsername">
+          <copy>
+            <from variable="VariableOrden"
+                  query="/ns4:unaOrden/cliente/nombreUsuario"/>
+            <to variable="InvokeGetUser_InputVariable"
+                part="getUsuarioSelect_inputParameters"
+                query="/ns5:getUsuarioSelect_paramUsernameInputParameters/ns5:paramUsername"/>
+          </copy>
+        </assign>
+        <invoke name="InvokeGetUser" inputVariable="InvokeGetUser_InputVariable"
+                outputVariable="InvokeGetUser_OutputVariable"
+                partnerLink="getUsuario" portType="ns2:getUsuario_ptt"
+                operation="getUsuarioSelect" bpelx:invokeAsDetail="no"/>
+        <assign name="TransformUser">
+          <bpelx:annotation>
+            <bpelx:pattern>transformation</bpelx:pattern>
+          </bpelx:annotation>
+          <copy>
+            <from expression="ora:doXSLTransformForDoc('xsl/Transformation_User.xsl', $InvokeGetUser_OutputVariable.UsuarioCollection)"/>
+            <to variable="VariableUser"/>
+          </copy>
+        </assign>
+        <switch name="SwitchUsuario">
+          <case condition="bpws:getVariableData('VariableUser','/ns4:unUsuario/idUsuario')>0">
+            <bpelx:annotation>
+              <bpelx:general>
+                <bpelx:property name="userLabel">
+                  <![CDATA[UsuarioEncontrado]]>
+                </bpelx:property>
+              </bpelx:general>
+            </bpelx:annotation>
+            <sequence>
+              <assign name="TransformSetOrden">
+                <bpelx:annotation>
+                  <bpelx:pattern>transformation</bpelx:pattern>
+                </bpelx:annotation>
+                <copy>
+                  <from expression="ora:doXSLTransformForDoc('xsl/Transformation_setOrden.xsl', $VariableOrden, 'VariableUser', $VariableUser)"/>
+                  <to variable="InvokeSetOrden_InputVariable"
+                      part="OrdenCollection"/>
+                </copy>
+              </assign>
+              <invoke name="InvokeSetOrden"
+                      inputVariable="InvokeSetOrden_InputVariable"
+                      outputVariable="InvokeSetOrden_OutputVariable"
+                      partnerLink="setOrden" portType="ns1:setOrden_ptt"
+                      operation="insert" bpelx:invokeAsDetail="no"/>
+              <assign name="AssignCount">
+                <copy>
+                  <from expression="1"/>
+                  <to variable="VariableCountItem"/>
+                </copy>
+                <copy>
+                  <from expression="ora:countNodes('VariableOrden','/ns4:unaOrden/listaItems/items') "/>
+                  <to variable="VariableMaximoItem"/>
+                </copy>
+              </assign>
+              <while name="WhilleItemOrden"
+                     condition="bpws:getVariableData('VariableCountItem')&lt;= bpws:getVariableData('VariableMaximoItem')">
+                <sequence name="SequenceWhileItem">
+                  <assign name="AssignItemOrden">
+                    <copy>
+                      <from expression="bpws:getVariableData('VariableOrden','/ns4:unaOrden/listaItems/items[bpws:getVariableData(&quot;VariableCountItem&quot;)]')"/>
+                      <to variable="VariableItem" query="/ns4:unItem"/>
+                    </copy>
+                  </assign>
+                  <assign name="TransformSetItem">
+                    <bpelx:annotation>
+                      <bpelx:pattern>transformation</bpelx:pattern>
+                    </bpelx:annotation>
+                    <copy>
+                      <from expression="ora:doXSLTransformForDoc('xsl/Transformation_SetItem.xsl', $VariableItem, 'InvokeSetOrden_OutputVariable.OrdenCollection', $InvokeSetOrden_OutputVariable.OrdenCollection)"/>
+                      <to variable="InvokeSetItem_InputVariable"
+                          part="ItemOrdenCollection"/>
+                    </copy>
+                  </assign>
+                  <invoke name="InvokeSetItem"
+                          inputVariable="InvokeSetItem_InputVariable"
+                          outputVariable="InvokeSetItem_OutputVariable"
+                          partnerLink="setItemOrden"
+                          portType="ns3:setItemOrden_ptt" operation="insert"
+                          bpelx:invokeAsDetail="yes"/>
+                  <assign name="AssignContador">
+                    <copy>
+                      <from expression="bpws:getVariableData('VariableCountItem')+1"/>
+                      <to variable="VariableCountItem"/>
+                    </copy>
+                  </assign>
+                </sequence>
+              </while>
+              <assign name="TransformEnvio">
+                <bpelx:annotation>
+                  <bpelx:pattern>transformation</bpelx:pattern>
+                </bpelx:annotation>
+                <copy>
+                  <from expression="ora:doXSLTransformForDoc('xsl/Transformation_EnvioTJ.xsl', $inputVariable.payload, 'InvokeSetOrden_OutputVariable.OrdenCollection', $InvokeSetOrden_OutputVariable.OrdenCollection)"/>
+                  <to variable="InvokeEnvio_InputVariable"
+                      part="EnvioCollection"/>
+                </copy>
+              </assign>
+              <invoke name="InvokeEnvio"
+                      inputVariable="InvokeEnvio_InputVariable"
+                      outputVariable="InvokeEnvio_OutputVariable"
+                      partnerLink="setEnvio" portType="ns8:setEnvio_ptt"
+                      operation="insert" bpelx:invokeAsDetail="no"/>
+            </sequence>
+          </case>
+          <otherwise>
+            <sequence name="Sequence4">
+              <assign name="AssignError">
+                <copy>
+                  <from expression="boolean('false')"/>
+                  <to variable="outputVariable" part="payload"
+                      query="/ns7:guardarCompraSalida/ns7:estadoTarjeta"/>
+                </copy>
+              </assign>
+              <terminate name="TerminateNoUser"/>
+            </sequence>
+          </otherwise>
+        </switch>
+        <assign name="AssignRespuesta">
+          <copy>
+            <from variable="InvokeSetOrden_OutputVariable"
+                  part="OrdenCollection"
+                  query="/ns6:OrdenCollection/ns6:Orden/ns6:idorden"/>
+            <to variable="outputVariable" part="payload"
+                query="/ns7:guardarCompraSalida/ns7:idPreOrden"/>
+          </copy>
+        </assign>
+      </sequence>
+    </scope>
+    <!-- Generate reply to synchronous request -->
+    <reply name="replyOutput" partnerLink="ServiceGuardarCompra" portType="client:BPELGuardarCompra" operation="guardarCompra" variable="outputVariable"/>
+ 
+  </sequence>
+</process>

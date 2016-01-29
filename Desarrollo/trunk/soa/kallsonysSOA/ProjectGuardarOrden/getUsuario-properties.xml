@@ -1,0 +1,57 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+   <entry key="root_descriptor_alias">USUARIO</entry>
+   <entry key="USUARIO.IDCATEGORIA:db_column_type">NUMBER</entry>
+   <entry key="USUARIO.PASSWORD:db_column_type">VARCHAR2</entry>
+   <entry key="USUARIO.NUMERODOCUMENTO:db_column_type">VARCHAR2</entry>
+   <entry key="USUARIO.COMPRAENCOLOMBIA:db_column_type">NUMBER</entry>
+   <entry key="USUARIO.IDUSUARIO:db_column_not_null">true</entry>
+   <entry key="USUARIO.IDDIRECCION:db_column_precision">18</entry>
+   <entry key="USUARIO.APELLIDOS:db_column_not_null">true</entry>
+   <entry key="USUARIO.IDUSUARIO:db_column_scale">0</entry>
+   <entry key="USUARIO.PASSWORD:db_column_size">128</entry>
+   <entry key="USUARIO.IDDIRECCION:db_column_not_null">false</entry>
+   <entry key="USUARIO.COMPRAENCOLOMBIA:db_column_precision">0</entry>
+   <entry key="USUARIO.NUMERODOCUMENTO:db_column_size">50</entry>
+   <entry key="USUARIO:db_table_type">TABLE</entry>
+   <entry key="USUARIO.IDUSUARIO:db_column_type">NUMBER</entry>
+   <entry key="USUARIO:db_column_11">IDCATEGORIA</entry>
+   <entry key="USUARIO:db_column_10">COMPRAENCOLOMBIA</entry>
+   <entry key="USUARIO.COMPRAENCOLOMBIA:db_column_not_null">false</entry>
+   <entry key="USUARIO.USERNAME:db_column_type">VARCHAR2</entry>
+   <entry key="USUARIO.PASSWORD:db_column_not_null">true</entry>
+   <entry key="USUARIO.NOMBRES:db_column_not_null">true</entry>
+   <entry key="USUARIO.TIPODOCUMENTO:db_column_not_null">true</entry>
+   <entry key="USUARIO.IDCATEGORIA:db_column_not_null">false</entry>
+   <entry key="USUARIO.EMAIL:db_column_type">VARCHAR2</entry>
+   <entry key="USUARIO:db_column_9">TELEFONO</entry>
+   <entry key="USUARIO:db_column_8">USERNAME</entry>
+   <entry key="USUARIO.IDDIRECCION:db_column_scale">0</entry>
+   <entry key="USUARIO:db_column_7">IDDIRECCION</entry>
+   <entry key="USUARIO.USERNAME:db_column_size">40</entry>
+   <entry key="USUARIO:db_column_6">NUMERODOCUMENTO</entry>
+   <entry key="USUARIO:db_column_5">TIPODOCUMENTO</entry>
+   <entry key="USUARIO.USERNAME:db_column_not_null">true</entry>
+   <entry key="USUARIO:db_column_4">PASSWORD</entry>
+   <entry key="USUARIO.NOMBRES:db_column_type">VARCHAR2</entry>
+   <entry key="USUARIO:db_column_3">EMAIL</entry>
+   <entry key="USUARIO:db_column_2">APELLIDOS</entry>
+   <entry key="USUARIO:db_column_1">NOMBRES</entry>
+   <entry key="USUARIO:db_column_0">IDUSUARIO</entry>
+   <entry key="return_single_result_set">false</entry>
+   <entry key="USUARIO.TELEFONO:db_column_type">VARCHAR2</entry>
+   <entry key="USUARIO.NUMERODOCUMENTO:db_column_not_null">true</entry>
+   <entry key="USUARIO.APELLIDOS:db_column_type">VARCHAR2</entry>
+   <entry key="USUARIO.IDUSUARIO:db_column_precision">18</entry>
+   <entry key="USUARIO.EMAIL:db_column_size">80</entry>
+   <entry key="USUARIO.IDCATEGORIA:db_column_precision">0</entry>
+   <entry key="USUARIO.NOMBRES:db_column_size">80</entry>
+   <entry key="USUARIO.TELEFONO:db_column_not_null">false</entry>
+   <entry key="USUARIO.TELEFONO:db_column_size">20</entry>
+   <entry key="USUARIO.APELLIDOS:db_column_size">80</entry>
+   <entry key="USUARIO.TIPODOCUMENTO:db_column_precision">0</entry>
+   <entry key="USUARIO.TIPODOCUMENTO:db_column_type">NUMBER</entry>
+   <entry key="USUARIO.EMAIL:db_column_not_null">false</entry>
+   <entry key="USUARIO.IDDIRECCION:db_column_type">NUMBER</entry>
+</properties>

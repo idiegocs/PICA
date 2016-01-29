@@ -1,0 +1,311 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Fri Apr 17 10:42:33 COT 2015
+  Author:  Diego
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="BPELProcessCampanias"
+               targetNamespace="http://xmlns.oracle.com/Appkallsonys/ProjectCampanias/BPELProcessCampanias"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/Appkallsonys/ProjectCampanias/BPELProcessCampanias"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:ns1="http://www.kallsony.com/final/operacion/consultacampanias"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/Appkallsonys/ProjectCampanias/getCampanias"
+         xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns3="http://www.kallsony.com/operacion/consultacampania"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/db/top/getCampanias"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns5="http://www.kallsony.com/entidad/producto"
+         xmlns:ns6="http://www.kallsony.com/entidad/campania"
+         xmlns:ns7="http://xmlns.oracle.com/pcbpel/adapter/db/Appkallsonys/ProjectCampanias/getProducto"
+         xmlns:ns8="http://xmlns.oracle.com/pcbpel/adapter/db/top/getProducto"
+         xmlns:ns9="http://www.kallsony.com/final/operacion/consultaproducto"
+         xmlns:ns10="http://www.kallsony.com/operacion/consultaproducto">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="bpelprocesscampanias_client" partnerLinkType="ns1:BPELProcessCampanias" myRole="CampaniasPort"/>
+    <partnerLink name="getCampanias" partnerLinkType="ns2:getCampanias_plt"
+                 partnerRole="getCampanias_role"/>
+    <partnerLink name="ServiceProductos" partnerLinkType="ns9:ServiceProductos"
+                 partnerRole="ProductosPort"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="ns1:Campanias_ConsultaCampaniasEntrada"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="ns1:Campanias_ConsultaCaampaniasSalida"/>
+    <variable name="InvokeCampañas_getCampaniasSelect_InputVariable"
+              messageType="ns2:getCampaniasSelect_inputParameters"/>
+    <variable name="InvokeCampañas_getCampaniasSelect_OutputVariable"
+              messageType="ns2:CampaniaCollection_msg"/>
+    <variable name="VariableContador" type="xsd:int"/>
+    <variable name="VariableMaximo" type="xsd:int"/>
+    <variable name="VariableProducto" element="ns6:unProductoCampania"/>
+    <variable name="VariableCampania" element="ns6:unaCampania"/>
+    <variable name="VariableContadorProducto" type="xsd:int"/>
+    <variable name="VariableMaximoProducto" type="xsd:int"/>
+    <variable name="InvokeProductos_ConsultarProductos_InputVariable"
+              messageType="ns9:ProductoDetalle_ConsultaProductoEntrada"/>
+    <variable name="InvokeProductos_ConsultarProductos_OutputVariable"
+              messageType="ns9:ProductoDetalle_ConsultaProductoSalida"/>
+    <variable name="CampaniasOutPut" element="ns3:consultaCampaniaSalida"/>
+    <variable name="VariableTotalCampania"
+              element="ns6:unaCampania"/>
+    <variable name="VariableIdProductos" type="xsd:string"/>
+    <variable name="VariableUnProduc" element="ns5:UnProducto"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in BPELProcessCampanias.wsdl) -->
+    <receive name="receiveInput" partnerLink="bpelprocesscampanias_client" portType="ns1:CampaniasPort" operation="ConsultarCampanias" variable="inputVariable" createInstance="yes"/>
+    <assign name="AssignEstadoCampania">
+      <copy>
+        <from variable="inputVariable" part="partEntrada"
+              query="/ns3:consultaCampaniaEntrada/ns3:filtroCampania/estado"/>
+        <to variable="InvokeCampañas_getCampaniasSelect_InputVariable"
+            part="getCampaniasSelect_inputParameters"
+            query="/ns4:getCampaniasSelect_estadoCampaniaInputParameters/ns4:estadoCampania"/>
+      </copy>
+    </assign>
+    <invoke name="InvokeCampañas" bpelx:invokeAsDetail="no"
+            inputVariable="InvokeCampañas_getCampaniasSelect_InputVariable"
+            outputVariable="InvokeCampañas_getCampaniasSelect_OutputVariable"
+            partnerLink="getCampanias" portType="ns2:getCampanias_ptt"
+            operation="getCampaniasSelect"/>
+    <assign name="TransformOutputCampania">
+      <bpelx:annotation>
+        <bpelx:pattern>transformation</bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from expression="ora:doXSLTransformForDoc('xsl/Transformation_Capanias.xsl', $InvokeCampañas_getCampaniasSelect_OutputVariable.CampaniaCollection)"/>
+        <to variable="outputVariable" part="partSalida"/>
+      </copy>
+    </assign>
+    <assign name="TransformCampaniasIterate">
+      <bpelx:annotation>
+        <bpelx:pattern>transformation</bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from expression="ora:doXSLTransformForDoc('xsl/Transformation_CampaniasIterate.xsl', $InvokeCampañas_getCampaniasSelect_OutputVariable.CampaniaCollection)"/>
+        <to variable="CampaniasOutPut"/>
+      </copy>
+    </assign>
+    <assign name="AssignMaximos">
+      <copy>
+        <from expression="1"/>
+        <to variable="VariableContador"/>
+      </copy>
+      <copy>
+        <from expression="ora:countNodes('outputVariable','partSalida','/ns3:consultaCampaniaSalida/ns3:campanias/ns3:campania')"/>
+        <to variable="VariableMaximo"/>
+      </copy>
+    </assign>
+    <while name="WhileCampanias"
+           condition="bpws:getVariableData('VariableContador')&lt;=bpws:getVariableData('VariableMaximo')">
+      <sequence name="Sequence1">
+        <assign name="AssignCampania">
+          <copy>
+            <from expression="bpws:getVariableData('CampaniasOutPut','/ns3:consultaCampaniaSalida/ns3:campanias/ns3:campania[bpws:getVariableData(&quot;VariableContador&quot;)]')"/>
+            <to variable="VariableCampania" query="/ns6:unaCampania"/>
+          </copy>
+        </assign>
+        <assign name="AssignMaximoProductos">
+          <copy>
+            <from expression="1"/>
+            <to variable="VariableContadorProducto"/>
+          </copy>
+          <copy>
+            <from expression="0"/>
+            <to variable="VariableTotalCampania"
+                query="/ns6:unaCampania/valorCampania"/>
+          </copy>
+          <copy>
+            <from expression="ora:countNodes('VariableCampania','/ns6:unaCampania/listaProductosCampanias/productoCampania')"/>
+            <to variable="VariableMaximoProducto"/>
+          </copy>
+        </assign>
+        <assign name="AssignConcatIdProductos">
+          <copy>
+            <from expression='"|"'/>
+            <to variable="VariableIdProductos"/>
+          </copy>
+        </assign>
+        <while name="WhileConcatIdProductos"
+               condition="bpws:getVariableData('VariableContadorProducto')&lt;=bpws:getVariableData('VariableMaximoProducto')">
+          <sequence>
+            <assign name="AssignIdProducto">
+              <copy>
+                <from expression="concat(bpws:getVariableData('VariableIdProductos'),bpws:getVariableData('VariableCampania','/ns6:unaCampania/listaProductosCampanias/productoCampania[bpws:getVariableData(&quot;VariableContadorProducto&quot;)]/productoCampania/idProducto'),&quot;|&quot;)"/>
+                <to variable="VariableIdProductos"/>
+              </copy>
+            </assign>
+            <assign name="AssignContadorProductos"
+                    xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/">
+      <copy>
+         <from expression="bpws:getVariableData('VariableContadorProducto')+1"/>
+         <to variable="VariableContadorProducto"/>
+      </copy>
+   </assign>
+          </sequence>
+        </while>
+        <scope name="Scope1">
+          <sequence name="Sequence3">
+            <assign name="AssignProductos">
+              <copy>
+                <from expression='"I"'/>
+                <to variable="InvokeProductos_ConsultarProductos_InputVariable"
+                    part="ConsultaProductosEntrada"
+                    query="/ns10:consultaProductoEntrada/ns10:filtroProducto/tipoFiltro"/>
+              </copy>
+              <copy>
+                <from expression="1"/>
+                <to variable="InvokeProductos_ConsultarProductos_InputVariable"
+                    part="ConsultaProductosEntrada"
+                    query="/ns10:consultaProductoEntrada/ns10:filtroProducto/pagina"/>
+              </copy>
+              <copy>
+                <from expression="bpws:getVariableData('VariableIdProductos')"/>
+                <to variable="InvokeProductos_ConsultarProductos_InputVariable"
+                    part="ConsultaProductosEntrada"
+                    query="/ns10:consultaProductoEntrada/ns10:filtroProducto/valorFiltro"/>
+              </copy>
+            </assign>
+            <invoke name="InvokeProductos"
+                    inputVariable="InvokeProductos_ConsultarProductos_InputVariable"
+                    outputVariable="InvokeProductos_ConsultarProductos_OutputVariable"
+                    partnerLink="ServiceProductos" portType="ns9:ProductosPort"
+                    operation="ConsultarProductos" bpelx:invokeAsDetail="no"/>
+          </sequence>
+        </scope>
+        <assign name="AssignMaximoProductos"
+                xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/">
+      <copy>
+         <from expression="1"/>
+         <to variable="VariableContadorProducto"/>
+      </copy>
+      <copy>
+         <from expression="0"/>
+         <to variable="VariableTotalCampania"
+             query="/ns6:unaCampania/valorCampania"/>
+      </copy>
+      <copy>
+         <from expression="ora:countNodes('VariableCampania','/ns6:unaCampania/listaProductosCampanias/productoCampania')"/>
+         <to variable="VariableMaximoProducto"/>
+      </copy>
+   </assign>
+        <while name="WhileProductosCampania"
+               condition="bpws:getVariableData('VariableContadorProducto')&lt;=bpws:getVariableData('VariableMaximoProducto')">
+          <sequence name="Sequence2">
+            <assign name="AssignProductoCampania">
+              <copy>
+                <from expression="bpws:getVariableData('VariableCampania','/ns6:unaCampania/listaProductosCampanias/productoCampania[bpws:getVariableData(&quot;VariableContadorProducto&quot;)]')"/>
+                <to variable="VariableProducto"/>
+              </copy>
+            </assign>
+            <assign name="AssignCopyProducto">
+              <copy>
+                <from expression="bpws:getVariableData('InvokeProductos_ConsultarProductos_OutputVariable','ConsultaProductosSalida','/ns10:consultaProductoSalida/ns10:listaProductos/ns10:producto[bpws:getVariableData(&quot;VariableContadorProducto&quot;)]')"/>
+                <to variable="VariableUnProduc"/>
+              </copy>
+            </assign>
+            <assign name="TransformDetalleProducto">
+              <bpelx:annotation>
+                <bpelx:pattern>transformation</bpelx:pattern>
+              </bpelx:annotation>
+              <copy>
+                <from expression="ora:doXSLTransformForDoc('xsl/Transformation_DetalleProducto.xsl', $VariableProducto, 'VariableUnProduc', $VariableUnProduc)"/>
+                <to variable="VariableProducto"/>
+              </copy>
+            </assign>
+            <assign name="AssignTotalCampaniaProducto">
+              <copy>
+                <from expression="bpws:getVariableData('VariableTotalCampania','/ns6:unaCampania/valorCampania')  + (bpws:getVariableData('VariableProducto','/ns6:unProductoCampania/productoCampania/precioProducto') - ((bpws:getVariableData('VariableProducto','/ns6:unProductoCampania/descuentoCampania')*bpws:getVariableData('VariableProducto','/ns6:unProductoCampania/productoCampania/precioProducto'))  div 100))"/>
+                <to variable="VariableTotalCampania"
+                    query="/ns6:unaCampania/valorCampania"/>
+              </copy>
+            </assign>
+            <assign name="AssignProductoACampaña">
+              <copy>
+                <from variable="VariableProducto"
+                      query="/ns6:unProductoCampania/productoCampania"/>
+                <to variable="VariableCampania"
+                    query="/ns6:unaCampania/listaProductosCampanias/productoCampania[bpws:getVariableData('VariableContadorProducto')]/productoCampania"/>
+              </copy>
+            </assign>
+            <assign name="AssignContadorProductos">
+              <copy>
+                <from expression="bpws:getVariableData('VariableContadorProducto')+1"/>
+                <to variable="VariableContadorProducto"/>
+              </copy>
+            </assign>
+          </sequence>
+        </while>
+        <assign name="AssignCampania">
+          <bpelx:append>
+            <bpelx:from variable="VariableTotalCampania"
+                        query="/ns6:unaCampania/valorCampania"/>
+            <bpelx:to variable="outputVariable" part="partSalida"
+                      query="/ns3:consultaCampaniaSalida/ns3:campanias/ns3:campania[bpws:getVariableData('VariableContador')]"/>
+          </bpelx:append>
+          <bpelx:append>
+            <bpelx:from variable="VariableCampania"
+                        query="/ns6:unaCampania/listaProductosCampanias"/>
+            <bpelx:to variable="outputVariable" part="partSalida"
+                      query="/ns3:consultaCampaniaSalida/ns3:campanias/ns3:campania[bpws:getVariableData('VariableContador')]"/>
+          </bpelx:append>
+        </assign>
+        <assign name="AssignContador">
+          <copy>
+            <from expression="bpws:getVariableData('VariableContador')+1"/>
+            <to variable="VariableContador"/>
+          </copy>
+        </assign>
+      </sequence>
+    </while>
+    <!-- Generate reply to synchronous request -->
+    <reply name="replyOutput" partnerLink="bpelprocesscampanias_client" portType="ns1:CampaniasPort" operation="ConsultarCampanias" variable="outputVariable"/>
+  </sequence>
+</process>

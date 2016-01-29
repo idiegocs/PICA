@@ -1,0 +1,14 @@
+<adapter-config name="getSpProductos" adapter="Database Adapter" wsdlLocation="getSpProductos.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/DB/productosDatabase" UIConnectionName="ProductosDB" UIStrongXSD="true" adapterRef=""/>
+  <endpoint-interaction portType="getSpProductos_ptt" operation="getSpProductos">
+    <interaction-spec className="oracle.tip.adapter.db.DBStoredProcedureInteractionSpec">
+      <property name="SchemaName" value="PRODUCTOS"/>
+      <property name="PackageName" value="Producto"/>
+      <property name="ProcedureName" value="getDetalleProducto"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+    <output/>
+  </endpoint-interaction>
+
+</adapter-config>

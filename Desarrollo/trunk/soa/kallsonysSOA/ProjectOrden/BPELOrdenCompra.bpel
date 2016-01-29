@@ -1,0 +1,809 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Sun Apr 19 18:21:02 COT 2015
+  Author:  Diego
+  Type: BPEL 1.1 Process
+  Purpose: One Way BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="BPELOrdenCompra"
+               targetNamespace="http://xmlns.oracle.com/Appkallsonys/ProjectOrden/BPELOrdenCompra"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/Appkallsonys/ProjectOrden/BPELOrdenCompra"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns1="http://www.kallsony.com/operacion/registrarcompra"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/Appkallsonys/ProjectOrden/setOrden"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/Appkallsonys/ProjectOrden/setItemOrden"
+         xmlns:ns4="http://www.kallsony.com/entidad/orden"
+         xmlns:ns5="http://xmlns.oracle.com/pcbpel/adapter/db/top/setOrden"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:ns6="http://xmlns.oracle.com/pcbpel/adapter/db/Appkallsonys/ProjectOrden/getUsuario"
+         xmlns:ns7="http://xmlns.oracle.com/pcbpel/adapter/db/top/getUsuario"
+         xmlns:ns8="http://xmlns.oracle.com/pcbpel/adapter/db/Appkallsonys/ProjectOrden/getParametro"
+         xmlns:ns9="http://xmlns.oracle.com/pcbpel/adapter/db/top/getParametro"
+         xmlns:ns10="http://xmlns.oracle.com/pcbpel/adapter/db/Appkallsonys/ProjectOrden/getCategoria"
+         xmlns:ns11="http://xmlns.oracle.com/pcbpel/adapter/db/top/getCategoria"
+         xmlns:ns12="http://www.kallsonys.com"
+         
+         xmlns:ns14="http://xmlns.oracle.com/bpel"
+         xmlns:ns15="http://xmlns.oracle.com/OracleRulesVOrden/OracleRulesVOrden_DecisionService_VOrden"
+         xmlns:ns16="http://xmlns.oracle.com/OracleRulesOrdenValidar/OracleRulesOrdenValidar_DecisionService_OrdenValidar"
+         xmlns:ns17="http://xmlns.oracle.com/OracleRulesValidOrden/OracleRulesValidOrden_DecisionService_ValidOrden"
+         xmlns:ns13="http://www.kallsony.com.destino"
+         xmlns:ns18="http://xmlns.oracle.com/OracleRulesValidarDestino/OracleRulesValidarDestino_DecisionService_Destino"
+         xmlns:ns19="http://kallsony.com/guardarcompra"
+         xmlns:ns20="http://xmlns.oracle.com/pcbpel/adapter/db/Appkallsonys/ProjectOrden/setEstadoOrden"
+         xmlns:ns21="http://xmlns.oracle.com/pcbpel/adapter/db/top/setEstadoOrden"
+         xmlns:ns22="http://www.kallsony.com/operacion/guardarcompra"
+
+        xmlns:ns23="http://www.kallsony.com.monto"
+         xmlns:ns24="http://xmlns.oracle.com/OracleRulesMG/OracleRulesMG_DecisionService_1"
+         xmlns:task="http://xmlns.oracle.com/bpel/workflow/task"
+         xmlns:taskservice="http://xmlns.oracle.com/bpel/workflow/taskService"
+         xmlns:wfcommon="http://xmlns.oracle.com/bpel/workflow/common"
+         xmlns:wf="http://schemas.oracle.com/bpel/extensions/workflow"
+         xmlns:ns25="http://xmlns.oracle.com/bpel/workflow/TaskEvidenceService"
+         xmlns:ns26="http://xmlns.oracle.com/bpel/workflow/routingSlip"
+         xmlns:ns27="http://xmlns.oracle.com/Appkallsonys/ProjectEnvio/BPELEnvio"
+         xmlns:ns28="http://www.kallsony.com/operacion/enviarcompra"
+         xmlns:ns29="http://xmlns.oracle.com/Appkallsonys/ProjectCotizacion/BPELCotizacion"
+         xmlns:ns30="http://www.kallsony.com/operacion/cotizarcompra"
+         xmlns:ns31="http://xmlns.oracle.com/pcbpel/adapter/jms/Appkallsonys/ProjectOrden/setErrorJMS"
+         xmlns:ns32="http://www.kallsony.com/operacion/errororden">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="bpelordencompra_client" partnerLinkType="client:BPELOrdenCompra" myRole="BPELOrdenCompraProvider"/>
+    
+    <partnerLink name="OracleRulesValidOrden.OracleRulesValidOrden_DecisionService_ValidOrden"
+                 partnerRole="IDecisionService_Role"
+                 partnerLinkType="ns17:IDecisionService_PL"/>
+    <partnerLink name="OracleRulesValidarDestino.OracleRulesValidarDestino_DecisionService_Destino"
+                 partnerRole="IDecisionService_Role"
+                 partnerLinkType="ns18:IDecisionService_PL"/>
+    <partnerLink name="ServiceGuardarC" partnerLinkType="ns19:BPELGuardarCompra"
+                 partnerRole="BPELGuardarCompraProvider"/>
+    <partnerLink name="getUsuario" partnerLinkType="ns6:getUsuario_plt"
+                 partnerRole="getUsuario_role"/>
+    <partnerLink name="setEstadoOrden" partnerLinkType="ns20:setEstadoOrden_plt"
+                 partnerRole="setEstadoOrden_role"/>
+    <partnerLink name="OracleRulesMG.OracleRulesMG_DecisionService_1"
+                 partnerRole="IDecisionService_Role"
+                 partnerLinkType="ns24:IDecisionService_PL"/>
+    <partnerLink name="HumantaskAproManual.TaskService_1"
+                 partnerLinkType="taskservice:TaskService"
+                 partnerRole="TaskService"
+                 myRole="TaskServiceCallbackListener"/>
+    <partnerLink name="ServiceEnvio" partnerLinkType="ns27:BPELEnvio"
+                 partnerRole="BPELEnvioProvider"/>
+    <partnerLink name="ServiceCotizacion" partnerLinkType="ns29:BPELCotizacion"
+                 partnerRole="BPELCotizacionProvider"/>
+    <partnerLink name="setErrorJMS" partnerLinkType="ns31:Produce_Message_plt"
+                 partnerRole="Produce_Message_role"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:BPELOrdenCompraRequestMessage"/>
+    
+    
+    
+    <variable name="VariableUser" element="ns4:unUsuario"/>
+    <variable name="VariableValidarOrdenInput"
+              element="ns12:ValidarOrdenEntrada"/>
+    <variable name="VariableValidarOrdenOutput"
+              element="ns12:ValidarOrdenSalida"/>
+    <variable name="VariableValidarDestinoEntrada"
+              element="ns13:ValidarDestinoEntrada"/>
+    <variable name="VariableValidarDestinoSalida"
+              element="ns13:ValidarDestinoSalida"/>
+    <variable name="Invoke_guardarCompra_InputVariable"
+              messageType="ns19:BPELGuardarCompraRequestMessage"/>
+    <variable name="Invoke_guardarCompra_OutputVariable"
+              messageType="ns19:BPELGuardarCompraResponseMessage"/>
+    <variable name="InvokeUserCategoria_InputVariable"
+              messageType="ns6:getUsuarioSelect_inputParameters"/>
+    <variable name="InvokeUserCategoria_OutputVariable"
+              messageType="ns6:UsuarioCollection_msg"/>
+    <variable name="InvokeEstadoOrden_InputVariable"
+              messageType="ns20:OrdenCollection_msg"/>
+    <variable name="InvokeEstadoEOrden_InputVariable"
+              messageType="ns20:OrdenCollection_msg"/>
+    <variable name="VariableOrden" element="ns4:unaOrden"/>
+    <variable name="MontoIn" element="ns23:ValidarMontoEntrada"/>
+    <variable name="MontoOut" element="ns23:ValidarMontoSalida"/>
+    <variable name="HumantaskAproManual1_globalVariable"
+              messageType="taskservice:taskMessage"/>
+    <variable name="HumantaskAproManual2_globalVariable"
+              messageType="taskservice:taskMessage"/>
+    <variable name="InvokeServiceEnvio_enviarCompra_InputVariable"
+              messageType="ns27:BPELEnvioRequestMessage"/>
+    <variable name="InvokeServiceEnvio_enviarCompra_OutputVariable"
+              messageType="ns27:BPELEnvioResponseMessage"/>
+    <variable name="InvokeCotizacion_process_InputVariable"
+              messageType="ns29:BPELCotizacionRequestMessage"/>
+    <variable name="InvokeCotizacion_process_OutputVariable"
+              messageType="ns29:BPELCotizacionResponseMessage"/>
+    <variable name="InvokeGuardarError_Produce_Message_InputVariable"
+              messageType="ns31:Produce_Message_msg"/>
+    <variable name="VariableError" type="xsd:int"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in BPELOrdenCompra.wsdl) -->
+    <receive name="receiveInput" partnerLink="bpelordencompra_client" portType="client:BPELOrdenCompra" operation="process" variable="inputVariable" createInstance="yes"/>
+    <assign name="AssignResetError">
+      <copy>
+        <from expression="0"/>
+        <to variable="VariableError"/>
+      </copy>
+    </assign>
+    <assign name="TransformOrden">
+      <bpelx:annotation>
+        <bpelx:pattern>transformation</bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from expression="ora:doXSLTransformForDoc('xsl/Transformation_Orden.xsl', $inputVariable.payload)"/>
+        <to variable="VariableOrden"/>
+      </copy>
+    </assign>
+    <scope name="ScopeRegistroOrden" variableAccessSerializable="no">
+      <faultHandlers>
+        <catchAll>
+          <sequence name="Sequence6">
+            <assign name="AssignError">
+              <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/ns1:registrarCompraEntrada/ns1:compra/orden/idOrden"/>
+                <to variable="InvokeGuardarError_Produce_Message_InputVariable"
+                    part="body" query="/ns32:errorEntrada/idOrden"/>
+              </copy>
+              <copy>
+                <from expression="'BPELORDEN'"/>
+                <to variable="InvokeGuardarError_Produce_Message_InputVariable"
+                    part="body" query="/ns32:errorEntrada/operacion"/>
+              </copy>
+              <copy>
+                <from expression="'Guardar'"/>
+                <to variable="InvokeGuardarError_Produce_Message_InputVariable"
+                    part="body" query="/ns32:errorEntrada/tipoError"/>
+              </copy>
+              <copy>
+                <from expression="'Error al Guardar'"/>
+                <to variable="InvokeGuardarError_Produce_Message_InputVariable"
+                    part="body" query="/ns32:errorEntrada/detalle"/>
+              </copy>
+              <copy>
+                <from expression="xp20:current-date()"/>
+                <to variable="InvokeGuardarError_Produce_Message_InputVariable"
+                    part="body" query="/ns32:errorEntrada/fecha"/>
+              </copy>
+              <copy>
+                <from expression="1"/>
+                <to variable="VariableError"/>
+              </copy>
+            </assign>
+            <invoke name="InvokeGuardarError" bpelx:invokeAsDetail="no"
+                    inputVariable="InvokeGuardarError_Produce_Message_InputVariable"
+                    partnerLink="setErrorJMS"
+                    portType="ns31:Produce_Message_ptt"
+                    operation="Produce_Message"/>
+            <terminate name="TerminateError"/>
+          </sequence>
+        </catchAll>
+      </faultHandlers>
+      <sequence name="SequenceRegistroOrden">
+        <assign name="TransformGuardar">
+          <bpelx:annotation>
+            <bpelx:pattern>transformation</bpelx:pattern>
+          </bpelx:annotation>
+          <copy>
+            <from expression="ora:doXSLTransformForDoc('xsl/Transformation_Guardar.xsl', $inputVariable.payload)"/>
+            <to variable="Invoke_guardarCompra_InputVariable" part="payload"/>
+          </copy>
+        </assign>
+        <invoke name="InvokeGuardarCompra"
+                inputVariable="Invoke_guardarCompra_InputVariable"
+                outputVariable="Invoke_guardarCompra_OutputVariable"
+                partnerLink="ServiceGuardarC"
+                portType="ns19:BPELGuardarCompra" operation="guardarCompra"
+                bpelx:invokeAsDetail="no"/>
+      </sequence>
+    </scope>
+    <switch name="Switch4">
+      <case condition="bpws:getVariableData('VariableError')=0">
+        <bpelx:annotation>
+          <bpelx:general>
+            <bpelx:property name="userLabel">
+              <![CDATA[NoError]]>
+            </bpelx:property>
+          </bpelx:general>
+        </bpelx:annotation>
+        <sequence name="SequenceNoError">
+          <scope name="ScopeAprobarOrden" variableAccessSerializable="no">
+            <faultHandlers>
+              <catchAll>
+                <sequence name="Sequence6"
+                          xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/">
+                  <assign name="AssignError">
+                    <copy>
+                      <from variable="inputVariable" part="payload"
+                            query="/ns1:registrarCompraEntrada/ns1:compra/orden/idOrden"/>
+                      <to variable="InvokeGuardarError_Produce_Message_InputVariable"
+                          part="body" query="/ns32:errorEntrada/idOrden"/>
+                    </copy>
+                    <copy>
+                      <from expression="'BPELORDEN'"/>
+                      <to variable="InvokeGuardarError_Produce_Message_InputVariable"
+                          part="body" query="/ns32:errorEntrada/operacion"/>
+                    </copy>
+                    <copy>
+                      <from expression="'Aprobar'"/>
+                      <to variable="InvokeGuardarError_Produce_Message_InputVariable"
+                          part="body" query="/ns32:errorEntrada/tipoError"/>
+                    </copy>
+                    <copy>
+                      <from expression="'Error al Aprobar'"/>
+                      <to variable="InvokeGuardarError_Produce_Message_InputVariable"
+                          part="body" query="/ns32:errorEntrada/detalle"/>
+                    </copy>
+                    <copy>
+                      <from expression="xp20:current-date()"/>
+                      <to variable="InvokeGuardarError_Produce_Message_InputVariable"
+                          part="body" query="/ns32:errorEntrada/fecha"/>
+                    </copy>
+                    <copy>
+                      <from expression="1"/>
+                      <to variable="VariableError"/>
+                    </copy>
+                  </assign>
+                  <invoke name="InvokeGuardarError" bpelx:invokeAsDetail="no"
+                          inputVariable="InvokeGuardarError_Produce_Message_InputVariable"
+                          partnerLink="setErrorJMS"
+                          portType="ns31:Produce_Message_ptt"
+                          operation="Produce_Message"
+                          xmlns:bpelx="http://schemas.oracle.com/bpel/extension"/>
+                  <terminate name="TerminateError"/>
+                </sequence>
+              </catchAll>
+            </faultHandlers>
+            <sequence name="SequenceAprobarOrden">
+              <assign name="AssignGetMontoGerencia">
+                <copy>
+                  <from variable="VariableOrden" query="/ns4:unaOrden/total"/>
+                  <to variable="MontoIn"
+                      query="/ns23:ValidarMontoEntrada/ns23:totalOrden"/>
+                </copy>
+              </assign>
+              <scope name="RuleMonto" variableAccessSerializable="no">
+                <bpelx:annotation>
+                  <bpelx:pattern patternName="bpelx:decide"></bpelx:pattern>
+                </bpelx:annotation>
+                <variables>
+                  <variable name="dsIn"
+                            messageType="ns24:callFunctionStatelessMessage"/>
+                  <variable name="dsOut"
+                            messageType="ns24:callFunctionStatelessDecisionMessage"/>
+                </variables>
+                <sequence name="Sequence4">
+                  <assign name="Facts_To_Rule_Service">
+                    <copy>
+                      <from variable="MontoIn"
+                            query="/ns23:ValidarMontoEntrada"/>
+                      <to variable="dsIn" part="payload"
+                          query="/ns24:callFunctionStateless/ns24:parameterList/ns23:ValidarMontoEntrada"/>
+                    </copy>
+                  </assign>
+                  <assign name="BPEL_Header">
+                    <copy>
+                      <from expression='"OracleRulesMG_DecisionService_1"'/>
+                      <to variable="dsIn" part="payload" query="@name"/>
+                    </copy>
+                  </assign>
+                  <invoke name="Invoke"
+                          partnerLink="OracleRulesMG.OracleRulesMG_DecisionService_1"
+                          portType="ns24:IDecisionService"
+                          operation="callFunctionStateless" inputVariable="dsIn"
+                          outputVariable="dsOut"/>
+                  <assign name="Rule_Service_To_Facts">
+                    <copy>
+                      <from variable="dsOut" part="payload"
+                            query="/ns24:callFunctionStatelessDecision/ns24:resultList/ns23:ValidarMontoSalida"/>
+                      <to variable="MontoOut" query="/ns23:ValidarMontoSalida"/>
+                    </copy>
+                  </assign>
+                </sequence>
+              </scope>
+              <assign name="AssignGetUserCategoria">
+                <copy>
+                  <from variable="inputVariable" part="payload"
+                        query="/ns1:registrarCompraEntrada/ns1:compra/orden/cliente/nombreUsuario"/>
+                  <to variable="InvokeUserCategoria_InputVariable"
+                      part="getUsuarioSelect_inputParameters"
+                      query="/ns7:getUsuarioSelect_paramUserInputParameters/ns7:paramUser"/>
+                </copy>
+              </assign>
+              <invoke name="InvokeUserCategoria"
+                      inputVariable="InvokeUserCategoria_InputVariable"
+                      outputVariable="InvokeUserCategoria_OutputVariable"
+                      partnerLink="getUsuario" portType="ns6:getUsuario_ptt"
+                      operation="getUsuarioSelect" bpelx:invokeAsDetail="no"/>
+              <assign name="AssignRuleOrden">
+                <copy>
+                  <from variable="VariableOrden" query="/ns4:unaOrden/total"/>
+                  <to variable="VariableValidarOrdenInput"
+                      query="/ns12:ValidarOrdenEntrada/ns12:totalOrden"/>
+                </copy>
+                <copy>
+                  <from variable="MontoOut"
+                        query="/ns23:ValidarMontoSalida/ns23:totalMonto"/>
+                  <to variable="VariableValidarOrdenInput"
+                      query="/ns12:ValidarOrdenEntrada/ns12:montoGerencia"/>
+                </copy>
+                <copy>
+                  <from variable="InvokeUserCategoria_OutputVariable"
+                        part="UsuarioCollection"
+                        query="/ns7:UsuarioCollection/ns7:Usuario/ns7:categoriaCliente/ns7:idcategoria"/>
+                  <to variable="VariableValidarOrdenInput"
+                      query="/ns12:ValidarOrdenEntrada/ns12:idCategoriaCliente"/>
+                </copy>
+                <copy>
+                  <from variable="InvokeUserCategoria_OutputVariable"
+                        part="UsuarioCollection"
+                        query="/ns7:UsuarioCollection/ns7:Usuario/ns7:categoriaCliente/ns7:nombreCategoria"/>
+                  <to variable="VariableValidarOrdenInput"
+                      query="/ns12:ValidarOrdenEntrada/ns12:nombreCategoriaCliente"/>
+                </copy>
+              </assign>
+              <scope name="RuleOrden" variableAccessSerializable="no">
+                <bpelx:annotation>
+                  <bpelx:pattern patternName="bpelx:decide"></bpelx:pattern>
+                </bpelx:annotation>
+                <variables>
+                  <variable name="dsIn"
+                            messageType="ns17:callFunctionStatelessMessage"/>
+                  <variable name="dsOut"
+                            messageType="ns17:callFunctionStatelessDecisionMessage"/>
+                </variables>
+                <sequence name="Sequence1">
+                  <assign name="Facts_To_Rule_Service">
+                    <copy>
+                      <from variable="VariableValidarOrdenInput"/>
+                      <to variable="dsIn" part="payload"
+                          query="ns17:parameterList/ns12:ValidarOrdenEntrada"/>
+                    </copy>
+                  </assign>
+                  <assign name="BPEL_Header">
+                    <copy>
+                      <from expression='"OracleRulesValidOrden_DecisionService_ValidOrden"'/>
+                      <to variable="dsIn" part="payload" query="@name"/>
+                    </copy>
+                  </assign>
+                  <invoke name="Invoke"
+                          partnerLink="OracleRulesValidOrden.OracleRulesValidOrden_DecisionService_ValidOrden"
+                          portType="ns17:IDecisionService"
+                          operation="callFunctionStateless" inputVariable="dsIn"
+                          outputVariable="dsOut"/>
+                  <assign name="Rule_Service_To_Facts">
+                    <copy>
+                      <from variable="dsOut" part="payload"
+                            query="ns17:resultList/ns12:ValidarOrdenSalida"/>
+                      <to variable="VariableValidarOrdenOutput"/>
+                    </copy>
+                  </assign>
+                </sequence>
+              </scope>
+              <switch name="Switch1">
+                <case condition="bpws:getVariableData('VariableValidarOrdenOutput','/ns12:ValidarOrdenSalida/ns12:nombreEstado')='PRE_APROBADA'">
+                  <bpelx:annotation>
+                    <bpelx:pattern>el Anlalista de Ventas debe Aprobarla</bpelx:pattern>
+                    <bpelx:general>
+                      <bpelx:property name="userLabel">
+                        <![CDATA[PRE_APROBADO]]>
+                      </bpelx:property>
+                    </bpelx:general>
+                  </bpelx:annotation>
+                  <sequence name="Sequence5">
+                    <assign name="AssignAnalistaTH">
+                      <copy>
+                        <from expression="0"/>
+                        <to variable="VariableValidarOrdenOutput"
+                            query="/ns12:ValidarOrdenSalida/ns12:idEstado"/>
+                      </copy>
+                    </assign>
+                    <scope name="HumantaskAproManual2"
+                           xmlns:wf="http://schemas.oracle.com/bpel/extensions/workflow"
+                           wf:key="HumantaskAproManual1_globalVariable">
+                      <bpelx:annotation>
+                        <bpelx:pattern patternName="bpelx:workflow"></bpelx:pattern>
+                      </bpelx:annotation>
+                      <variables>
+                        <variable name="initiateTaskInput"
+                                  messageType="taskservice:initiateTaskMessage"/>
+                        <variable name="initiateTaskResponseMessage"
+                                  messageType="taskservice:initiateTaskResponseMessage"/>
+                      </variables>
+                      <sequence>
+                        <assign name="HumantaskAproManual2_AssignTaskAttributes">
+                          <copy>
+                            <from expression="number(3)"/>
+                            <to variable="initiateTaskInput" part="payload"
+                                query="/taskservice:initiateTask/task:task/task:priority"/>
+                          </copy>
+                          <copy>
+                            <from><payload xmlns="http://xmlns.oracle.com/bpel/workflow/task">
+	<ValidarOrdenEntrada xmlns="http://www.kallsonys.com"/> 
+</payload></from>
+                            <to variable="initiateTaskInput" part="payload"
+                                query="/taskservice:initiateTask/task:task/task:payload"/>
+                          </copy>
+                          <copy>
+                            <from expression="string('Aprobar Orden Kallsony')"/>
+                            <to variable="initiateTaskInput" part="payload"
+                                query="/taskservice:initiateTask/task:task/task:title"/>
+                          </copy>
+                          <copy>
+                            <from variable="VariableValidarOrdenInput"/>
+                            <to variable="initiateTaskInput" part="payload"
+                                query="/taskservice:initiateTask/task:task/task:payload/ns12:ValidarOrdenEntrada"/>
+                          </copy>
+                        </assign>
+                        <invoke name="initiateTask_HumantaskAproManual2"
+                                partnerLink="HumantaskAproManual.TaskService_1"
+                                operation="initiateTask"
+                                portType="taskservice:TaskService"
+                                inputVariable="initiateTaskInput"
+                                outputVariable="initiateTaskResponseMessage"/>
+                        <receive name="receiveCompletedTask_HumantaskAproManual2"
+                                 partnerLink="HumantaskAproManual.TaskService_1"
+                                 portType="taskservice:TaskServiceCallback"
+                                 operation="onTaskCompleted"
+                                 variable="HumantaskAproManual1_globalVariable"
+                                 createInstance="no"/>
+                      </sequence>
+                    </scope>
+                    <switch name="taskSwitch">
+                      <case condition="$HumantaskAproManual1_globalVariable.payload/task:systemAttributes/task:outcome = 'REJECT'">
+                        <bpelx:annotation>
+                          <bpelx:pattern>Task outcome is REJECT</bpelx:pattern>
+                          <bpelx:general>
+                            <bpelx:property name="userLabel">
+                              <![CDATA[Task outcome is REJECT]]>
+                            </bpelx:property>
+                          </bpelx:general>
+                        </bpelx:annotation>
+                        <sequence>
+                          <assign name="RECHAZADO">
+                            <copy>
+                              <from expression='"RECHAZADA"'/>
+                              <to variable="VariableValidarOrdenOutput"
+                                  query="/ns12:ValidarOrdenSalida/ns12:nombreEstado"/>
+                            </copy>
+                            <copy>
+                              <from expression="3"/>
+                              <to variable="VariableValidarOrdenOutput"
+                                  query="/ns12:ValidarOrdenSalida/ns12:idEstado"/>
+                            </copy>
+                          </assign>
+                        </sequence>
+                      </case>
+                      <case condition="$HumantaskAproManual1_globalVariable.payload/task:systemAttributes/task:outcome = 'APPROVE'">
+                        <bpelx:annotation>
+                          <bpelx:pattern>Task outcome is APPROVE</bpelx:pattern>
+                          <bpelx:general>
+                            <bpelx:property name="userLabel">
+                              <![CDATA[Task outcome is APPROVE]]>
+                            </bpelx:property>
+                          </bpelx:general>
+                        </bpelx:annotation>
+                        <sequence>
+                          <assign name="APROBADO">
+                            <copy>
+                              <from expression='"APROBADA"'/>
+                              <to variable="VariableValidarOrdenOutput"
+                                  query="/ns12:ValidarOrdenSalida/ns12:nombreEstado"/>
+                            </copy>
+                            <copy>
+                              <from expression="2"/>
+                              <to variable="VariableValidarOrdenOutput"
+                                  query="/ns12:ValidarOrdenSalida/ns12:idEstado"/>
+                            </copy>
+                          </assign>
+                        </sequence>
+                      </case>
+                      <otherwise>
+                        <sequence>
+                          <assign name="OTROS">
+                            <copy>
+                              <from expression='"RECHAZADA"'/>
+                              <to variable="VariableValidarOrdenOutput"
+                                  query="/ns12:ValidarOrdenSalida/ns12:nombreEstado"/>
+                            </copy>
+                            <copy>
+                              <from expression="3"/>
+                              <to variable="VariableValidarOrdenOutput"
+                                  query="/ns12:ValidarOrdenSalida/ns12:idEstado"/>
+                            </copy>
+                          </assign>
+                        </sequence>
+                      </otherwise>
+                    </switch>
+                  </sequence>
+                </case>
+                <otherwise/>
+              </switch>
+              <assign name="AssignEstado">
+                <copy>
+                  <from variable="VariableValidarOrdenOutput"
+                        query="/ns12:ValidarOrdenSalida/ns12:idEstado"/>
+                  <to variable="InvokeEstadoOrden_InputVariable"
+                      part="OrdenCollection"
+                      query="/ns21:OrdenCollection/ns21:Orden/ns21:idestadoorden"/>
+                </copy>
+                <copy>
+                  <from variable="Invoke_guardarCompra_OutputVariable"
+                        part="payload"
+                        query="/ns22:guardarCompraSalida/ns22:idPreOrden"/>
+                  <to variable="InvokeEstadoOrden_InputVariable"
+                      part="OrdenCollection"
+                      query="/ns21:OrdenCollection/ns21:Orden/ns21:idorden"/>
+                </copy>
+              </assign>
+              <invoke name="InvokeEstadoOrden"
+                      inputVariable="InvokeEstadoOrden_InputVariable"
+                      partnerLink="setEstadoOrden"
+                      portType="ns20:setEstadoOrden_ptt" operation="update"
+                      bpelx:invokeAsDetail="no"/>
+            </sequence>
+          </scope>
+          <switch name="Switch5">
+            <case condition="bpws:getVariableData('VariableError')=0">
+              <bpelx:annotation>
+                <bpelx:general>
+                  <bpelx:property name="userLabel">
+                    <![CDATA[NoError]]>
+                  </bpelx:property>
+                </bpelx:general>
+              </bpelx:annotation>
+              <scope name="ScopeEnvio" variableAccessSerializable="no">
+                <faultHandlers>
+                  <catchAll>
+                    <sequence name="Sequence6"
+                              xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/">
+                      <assign name="AssignError">
+                        <copy>
+                          <from variable="inputVariable" part="payload"
+                                query="/ns1:registrarCompraEntrada/ns1:compra/orden/idOrden"/>
+                          <to variable="InvokeGuardarError_Produce_Message_InputVariable"
+                              part="body" query="/ns32:errorEntrada/idOrden"/>
+                        </copy>
+                        <copy>
+                          <from expression="'BPELORDEN'"/>
+                          <to variable="InvokeGuardarError_Produce_Message_InputVariable"
+                              part="body" query="/ns32:errorEntrada/operacion"/>
+                        </copy>
+                        <copy>
+                          <from expression="'Enviar'"/>
+                          <to variable="InvokeGuardarError_Produce_Message_InputVariable"
+                              part="body" query="/ns32:errorEntrada/tipoError"/>
+                        </copy>
+                        <copy>
+                          <from expression="'Error al Enviar'"/>
+                          <to variable="InvokeGuardarError_Produce_Message_InputVariable"
+                              part="body" query="/ns32:errorEntrada/detalle"/>
+                        </copy>
+                        <copy>
+                          <from expression="xp20:current-date()"/>
+                          <to variable="InvokeGuardarError_Produce_Message_InputVariable"
+                              part="body" query="/ns32:errorEntrada/fecha"/>
+                        </copy>
+                        <copy>
+                          <from expression="1"/>
+                          <to variable="VariableError"/>
+                        </copy>
+                      </assign>
+                      <invoke name="InvokeGuardarError"
+                              bpelx:invokeAsDetail="no"
+                              inputVariable="InvokeGuardarError_Produce_Message_InputVariable"
+                              partnerLink="setErrorJMS"
+                              portType="ns31:Produce_Message_ptt"
+                              operation="Produce_Message"
+                              xmlns:bpelx="http://schemas.oracle.com/bpel/extension"/>
+                      <terminate name="TerminateError"/>
+                    </sequence>
+                  </catchAll>
+                </faultHandlers>
+                <sequence name="SequenceEnvio">
+                  <switch name="Switch2">
+                    <case condition="bpws:getVariableData('VariableValidarOrdenOutput','/ns12:ValidarOrdenSalida/ns12:nombreEstado')=&quot;APROBADA&quot;">
+                      <bpelx:annotation>
+                        <bpelx:general>
+                          <bpelx:property name="userLabel">
+                            <![CDATA[APROBADA]]>
+                          </bpelx:property>
+                        </bpelx:general>
+                      </bpelx:annotation>
+                      <sequence name="SequenceAprobada">
+                        <assign name="TransformCotizar">
+                          <bpelx:annotation>
+                            <bpelx:pattern>transformation</bpelx:pattern>
+                          </bpelx:annotation>
+                          <copy>
+                            <from expression="ora:doXSLTransformForDoc('xsl/Transformation_Cotizar.xsl', $inputVariable.payload, 'VariableValidarOrdenOutput', $VariableValidarOrdenOutput, 'Invoke_guardarCompra_OutputVariable.payload', $Invoke_guardarCompra_OutputVariable.payload)"/>
+                            <to variable="InvokeCotizacion_process_InputVariable"
+                                part="payload"/>
+                          </copy>
+                        </assign>
+                        <invoke name="InvokeCotizacion"
+                                inputVariable="InvokeCotizacion_process_InputVariable"
+                                outputVariable="InvokeCotizacion_process_OutputVariable"
+                                partnerLink="ServiceCotizacion"
+                                portType="ns29:BPELCotizacion"
+                                operation="process" bpelx:invokeAsDetail="yes"/>
+                        <assign name="AssignValidarDestino">
+                          <copy>
+                            <from expression="bpws:getVariableData('inputVariable','payload','/ns1:registrarCompraEntrada/ns1:compra/usuarioEnvio/direccion/idPais')!=1"/>
+                            <to variable="VariableValidarDestinoEntrada"
+                                query="/ns13:ValidarDestinoEntrada/ns13:tipoDestino"/>
+                          </copy>
+                          <copy>
+                            <from variable="InvokeCotizacion_process_OutputVariable"
+                                  part="payload"
+                                  query="/ns30:cotizacionSalida/ns30:proveedor"/>
+                            <to variable="VariableValidarDestinoEntrada"
+                                query="/ns13:ValidarDestinoEntrada/ns13:nombreFabricante"/>
+                          </copy>
+                        </assign>
+                        <scope name="RuleValidarDestino"
+                               variableAccessSerializable="no">
+                          <bpelx:annotation>
+                            <bpelx:pattern patternName="bpelx:decide"></bpelx:pattern>
+                          </bpelx:annotation>
+                          <variables>
+                            <variable name="dsIn"
+                                      messageType="ns18:callFunctionStatelessMessage"/>
+                            <variable name="dsOut"
+                                      messageType="ns18:callFunctionStatelessDecisionMessage"/>
+                          </variables>
+                          <sequence name="Sequence3">
+                            <assign name="Facts_To_Rule_Service">
+                              <copy>
+                                <from variable="VariableValidarDestinoEntrada"
+                                      query="/ns13:ValidarDestinoEntrada"/>
+                                <to variable="dsIn" part="payload"
+                                    query="/ns18:callFunctionStateless/ns18:parameterList/ns13:ValidarDestinoEntrada"/>
+                              </copy>
+                            </assign>
+                            <assign name="BPEL_Header">
+                              <copy>
+                                <from expression='"OracleRulesValidarDestino_DecisionService_Destino"'/>
+                                <to variable="dsIn" part="payload"
+                                    query="@name"/>
+                              </copy>
+                            </assign>
+                            <invoke name="Invoke"
+                                    partnerLink="OracleRulesValidarDestino.OracleRulesValidarDestino_DecisionService_Destino"
+                                    portType="ns18:IDecisionService"
+                                    operation="callFunctionStateless"
+                                    inputVariable="dsIn"
+                                    outputVariable="dsOut"/>
+                            <assign name="Rule_Service_To_Facts">
+                              <copy>
+                                <from variable="dsOut" part="payload"
+                                      query="/ns18:callFunctionStatelessDecision/ns18:resultList/ns13:ValidarDestinoSalida"/>
+                                <to variable="VariableValidarDestinoSalida"
+                                    query="/ns13:ValidarDestinoSalida"/>
+                              </copy>
+                            </assign>
+                          </sequence>
+                        </scope>
+                        <assign name="TransformEnvio">
+                          <bpelx:annotation>
+                            <bpelx:pattern>transformation</bpelx:pattern>
+                          </bpelx:annotation>
+                          <copy>
+                            <from expression="ora:doXSLTransformForDoc('xsl/Transformation_ServiceEnvio.xsl', $inputVariable.payload, 'VariableValidarDestinoSalida', $VariableValidarDestinoSalida, 'Invoke_guardarCompra_OutputVariable.payload', $Invoke_guardarCompra_OutputVariable.payload)"/>
+                            <to variable="InvokeServiceEnvio_enviarCompra_InputVariable"
+                                part="payload"/>
+                          </copy>
+                        </assign>
+                        <invoke name="InvokeServiceEnvio"
+                                inputVariable="InvokeServiceEnvio_enviarCompra_InputVariable"
+                                outputVariable="InvokeServiceEnvio_enviarCompra_OutputVariable"
+                                partnerLink="ServiceEnvio"
+                                portType="ns27:BPELEnvio"
+                                operation="enviarCompra"
+                                bpelx:invokeAsDetail="no"/>
+                        <switch name="Switch3">
+                          <case condition="bpws:getVariableData('InvokeServiceEnvio_enviarCompra_OutputVariable','payload','/ns28:enviarCompraSalida/ns28:estadoEnvio')">
+                            <bpelx:annotation>
+                              <bpelx:general>
+                                <bpelx:property name="userLabel">
+                                  <![CDATA[EnvioOk]]>
+                                </bpelx:property>
+                              </bpelx:general>
+                            </bpelx:annotation>
+                            <sequence>
+                              <assign name="AssignEstadoEnviado">
+                                <copy>
+                                  <from expression="4"/>
+                                  <to variable="InvokeEstadoEOrden_InputVariable"
+                                      part="OrdenCollection"
+                                      query="/ns21:OrdenCollection/ns21:Orden/ns21:idestadoorden"/>
+                                </copy>
+                                <copy>
+                                  <from variable="Invoke_guardarCompra_OutputVariable"
+                                        part="payload"
+                                        query="/ns22:guardarCompraSalida/ns22:idPreOrden"/>
+                                  <to variable="InvokeEstadoEOrden_InputVariable"
+                                      part="OrdenCollection"
+                                      query="/ns21:OrdenCollection/ns21:Orden/ns21:idorden"/>
+                                </copy>
+                              </assign>
+                              <invoke name="InvokeEstadoOrden"
+                                      inputVariable="InvokeEstadoEOrden_InputVariable"
+                                      partnerLink="setEstadoOrden"
+                                      portType="ns20:setEstadoOrden_ptt"
+                                      operation="update"
+                                      bpelx:invokeAsDetail="no"/>
+                            </sequence>
+                          </case>
+                          <otherwise/>
+                        </switch>
+                      </sequence>
+                    </case>
+                    <otherwise>
+                      <terminate name="TerminateNoAprobado"/>
+                    </otherwise>
+                  </switch>
+                </sequence>
+              </scope>
+            </case>
+            <otherwise/>
+          </switch>
+        </sequence>
+      </case>
+      <otherwise/>
+    </switch>
+  </sequence>
+</process>

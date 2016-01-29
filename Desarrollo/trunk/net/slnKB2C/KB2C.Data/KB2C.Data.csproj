@@ -1,0 +1,305 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9E8F9C08-26EC-46DC-B34E-1C18B8DB4D64}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KB2C.Data</RootNamespace>
+    <AssemblyName>KB2C.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Oracle.ManagedDataAccess">
+      <HintPath>..\packages\Oracle.ManagedDataAccess.12.1.021\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CampaniaDAL.cs" />
+    <Compile Include="CategoryDAL.cs" />
+    <Compile Include="CompraDAL.cs" />
+    <Compile Include="Interface\IData.cs" />
+    <Compile Include="OrdenDAL.cs" />
+    <Compile Include="ProductoDAL.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\ServiceCampanias\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceCategorias\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceCompra\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceOrdenes\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ServiceProductos\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="ParametricaDAL.cs" />
+    <Compile Include="UserDAL.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Service References\ServiceCampanias\KB2C.Data.ServiceCampanias.ConsultaCampaniaSalida.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServiceCampanias\KB2C.Data.ServiceCampanias.ConsultarCampaniasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServiceCampanias\mockCampaniasPortSOAP11Binding.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceCampanias\mockCampaniasPortSOAP11Binding1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceCampanias\mockCampaniasPortSOAP11Binding2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceCampanias\mockCampaniasPortSOAP11Binding3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceCampanias\mockCampaniasPortSOAP11Binding4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceCampanias\Productos.wsdl" />
+    <None Include="Service References\ServiceCampanias\Productos1.wsdl" />
+    <None Include="Service References\ServiceCampanias\ProxyCampanias.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceCampanias\ProxyCampanias1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceCampanias\ProxyCampanias2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceCampanias\ProxyCampanias3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceCampanias\ProxyCampanias4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceCategorias\KB2C.Data.ServiceCategorias.ConsultaCategoriaSalida.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServiceCategorias\KB2C.Data.ServiceCategorias.consultaCategoriasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServiceCategorias\ProxyCategorias1.wsdl" />
+    <None Include="Service References\ServiceCategorias\ProxyCategorias4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceCategorias\ProxyCategorias41.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceCategorias\ProxyCategorias42.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceCategorias\ProxyCategorias43.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceCompra\KB2C.Data.ServiceCompra.registrarCompraResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServiceCompra\KB2C.Data.ServiceCompra.RegistrarCompraSalida.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServiceCompra\ProxyCompra.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceCompra\ProxyCompra1.wsdl" />
+    <None Include="Service References\ServiceCompra\ProxyCompra1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceCompra\ProxyCompra2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceCompra\ProxyCompra3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceCompra\ProxyCompra4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceCompra\ProxyCompra5.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceCompra\ProxyCompra6.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceCompra\ProxyCompra7.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceOrdenes\ConsultaOrden.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceOrdenes\Direccion1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceOrdenes\Falta1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceOrdenes\KB2C.Data.ServiceOrdenes.ConsultaOrdenSalida.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServiceOrdenes\KB2C.Data.ServiceOrdenes.consultarOrdenResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServiceOrdenes\Orden1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceOrdenes\Producto1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceOrdenes\ServiceConsultaOrden.wsdl" />
+    <None Include="Service References\ServiceOrdenes\Usuario1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceProductos\KB2C.Data.ServiceProductos.ConsultaProductoSalida.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ServiceProductos\KB2C.Data.ServiceProductos.ConsultarProductosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\ServiceCampanias\" />
+    <WCFMetadataStorage Include="Service References\ServiceCategorias\" />
+    <WCFMetadataStorage Include="Service References\ServiceCompra\" />
+    <WCFMetadataStorage Include="Service References\ServiceOrdenes\" />
+    <WCFMetadataStorage Include="Service References\ServiceProductos\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\KB2C.DTO\KB2C.DTO.csproj">
+      <Project>{d9652f19-1721-4859-9a6b-4785b05250fc}</Project>
+      <Name>KB2C.DTO</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServiceCampanias\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServiceCampanias\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServiceCampanias\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServiceCompra\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServiceCompra\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServiceCompra\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServiceCategorias\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServiceCategorias\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServiceCategorias\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServiceProductos\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServiceProductos\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServiceProductos\Productos1.wsdl" />
+    <None Include="Service References\ServiceProductos\ProxyProductos4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceProductos\ProxyProductos41.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceProductos\ProxyProductos42.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceProductos\ProxyProductos43.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ServiceProductos\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServiceOrdenes\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServiceOrdenes\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ServiceOrdenes\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

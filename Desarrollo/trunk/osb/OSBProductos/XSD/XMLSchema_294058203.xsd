@@ -1,0 +1,22 @@
+<schema targetNamespace="http://www.kallsony.com/operacion/consultaproducto" elementFormDefault="qualified" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:cp="http://www.kallsony.com/operacion/consultaproducto" xmlns:pr="http://www.kallsony.com/entidad/producto" xmlns:ft="http://www.kallsony.com/util/filtro">
+    <import schemaLocation="XMLSchema_1160370405.xsd" namespace="http://www.kallsony.com/entidad/producto"/>
+    <import schemaLocation="XMLSchema_438953405.xsd" namespace="http://www.kallsony.com/util/filtro"/>
+    <complexType name="ConsultaProductoEntrada">
+        <sequence>
+            <element name="filtroProducto" type="ft:Filtro"/>
+        </sequence>
+    </complexType>
+    <complexType name="ConsultaProductoSalida">
+        <sequence>
+            <element name="respuestaFiltro" type="ft:RespuestaFiltro" minOccurs="0" maxOccurs="1"/>
+            <element name="listaProductos" type="cp:Productos"/>
+        </sequence>
+    </complexType>
+    <complexType name="Productos">
+        <sequence minOccurs="1">
+            <element name="producto" type="pr:Producto" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+    <element name="consultaProductoEntrada" type="cp:ConsultaProductoEntrada"/>
+    <element name="consultaProductoSalida" type="cp:ConsultaProductoSalida"/>
+</schema>

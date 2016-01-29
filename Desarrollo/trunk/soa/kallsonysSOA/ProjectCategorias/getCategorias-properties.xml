@@ -1,0 +1,25 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+   <entry key="Producto.Subcategoria.NombreSubcategoria:db_column_not_null">true</entry>
+   <entry key="Producto.Categoria.IdCategoria:db_column_not_null">true</entry>
+   <entry key="Producto.Subcategoria.NombreSubcategoria:db_column_size">64</entry>
+   <entry key="Producto.Subcategoria:db_table_type">TABLE</entry>
+   <entry key="Producto.Categoria.NombreCategoria:db_column_type">NVARCHAR</entry>
+   <entry key="return_single_result_set">false</entry>
+   <entry key="Producto.Subcategoria.IdSubcategoria:db_column_type">int identity</entry>
+   <entry key="Producto.Categoria:db_column_1">NombreCategoria</entry>
+   <entry key="Producto.Categoria.IdCategoria:db_column_type">int identity</entry>
+   <entry key="Producto.Categoria:db_column_0">IdCategoria</entry>
+   <entry key="Producto.Subcategoria.IdCategoria:db_column_type">INT</entry>
+   <entry key="Producto.Categoria.NombreCategoria:db_column_not_null">true</entry>
+   <entry key="root_descriptor_alias">Producto.Categoria</entry>
+   <entry key="Producto.Subcategoria.IdSubcategoria:db_column_not_null">true</entry>
+   <entry key="Producto.Subcategoria:db_column_2">IdCategoria</entry>
+   <entry key="Producto.Subcategoria:db_column_1">NombreSubcategoria</entry>
+   <entry key="Producto.Categoria:db_table_type">TABLE</entry>
+   <entry key="Producto.Categoria.NombreCategoria:db_column_size">128</entry>
+   <entry key="Producto.Subcategoria:db_column_0">IdSubcategoria</entry>
+   <entry key="Producto.Subcategoria.NombreSubcategoria:db_column_type">NVARCHAR</entry>
+   <entry key="Producto.Subcategoria.IdCategoria:db_column_not_null">true</entry>
+</properties>

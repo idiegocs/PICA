@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-persistence xmlns="http://www.eclipse.org/eclipselink/xsds/persistence" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:eclipselink="http://www.eclipse.org/eclipselink/xsds/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="Eclipse Persistence Services - 2.1.3.v20110304-r9073">
+   <name>getProductos-OR</name>
+   <class-mapping-descriptors>
+      <class-mapping-descriptor xsi:type="object-relational-class-mapping-descriptor">
+         <class>getProductos.Producto</class>
+         <alias>Producto.Producto</alias>
+         <primary-key>
+            <field table="Producto" name="IdProducto" xsi:type="column"/>
+         </primary-key>
+         <events/>
+         <querying>
+            <queries>
+               <query name="getProductosSelect" xsi:type="read-all-query">
+                  <reference-class>getProductos.Producto</reference-class>
+                  <container xsi:type="list-container-policy">
+                     <collection-type>java.util.Vector</collection-type>
+                  </container>
+               </query>
+            </queries>
+         </querying>
+         <attribute-mappings>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>IdProducto</attribute-name>
+               <field table="Producto" name="IdProducto" xsi:type="column"/>
+               <attribute-classification>java.lang.Integer</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>CodigoProducto</attribute-name>
+               <field table="Producto" name="CodigoProducto" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>NombreProducto</attribute-name>
+               <field table="Producto" name="NombreProducto" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>DescripcionProducto</attribute-name>
+               <field table="Producto" name="DescripcionProducto" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>NombreFabricante</attribute-name>
+               <field table="Producto" name="NombreFabricante" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>NombreImagenProducto</attribute-name>
+               <field table="Producto" name="NombreImagenProducto" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>IdSubcategoria</attribute-name>
+               <field table="Producto" name="IdSubcategoria" xsi:type="column"/>
+               <attribute-classification>java.lang.Integer</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>PrecioUnitario</attribute-name>
+               <field table="Producto" name="PrecioUnitario" xsi:type="column"/>
+               <attribute-classification>java.math.BigDecimal</attribute-classification>
+            </attribute-mapping>
+         </attribute-mappings>
+         <descriptor-type>independent</descriptor-type>
+         <sequencing>
+            <sequence-name>SEQ</sequence-name>
+            <sequence-field table="Producto" name="IdProducto"/>
+         </sequencing>
+         <caching>
+            <cache-type>weak-reference</cache-type>
+            <cache-size>-1</cache-size>
+            <always-refresh>true</always-refresh>
+         </caching>
+         <remote-caching>
+            <cache-type>weak-reference</cache-type>
+            <cache-size>-1</cache-size>
+         </remote-caching>
+         <instantiation/>
+         <copying xsi:type="instantiation-copy-policy"/>
+         <tables>
+            <table name="Producto.Producto"/>
+         </tables>
+         <structure>structureName</structure>
+      </class-mapping-descriptor>
+      <class-mapping-descriptor xsi:type="object-relational-class-mapping-descriptor">
+         <class>getProductos.Producto</class>
+         <alias>Producto.Producto</alias>
+         <primary-key>
+            <field table="Producto" name="IdProducto" xsi:type="column"/>
+         </primary-key>
+         <events/>
+         <querying>
+            <queries>
+               <query name="getProductosSelect" xsi:type="read-all-query">
+                  <arguments>
+                     <argument name="tipoBusqueda">
+                        <type>java.lang.String</type>
+                     </argument>
+                     <argument name="valorBusqueda">
+                        <type>java.lang.String</type>
+                     </argument>
+                     <argument name="tamanioPagina">
+                        <type>java.lang.String</type>
+                     </argument>
+                     <argument name="pagina">
+                        <type>java.lang.String</type>
+                     </argument>
+                  </arguments>
+                  <call xsi:type="sql-call">
+                     <sql>SELECT t1.IdProducto, t1.CodigoProducto, t1.NombreProducto, t1.DescripcionProducto, t1.NombreFabricante,
+ t1.NombreImagenProducto, t1.PrecioUnitario, t1.IdSubcategoria
+FROM Producto.Producto t1 
+WHERE 
+( 'N'=#tipoBusqueda  AND UPPER(t1.NombreProducto) LIKE UPPER(concat('%', #valorBusqueda, '%')) )
+ OR ( 'I'=#tipoBusqueda  AND  CONCAT('',#valorBusqueda)  LIKE CONCAT ('%|', t1.IdProducto, '|%') ) 
+ OR ( 'C'=#tipoBusqueda  AND UPPER(t1.CodigoProducto) LIKE UPPER(concat('%', #valorBusqueda, '%')) )
+OR ( 'D'=#tipoBusqueda  AND UPPER(t1.DescripcionProducto) LIKE UPPER(concat('%', #valorBusqueda, '%')) )
+OR ( 'S'=#tipoBusqueda  AND UPPER(t1.IdSubcategoria) LIKE UPPER(concat('%', #valorBusqueda, '%')) )
+OR ( 'A'=#tipoBusqueda)
+ORDER BY t1.IdProducto 
+OFFSET ( (CAST(#pagina AS INT)-1) *  CAST(#tamanioPagina AS INT) ) ROWS  FETCH NEXT CAST(#tamanioPagina AS INT) ROWS ONLY</sql>
+                  </call>
+                  <reference-class>getProductos.Producto</reference-class>
+                  <container xsi:type="list-container-policy">
+                     <collection-type>java.util.Vector</collection-type>
+                  </container>
+               </query>
+            </queries>
+         </querying>
+         <attribute-mappings>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>IdProducto</attribute-name>
+               <field table="Producto" name="IdProducto" xsi:type="column"/>
+               <attribute-classification>java.lang.Integer</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>CodigoProducto</attribute-name>
+               <field table="Producto" name="CodigoProducto" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>NombreProducto</attribute-name>
+               <field table="Producto" name="NombreProducto" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>DescripcionProducto</attribute-name>
+               <field table="Producto" name="DescripcionProducto" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>NombreFabricante</attribute-name>
+               <field table="Producto" name="NombreFabricante" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>NombreImagenProducto</attribute-name>
+               <field table="Producto" name="NombreImagenProducto" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>IdSubcategoria</attribute-name>
+               <field table="Producto" name="IdSubcategoria" xsi:type="column"/>
+               <attribute-classification>java.lang.Integer</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>PrecioUnitario</attribute-name>
+               <field table="Producto" name="PrecioUnitario" xsi:type="column"/>
+               <attribute-classification>java.math.BigDecimal</attribute-classification>
+            </attribute-mapping>
+         </attribute-mappings>
+         <descriptor-type>independent</descriptor-type>
+         <sequencing>
+            <sequence-name>SEQ</sequence-name>
+            <sequence-field table="Producto" name="IdProducto"/>
+         </sequencing>
+         <caching>
+            <cache-type>weak-reference</cache-type>
+            <cache-size>-1</cache-size>
+            <always-refresh>true</always-refresh>
+         </caching>
+         <remote-caching>
+            <cache-type>weak-reference</cache-type>
+            <cache-size>-1</cache-size>
+         </remote-caching>
+         <instantiation/>
+         <copying xsi:type="instantiation-copy-policy"/>
+         <tables>
+            <table name="Producto.Producto"/>
+         </tables>
+         <structure>structureName</structure>
+      </class-mapping-descriptor>
+   </class-mapping-descriptors>
+   <login xsi:type="database-login">
+      <platform-class>org.eclipse.persistence.platform.database.SQLServerPlatform</platform-class>
+      <user-name></user-name>
+      <connection-url></connection-url>
+   </login>
+</object-persistence>

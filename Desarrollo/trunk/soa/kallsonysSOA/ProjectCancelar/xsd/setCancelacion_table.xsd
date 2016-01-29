@@ -1,0 +1,30 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/setCancelacion" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/setCancelacion" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="OrdencanceladaCollection" type="OrdencanceladaCollection"/>
+   <xs:complexType name="OrdencanceladaCollection">
+      <xs:sequence>
+         <xs:element name="Ordencancelada" type="Ordencancelada" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="Ordencancelada">
+      <xs:sequence>
+         <xs:element name="idcancelada" type="xs:decimal" nillable="true"/>
+         <xs:element name="idorden" type="xs:decimal" minOccurs="0" nillable="true"/>
+         <xs:element name="usuario" minOccurs="0" nillable="true">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:maxLength value="50"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:element>
+         <xs:element name="comentario" minOccurs="0" nillable="true">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:maxLength value="80"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:element>
+         <xs:element name="fecha" type="xs:dateTime" minOccurs="0" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

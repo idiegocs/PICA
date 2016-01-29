@@ -1,0 +1,25 @@
+<?binding.jca getPreorden_db.jca?>
+<wsdl:definitions name="getPreorden" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/Appkallsonys/ProjectCompras/getPreorden" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/getPreorden" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/Appkallsonys/ProjectCompras/getPreorden" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/">
+    <plt:partnerLinkType name="getPreorden_plt">
+        <plt:role name="getPreorden_role">
+            <plt:portType name="tns:getPreorden_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/getPreorden" schemaLocation="xsd/getPreorden.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="getPreordenInput_msg">
+        <wsdl:part name="getPreordenInput_msg" element="db:getPreordenInput"/>
+    </wsdl:message>
+    <wsdl:message name="getPreordenOutputCollection_msg">
+        <wsdl:part name="getPreordenOutputCollection" element="db:getPreordenOutputCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="getPreorden_ptt">
+        <wsdl:operation name="getPreorden">
+            <wsdl:input message="tns:getPreordenInput_msg"/>
+            <wsdl:output message="tns:getPreordenOutputCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

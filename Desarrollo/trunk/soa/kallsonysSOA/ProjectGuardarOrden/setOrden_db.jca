@@ -1,0 +1,15 @@
+<adapter-config name="setOrden" adapter="Database Adapter" wsdlLocation="setOrden.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/DB/omsordenDatabase" UIConnectionName="OMSOrden" adapterRef=""/>
+  <endpoint-interaction portType="setOrden_ptt" operation="insert">
+    <interaction-spec className="oracle.tip.adapter.db.DBWriteInteractionSpec">
+      <property name="DescriptorName" value="setOrden.Orden"/>
+      <property name="DmlType" value="insert"/>
+      <property name="OutputCompletedXml" value="true"/>
+      <property name="MappingsMetaDataURL" value="setOrden-or-mappings.xml"/>
+      <property name="DetectOmissions" value="true"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

@@ -1,0 +1,3 @@
+D:\Google Drive\PICA\Desarrollo\trunk\net\WindowsFClientWSProductos\obj\Debug\WindowsFClientWSProductos.FormProductos.resources
+D:\Google Drive\PICA\Desarrollo\trunk\net\WindowsFClientWSProductos\obj\Debug\WindowsFClientWSProductos.Properties.Resources.resources
+D:\Google Drive\PICA\Desarrollo\trunk\net\WindowsFClientWSProductos\obj\Debug\WindowsFClientWSProductos.csproj.GenerateResource.Cache

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:vt="http://www.kallsony.com.validcot"
+            targetNamespace="http://www.kallsony.com.validcot"
+            elementFormDefault="qualified">
+  
+    
+  <element name="ValidarCotizarEntrada">
+    <complexType>
+      <sequence>
+        <element name="idOrden" type="int"/>
+      </sequence>
+    </complexType>
+  </element>
+  <element name="ValidarCotizarSalida">
+    <complexType>
+      <sequence>
+        <element name="valorSony" type="double"/>
+        <element name="valorRapidService" type="double"/>
+      </sequence>
+    </complexType>
+  </element>
+</schema>

@@ -1,0 +1,36 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/getCategorias" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/getCategorias" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="CategoriaCollection" type="CategoriaCollection"/>
+   <xs:complexType name="CategoriaCollection">
+      <xs:sequence>
+         <xs:element name="Categoria" type="Categoria" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="Categoria">
+      <xs:sequence>
+         <xs:element name="IdCategoria" type="xs:int" nillable="true"/>
+         <xs:element name="NombreCategoria" type="xs:string" minOccurs="0"/>
+         <xs:element name="SubcategoriaCollection" minOccurs="0">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element name="Subcategoria" type="Subcategoria" minOccurs="0" maxOccurs="unbounded"/>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="Subcategoria">
+      <xs:sequence>
+         <xs:element name="IdSubcategoria" type="xs:int" nillable="true"/>
+         <xs:element name="NombreSubcategoria" type="xs:string" minOccurs="0"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="getCategoriasSelect_tipoFiltro_valorFiltro_paginaInputParameters" type="getCategoriasSelect_tipoFiltro_valorFiltro_pagina"/>
+   <xs:complexType name="getCategoriasSelect_tipoFiltro_valorFiltro_pagina">
+      <xs:sequence>
+         <xs:element name="tipoFiltro" type="xs:string" minOccurs="1" maxOccurs="1"/>
+         <xs:element name="valorFiltro" type="xs:string" minOccurs="1" maxOccurs="1"/>
+         <xs:element name="pagina" type="xs:string" minOccurs="1" maxOccurs="1"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

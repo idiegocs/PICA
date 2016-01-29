@@ -1,0 +1,30 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:ev="http://www.kallsony.com/operacion/enviarcompra"
+       xmlns:us="http://www.kallsony.com/entidad/usuario"
+       xmlns:or="http://www.kallsony.com/entidad/orden"
+        targetNamespace="http://www.kallsony.com/operacion/enviarcompra"
+        elementFormDefault="qualified">
+   <import schemaLocation="Usuario.xsd"
+            namespace="http://www.kallsony.com/entidad/usuario"/>
+<import schemaLocation="Orden.xsd"
+            namespace="http://www.kallsony.com/entidad/orden"/>
+    <complexType name="EnviarCompraEntrada">
+        <sequence>
+            <element name="idOrden" type="int"/>
+            <element name="nombreEnvio" type="string"/>
+            <element name="tipoDestino" type="boolean"/>
+            <element name="nombreFabricante" type="string"/>
+            <element name="usuarioEnvio" type="us:Usuario"/>
+            <element name="orden" type="or:Orden"/>
+        </sequence>
+    </complexType>
+    <complexType name="EnviarCompraSalida">
+        <sequence>
+            <element name="estadoEnvio" type="boolean" minOccurs="1"/>
+            <element name="proveedor" type="string"/>
+        </sequence>
+    </complexType>
+    <element name="enviarCompraEntrada" type="ev:EnviarCompraEntrada"/>
+    <element name="enviarCompraSalida" type="ev:EnviarCompraSalida"/>
+</schema>

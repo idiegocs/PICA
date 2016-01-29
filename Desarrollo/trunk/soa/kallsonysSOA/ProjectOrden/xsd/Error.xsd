@@ -1,0 +1,17 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:er="http://www.kallsony.com/operacion/errororden"
+        targetNamespace="http://www.kallsony.com/operacion/errororden"
+        elementFormDefault="unqualified">
+  
+    <complexType name="ErrorEntrada">
+        <sequence>
+            <element name="idOrden" type="int" minOccurs="0"/>
+            <element name="tipoError" type="string" minOccurs="1"/>
+            <element name="operacion" type="string"/>
+            <element name="detalle" type="string" minOccurs="0"/>
+            <element name="fecha" type="dateTime"/>
+        </sequence>
+    </complexType>
+    <element name="errorEntrada" type="er:ErrorEntrada"/>
+</schema>

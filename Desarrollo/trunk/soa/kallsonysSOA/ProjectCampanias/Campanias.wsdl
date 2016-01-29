@@ -1,0 +1,72 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<definitions
+     name="Productos"
+     targetNamespace="http://www.kallsony.com/final/operacion/consultacampanias"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:ns2="http://www.kallsony.com/entidad/campania"
+     xmlns:ns1="http://www.kallsony.com/entidad/producto"
+     xmlns:tns="http://www.kallsony.com/final/operacion/consultacampanias"
+     xmlns:wkcaf="http://www.kallsony.com/util/falta"
+     xmlns:wkcam="http://www.kallsony.com/operacion/consultacampania"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    >
+    <types>
+        <xsd:schema targetNamespace="http://www.kallsony.com/final/operacion/consultacampanias" elementFormDefault="qualified"
+             xmlns:ns2="http://www.kallsony.com/entidad/campania" xmlns:ns1="http://www.kallsony.com/entidad/producto"
+             xmlns:tns="http://www.kallsony.com/final/operacion/consultacampanias" xmlns:wkcaf="http://www.kallsony.com/util/falta"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wkcam="http://www.kallsony.com/operacion/consultacampania"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+            <xsd:import schemaLocation="xsd/ConsultaCampania.xsd" namespace="http://www.kallsony.com/operacion/consultacampania"/>
+            <xsd:import schemaLocation="xsd/Falta.xsd" namespace="http://www.kallsony.com/util/falta"/>
+        </xsd:schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.kallsony.com/entidad/campania"
+             xmlns:ns1="http://www.kallsony.com/entidad/producto" xmlns:tns="http://www.kallsony.com/final/operacion/consultacampanias"
+             xmlns:wkcaf="http://www.kallsony.com/util/falta" xmlns:wkcam="http://www.kallsony.com/operacion/consultacampania"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+            <xsd:import namespace="http://www.kallsony.com/entidad/producto" schemaLocation="xsd/Producto.xsd"/>
+        </xsd:schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.kallsony.com/entidad/campania"
+             xmlns:ns1="http://www.kallsony.com/entidad/producto" xmlns:tns="http://www.kallsony.com/final/operacion/consultacampanias"
+             xmlns:wkcaf="http://www.kallsony.com/util/falta" xmlns:wkcam="http://www.kallsony.com/operacion/consultacampania"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+            <xsd:import namespace="http://www.kallsony.com/entidad/campania" schemaLocation="xsd/Campania.xsd"/>
+        </xsd:schema>
+    </types>
+    <message name="Campanias_ConsultaCampaniasEntrada">
+        <part name="partEntrada" element="wkcam:consultaCampaniaEntrada"/>
+    </message>
+    <message name="Campanias_ConsultaCaampaniasSalida">
+        <part name="partSalida" element="wkcam:consultaCampaniaSalida"/>
+    </message>
+    <message name="Campanias_FaltaCampania">
+        <part name="part" element="wkcaf:falta"/>
+    </message>
+    <portType name="CampaniasPort">
+        <operation name="ConsultarCampanias">
+            <input message="tns:Campanias_ConsultaCampaniasEntrada"/>
+            <output message="tns:Campanias_ConsultaCaampaniasSalida"/>
+            <fault name="FaltaCampanias" message="tns:Campanias_FaltaCampania"/>
+        </operation>
+    </portType>
+    <binding name="CampaniasPortSOAP11Binding" type="tns:CampaniasPort">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="ConsultarCampanias">
+            <soap:operation style="document" soapAction="http://www.kallsony.com/final/operacion/consultacampanias/ConsultarCampanias"/>
+            <input>
+                <soap:body use="literal" parts="partEntrada"/>
+            </input>
+            <output>
+                <soap:body use="literal" parts="partSalida"/>
+            </output>
+            <fault name="FaltaCampanias">
+                <soap:fault name="FaltaCampanias" use="literal"/>
+            </fault>
+        </operation>
+    </binding>
+    <service name="CampaniasPort">
+        <port name="CampaniasPortPort" binding="tns:CampaniasPortSOAP11Binding">
+            <soap:address location="http://www.kallsony.com"/>
+        </port>
+    </service>
+</definitions>

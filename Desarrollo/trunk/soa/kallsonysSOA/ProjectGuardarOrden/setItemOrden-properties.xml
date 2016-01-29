@@ -1,0 +1,39 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+   <entry key="ITEM_ORDEN:db_column_5">NOMBREPRODUCTO</entry>
+   <entry key="ITEM_ORDEN.IDITEM:db_column_not_null">true</entry>
+   <entry key="ITEM_ORDEN:db_column_4">CODIGOPRODUCTO</entry>
+   <entry key="ITEM_ORDEN:db_column_3">IDPRODUCTO</entry>
+   <entry key="ITEM_ORDEN:db_column_2">IDORDEN</entry>
+   <entry key="ITEM_ORDEN:db_column_1">TIPOITEM</entry>
+   <entry key="ITEM_ORDEN:db_column_0">IDITEM</entry>
+   <entry key="ITEM_ORDEN.CODIGOPRODUCTO:db_column_not_null">false</entry>
+   <entry key="ITEM_ORDEN.NOMBREPRODUCTO:db_column_not_null">false</entry>
+   <entry key="ITEM_ORDEN.TIPOITEM:db_column_type">NUMBER</entry>
+   <entry key="ITEM_ORDEN.CANTIDADITEM:db_column_type">NUMBER</entry>
+   <entry key="ITEM_ORDEN.TIPOITEM:db_column_not_null">true</entry>
+   <entry key="ITEM_ORDEN.IDORDEN:db_column_precision">0</entry>
+   <entry key="ITEM_ORDEN.NOMBREPRODUCTO:db_column_type">VARCHAR2</entry>
+   <entry key="ITEM_ORDEN.CODIGOPRODUCTO:db_column_type">VARCHAR2</entry>
+   <entry key="ITEM_ORDEN.VALORUNITARIOITEM:db_column_precision">0</entry>
+   <entry key="ITEM_ORDEN.IDPRODUCTO:db_column_scale">0</entry>
+   <entry key="ITEM_ORDEN.VALORUNITARIOITEM:db_column_type">NUMBER</entry>
+   <entry key="ITEM_ORDEN.IDPRODUCTO:db_column_precision">10</entry>
+   <entry key="ITEM_ORDEN.IDPRODUCTO:db_column_not_null">true</entry>
+   <entry key="ITEM_ORDEN.IDPRODUCTO:db_column_type">NUMBER</entry>
+   <entry key="ITEM_ORDEN.IDITEM:db_column_type">NUMBER</entry>
+   <entry key="ITEM_ORDEN.IDORDEN:db_column_type">NUMBER</entry>
+   <entry key="ITEM_ORDEN.IDORDEN:db_column_not_null">true</entry>
+   <entry key="root_descriptor_alias">ITEM_ORDEN</entry>
+   <entry key="ITEM_ORDEN.TIPOITEM:db_column_precision">0</entry>
+   <entry key="ITEM_ORDEN.IDITEM:db_column_precision">0</entry>
+   <entry key="ITEM_ORDEN.VALORUNITARIOITEM:db_column_not_null">true</entry>
+   <entry key="ITEM_ORDEN.NOMBREPRODUCTO:db_column_size">64</entry>
+   <entry key="ITEM_ORDEN.CODIGOPRODUCTO:db_column_size">32</entry>
+   <entry key="ITEM_ORDEN.CANTIDADITEM:db_column_precision">0</entry>
+   <entry key="ITEM_ORDEN:db_table_type">TABLE</entry>
+   <entry key="ITEM_ORDEN:db_column_7">VALORUNITARIOITEM</entry>
+   <entry key="ITEM_ORDEN.CANTIDADITEM:db_column_not_null">false</entry>
+   <entry key="ITEM_ORDEN:db_column_6">CANTIDADITEM</entry>
+</properties>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.64.93"
+          id="ValidarOrdenEntrada" Package="ProjectTaskKall_HumantaskAproManual"
+          BeanClass="ProjectTaskKall_HumantaskAproManual.ValidarOrdenEntrada"
+          isJavaBased="false">
+  <Attribute Name="idCategoriaCliente" IsUpdateable="0"
+             Type="java.lang.Integer">
+    <Properties>
+      <CustomProperties>
+        <Property Name="minInclusive" Value="-2147483648"/>
+        <Property Name="originalName" Value="idCategoriaCliente"/>
+        <Property Name="LeafElement_hint" Value="LeafElement_no_attribute"/>
+        <Property Name="nextSiblingNamespace" Value="http://www.kallsonys.com"/>
+        <Property Name="nextSibling" Value="nombreCategoriaCliente"/>
+        <Property Name="fractionDigits" Value="0"/>
+        <Property Name="nillable" Value="false"/>
+        <Property Name="LABEL" Value="Id Categoria Cliente"/>
+        <Property Name="maxOccurs" Value="1"/>
+        <Property Name="maxInclusive" Value="2147483647"/>
+        <Property Name="type" Value="java.lang.Integer"/>
+        <Property Name="targetNamespace" Value="http://www.kallsonys.com"/>
+        <Property Name="minOccurs" Value="0"/>
+      </CustomProperties>
+    </Properties>
+  </Attribute>
+  <Attribute Name="nombreCategoriaCliente" IsUpdateable="0"
+             Type="java.lang.String">
+    <Properties>
+      <CustomProperties>
+        <Property Name="nextSiblingNamespace" Value="http://www.kallsonys.com"/>
+        <Property Name="nextSibling" Value="montoGerencia"/>
+        <Property Name="minOccurs" Value="0"/>
+        <Property Name="maxOccurs" Value="1"/>
+        <Property Name="LABEL" Value="Nombre Categoria Cliente"/>
+        <Property Name="LeafElement_hint" Value="LeafElement_no_attribute"/>
+        <Property Name="nillable" Value="false"/>
+        <Property Name="originalName" Value="nombreCategoriaCliente"/>
+        <Property Name="targetNamespace" Value="http://www.kallsonys.com"/>
+        <Property Name="type" Value="java.lang.String"/>
+      </CustomProperties>
+    </Properties>
+  </Attribute>
+  <Attribute Name="montoGerencia" IsUpdateable="0" Type="java.lang.Double">
+    <Properties>
+      <CustomProperties>
+        <Property Name="nextSiblingNamespace" Value="http://www.kallsonys.com"/>
+        <Property Name="nextSibling" Value="totalOrden"/>
+        <Property Name="minOccurs" Value="0"/>
+        <Property Name="maxOccurs" Value="1"/>
+        <Property Name="LABEL" Value="Monto Gerencia"/>
+        <Property Name="LeafElement_hint" Value="LeafElement_no_attribute"/>
+        <Property Name="nillable" Value="false"/>
+        <Property Name="originalName" Value="montoGerencia"/>
+        <Property Name="targetNamespace" Value="http://www.kallsonys.com"/>
+        <Property Name="type" Value="java.lang.Double"/>
+      </CustomProperties>
+    </Properties>
+  </Attribute>
+  <Attribute Name="totalOrden" IsUpdateable="0" Type="java.lang.Double">
+    <Properties>
+      <CustomProperties>
+        <Property Name="minOccurs" Value="0"/>
+        <Property Name="maxOccurs" Value="1"/>
+        <Property Name="LABEL" Value="Total Orden"/>
+        <Property Name="LeafElement_hint" Value="LeafElement_no_attribute"/>
+        <Property Name="nillable" Value="false"/>
+        <Property Name="originalName" Value="totalOrden"/>
+        <Property Name="targetNamespace" Value="http://www.kallsonys.com"/>
+        <Property Name="type" Value="java.lang.Double"/>
+      </CustomProperties>
+    </Properties>
+  </Attribute>
+</JavaBean>

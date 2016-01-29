@@ -1,0 +1,26 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/getOrden" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/getOrden" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="OrdenCollection" type="OrdenCollection"/>
+   <xs:complexType name="OrdenCollection">
+      <xs:sequence>
+         <xs:element name="Orden" type="Orden" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="Orden">
+      <xs:sequence>
+         <xs:element name="idorden" type="xs:decimal"/>
+         <xs:element name="fechaorden" type="xs:dateTime" minOccurs="0" nillable="true"/>
+         <xs:element name="idestadoorden" type="xs:decimal" minOccurs="0"/>
+         <xs:element name="idcliente" type="xs:decimal" minOccurs="0"/>
+         <xs:element name="cantitemorden" type="xs:decimal" minOccurs="0" nillable="true"/>
+         <xs:element name="totalorden" type="xs:decimal" minOccurs="0" nillable="true"/>
+         <xs:element name="numpreorden" type="xs:decimal" minOccurs="0"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="getOrdenSelect_paramOrdenInputParameters" type="getOrdenSelect_paramOrden"/>
+   <xs:complexType name="getOrdenSelect_paramOrden">
+      <xs:sequence>
+         <xs:element name="paramOrden" type="xs:decimal" minOccurs="1" maxOccurs="1"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

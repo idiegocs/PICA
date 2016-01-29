@@ -1,0 +1,147 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<References xmlns="http://xmlns.oracle.com/adf/jndi">
+   <Reference name="kallsonysDB" className="oracle.jdeveloper.db.adapter.DatabaseProvider" credentialStoreKey="kallsonysDB" xmlns="">
+      <Factory className="oracle.jdeveloper.db.adapter.DatabaseProviderFactory"/>
+      <RefAddresses>
+         <StringRefAddr addrType="port">
+            <Contents>1433</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="DeployPassword">
+            <Contents>true</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="dataSourceName">
+            <Contents>KALLSONYS</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="user">
+            <Contents>sa</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="subtype">
+            <Contents>SQLServer</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="hostname">
+            <Contents>localhost</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="instanceName">
+            <Contents>MSSQLSERVER2012</Contents>
+         </StringRefAddr>
+         <SecureRefAddr addrType="password"/>
+         <StringRefAddr addrType="driver">
+            <Contents>com.microsoft.sqlserver.jdbc.SQLServerDriver</Contents>
+         </StringRefAddr>
+      </RefAddresses>
+   </Reference>
+   <Reference name="ProductosDB" className="oracle.jdeveloper.db.adapter.DatabaseProvider" credentialStoreKey="ProductosDB" xmlns="">
+      <Factory className="oracle.jdeveloper.db.adapter.DatabaseProviderFactory"/>
+      <RefAddresses>
+         <StringRefAddr addrType="port">
+            <Contents>1433</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="DeployPassword">
+            <Contents>true</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="dataSourceName">
+            <Contents>PRODUCTOS</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="user">
+            <Contents>sa</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="subtype">
+            <Contents>SQLServer</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="hostname">
+            <Contents>localhost</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="instanceName">
+            <Contents>MSSQLSERVER2012</Contents>
+         </StringRefAddr>
+         <SecureRefAddr addrType="password"/>
+         <StringRefAddr addrType="driver">
+            <Contents>com.microsoft.sqlserver.jdbc.SQLServerDriver</Contents>
+         </StringRefAddr>
+      </RefAddresses>
+   </Reference>
+   <Reference name="trajetaDB" className="oracle.jdeveloper.db.adapter.DatabaseProvider" credentialStoreKey="trajetaDB" xmlns="">
+      <Factory className="oracle.jdeveloper.db.adapter.DatabaseProviderFactory"/>
+      <RefAddresses>
+         <StringRefAddr addrType="sid">
+            <Contents>XE</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="subtype">
+            <Contents>oraJDBC</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="port">
+            <Contents>1521</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="hostname">
+            <Contents>localhost</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="user">
+            <Contents>OMSTARJETA</Contents>
+         </StringRefAddr>
+         <SecureRefAddr addrType="password"/>
+         <StringRefAddr addrType="DeployPassword">
+            <Contents>true</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="oraDriverType">
+            <Contents>thin</Contents>
+         </StringRefAddr>
+      </RefAddresses>
+   </Reference>
+   <Reference name="OMSOrden" className="oracle.jdeveloper.db.adapter.DatabaseProvider" credentialStoreKey="OMSOrden" xmlns="">
+      <Factory className="oracle.jdeveloper.db.adapter.DatabaseProviderFactory"/>
+      <RefAddresses>
+         <StringRefAddr addrType="sid">
+            <Contents>XE</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="subtype">
+            <Contents>oraJDBC</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="port">
+            <Contents>1521</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="hostname">
+            <Contents>localhost</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="user">
+            <Contents>OMS</Contents>
+         </StringRefAddr>
+         <SecureRefAddr addrType="password"/>
+         <StringRefAddr addrType="DeployPassword">
+            <Contents>true</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="oraDriverType">
+            <Contents>thin</Contents>
+         </StringRefAddr>
+      </RefAddresses>
+   </Reference>
+   <Reference name="Servientrega" className="oracle.jdeveloper.db.adapter.DatabaseProvider" credentialStoreKey="Servientrega" xmlns="">
+      <Factory className="oracle.jdeveloper.db.adapter.DatabaseProviderFactory"/>
+      <RefAddresses>
+         <StringRefAddr addrType="port">
+            <Contents>1433</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="DeployPassword">
+            <Contents>true</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="dataSourceName">
+            <Contents>SERVIENTREGA</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="user">
+            <Contents>sa</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="subtype">
+            <Contents>SQLServer</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="hostname">
+            <Contents>localhost</Contents>
+         </StringRefAddr>
+         <StringRefAddr addrType="instanceName">
+            <Contents>SERVIENTREGA</Contents>
+         </StringRefAddr>
+         <SecureRefAddr addrType="password"/>
+         <StringRefAddr addrType="driver">
+            <Contents>com.microsoft.sqlserver.jdbc.SQLServerDriver</Contents>
+         </StringRefAddr>
+      </RefAddresses>
+   </Reference>
+</References>

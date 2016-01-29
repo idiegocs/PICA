@@ -1,0 +1,19 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ccs="http://www.kallsony.com/operacion/consultarcategorias"
+     xmlns:cat="http://www.kallsony.com/entidad/categoria" xmlns:flc="http://www.kallsony.com/util/filtro"
+     targetNamespace="http://www.kallsony.com/operacion/consultarcategorias" elementFormDefault="qualified">
+    <import schemaLocation="Categoria.xsd" namespace="http://www.kallsony.com/entidad/categoria"/>
+    <import schemaLocation="Filtro.xsd" namespace="http://www.kallsony.com/util/filtro"/>
+    <complexType name="ConsultaCategoriaEntrada">
+        <sequence>
+            <element name="filtroCategoria" type="flc:Filtro"/>
+        </sequence>
+    </complexType>
+    <complexType name="ConsultaCategoriaSalida">
+        <sequence>
+            <element name="listaCategorias" type="cat:Categorias" minOccurs="0"/>
+        </sequence>
+    </complexType>
+    <element name="consultaCategoriaEntrada" type="ccs:ConsultaCategoriaEntrada"/>
+    <element name="consultaCategoriaSalida" type="ccs:ConsultaCategoriaSalida"/>
+</schema>

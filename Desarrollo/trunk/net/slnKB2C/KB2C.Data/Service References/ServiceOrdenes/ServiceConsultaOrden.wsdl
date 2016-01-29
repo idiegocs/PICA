@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.kallsony.com/final/operacion/consultaorden" xmlns:wkcor="http://www.kallsony.com/operacion/consultaorden" xmlns:wkcof="http://www.kallsony.com/util/falta" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://www.kallsony.com/final/operacion/consultaorden" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <documentation>
+    <abstractWSDL>http://DiegoPC:8001/soa-infra/services/default/ProjectConsultaOrdenes!1.0/Orden.wsdl</abstractWSDL>
+  </documentation>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.kallsony.com/final/operacion/consultaorden">
+      <xsd:import schemaLocation="http://192.168.2.6:8001/soa-infra/services/default/ProjectConsultaOrdenes/ServiceConsultaOrden?XSD=xsd/ConsultaOrden.xsd" namespace="http://www.kallsony.com/operacion/consultaorden" />
+      <xsd:import schemaLocation="http://192.168.2.6:8001/soa-infra/services/default/ProjectConsultaOrdenes/ServiceConsultaOrden?XSD=xsd/Falta.xsd" namespace="http://www.kallsony.com/util/falta" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="Orden_ConsultaEntrada">
+    <wsdl:part name="partEntrada" element="wkcor:consultaOrdenEntrada" />
+  </wsdl:message>
+  <wsdl:message name="Orden_ConsultaSalida">
+    <wsdl:part name="partSalida" element="wkcor:consultaOrdenSalida" />
+  </wsdl:message>
+  <wsdl:message name="Orden_Falta">
+    <wsdl:part name="partFalta" element="wkcof:falta" />
+  </wsdl:message>
+  <wsdl:portType name="PortOrden">
+    <wsdl:operation name="consultarOrden">
+      <wsdl:input message="tns:Orden_ConsultaEntrada" />
+      <wsdl:output message="tns:Orden_ConsultaSalida" />
+      <wsdl:fault name="faltaOrden" message="tns:Orden_Falta" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PortOrdenSOAP11Binding" type="tns:PortOrden">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="consultarOrden">
+      <soap:operation soapAction="http://www.kallsony.com/final/operacion/consultaorden/consultarOrden" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" parts="partEntrada" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" parts="partSalida" />
+      </wsdl:output>
+      <wsdl:fault name="faltaOrden">
+        <soap:fault use="literal" name="faltaOrden" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ServiceConsultaOrden">
+    <wsdl:port name="PortOrden_pt" binding="tns:PortOrdenSOAP11Binding">
+      <soap:address location="http://192.168.2.6:8001/soa-infra/services/default/ProjectConsultaOrdenes/ServiceConsultaOrden" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

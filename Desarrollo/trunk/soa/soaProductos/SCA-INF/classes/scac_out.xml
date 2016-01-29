@@ -1,0 +1,23 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Faults>
+   <Fault>
+      <severity>warning</severity>
+      <loc/>
+      <line>181</line>
+      <col/>
+      <file>BPELProductos.bpel</file>
+      <name>BPELProductos.bpel</name>
+      <fix>Asegúrese de que el valor de retorno de la consulta de from-spec es compatible con la consulta de to-spec</fix>
+      <msg>el tipo de valor &lt;from> "{http://www.w3.org/2001/XMLSchema}int" no es compatible con el tipo de valor &lt;to> "{http://www.w3.org/2001/XMLSchema}string"</msg>
+   </Fault>
+   <Fault>
+      <severity>warning</severity>
+      <loc/>
+      <line>181</line>
+      <col/>
+      <file>BPELProductos.bpel</file>
+      <name>BPELProductos.bpel</name>
+      <fix>Asegúrese de que el valor de retorno de la consulta de from-spec es compatible con la consulta de to-spec</fix>
+      <msg>el tipo de valor &lt;from> "{http://www.w3.org/2001/XMLSchema}int" no es compatible con el tipo de valor &lt;to> "{http://www.w3.org/2001/XMLSchema}string"</msg>
+   </Fault>
+</Faults>

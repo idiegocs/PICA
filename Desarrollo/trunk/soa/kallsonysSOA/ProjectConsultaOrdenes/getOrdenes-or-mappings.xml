@@ -1,0 +1,587 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-persistence xmlns="http://www.eclipse.org/eclipselink/xsds/persistence" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:eclipselink="http://www.eclipse.org/eclipselink/xsds/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="Eclipse Persistence Services - 2.1.3.v20110304-r9073">
+   <name>getOrdenes-OR</name>
+   <class-mapping-descriptors>
+      <class-mapping-descriptor xsi:type="object-relational-class-mapping-descriptor">
+         <class>getOrdenes.Orden</class>
+         <alias>ORDEN</alias>
+         <primary-key>
+            <field table="ORDEN" name="IDORDEN" xsi:type="column"/>
+         </primary-key>
+         <events/>
+         <querying>
+            <queries>
+               <query name="getOrdenesSelect" xsi:type="read-all-query">
+                  <arguments>
+                     <argument name="idPreOrden">
+                        <type>java.lang.String</type>
+                     </argument>
+                     <argument name="estadoOrden">
+                        <type>java.lang.String</type>
+                     </argument>
+                     <argument name="userName">
+                        <type>java.lang.String</type>
+                     </argument>
+                  </arguments>
+                  <call xsi:type="sql-call">
+                     <sql>SELECT DISTINCT t1.IDORDEN, t1.FECHAORDEN, t1.CANTITEMORDEN, t1.TOTALORDEN, t1.NUMPREORDEN, t1.IDCLIENTE, t1.IDESTADOORDEN, t0.IDUSUARIO, t0.NOMBRES, t0.APELLIDOS, t0.EMAIL, t0.TIPODOCUMENTO, t0.NUMERODOCUMENTO, t0.IDDIRECCION, t0.USERNAME, t0.TELEFONO, t0.COMPRAENCOLOMBIA, t0.IDCATEGORIA, t2.IDESTADOORDEN, t2.NOMBREESTADOORDEN, t3.IDITEM, t3.TIPOITEM, t3.IDPRODUCTO, t3.CODIGOPRODUCTO, t3.NOMBREPRODUCTO, t3.CANTIDADITEM, t3.VALORUNITARIOITEM, t3.IDORDEN FROM ORDEN t1 LEFT OUTER JOIN ITEM_ORDEN t3 ON (t3.IDORDEN = t1.IDORDEN), ESTADO_ORDEN t2, USUARIO t0 WHERE 
+((t1.NUMPREORDEN = #idPreOrden AND #idPreOrden &lt;> -1) OR (#idPreOrden =-1))
+AND ((t2.NOMBREESTADOORDEN = #estadoOrden AND #estadoOrden IS NOT NULL) OR (#estadoOrden IS NULL))
+AND ((t0.USERNAME = #userName AND #userName IS NOT NULL) OR (#userName IS NULL))
+AND (t2.IDESTADOORDEN = t1.IDESTADOORDEN)
+AND (t0.IDUSUARIO = t1.IDCLIENTE)</sql>
+                  </call>
+                  <reference-class>getOrdenes.Orden</reference-class>
+                  <container xsi:type="list-container-policy">
+                     <collection-type>java.util.Vector</collection-type>
+                  </container>
+               </query>
+               <query name="getOrdenesSelect" xsi:type="read-all-query">
+                  <arguments>
+                     <argument name="idPreOrden">
+                        <type>java.lang.String</type>
+                     </argument>
+                     <argument name="estadoOrden">
+                        <type>java.lang.String</type>
+                     </argument>
+                     <argument name="userName">
+                        <type>java.lang.String</type>
+                     </argument>
+                  </arguments>
+                  <call xsi:type="sql-call">
+                     <sql>SELECT DISTINCT t1.IDORDEN, t1.FECHAORDEN, t1.CANTITEMORDEN, t1.TOTALORDEN, t1.NUMPREORDEN, t1.IDCLIENTE, t1.IDESTADOORDEN, t0.IDUSUARIO, t0.NOMBRES, t0.APELLIDOS, t0.EMAIL, t0.TIPODOCUMENTO, t0.NUMERODOCUMENTO, t0.IDDIRECCION, t0.USERNAME, t0.TELEFONO, t0.COMPRAENCOLOMBIA, t0.IDCATEGORIA, t2.IDESTADOORDEN, t2.NOMBREESTADOORDEN, t3.IDITEM, t3.TIPOITEM, t3.IDPRODUCTO, t3.CODIGOPRODUCTO, t3.NOMBREPRODUCTO, t3.CANTIDADITEM, t3.VALORUNITARIOITEM, t3.IDORDEN, t4.IDENVIO, t4.NOMBRES, t4.APELLIDOS, t4.TIPODOCUMENTO, t4.NUMERODOCUMENTO, t4.EMAIL, t4.TELEFONO, t4.NUMERODRIREC, t4.IDCIUDAD, t4.COMPANIAENVIO, t4.ENVIADO, t4.TITULARTARJETA, t4.NUMEROTARJETA, t4.IDORDEN FROM ORDEN t1 LEFT OUTER JOIN USUARIO t0 ON (t0.IDUSUARIO = t1.IDCLIENTE) LEFT OUTER JOIN ESTADO_ORDEN t2 ON (t2.IDESTADOORDEN = t1.IDESTADOORDEN) LEFT OUTER JOIN ITEM_ORDEN t3 ON (t3.IDORDEN = t1.IDORDEN) LEFT OUTER JOIN ENVIO t4 ON (t4.IDORDEN = t1.IDORDEN)
+WHERE  ((t1.NUMPREORDEN = #idPreOrden AND #idPreOrden &lt;> -1) OR (#idPreOrden =-1))
+AND ((t2.NOMBREESTADOORDEN = #estadoOrden AND #estadoOrden IS NOT NULL) OR (#estadoOrden IS NULL))
+AND ((t0.USERNAME = #userName AND #userName IS NOT NULL) OR (#userName IS NULL))
+
+</sql>
+                  </call>
+                  <reference-class>getOrdenes.Orden</reference-class>
+                  <container xsi:type="list-container-policy">
+                     <collection-type>java.util.Vector</collection-type>
+                  </container>
+               </query>
+            </queries>
+         </querying>
+         <attribute-mappings>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>idorden</attribute-name>
+               <field table="ORDEN" name="IDORDEN" xsi:type="column"/>
+               <attribute-classification>java.math.BigDecimal</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>fechaorden</attribute-name>
+               <field table="ORDEN" name="FECHAORDEN" xsi:type="column"/>
+               <attribute-classification>java.sql.Timestamp</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>idestadoorden</attribute-name>
+               <read-only>true</read-only>
+               <properties>
+                  <property name="fkPlaceholder">
+                     <value>true</value>
+                  </property>
+               </properties>
+               <field table="ORDEN" name="IDESTADOORDEN" xsi:type="column"/>
+               <attribute-classification>java.math.BigDecimal</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>idcliente</attribute-name>
+               <read-only>true</read-only>
+               <properties>
+                  <property name="fkPlaceholder">
+                     <value>true</value>
+                  </property>
+               </properties>
+               <field table="ORDEN" name="IDCLIENTE" xsi:type="column"/>
+               <attribute-classification>java.math.BigDecimal</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>cantitemorden</attribute-name>
+               <field table="ORDEN" name="CANTITEMORDEN" xsi:type="column"/>
+               <attribute-classification>java.math.BigDecimal</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>totalorden</attribute-name>
+               <field table="ORDEN" name="TOTALORDEN" xsi:type="column"/>
+               <attribute-classification>java.math.BigDecimal</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>numpreorden</attribute-name>
+               <field table="ORDEN" name="NUMPREORDEN" xsi:type="column"/>
+               <attribute-classification>java.math.BigDecimal</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="one-to-one-mapping">
+               <attribute-name>idcliente</attribute-name>
+               <reference-class>getOrdenes.Usuario</reference-class>
+               <private-owned>true</private-owned>
+               <foreign-key>
+                  <field-reference>
+                     <source-field table="ORDEN" name="IDCLIENTE" xsi:type="column"/>
+                     <target-field table="USUARIO" name="IDUSUARIO" xsi:type="column"/>
+                  </field-reference>
+               </foreign-key>
+               <foreign-key-fields>
+                  <field table="ORDEN" name="IDCLIENTE" xsi:type="column"/>
+               </foreign-key-fields>
+               <batch-reading>true</batch-reading>
+               <indirection xsi:type="value-holder-indirection-policy"/>
+               <selection-query xsi:type="read-object-query">
+                  <reference-class>getOrdenes.Usuario</reference-class>
+               </selection-query>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="one-to-one-mapping">
+               <attribute-name>idestadoorden</attribute-name>
+               <reference-class>getOrdenes.EstadoOrden</reference-class>
+               <private-owned>true</private-owned>
+               <foreign-key>
+                  <field-reference>
+                     <source-field table="ORDEN" name="IDESTADOORDEN" xsi:type="column"/>
+                     <target-field table="ESTADO_ORDEN" name="IDESTADOORDEN" xsi:type="column"/>
+                  </field-reference>
+               </foreign-key>
+               <foreign-key-fields>
+                  <field table="ORDEN" name="IDESTADOORDEN" xsi:type="column"/>
+               </foreign-key-fields>
+               <batch-reading>true</batch-reading>
+               <indirection xsi:type="value-holder-indirection-policy"/>
+               <selection-query xsi:type="read-object-query">
+                  <reference-class>getOrdenes.EstadoOrden</reference-class>
+               </selection-query>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="one-to-many-mapping">
+               <attribute-name>itemOrdenCollection</attribute-name>
+               <reference-class>getOrdenes.ItemOrden</reference-class>
+               <private-owned>true</private-owned>
+               <target-foreign-key>
+                  <field-reference>
+                     <source-field table="ITEM_ORDEN" name="IDORDEN" xsi:type="column"/>
+                     <target-field table="ORDEN" name="IDORDEN" xsi:type="column"/>
+                  </field-reference>
+               </target-foreign-key>
+               <batch-reading>true</batch-reading>
+               <container xsi:type="list-container-policy">
+                  <collection-type>org.eclipse.persistence.indirection.IndirectList</collection-type>
+               </container>
+               <indirection xsi:type="value-holder-indirection-policy"/>
+               <selection-query xsi:type="read-all-query">
+                  <reference-class>getOrdenes.ItemOrden</reference-class>
+                  <container xsi:type="list-container-policy">
+                     <collection-type>org.eclipse.persistence.indirection.IndirectList</collection-type>
+                  </container>
+               </selection-query>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="one-to-one-mapping">
+               <attribute-name>envio</attribute-name>
+               <properties>
+                  <property name="enabled">
+                     <value>true</value>
+                  </property>
+               </properties>
+               <reference-class>getOrdenes.Envio</reference-class>
+               <private-owned>true</private-owned>
+               <foreign-key>
+                  <field-reference>
+                     <source-field table="ORDEN" name="IDORDEN" xsi:type="column"/>
+                     <target-field table="ENVIO" name="IDORDEN" xsi:type="column"/>
+                  </field-reference>
+               </foreign-key>
+               <batch-reading>true</batch-reading>
+               <indirection xsi:type="value-holder-indirection-policy"/>
+               <selection-query xsi:type="read-object-query">
+                  <reference-class>getOrdenes.Envio</reference-class>
+               </selection-query>
+            </attribute-mapping>
+         </attribute-mappings>
+         <descriptor-type>independent</descriptor-type>
+         <caching>
+            <cache-type>weak-reference</cache-type>
+            <cache-size>-1</cache-size>
+            <always-refresh>true</always-refresh>
+         </caching>
+         <remote-caching>
+            <cache-type>weak-reference</cache-type>
+            <cache-size>-1</cache-size>
+         </remote-caching>
+         <instantiation/>
+         <copying xsi:type="instantiation-copy-policy"/>
+         <tables>
+            <table name="ORDEN"/>
+         </tables>
+         <structure>structureName</structure>
+      </class-mapping-descriptor>
+      <class-mapping-descriptor xsi:type="object-relational-class-mapping-descriptor">
+         <class>getOrdenes.Usuario</class>
+         <alias>USUARIO</alias>
+         <primary-key>
+            <field table="USUARIO" name="IDUSUARIO" xsi:type="column"/>
+         </primary-key>
+         <events/>
+         <querying/>
+         <attribute-mappings>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>idusuario</attribute-name>
+               <field table="USUARIO" name="IDUSUARIO" xsi:type="column"/>
+               <attribute-classification>java.lang.Long</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>nombres</attribute-name>
+               <field table="USUARIO" name="NOMBRES" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>apellidos</attribute-name>
+               <field table="USUARIO" name="APELLIDOS" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>email</attribute-name>
+               <field table="USUARIO" name="EMAIL" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>password</attribute-name>
+               <properties>
+                  <property name="enabled">
+                     <value>false</value>
+                  </property>
+               </properties>
+               <field table="USUARIO" name="PASSWORD" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>tipodocumento</attribute-name>
+               <field table="USUARIO" name="TIPODOCUMENTO" xsi:type="column"/>
+               <attribute-classification>java.math.BigDecimal</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>numerodocumento</attribute-name>
+               <field table="USUARIO" name="NUMERODOCUMENTO" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>iddireccion</attribute-name>
+               <field table="USUARIO" name="IDDIRECCION" xsi:type="column"/>
+               <attribute-classification>java.lang.Long</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>username</attribute-name>
+               <field table="USUARIO" name="USERNAME" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>telefono</attribute-name>
+               <field table="USUARIO" name="TELEFONO" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>compraencolombia</attribute-name>
+               <field table="USUARIO" name="COMPRAENCOLOMBIA" xsi:type="column"/>
+               <attribute-classification>java.math.BigDecimal</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>idcategoria</attribute-name>
+               <field table="USUARIO" name="IDCATEGORIA" xsi:type="column"/>
+               <attribute-classification>java.math.BigDecimal</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="one-to-many-mapping">
+               <attribute-name>ordenCollection</attribute-name>
+               <reference-class>getOrdenes.Orden</reference-class>
+               <private-owned>true</private-owned>
+               <target-foreign-key>
+                  <field-reference>
+                     <source-field table="ORDEN" name="IDCLIENTE" xsi:type="column"/>
+                     <target-field table="USUARIO" name="IDUSUARIO" xsi:type="column"/>
+                  </field-reference>
+               </target-foreign-key>
+               <batch-reading>true</batch-reading>
+               <container xsi:type="list-container-policy">
+                  <collection-type>org.eclipse.persistence.indirection.IndirectList</collection-type>
+               </container>
+               <indirection xsi:type="value-holder-indirection-policy"/>
+               <selection-query xsi:type="read-all-query">
+                  <reference-class>getOrdenes.Orden</reference-class>
+                  <container xsi:type="list-container-policy">
+                     <collection-type>org.eclipse.persistence.indirection.IndirectList</collection-type>
+                  </container>
+               </selection-query>
+            </attribute-mapping>
+         </attribute-mappings>
+         <descriptor-type>independent</descriptor-type>
+         <caching>
+            <cache-type>weak-reference</cache-type>
+            <cache-size>-1</cache-size>
+            <always-refresh>true</always-refresh>
+         </caching>
+         <remote-caching>
+            <cache-type>weak-reference</cache-type>
+            <cache-size>-1</cache-size>
+         </remote-caching>
+         <instantiation/>
+         <copying xsi:type="instantiation-copy-policy"/>
+         <tables>
+            <table name="USUARIO"/>
+         </tables>
+         <structure>structureName</structure>
+      </class-mapping-descriptor>
+      <class-mapping-descriptor xsi:type="object-relational-class-mapping-descriptor">
+         <class>getOrdenes.EstadoOrden</class>
+         <alias>ESTADO_ORDEN</alias>
+         <primary-key>
+            <field table="ESTADO_ORDEN" name="IDESTADOORDEN" xsi:type="column"/>
+         </primary-key>
+         <events/>
+         <querying/>
+         <attribute-mappings>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>idestadoorden</attribute-name>
+               <field table="ESTADO_ORDEN" name="IDESTADOORDEN" xsi:type="column"/>
+               <attribute-classification>java.math.BigDecimal</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>nombreestadoorden</attribute-name>
+               <field table="ESTADO_ORDEN" name="NOMBREESTADOORDEN" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="one-to-many-mapping">
+               <attribute-name>ordenCollection</attribute-name>
+               <reference-class>getOrdenes.Orden</reference-class>
+               <private-owned>true</private-owned>
+               <target-foreign-key>
+                  <field-reference>
+                     <source-field table="ORDEN" name="IDESTADOORDEN" xsi:type="column"/>
+                     <target-field table="ESTADO_ORDEN" name="IDESTADOORDEN" xsi:type="column"/>
+                  </field-reference>
+               </target-foreign-key>
+               <batch-reading>true</batch-reading>
+               <container xsi:type="list-container-policy">
+                  <collection-type>org.eclipse.persistence.indirection.IndirectList</collection-type>
+               </container>
+               <indirection xsi:type="value-holder-indirection-policy"/>
+               <selection-query xsi:type="read-all-query">
+                  <reference-class>getOrdenes.Orden</reference-class>
+                  <container xsi:type="list-container-policy">
+                     <collection-type>org.eclipse.persistence.indirection.IndirectList</collection-type>
+                  </container>
+               </selection-query>
+            </attribute-mapping>
+         </attribute-mappings>
+         <descriptor-type>independent</descriptor-type>
+         <caching>
+            <cache-type>weak-reference</cache-type>
+            <cache-size>-1</cache-size>
+            <always-refresh>true</always-refresh>
+         </caching>
+         <remote-caching>
+            <cache-type>weak-reference</cache-type>
+            <cache-size>-1</cache-size>
+         </remote-caching>
+         <instantiation/>
+         <copying xsi:type="instantiation-copy-policy"/>
+         <tables>
+            <table name="ESTADO_ORDEN"/>
+         </tables>
+         <structure>structureName</structure>
+      </class-mapping-descriptor>
+      <class-mapping-descriptor xsi:type="object-relational-class-mapping-descriptor">
+         <class>getOrdenes.ItemOrden</class>
+         <alias>ITEM_ORDEN</alias>
+         <primary-key>
+            <field table="ITEM_ORDEN" name="IDITEM" xsi:type="column"/>
+         </primary-key>
+         <events/>
+         <querying/>
+         <attribute-mappings>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>iditem</attribute-name>
+               <field table="ITEM_ORDEN" name="IDITEM" xsi:type="column"/>
+               <attribute-classification>java.math.BigDecimal</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>tipoitem</attribute-name>
+               <field table="ITEM_ORDEN" name="TIPOITEM" xsi:type="column"/>
+               <attribute-classification>java.math.BigDecimal</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>idorden</attribute-name>
+               <read-only>true</read-only>
+               <properties>
+                  <property name="fkPlaceholder">
+                     <value>true</value>
+                  </property>
+               </properties>
+               <field table="ITEM_ORDEN" name="IDORDEN" xsi:type="column"/>
+               <attribute-classification>java.math.BigDecimal</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>idproducto</attribute-name>
+               <field table="ITEM_ORDEN" name="IDPRODUCTO" xsi:type="column"/>
+               <attribute-classification>java.lang.Long</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>codigoproducto</attribute-name>
+               <field table="ITEM_ORDEN" name="CODIGOPRODUCTO" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>nombreproducto</attribute-name>
+               <field table="ITEM_ORDEN" name="NOMBREPRODUCTO" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>cantidaditem</attribute-name>
+               <field table="ITEM_ORDEN" name="CANTIDADITEM" xsi:type="column"/>
+               <attribute-classification>java.math.BigDecimal</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>valorunitarioitem</attribute-name>
+               <field table="ITEM_ORDEN" name="VALORUNITARIOITEM" xsi:type="column"/>
+               <attribute-classification>java.math.BigDecimal</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="one-to-one-mapping">
+               <attribute-name>idorden</attribute-name>
+               <reference-class>getOrdenes.Orden</reference-class>
+               <private-owned>true</private-owned>
+               <foreign-key>
+                  <field-reference>
+                     <source-field table="ITEM_ORDEN" name="IDORDEN" xsi:type="column"/>
+                     <target-field table="ORDEN" name="IDORDEN" xsi:type="column"/>
+                  </field-reference>
+               </foreign-key>
+               <foreign-key-fields>
+                  <field table="ITEM_ORDEN" name="IDORDEN" xsi:type="column"/>
+               </foreign-key-fields>
+               <batch-reading>true</batch-reading>
+               <indirection xsi:type="value-holder-indirection-policy"/>
+               <selection-query xsi:type="read-object-query">
+                  <reference-class>getOrdenes.Orden</reference-class>
+               </selection-query>
+            </attribute-mapping>
+         </attribute-mappings>
+         <descriptor-type>independent</descriptor-type>
+         <caching>
+            <cache-type>weak-reference</cache-type>
+            <cache-size>-1</cache-size>
+            <always-refresh>true</always-refresh>
+         </caching>
+         <remote-caching>
+            <cache-type>weak-reference</cache-type>
+            <cache-size>-1</cache-size>
+         </remote-caching>
+         <instantiation/>
+         <copying xsi:type="instantiation-copy-policy"/>
+         <tables>
+            <table name="ITEM_ORDEN"/>
+         </tables>
+         <structure>structureName</structure>
+      </class-mapping-descriptor>
+      <class-mapping-descriptor xsi:type="object-relational-class-mapping-descriptor">
+         <class>getOrdenes.Envio</class>
+         <alias>ENVIO</alias>
+         <primary-key>
+            <field table="ENVIO" name="IDENVIO" xsi:type="column"/>
+         </primary-key>
+         <events/>
+         <querying/>
+         <attribute-mappings>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>idenvio</attribute-name>
+               <field table="ENVIO" name="IDENVIO" xsi:type="column"/>
+               <attribute-classification>java.math.BigDecimal</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>idorden</attribute-name>
+               <read-only>true</read-only>
+               <properties>
+                  <property name="fkPlaceholder">
+                     <value>true</value>
+                  </property>
+               </properties>
+               <field table="ENVIO" name="IDORDEN" xsi:type="column"/>
+               <attribute-classification>java.math.BigDecimal</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>nombres</attribute-name>
+               <field table="ENVIO" name="NOMBRES" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>apellidos</attribute-name>
+               <field table="ENVIO" name="APELLIDOS" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>tipodocumento</attribute-name>
+               <field table="ENVIO" name="TIPODOCUMENTO" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>numerodocumento</attribute-name>
+               <field table="ENVIO" name="NUMERODOCUMENTO" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>email</attribute-name>
+               <field table="ENVIO" name="EMAIL" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>telefono</attribute-name>
+               <field table="ENVIO" name="TELEFONO" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>numerodrirec</attribute-name>
+               <field table="ENVIO" name="NUMERODRIREC" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>idciudad</attribute-name>
+               <field table="ENVIO" name="IDCIUDAD" xsi:type="column"/>
+               <attribute-classification>java.math.BigDecimal</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>companiaenvio</attribute-name>
+               <field table="ENVIO" name="COMPANIAENVIO" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>enviado</attribute-name>
+               <field table="ENVIO" name="ENVIADO" xsi:type="column"/>
+               <attribute-classification>java.math.BigDecimal</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>titulartarjeta</attribute-name>
+               <field table="ENVIO" name="TITULARTARJETA" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>numerotarjeta</attribute-name>
+               <field table="ENVIO" name="NUMEROTARJETA" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+         </attribute-mappings>
+         <descriptor-type>independent</descriptor-type>
+         <caching>
+            <cache-type>weak-reference</cache-type>
+            <cache-size>-1</cache-size>
+            <always-refresh>true</always-refresh>
+         </caching>
+         <remote-caching>
+            <cache-type>weak-reference</cache-type>
+            <cache-size>-1</cache-size>
+         </remote-caching>
+         <instantiation/>
+         <copying xsi:type="instantiation-copy-policy"/>
+         <tables>
+            <table name="ENVIO"/>
+         </tables>
+         <structure>structureName</structure>
+      </class-mapping-descriptor>
+   </class-mapping-descriptors>
+   <login xsi:type="database-login">
+      <platform-class>org.eclipse.persistence.platform.database.oracle.Oracle9Platform</platform-class>
+      <user-name></user-name>
+      <connection-url></connection-url>
+   </login>
+</object-persistence>

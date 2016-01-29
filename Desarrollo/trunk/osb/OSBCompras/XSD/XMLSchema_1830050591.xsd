@@ -1,0 +1,15 @@
+<schema targetNamespace="http://www.kallsony.com/entidad/usuario" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:dr="http://www.kallsony.com/entidad/direccion">
+    <import schemaLocation="XMLSchema_-117231711.xsd" namespace="http://www.kallsony.com/entidad/direccion"/>
+    <complexType name="Usuario" xmlns:us="http://www.kallsony.com/entidad/usuario">
+        <sequence>
+            <element name="nombreUsuario" minOccurs="0" type="string"/>
+            <element name="nombre" type="string" minOccurs="0"/>
+            <element name="apellido" type="string" minOccurs="0"/>
+            <element name="tipoDocumento" type="string" minOccurs="0"/>
+            <element name="numeroDocumento" type="string" minOccurs="0"/>
+            <element name="correoElectronico" type="string" minOccurs="0"/>
+            <element name="telefono" type="string" minOccurs="0"/>
+            <element name="direccion" type="dr:Direccion" minOccurs="0"/>
+        </sequence>
+    </complexType>
+</schema>

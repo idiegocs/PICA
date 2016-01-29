@@ -1,0 +1,16 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:dr="http://www.kallsony.com/entidad/direccion"
+     targetNamespace="http://www.kallsony.com/entidad/direccion">
+    <complexType name="Direccion">
+        <sequence>
+            <element name="idDireccion" type="long" minOccurs="0"/>
+            <element name="numero" type="string" minOccurs="0"/>
+            <element name="ciudad" type="string" minOccurs="0"/>
+            <element name="departamento" type="string" minOccurs="0"/>
+            <element name="idCiudad" type="int"/>
+            <element name="idDepartamento" type="int"/>
+             <element name="idPais" type="int"/>
+            <element name="pais" type="string"/>
+        </sequence>
+    </complexType>
+</schema>

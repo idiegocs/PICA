@@ -1,0 +1,14 @@
+<adapter-config name="getProductos" adapter="Database Adapter" wsdlLocation="getProductos.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/DB/productosDatabase" UIConnectionName="ProductosDB" adapterRef=""/>
+  <endpoint-interaction portType="getProductos_ptt" operation="getProductosSelect">
+    <interaction-spec className="oracle.tip.adapter.db.DBReadInteractionSpec">
+      <property name="DescriptorName" value="getProductos.Producto"/>
+      <property name="QueryName" value="getProductosSelect"/>
+      <property name="MappingsMetaDataURL" value="getProductos-or-mappings.xml"/>
+      <property name="ReturnSingleResultSet" value="true"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

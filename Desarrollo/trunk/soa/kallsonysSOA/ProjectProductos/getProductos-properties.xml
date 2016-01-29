@@ -1,0 +1,38 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+   <entry key="Producto.Producto.DescripcionProducto:db_column_type">NVARCHAR</entry>
+   <entry key="Producto.Producto.IdProducto:db_column_type">int identity</entry>
+   <entry key="Producto.Producto.PrecioUnitario:db_column_not_null">true</entry>
+   <entry key="Producto.Producto.NombreImagenProducto:db_column_type">NVARCHAR</entry>
+   <entry key="Producto.Producto.NombreFabricante:db_column_size">64</entry>
+   <entry key="Producto.Producto.IdSubcategoria:db_column_type">INT</entry>
+   <entry key="Producto.Producto:db_column_7">PrecioUnitario</entry>
+   <entry key="Producto.Producto:db_column_6">IdSubcategoria</entry>
+   <entry key="Producto.Producto:db_column_5">NombreImagenProducto</entry>
+   <entry key="Producto.Producto.IdProducto:db_column_not_null">true</entry>
+   <entry key="Producto.Producto:db_column_4">NombreFabricante</entry>
+   <entry key="Producto.Producto:db_column_3">DescripcionProducto</entry>
+   <entry key="Producto.Producto:db_column_2">NombreProducto</entry>
+   <entry key="Producto.Producto.NombreImagenProducto:db_column_not_null">true</entry>
+   <entry key="Producto.Producto.DescripcionProducto:db_column_size">128</entry>
+   <entry key="Producto.Producto.NombreProducto:db_column_type">NVARCHAR</entry>
+   <entry key="Producto.Producto.CodigoProducto:db_column_type">NVARCHAR</entry>
+   <entry key="Producto.Producto:db_column_1">CodigoProducto</entry>
+   <entry key="Producto.Producto:db_column_0">IdProducto</entry>
+   <entry key="return_single_result_set">true</entry>
+   <entry key="Producto.Producto.NombreImagenProducto:db_column_size">56</entry>
+   <entry key="Producto.Producto.PrecioUnitario:db_column_scale">2</entry>
+   <entry key="Producto.Producto.NombreFabricante:db_column_not_null">true</entry>
+   <entry key="Producto.Producto.PrecioUnitario:db_column_type">NUMERIC</entry>
+   <entry key="root_descriptor_alias">Producto.Producto</entry>
+   <entry key="Producto.Producto.DescripcionProducto:db_column_not_null">true</entry>
+   <entry key="Producto.Producto.NombreFabricante:db_column_type">NVARCHAR</entry>
+   <entry key="Producto.Producto:db_table_type">TABLE</entry>
+   <entry key="Producto.Producto.IdSubcategoria:db_column_not_null">true</entry>
+   <entry key="Producto.Producto.CodigoProducto:db_column_size">32</entry>
+   <entry key="Producto.Producto.NombreProducto:db_column_size">64</entry>
+   <entry key="Producto.Producto.CodigoProducto:db_column_not_null">true</entry>
+   <entry key="Producto.Producto.PrecioUnitario:db_column_precision">16</entry>
+   <entry key="Producto.Producto.NombreProducto:db_column_not_null">true</entry>
+</properties>

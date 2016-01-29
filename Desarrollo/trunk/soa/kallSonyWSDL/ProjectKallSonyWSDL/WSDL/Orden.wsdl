@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<definitions targetNamespace="http://www.kallsony.com/final/operacion/consultaorden"
+             xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:tns="http://www.kallsony.com/final/operacion/consultaorden"
+             xmlns:wkcor="http://www.kallsony.com/operacion/consultaorden"
+             xmlns:wkcof="http://www.kallsony.com/util/falta"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+            >
+  <types>
+    <xsd:schema targetNamespace="http://www.kallsony.com/final/operacion/consultaorden">
+      <xsd:import schemaLocation="../xsd/Operacion/ConsultaOrden.xsd"
+                  namespace="http://www.kallsony.com/operacion/consultaorden"/>
+      <xsd:import schemaLocation="../xsd/Util/Falta.xsd"
+                  namespace="http://www.kallsony.com/util/falta"/>
+    </xsd:schema>
+  </types>
+  <message name="Orden_ConsultaEntrada">
+    <part name="partEntrada" element="wkcor:consultaOrdenEntrada"/>
+  </message>
+  <message name="Orden_ConsultaSalida">
+    <part name="partSalida" element="wkcor:consultaOrdenSalida"/>
+  </message>
+  <message name="Orden_Falta">
+    <part name="partFalta" element="wkcof:falta"/>
+  </message>
+  <portType name="PortOrden">
+    <operation name="consultarOrden">
+      <input message="tns:Orden_ConsultaEntrada"/>
+      <output message="tns:Orden_ConsultaSalida"/>
+      <fault message="tns:Orden_Falta" name="faltaOrden"/>
+    </operation>
+  </portType>
+  <binding name="PortOrdenSOAP11Binding" type="tns:PortOrden">
+    <soap:binding style="document"
+                  transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="consultarOrden">
+      <soap:operation style="document"
+                      soapAction="http://www.kallsony.com/final/operacion/consultaorden/consultarOrden"/>
+      <input>
+        <soap:body use="literal" parts="partEntrada"/>
+      </input>
+      <output>
+        <soap:body use="literal" parts="partSalida"/>
+      </output>
+      <fault name="faltaOrden">
+        <soap:fault name="faltaOrden" use="literal"/>
+      </fault>
+    </operation>
+  </binding>
+  <service name="PortOrden">
+    <port name="PortOrdenPort" binding="tns:PortOrdenSOAP11Binding">
+      <soap:address location="http://www.kallsony.com"/>
+    </port>
+  </service>
+</definitions>

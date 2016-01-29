@@ -1,0 +1,264 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Tue Jun 02 12:03:27 COT 2015
+  Author:  Diego
+  Type: BPEL 1.1 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="BPELCotizacion"
+               targetNamespace="http://xmlns.oracle.com/Appkallsonys/ProjectCotizacion/BPELCotizacion"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/Appkallsonys/ProjectCotizacion/BPELCotizacion"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns1="http://tempuri.org/"
+         xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns2="http://www.kallsony.com.validcot"
+         xmlns:ns3="http://xmlns.oracle.com/OracleRulesCotizar/OracleRulesCotizar_DecisionService_1"
+         xmlns:ns4="http://xmlns.oracle.com/bpel"
+         xmlns:ns5="http://www.kallsony.com/operacion/cotizarcompra"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap">
+
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="ServiceCotizacion" partnerLinkType="client:BPELCotizacion" myRole="BPELCotizacionProvider"/>
+    <partnerLink name="ServiceCotizar" partnerLinkType="ns1:ServiceCotizar"
+                 partnerRole="IService1"/>
+    <partnerLink name="OracleRulesCotizar.OracleRulesCotizar_DecisionService_1"
+                 partnerRole="IDecisionService_Role"
+                 partnerLinkType="ns3:IDecisionService_PL"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:BPELCotizacionRequestMessage"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="client:BPELCotizacionResponseMessage"/>
+    <variable name="InvokeSony_fullfillOrder_InputVariable"
+              messageType="ns1:IService1_fullfillOrder_InputMessage"/>
+    <variable name="InvokeSony_fullfillOrder_OutputVariable"
+              messageType="ns1:IService1_fullfillOrder_OutputMessage"/>
+    <variable name="InvokeRapidService_fullfillOrder_InputVariable"
+              messageType="ns1:IService1_fullfillOrder_InputMessage"/>
+    <variable name="InvokeRapidService_fullfillOrder_OutputVariable"
+              messageType="ns1:IService1_fullfillOrder_OutputMessage"/>
+    <variable name="VariableCotiizarIn" element="ns2:ValidarCotizarEntrada"/>
+    <variable name="VariableCotizarOut" element="ns2:ValidarCotizarSalida"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in BPELCotizacion.wsdl) -->
+    <receive name="receiveInput" partnerLink="ServiceCotizacion" portType="client:BPELCotizacion" operation="process" variable="inputVariable" createInstance="yes"/>
+    <scope name="Scope1">
+      <faultHandlers>
+        <catchAll>
+          <sequence name="Sequence4">
+            <assign name="AssignError">
+              <copy>
+                <from expression="2=3"/>
+                <to variable="outputVariable" part="payload"
+                    query="/ns5:cotizacionSalida/ns5:estado"/>
+              </copy>
+              <copy>
+                <from expression="0"/>
+                <to variable="outputVariable" part="payload"
+                    query="/ns5:cotizacionSalida/ns5:valorCotizacion"/>
+              </copy>
+            </assign>
+            <terminate name="Terminate1"/>
+          </sequence>
+        </catchAll>
+      </faultHandlers>
+      <flow name="FlowCotizar">
+        <sequence name="Sequence">
+          <assign name="TransformSony">
+            <bpelx:annotation>
+              <bpelx:pattern>transformation</bpelx:pattern>
+            </bpelx:annotation>
+            <copy>
+              <from expression="ora:doXSLTransformForDoc('xsl/Transformation_Sony.xsl', $inputVariable.payload)"/>
+              <to variable="InvokeSony_fullfillOrder_InputVariable"
+                  part="parameters"/>
+            </copy>
+          </assign>
+          <invoke name="InvokeSony"
+                  inputVariable="InvokeSony_fullfillOrder_InputVariable"
+                  outputVariable="InvokeSony_fullfillOrder_OutputVariable"
+                  partnerLink="ServiceCotizar" portType="ns1:IService1"
+                  operation="fullfillOrder" bpelx:invokeAsDetail="no"/>
+        </sequence>
+        <sequence name="Sequence1">
+          <assign name="TransformRapidService">
+            <bpelx:annotation>
+              <bpelx:pattern>transformation</bpelx:pattern>
+            </bpelx:annotation>
+            <copy>
+              <from expression="ora:doXSLTransformForDoc('xsl/Transformation_RapidService.xsl', $inputVariable.payload)"/>
+              <to variable="InvokeRapidService_fullfillOrder_InputVariable"
+                  part="parameters"/>
+            </copy>
+          </assign>
+          <invoke name="InvokeRapidService"
+                  inputVariable="InvokeRapidService_fullfillOrder_InputVariable"
+                  outputVariable="InvokeRapidService_fullfillOrder_OutputVariable"
+                  partnerLink="ServiceCotizar" portType="ns1:IService1"
+                  operation="fullfillOrder" bpelx:invokeAsDetail="no"/>
+        </sequence>
+      </flow>
+    </scope>
+    <scope name="ScopeMaimoMonto" variableAccessSerializable="no">
+      <faultHandlers>
+        <catchAll><assign name="AssignError"
+                          xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/">
+      <copy>
+         <from expression="2=3"/>
+         <to variable="outputVariable" part="payload"
+             query="/ns5:cotizacionSalida/ns5:estado"/>
+      </copy>
+      <copy>
+         <from expression="0"/>
+         <to variable="outputVariable" part="payload"
+             query="/ns5:cotizacionSalida/ns5:valorCotizacion"/>
+      </copy>
+   </assign></catchAll>
+      </faultHandlers>
+      <sequence name="Sequence3">
+        <assign name="AssignOrden">
+          <copy>
+            <from variable="inputVariable" part="payload"
+                  query="/ns5:cotizacionEntrada/ns5:idOrden"/>
+            <to variable="VariableCotiizarIn"
+                query="/ns2:ValidarCotizarEntrada/ns2:idOrden"/>
+          </copy>
+        </assign>
+        <scope name="RuleCotizar" variableAccessSerializable="no">
+          <bpelx:annotation>
+            <bpelx:pattern patternName="bpelx:decide"></bpelx:pattern>
+          </bpelx:annotation>
+          <variables>
+            <variable name="dsIn"
+                      messageType="ns3:callFunctionStatelessMessage"/>
+            <variable name="dsOut"
+                      messageType="ns3:callFunctionStatelessDecisionMessage"/>
+          </variables>
+          <sequence name="Sequence2">
+            <assign name="Facts_To_Rule_Service">
+              <copy>
+                <from variable="VariableCotiizarIn"/>
+                <to variable="dsIn" part="payload"
+                    query="ns3:parameterList/ns2:ValidarCotizarEntrada"/>
+              </copy>
+            </assign>
+            <assign name="BPEL_Header">
+              <copy>
+                <from expression='"OracleRulesCotizar_DecisionService_1"'/>
+                <to variable="dsIn" part="payload" query="@name"/>
+              </copy>
+            </assign>
+            <invoke name="Invoke"
+                    partnerLink="OracleRulesCotizar.OracleRulesCotizar_DecisionService_1"
+                    portType="ns3:IDecisionService"
+                    operation="callFunctionStateless" inputVariable="dsIn"
+                    outputVariable="dsOut"/>
+            <assign name="Rule_Service_To_Facts">
+              <copy>
+                <from variable="dsOut" part="payload"
+                      query="ns3:resultList/ns2:ValidarCotizarSalida"/>
+                <to variable="VariableCotizarOut"/>
+              </copy>
+            </assign>
+          </sequence>
+        </scope>
+        <switch name="Switch1">
+          <case condition="bpws:getVariableData('VariableCotizarOut','/ns2:ValidarCotizarSalida/ns2:valorSony')&lt;=bpws:getVariableData('VariableCotizarOut','/ns2:ValidarCotizarSalida/ns2:valorRapidService')">
+            <bpelx:annotation>
+              <bpelx:general>
+                <bpelx:property name="userLabel">
+                  <![CDATA[MenorSony]]>
+                </bpelx:property>
+              </bpelx:general>
+            </bpelx:annotation>
+            <assign name="AssignSony">
+              <copy>
+                <from variable="VariableCotizarOut"
+                      query="/ns2:ValidarCotizarSalida/ns2:valorSony"/>
+                <to variable="outputVariable" part="payload"
+                    query="/ns5:cotizacionSalida/ns5:valorCotizacion"/>
+              </copy>
+              <copy>
+                <from expression='"SONY"'/>
+                <to variable="outputVariable" part="payload"
+                    query="/ns5:cotizacionSalida/ns5:proveedor"/>
+              </copy>
+              <copy>
+                <from expression="1=1"/>
+                <to variable="outputVariable" part="payload"
+                    query="/ns5:cotizacionSalida/ns5:estado"/>
+              </copy>
+            </assign>
+          </case>
+          <otherwise>
+            <assign name="AssignrapidService">
+              <copy>
+                <from variable="VariableCotizarOut"
+                      query="/ns2:ValidarCotizarSalida/ns2:valorRapidService"/>
+                <to variable="outputVariable" part="payload"
+                    query="/ns5:cotizacionSalida/ns5:valorCotizacion"/>
+              </copy>
+              <copy>
+                <from expression='"RAPIDSERVICE"'/>
+                <to variable="outputVariable" part="payload"
+                    query="/ns5:cotizacionSalida/ns5:proveedor"/>
+              </copy>
+              <copy>
+                <from expression="1=1"/>
+                <to variable="outputVariable" part="payload"
+                    query="/ns5:cotizacionSalida/ns5:estado"/>
+              </copy>
+            </assign>
+          </otherwise>
+        </switch>
+      </sequence>
+    </scope>
+    <!-- Generate reply to synchronous request -->
+    <reply name="replyOutput" partnerLink="ServiceCotizacion" portType="client:BPELCotizacion" operation="process" variable="outputVariable"/>
+  </sequence>
+</process>

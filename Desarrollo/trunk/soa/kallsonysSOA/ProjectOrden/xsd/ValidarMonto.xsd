@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:mt="http://www.kallsony.com.monto"
+            targetNamespace="http://www.kallsony.com.monto"
+            elementFormDefault="qualified">
+  
+    
+  <element name="ValidarMontoEntrada">
+    <complexType>
+      <sequence>
+        <element name="totalOrden" type="double"/>
+      </sequence>
+    </complexType>
+  </element>
+  <element name="ValidarMontoSalida">
+    <complexType>
+      <sequence>
+        <element name="totalMonto" type="double"/>
+      </sequence>
+    </complexType>
+  </element>
+</schema>

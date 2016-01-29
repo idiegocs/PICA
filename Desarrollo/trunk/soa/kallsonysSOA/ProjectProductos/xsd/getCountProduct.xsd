@@ -1,0 +1,25 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/getCountProduct" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/getCountProduct" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="getCountProductInput" type="getCountProductInput"/>
+   <xs:complexType name="getCountProductInput">
+      <xs:sequence>
+         <xs:element name="tipoBusquedaN" type="xs:string" nillable="true"/>
+         <xs:element name="valorBusquedaN" type="xs:string" nillable="true"/>
+         <xs:element name="tipoBusquedaI" type="xs:string" nillable="true"/>
+         <xs:element name="valorBusquedaI" type="xs:string" nillable="true"/>
+         <xs:element name="tipoBusquedaC" type="xs:string" nillable="true"/>
+         <xs:element name="valorBusquedaC" type="xs:string" nillable="true"/>
+         <xs:element name="tipoBusquedaD" type="xs:string" nillable="true"/>
+         <xs:element name="valorBusquedaD" type="xs:string" nillable="true"/>
+         <xs:element name="tipoBusquedaS" type="xs:string" nillable="true"/>
+         <xs:element name="valorBusquedaS" type="xs:string" nillable="true"/>
+         <xs:element name="tipoBusquedaA" type="xs:string" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="getCountProductOutput" type="getCountProductOutput"/>
+   <xs:complexType name="getCountProductOutput">
+      <xs:sequence>
+         <xs:element name="total" type="xs:int" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

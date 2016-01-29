@@ -1,0 +1,13 @@
+<adapter-config name="getTarjetas" adapter="Database Adapter" wsdlLocation="getTarjetas.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/DB/omstarjetaDatabase" UIConnectionName="trajetaDB" adapterRef=""/>
+  <endpoint-interaction portType="getTarjetas_ptt" operation="getTarjetas">
+    <interaction-spec className="oracle.tip.adapter.db.DBPureSQLInteractionSpec">
+      <property name="SqlString" value="SELECT count(TJ.IDTARJETA) as countTarjetas  FROM TARJETAS TJ WHERE TJ.TARJETA_NUMBERO= #num_tarjeta  AND TJ.TARJETA_EXP_MES=#mes_exp   AND TJ.TARJETA_EXP_YEAR=#anio_exp  AND TJ.CODIGO_VER=#cod_ver"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+    <input/>
+    <output/>
+  </endpoint-interaction>
+
+</adapter-config>

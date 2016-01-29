@@ -1,0 +1,39 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+   <entry key="SERVIENTREGA.KALLSONYS_SHIPMENT:db_column_6">ZIPCODE</entry>
+   <entry key="SERVIENTREGA.KALLSONYS_SHIPMENT.ZIPCODE:db_column_not_null">false</entry>
+   <entry key="SERVIENTREGA.KALLSONYS_SHIPMENT:db_column_5">STATE</entry>
+   <entry key="SERVIENTREGA.KALLSONYS_SHIPMENT:db_column_4">CITY</entry>
+   <entry key="SERVIENTREGA.KALLSONYS_SHIPMENT:db_column_3">STREET</entry>
+   <entry key="SERVIENTREGA.KALLSONYS_SHIPMENT:db_column_2">LNAME</entry>
+   <entry key="SERVIENTREGA.KALLSONYS_SHIPMENT.ZIPCODE:db_column_size">50</entry>
+   <entry key="SERVIENTREGA.KALLSONYS_SHIPMENT:db_column_1">FNAME</entry>
+   <entry key="SERVIENTREGA.KALLSONYS_SHIPMENT:db_column_0">ORDERID</entry>
+   <entry key="SERVIENTREGA.KALLSONYS_SHIPMENT.FNAME:db_column_type">NVARCHAR</entry>
+   <entry key="SERVIENTREGA.KALLSONYS_SHIPMENT.STREET:db_column_type">NVARCHAR</entry>
+   <entry key="SERVIENTREGA.KALLSONYS_SHIPMENT.CITY:db_column_type">NVARCHAR</entry>
+   <entry key="SERVIENTREGA.KALLSONYS_SHIPMENT.Estado:db_column_size">50</entry>
+   <entry key="SERVIENTREGA.KALLSONYS_SHIPMENT.LNAME:db_column_type">NVARCHAR</entry>
+   <entry key="SERVIENTREGA.KALLSONYS_SHIPMENT.LNAME:db_column_not_null">true</entry>
+   <entry key="SERVIENTREGA.KALLSONYS_SHIPMENT.Estado:db_column_not_null">true</entry>
+   <entry key="SERVIENTREGA.KALLSONYS_SHIPMENT.CITY:db_column_not_null">true</entry>
+   <entry key="SERVIENTREGA.KALLSONYS_SHIPMENT.STATE:db_column_type">NVARCHAR</entry>
+   <entry key="SERVIENTREGA.KALLSONYS_SHIPMENT:db_table_type">TABLE</entry>
+   <entry key="SERVIENTREGA.KALLSONYS_SHIPMENT.ORDERID:db_column_scale">0</entry>
+   <entry key="SERVIENTREGA.KALLSONYS_SHIPMENT.FNAME:db_column_size">50</entry>
+   <entry key="SERVIENTREGA.KALLSONYS_SHIPMENT.STREET:db_column_size">50</entry>
+   <entry key="SERVIENTREGA.KALLSONYS_SHIPMENT.CITY:db_column_size">50</entry>
+   <entry key="SERVIENTREGA.KALLSONYS_SHIPMENT.ORDERID:db_column_precision">18</entry>
+   <entry key="SERVIENTREGA.KALLSONYS_SHIPMENT.ZIPCODE:db_column_type">NVARCHAR</entry>
+   <entry key="SERVIENTREGA.KALLSONYS_SHIPMENT.LNAME:db_column_size">50</entry>
+   <entry key="root_descriptor_alias">SERVIENTREGA.KALLSONYS_SHIPMENT</entry>
+   <entry key="SERVIENTREGA.KALLSONYS_SHIPMENT.ORDERID:db_column_type">NUMERIC</entry>
+   <entry key="SERVIENTREGA.KALLSONYS_SHIPMENT.FNAME:db_column_not_null">true</entry>
+   <entry key="SERVIENTREGA.KALLSONYS_SHIPMENT.STATE:db_column_not_null">true</entry>
+   <entry key="SERVIENTREGA.KALLSONYS_SHIPMENT.STATE:db_column_size">50</entry>
+   <entry key="SERVIENTREGA.KALLSONYS_SHIPMENT.Estado:db_column_type">NVARCHAR</entry>
+   <entry key="SERVIENTREGA.KALLSONYS_SHIPMENT:db_column_7">Estado</entry>
+   <entry key="SERVIENTREGA.KALLSONYS_SHIPMENT.STREET:db_column_not_null">true</entry>
+   <entry key="SERVIENTREGA.KALLSONYS_SHIPMENT.ORDERID:db_column_not_null">true</entry>
+</properties>

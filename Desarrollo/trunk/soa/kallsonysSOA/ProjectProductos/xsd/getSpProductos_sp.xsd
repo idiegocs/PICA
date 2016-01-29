@@ -1,0 +1,54 @@
+<schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getSpProductos" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/sp/getSpProductos" elementFormDefault="qualified">
+   <element name="InputParameters">
+      <complexType>
+         <sequence>
+            <element name="parIdProducto" type="db:string128" db:index="1" db:type="VARCHAR" minOccurs="0" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <element name="OutputParameters">
+      <complexType>
+         <sequence>
+            <element name="RowSet0" type="db:RowSet0_RowSet" db:type="RowSet0" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+         </sequence>
+      </complexType>
+   </element>
+   <complexType name="RowSet0_RowSet">
+      <sequence>
+         <element name="RowSet0_Row" minOccurs="0" maxOccurs="unbounded">
+            <complexType>
+               <sequence>
+                  <element name="IdProducto" type="int" db:type="int identity" minOccurs="0" nillable="true"/>
+                  <element name="CodigoProducto" type="db:string32" db:type="nvarchar" minOccurs="0" nillable="true"/>
+                  <element name="NombreProducto" type="db:string64" db:type="nvarchar" minOccurs="0" nillable="true"/>
+                  <element name="DescripcionProducto" type="db:string128" db:type="nvarchar" minOccurs="0" nillable="true"/>
+                  <element name="NombreImagenProducto" type="db:string56" db:type="nvarchar" minOccurs="0" nillable="true"/>
+                  <element name="NombreFabricante" type="db:string64" db:type="nvarchar" minOccurs="0" nillable="true"/>
+                  <element name="PrecioUnitario" type="decimal" db:type="NUMERIC" minOccurs="0" nillable="true"/>
+                  <element name="IdSubcategoria" type="int" db:type="INT" minOccurs="0" nillable="true"/>
+               </sequence>
+            </complexType>
+         </element>
+      </sequence>
+   </complexType>
+   <simpleType name="string128">
+      <restriction base="string">
+         <maxLength value="128"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string32">
+      <restriction base="string">
+         <maxLength value="32"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string64">
+      <restriction base="string">
+         <maxLength value="64"/>
+      </restriction>
+   </simpleType>
+   <simpleType name="string56">
+      <restriction base="string">
+         <maxLength value="56"/>
+      </restriction>
+   </simpleType>
+</schema>

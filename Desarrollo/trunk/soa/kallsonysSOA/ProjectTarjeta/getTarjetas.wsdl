@@ -1,0 +1,25 @@
+<?binding.jca getTarjetas_db.jca?>
+<wsdl:definitions name="getTarjetas" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/Appkallsonys/ProjectTarjeta/getTarjetas" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/getTarjetas" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/Appkallsonys/ProjectTarjeta/getTarjetas" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/">
+    <plt:partnerLinkType name="getTarjetas_plt">
+        <plt:role name="getTarjetas_role">
+            <plt:portType name="tns:getTarjetas_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/getTarjetas" schemaLocation="xsd/getTarjetas.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="getTarjetasInput_msg">
+        <wsdl:part name="getTarjetasInput_msg" element="db:getTarjetasInput"/>
+    </wsdl:message>
+    <wsdl:message name="getTarjetasOutput_msg">
+        <wsdl:part name="getTarjetasOutput" element="db:getTarjetasOutput"/>
+    </wsdl:message>
+    <wsdl:portType name="getTarjetas_ptt">
+        <wsdl:operation name="getTarjetas">
+            <wsdl:input message="tns:getTarjetasInput_msg"/>
+            <wsdl:output message="tns:getTarjetasOutput_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

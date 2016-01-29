@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<JavaBean xmlns="http://xmlns.oracle.com/adfm/beanmodel" version="11.1.1.64.93"
+          id="HumantaskAproManualPayloadType"
+          Package="ProjectTaskKall_HumantaskAproManual"
+          BeanClass="ProjectTaskKall_HumantaskAproManual.HumantaskAproManualPayloadType"
+          isJavaBased="false">
+  <AccessorAttribute id="ValidarOrdenEntrada" IsCollection="true"
+                     BeanClass="ProjectTaskKall_HumantaskAproManual.ValidarOrdenEntrada"
+                     CollectionBeanClass="ProjectTaskKall_HumantaskAproManual.ValidarOrdenEntrada_ValidarOrdenEntrada_Operations">
+    <Properties>
+      <Property Name="minOccurs" Value="1"/>
+      <Property Name="maxOccurs" Value="1"/>
+      <Property Name="LABEL" Value="Validar Orden Entrada"/>
+      <Property Name="nillable" Value="false"/>
+      <Property Name="originalName" Value="ValidarOrdenEntrada"/>
+      <Property Name="targetNamespace" Value="http://www.kallsonys.com"/>
+    </Properties>
+  </AccessorAttribute>
+</JavaBean>

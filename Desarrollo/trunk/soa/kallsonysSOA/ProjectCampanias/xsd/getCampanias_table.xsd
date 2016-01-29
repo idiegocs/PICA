@@ -1,0 +1,39 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/getCampanias" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/getCampanias" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="CampaniaCollection" type="CampaniaCollection"/>
+   <xs:complexType name="CampaniaCollection">
+      <xs:sequence>
+         <xs:element name="Campania" type="Campania" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="Campania">
+      <xs:sequence>
+         <xs:element name="IdCampania" type="xs:int" nillable="true"/>
+         <xs:element name="Nombre" type="xs:string" minOccurs="0"/>
+         <xs:element name="FechaInicio" type="xs:dateTime" minOccurs="0"/>
+         <xs:element name="FechaFin" type="xs:dateTime" minOccurs="0"/>
+         <xs:element name="Estado" type="xs:boolean" minOccurs="0"/>
+         <xs:element name="NombreImagenCampania" type="xs:string" minOccurs="0"/>
+         <xs:element name="ProductoxCampaniaCollection" minOccurs="0">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element name="ProductoxCampania" type="ProductoxCampania" minOccurs="0" maxOccurs="unbounded"/>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="ProductoxCampania">
+      <xs:sequence>
+         <xs:element name="IdProductoxCampania" type="xs:int" nillable="true"/>
+         <xs:element name="IdProducto" type="xs:int" minOccurs="0"/>
+         <xs:element name="PorcentajeDescuento" type="xs:int" minOccurs="0"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="getCampaniasSelect_estadoCampaniaInputParameters" type="getCampaniasSelect_estadoCampania"/>
+   <xs:complexType name="getCampaniasSelect_estadoCampania">
+      <xs:sequence>
+         <xs:element name="estadoCampania" type="xs:boolean" minOccurs="1" maxOccurs="1"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

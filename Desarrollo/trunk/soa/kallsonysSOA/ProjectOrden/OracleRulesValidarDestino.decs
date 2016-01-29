@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<decisionServices xmlns="http://xmlns.oracle.com/bpel/rules" name="OracleRulesValidarDestino">
+    <ruleEngineProvider name="OracleRulesSDK" provider="Oracle_11.0.0.0.0">
+        <repository type="SCA-Archive">
+            <path>ProjectOrden/oracle/rules/projectorden/OracleRulesValidarDestino.rules</path>
+        </repository>
+    </ruleEngineProvider>
+    <decisionService targetNamespace="http://xmlns.oracle.com/OracleRulesValidarDestino/OracleRulesValidarDestino_DecisionService_Destino" ruleEngineProviderReference="OracleRulesSDK" name="OracleRulesValidarDestino_DecisionService_Destino">
+        <catalog>OracleRulesValidarDestino</catalog>
+        <pattern name="CallFunctionStateless">
+            <arguments>
+                <call>projectorden.OracleRulesValidarDestino.OracleRulesValidarDestino_DecisionService_Destino</call>
+            </arguments>
+        </pattern>
+        <pattern name="CallFunctionStateful">
+            <arguments>
+                <call>projectorden.OracleRulesValidarDestino.OracleRulesValidarDestino_DecisionService_Destino</call>
+            </arguments>
+        </pattern>
+    </decisionService>
+</decisionServices>

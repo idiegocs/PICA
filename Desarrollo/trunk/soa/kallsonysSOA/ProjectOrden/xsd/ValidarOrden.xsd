@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:vo="http://www.kallsonys.com"
+            targetNamespace="http://www.kallsonys.com"
+            elementFormDefault="qualified">
+  <element name="ValidarOrdenEntrada">
+ 
+    <complexType>
+      <sequence>
+        <element name="idCategoriaCliente" type="int" minOccurs="0"/>
+        <element name="nombreCategoriaCliente" type="string" minOccurs="0"/>
+        <element name="montoGerencia" type="double" minOccurs="0"/>
+        <element name="totalOrden" type="double" minOccurs="0"/>
+      </sequence>
+    </complexType>
+  </element>
+  <element name="ValidarOrdenSalida">
+    <complexType>
+      <sequence>
+        <element name="idEstado" type="int" minOccurs="0"/>
+        <element name="nombreEstado" minOccurs="0" type="string"/>
+      </sequence>
+    </complexType>
+  </element>
+</schema>

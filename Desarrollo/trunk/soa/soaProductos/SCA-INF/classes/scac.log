@@ -1,0 +1,24 @@
+12-mar-2015 11:23:39 oracle.mds
+NOTIFICATION: La instancia de PManager se ha creado sin soporte de varios contenidos, ya que el indicador de JVM "oracle.multitenant.enabled" no se ha definido para activar el soporte de varios contenidos.
+12-mar-2015 11:23:40 oracle.security.jps.internal.config.xml.XmlConfigurationFactory initDefaultConfiguration
+GRAVE: java.io.FileNotFoundException: .\config\jps-config.xml (El sistema no puede encontrar la ruta especificada)
+12-mar-2015 11:23:40 oracle.mds
+NOTIFICATION: La auditoría se ha desactivado para el componente MDS.
+12-mar-2015 11:23:40 oracle.fabric.common.wsdl.SchemaManager isIncrementalBuildSupported
+INFO: XMLSchema incremental build enabled.
+12-mar-2015 11:23:40 com.collaxa.cube.CubeLogger info
+INFO: validando "BPELProductos.bpel" ...
+12-mar-2015 11:23:40 oracle.integration.platform.blocks.FabricConfigManager <clinit>
+ADVERTENCIA: JRF is unable to determine the current application server platform.
+12-mar-2015 11:23:40 oracle.integration.platform.blocks.WLSPlatformConfigurationProvider <clinit>
+ADVERTENCIA: JRF is unable to determine the current application server platform.
+12-mar-2015 11:23:40 com.collaxa.cube.CubeLogger info
+INFO: Composed "BPELProductos" in 46,7 milliseconds [nodes 15=0+15, 321,0 nodes/sec]
+12-mar-2015 11:23:42 com.collaxa.cube.CubeLogger info
+INFO: Compiled "BPELProductos" in 1,274 seconds
+12-mar-2015 11:23:42 com.collaxa.cube.CubeLogger info
+INFO: Gathered 3 files in 0,7 milliseconds
+
+12-mar-2015 11:23:42 com.collaxa.cube.CubeLogger info
+INFO: Packaged "BPELProductos" in 15,5 milliseconds
+

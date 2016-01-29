@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-persistence xmlns="http://www.eclipse.org/eclipselink/xsds/persistence" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:eclipselink="http://www.eclipse.org/eclipselink/xsds/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="Eclipse Persistence Services - 2.3.1.v20111018-r10243">
+   <name>setServientrega-OR</name>
+   <class-mapping-descriptors>
+      <class-mapping-descriptor xsi:type="object-relational-class-mapping-descriptor">
+         <class>setServientrega.KallsonysShipment</class>
+         <alias>SERVIENTREGA.KALLSONYS_SHIPMENT</alias>
+         <primary-key>
+            <field table="KALLSONYS_SHIPMENT" name="ORDERID" xsi:type="column"/>
+            <field table="KALLSONYS_SHIPMENT" name="FNAME" xsi:type="column"/>
+            <field table="KALLSONYS_SHIPMENT" name="LNAME" xsi:type="column"/>
+            <field table="KALLSONYS_SHIPMENT" name="CITY" xsi:type="column"/>
+            <field table="KALLSONYS_SHIPMENT" name="STREET" xsi:type="column"/>
+            <field table="KALLSONYS_SHIPMENT" name="STATE" xsi:type="column"/>
+            <field table="KALLSONYS_SHIPMENT" name="ZIPCODE" xsi:type="column"/>
+            <field table="KALLSONYS_SHIPMENT" name="Estado" xsi:type="column"/>
+         </primary-key>
+         <events/>
+         <querying>
+            <queries>
+               <query name="setServientregaSelect" xsi:type="read-all-query">
+                  <reference-class>setServientrega.KallsonysShipment</reference-class>
+                  <container xsi:type="list-container-policy">
+                     <collection-type>java.util.Vector</collection-type>
+                  </container>
+               </query>
+            </queries>
+         </querying>
+         <attribute-mappings>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>orderid</attribute-name>
+               <field table="KALLSONYS_SHIPMENT" name="ORDERID" xsi:type="column"/>
+               <attribute-classification>java.lang.Long</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>fname</attribute-name>
+               <field table="KALLSONYS_SHIPMENT" name="FNAME" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>lname</attribute-name>
+               <field table="KALLSONYS_SHIPMENT" name="LNAME" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>street</attribute-name>
+               <field table="KALLSONYS_SHIPMENT" name="STREET" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>city</attribute-name>
+               <field table="KALLSONYS_SHIPMENT" name="CITY" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>state</attribute-name>
+               <field table="KALLSONYS_SHIPMENT" name="STATE" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>zipcode</attribute-name>
+               <field table="KALLSONYS_SHIPMENT" name="ZIPCODE" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>Estado</attribute-name>
+               <field table="KALLSONYS_SHIPMENT" name="Estado" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+         </attribute-mappings>
+         <descriptor-type>independent</descriptor-type>
+         <caching>
+            <cache-type>weak-reference</cache-type>
+            <cache-size>-1</cache-size>
+            <always-refresh>true</always-refresh>
+         </caching>
+         <remote-caching>
+            <cache-type>weak-reference</cache-type>
+            <cache-size>-1</cache-size>
+         </remote-caching>
+         <instantiation/>
+         <copying xsi:type="instantiation-copy-policy"/>
+         <tables>
+            <table name="SERVIENTREGA.KALLSONYS_SHIPMENT"/>
+         </tables>
+         <structure>structureName</structure>
+      </class-mapping-descriptor>
+   </class-mapping-descriptors>
+   <login xsi:type="database-login">
+      <platform-class>org.eclipse.persistence.platform.database.SQLServerPlatform</platform-class>
+      <connection-url></connection-url>
+   </login>
+</object-persistence>

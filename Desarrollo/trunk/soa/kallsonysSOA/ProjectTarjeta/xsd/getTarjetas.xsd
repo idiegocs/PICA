@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/getTarjetas" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/getTarjetas" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="getTarjetasInput" type="getTarjetasInput"/>
+   <xs:complexType name="getTarjetasInput">
+      <xs:sequence>
+         <xs:element name="num_tarjeta" type="xs:string" nillable="true"/>
+         <xs:element name="mes_exp" type="xs:string" nillable="true"/>
+         <xs:element name="anio_exp" type="xs:string" nillable="true"/>
+         <xs:element name="cod_ver" type="xs:string" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="getTarjetasOutput" type="getTarjetasOutput"/>
+   <xs:complexType name="getTarjetasOutput">
+      <xs:sequence>
+         <xs:element name="countTarjetas" type="xs:decimal" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

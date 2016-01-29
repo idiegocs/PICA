@@ -1,0 +1,29 @@
+<wsdl:definitions
+     name="setCompra"
+     targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/file/Appkallsonys/ProjectCompras/setCompra"
+     xmlns:jca="http://xmlns.oracle.com/pcbpel/wsdl/jca/"
+     xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/file/Appkallsonys/ProjectCompras/setCompra"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:imp1="http://www.kallsony.com/operacion/registrarcompra"
+     xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+    >
+  <plt:partnerLinkType name="WriteCompra_plt" >
+    <plt:role name="WriteCompra_role" >
+      <plt:portType name="tns:WriteCompra_ptt" />
+    </plt:role>
+  </plt:partnerLinkType>
+    <wsdl:types>
+      <schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/file/Appkallsonys/ProjectCompras/setCompra"
+              xmlns="http://www.w3.org/2001/XMLSchema" >
+        <import namespace="http://www.kallsony.com/operacion/registrarcompra" schemaLocation="xsd/RegistrarCompra.xsd" />
+      </schema>
+    </wsdl:types>
+    <wsdl:message name="WriteCompra_msg">
+        <wsdl:part name="body" element="imp1:registrarCompraEntrada"/>
+    </wsdl:message>
+    <wsdl:portType name="WriteCompra_ptt">
+        <wsdl:operation name="WriteCompra">
+            <wsdl:input message="tns:WriteCompra_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

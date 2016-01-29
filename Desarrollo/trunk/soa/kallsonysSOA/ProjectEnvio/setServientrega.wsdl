@@ -1,0 +1,21 @@
+<?binding.jca setServientrega_db.jca?>
+<wsdl:definitions name="setServientrega" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/Appkallsonys/ProjectEnvio/setServientrega" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/Appkallsonys/ProjectEnvio/setServientrega" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/setServientrega">
+    <plt:partnerLinkType name="setServientrega_plt">
+        <plt:role name="setServientrega_role">
+            <plt:portType name="tns:setServientrega_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/setServientrega" schemaLocation="xsd/setServientrega_table.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="KallsonysShipmentCollection_msg">
+        <wsdl:part name="KallsonysShipmentCollection" element="top:KallsonysShipmentCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="setServientrega_ptt">
+        <wsdl:operation name="insert">
+            <wsdl:input message="tns:KallsonysShipmentCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

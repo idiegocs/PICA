@@ -1,0 +1,40 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+   <entry key="root_descriptor_alias">Producto.Campania</entry>
+   <entry key="Producto.Campania.IdCampania:db_column_not_null">true</entry>
+   <entry key="Producto.Campania.IdCampania:db_column_type">int identity</entry>
+   <entry key="Producto.Campania:db_column_5">NombreImagenCampania</entry>
+   <entry key="Producto.Campania:db_column_4">Estado</entry>
+   <entry key="Producto.Campania:db_column_3">FechaFin</entry>
+   <entry key="Producto.ProductoxCampania:db_table_type">TABLE</entry>
+   <entry key="Producto.Campania:db_column_2">FechaInicio</entry>
+   <entry key="Producto.Campania:db_column_1">Nombre</entry>
+   <entry key="Producto.Campania:db_column_0">IdCampania</entry>
+   <entry key="Producto.Campania.Nombre:db_column_type">NVARCHAR</entry>
+   <entry key="Producto.ProductoxCampania.IdProducto:db_column_not_null">true</entry>
+   <entry key="Producto.Campania.Nombre:db_column_size">80</entry>
+   <entry key="Producto.ProductoxCampania.IdCampania:db_column_type">INT</entry>
+   <entry key="Producto.Campania.Estado:db_column_not_null">true</entry>
+   <entry key="Producto.ProductoxCampania.PorcentajeDescuento:db_column_type">INT</entry>
+   <entry key="Producto.ProductoxCampania.IdProductoxCampania:db_column_type">int identity</entry>
+   <entry key="Producto.Campania.NombreImagenCampania:db_column_not_null">true</entry>
+   <entry key="Producto.ProductoxCampania.IdCampania:db_column_not_null">true</entry>
+   <entry key="Producto.Campania:db_table_type">TABLE</entry>
+   <entry key="Producto.Campania.Nombre:db_column_not_null">true</entry>
+   <entry key="Producto.Campania.FechaInicio:db_column_not_null">true</entry>
+   <entry key="Producto.Campania.NombreImagenCampania:db_column_type">NVARCHAR</entry>
+   <entry key="return_single_result_set">false</entry>
+   <entry key="Producto.Campania.FechaFin:db_column_type">DATETIME</entry>
+   <entry key="Producto.ProductoxCampania.PorcentajeDescuento:db_column_not_null">true</entry>
+   <entry key="Producto.ProductoxCampania:db_column_3">PorcentajeDescuento</entry>
+   <entry key="Producto.ProductoxCampania:db_column_2">IdProducto</entry>
+   <entry key="Producto.ProductoxCampania:db_column_1">IdCampania</entry>
+   <entry key="Producto.Campania.NombreImagenCampania:db_column_size">56</entry>
+   <entry key="Producto.ProductoxCampania.IdProductoxCampania:db_column_not_null">true</entry>
+   <entry key="Producto.ProductoxCampania:db_column_0">IdProductoxCampania</entry>
+   <entry key="Producto.ProductoxCampania.IdProducto:db_column_type">INT</entry>
+   <entry key="Producto.Campania.Estado:db_column_type">BIT</entry>
+   <entry key="Producto.Campania.FechaInicio:db_column_type">DATETIME</entry>
+   <entry key="Producto.Campania.FechaFin:db_column_not_null">true</entry>
+</properties>

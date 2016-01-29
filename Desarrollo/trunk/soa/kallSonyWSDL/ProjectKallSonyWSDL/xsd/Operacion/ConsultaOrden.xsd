@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:co="http://www.kallsony.com/operacion/consultaorden"
+        xmlns:or="http://www.kallsony.com/entidad/orden"
+        xmlns:us="http://www.kallsony.com/entidad/usuario"
+        targetNamespace="http://www.kallsony.com/operacion/consultaorden"
+        elementFormDefault="qualified">
+  <import schemaLocation="../Negocio/Orden.xsd"
+          namespace="http://www.kallsony.com/entidad/orden"/>
+  <import schemaLocation="../Negocio/Usuario.xsd"
+          namespace="http://www.kallsony.com/entidad/usuario"/>
+  <complexType name="ConsultaOrdenEntrada">
+    <sequence>
+      <element name="idOrden" type="int" minOccurs="0"/>
+      <element name="cliente" type="us:Usuario" minOccurs="0"/>
+    </sequence>
+  </complexType>
+  <complexType name="ConsultaOrdenSalida">
+    <sequence>
+      <element name="listaOrdenes" type="co:Ordenes"/>
+    </sequence>
+  </complexType>
+  <complexType name="Ordenes">
+    <sequence>
+      <element name="orden" minOccurs="0" maxOccurs="unbounded"
+               type="or:Orden"/>
+    </sequence>
+  </complexType>
+  <element name="consultaOrdenEntrada" type="co:ConsultaOrdenEntrada"/>
+  <element name="consultaOrdenSalida" type="co:ConsultaOrdenSalida"/>
+</schema>

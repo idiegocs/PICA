@@ -1,0 +1,260 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+PruebaServicioDHL
+</name>
+</assembly>
+<members>
+<member name="F:PruebaServicioDHL.Login.RegisterHyperLink">
+	<summary>
+Control RegisterHyperLink.
+</summary>
+	<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member><member name="F:PruebaServicioDHL.Login.OpenAuthLogin">
+	<summary>
+Control OpenAuthLogin.
+</summary>
+	<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member><member name="F:PruebaServicioDHL._Default.ddlDepartamento">
+	<summary>
+Control ddlDepartamento.
+</summary>
+	<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member><member name="F:PruebaServicioDHL._Default.ddlMunicipio">
+	<summary>
+Control ddlMunicipio.
+</summary>
+	<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member><member name="P:PruebaServicioDHL.ConnectDB.GetOleConnection">
+	<summary>
+ Juan Carlos Villero
+ 2014-01-24
+ Propiedad usada para abrir conexiones a la BD desde la capa DAL
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="P:PruebaServicioDHL.ConnectDB.GetOleTransaction">
+	<summary>
+ Propiedad usada para abrir transacciones a la BD desde la capa DAL
+ </summary>
+	<value></value>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PruebaServicioDHL.ConnectDB.#ctor">
+	<summary>
+ Constructor de la clase
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PruebaServicioDHL.ConnectDB.#ctor(System.String)">
+	<summary>
+ Constructor de la clase
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PruebaServicioDHL.ConnectDB.SetQuery(System.String)">
+	<summary>
+ Sentencia que se ejecutará
+ </summary>
+	<param name="s1">Sentencia SQL</param>
+	<remarks></remarks>
+</member><member name="M:PruebaServicioDHL.ConnectDB.ExecuteNonQuery">
+	<summary>
+ Ejecuta una instrucción SQL (INSERT/UPDATE/DELETE) y devuelve el número de filas afectadas ([String])
+ </summary>
+	<returns>[String]</returns>
+	<remarks></remarks>
+</member><member name="M:PruebaServicioDHL.ConnectDB.ExecuteQuery">
+	<summary>
+ Ejecuta una instrucción SQL (SELECT) y devuelve un conjunto de datos ([DataSet])
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PruebaServicioDHL.ConnectDB.ExecuteScalar">
+	<summary>
+  Ejecuta una o mas instrucciones SQL  y devuelve un unico valor (la primera columna de la primera fila de la última sentencia, las demas filas y columnas no se tienen en cuenta)
+ </summary>
+	<returns></returns>
+	<remarks></remarks>
+</member><member name="M:PruebaServicioDHL.ConnectDB.ExecuteStoredProcedure(System.Data.DataSet@,System.String,System.String)">
+	<summary>
+ Recibe tabla y envía a storedProcedure, devuelve ([String])
+ </summary>
+	<returns>[String]</returns>
+	<remarks></remarks>
+</member><member name="F:PruebaServicioDHL.Manage.successMessage">
+	<summary>
+Control successMessage.
+</summary>
+	<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member><member name="F:PruebaServicioDHL.Manage.setPassword">
+	<summary>
+Control setPassword.
+</summary>
+	<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member><member name="F:PruebaServicioDHL.Manage.password">
+	<summary>
+Control password.
+</summary>
+	<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member><member name="F:PruebaServicioDHL.Manage.newPasswordMessage">
+	<summary>
+Control newPasswordMessage.
+</summary>
+	<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member><member name="F:PruebaServicioDHL.Manage.confirmPassword">
+	<summary>
+Control confirmPassword.
+</summary>
+	<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member><member name="F:PruebaServicioDHL.Manage.changePassword">
+	<summary>
+Control changePassword.
+</summary>
+	<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member><member name="F:PruebaServicioDHL.Manage.externalLoginsList">
+	<summary>
+Control externalLoginsList.
+</summary>
+	<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member><member name="F:PruebaServicioDHL.OpenAuthProviders.providersList">
+	<summary>
+Control providersList.
+</summary>
+	<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member><member name="P:PruebaServicioDHL.My.MyWebExtension.Computer">
+	<summary>
+ Devuelve información sobre el equipo host.
+ </summary>
+</member><member name="P:PruebaServicioDHL.My.MyWebExtension.User">
+	<summary>
+ Devuelve información del usuario web actual.
+ </summary>
+</member><member name="P:PruebaServicioDHL.My.MyWebExtension.Request">
+	<summary>
+ Devuelve un objeto Request.
+ </summary>
+</member><member name="P:PruebaServicioDHL.My.MyWebExtension.Response">
+	<summary>
+ Devuelve un objeto Response.
+ </summary>
+</member><member name="P:PruebaServicioDHL.My.MyWebExtension.Log">
+	<summary>
+ Devuelve el objeto de registro Asp.
+ </summary>
+</member><member name="T:PruebaServicioDHL.My.MyWebExtension">
+	<summary>
+ Módulo usado para definir las propiedades que están disponibles en el espacio de nombres My para proyectos web.
+ </summary>
+	<remarks></remarks>
+</member><member name="F:PruebaServicioDHL.Register.RegisterUser">
+	<summary>
+Control RegisterUser.
+</summary>
+	<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member><member name="F:PruebaServicioDHL.Register.RegisterUserWizardStep">
+	<summary>
+Control RegisterUserWizardStep.
+</summary>
+	<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member><member name="F:PruebaServicioDHL.RegisterExternalLogin.providerMessage">
+	<summary>
+Control providerMessage.
+</summary>
+	<remarks>
+Auto-generated field.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member><member name="F:PruebaServicioDHL.RegisterExternalLogin.userNameForm">
+	<summary>
+Control userNameForm.
+</summary>
+	<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member><member name="F:PruebaServicioDHL.RegisterExternalLogin.userName">
+	<summary>
+Control userName.
+</summary>
+	<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member><member name="F:PruebaServicioDHL.RegisterExternalLogin.userNameMessage">
+	<summary>
+Control userNameMessage.
+</summary>
+	<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member><member name="F:PruebaServicioDHL.SiteMaster.HeadContent">
+	<summary>
+Control HeadContent.
+</summary>
+	<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member><member name="F:PruebaServicioDHL.SiteMaster.FeaturedContent">
+	<summary>
+Control FeaturedContent.
+</summary>
+	<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member><member name="F:PruebaServicioDHL.SiteMaster.MainContent">
+	<summary>
+Control MainContent.
+</summary>
+	<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+</members>
+</doc>

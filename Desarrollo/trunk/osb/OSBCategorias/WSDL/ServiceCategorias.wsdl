@@ -1,0 +1,47 @@
+<definitions targetNamespace="http://www.kallsony.com/final/operacion/consultacategorias" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:wkct="http://www.kallsony.com/operacion/consultarcategorias" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.kallsony.com/final/operacion/consultacategorias" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wkctf="http://www.kallsony.com/util/falta">
+    <documentation>
+        <abstractWSDL>http://DiegoPC:8001/soa-infra/services/default/ProjectCategorias!1.0/Categorias.wsdl</abstractWSDL>
+    </documentation>
+    <types>
+        <xsd:schema targetNamespace="http://www.kallsony.com/final/operacion/consultacategorias" elementFormDefault="qualified">
+            <xsd:import schemaLocation="../XSD/XMLSchema_-1361984100.xsd" namespace="http://www.kallsony.com/operacion/consultarcategorias"/>
+            <xsd:import schemaLocation="../XSD/XMLSchema_1355224743.xsd" namespace="http://www.kallsony.com/util/falta"/>
+        </xsd:schema>
+    </types>
+    <message name="Categorias_ConsultaEntrada">
+        <part name="partEntrada" element="wkct:consultaCategoriaEntrada"/>
+    </message>
+    <message name="Categoria_ConsultaSalida">
+        <part name="partSalida" element="wkct:consultaCategoriaSalida"/>
+    </message>
+    <message name="Categorias_Falta">
+        <part name="partFalta" element="wkctf:falta"/>
+    </message>
+    <portType name="portCategorias">
+        <operation name="consultaCategorias">
+            <input message="tns:Categorias_ConsultaEntrada"/>
+            <output message="tns:Categoria_ConsultaSalida"/>
+            <fault name="FaltaCategorias" message="tns:Categorias_Falta"/>
+        </operation>
+    </portType>
+    <binding name="portCategoriasSOAP11Binding" type="tns:portCategorias">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="consultaCategorias">
+            <soap:operation style="document" soapAction="http://www.kallsony.com/final/operacion/consultacategorias/consultaCategorias"/>
+            <input>
+                <soap:body use="literal" parts="partEntrada"/>
+            </input>
+            <output>
+                <soap:body use="literal" parts="partSalida"/>
+            </output>
+            <fault name="FaltaCategorias">
+                <soap:fault name="FaltaCategorias" use="literal"/>
+            </fault>
+        </operation>
+    </binding>
+    <service name="ServiceCategorias">
+        <port name="portCategorias_pt" binding="tns:portCategoriasSOAP11Binding">
+            <soap:address location="http://DiegoPC:8001/soa-infra/services/default/ProjectCategorias/ServiceCategorias"/>
+        </port>
+    </service>
+</definitions>

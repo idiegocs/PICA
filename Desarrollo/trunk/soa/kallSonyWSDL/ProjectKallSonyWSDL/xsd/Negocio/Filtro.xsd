@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+            xmlns:ft="http://www.kallsony.com/util/filtro"
+            targetNamespace="http://www.kallsony.com/util/filtro"
+            >
+  <complexType name="Filtro">
+    <sequence>
+      <element name="tipoFiltro" type="string"/>
+      <element name="valorFiltro" type="string"/>
+      <element name="pagina" type="int"/>
+    </sequence>
+  </complexType>
+  <complexType name="RespuestaFiltro">
+    <sequence minOccurs="0">
+      <element name="totalElementos" type="long" minOccurs="0"/>
+      <element name="pagina" type="int" minOccurs="0"/>
+    </sequence>
+  </complexType>
+  <complexType name="FiltroCampania">
+    <sequence>
+      <element name="estado" type="boolean"/>
+    </sequence>
+  </complexType>
+</schema>

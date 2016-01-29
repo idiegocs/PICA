@@ -1,0 +1,23 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/getTarjetas" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/getTarjetas" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="TarjetasCollection" type="TarjetasCollection"/>
+   <xs:complexType name="TarjetasCollection">
+      <xs:sequence>
+         <xs:element name="Tarjetas" type="Tarjetas" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="Tarjetas">
+      <xs:sequence>
+         <xs:element name="idtarjeta" type="xs:long"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="getTarjetasSelect_num_tarjeta_mes_exp_anio_exp_cod_verInputParameters" type="getTarjetasSelect_num_tarjeta_mes_exp_anio_exp_cod_ver"/>
+   <xs:complexType name="getTarjetasSelect_num_tarjeta_mes_exp_anio_exp_cod_ver">
+      <xs:sequence>
+         <xs:element name="num_tarjeta" type="xs:string" minOccurs="1" maxOccurs="1"/>
+         <xs:element name="mes_exp" type="xs:string" minOccurs="1" maxOccurs="1"/>
+         <xs:element name="anio_exp" type="xs:string" minOccurs="1" maxOccurs="1"/>
+         <xs:element name="cod_ver" type="xs:string" minOccurs="1" maxOccurs="1"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

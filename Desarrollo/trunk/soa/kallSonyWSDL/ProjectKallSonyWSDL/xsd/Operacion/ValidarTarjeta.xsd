@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:vt="http://www.kallsony.com/operacion/validartarjeta"
+        xmlns:tj="http://www.kallsony.com/entidad/tarjeta"
+        targetNamespace="http://www.kallsony.com/operacion/validartarjeta"
+        elementFormDefault="qualified">
+  <import schemaLocation="../Negocio/Tarjeta.xsd"
+          namespace="http://www.kallsony.com/entidad/tarjeta"/>
+  <complexType name="ValidarTarjetaEntrada">
+    <sequence>
+      <element name="tarjeta" type="tj:Tarjeta"/>
+    </sequence>
+  </complexType>
+  <complexType name="ValidarTarjetaSalida">
+    <sequence>
+      <element name="estado" type="boolean"/>
+    </sequence>
+  </complexType>
+  <element name="validarTarjetaEntrada" type="vt:ValidarTarjetaEntrada"/>
+  <element name="validarTarjetaSalida" type="vt:ValidarTarjetaSalida"/>
+</schema>

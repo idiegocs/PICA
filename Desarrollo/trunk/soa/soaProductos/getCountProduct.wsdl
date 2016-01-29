@@ -1,0 +1,25 @@
+<?binding.jca getCountProduct_db.jca?>
+<wsdl:definitions name="getCountProduct" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/kallSonysApp/productos/getCountProduct" xmlns:db="http://xmlns.oracle.com/pcbpel/adapter/db/getCountProduct" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/kallSonysApp/productos/getCountProduct" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/">
+    <plt:partnerLinkType name="getCountProduct_plt">
+        <plt:role name="getCountProduct_role">
+            <plt:portType name="tns:getCountProduct_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/getCountProduct" schemaLocation="xsd/getCountProduct.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="getCountProductInput_msg">
+        <wsdl:part name="getCountProductInput_msg" element="db:getCountProductInput"/>
+    </wsdl:message>
+    <wsdl:message name="getCountProductOutput_msg">
+        <wsdl:part name="getCountProductOutput" element="db:getCountProductOutput"/>
+    </wsdl:message>
+    <wsdl:portType name="getCountProduct_ptt">
+        <wsdl:operation name="getCountProduct">
+            <wsdl:input message="tns:getCountProductInput_msg"/>
+            <wsdl:output message="tns:getCountProductOutput_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

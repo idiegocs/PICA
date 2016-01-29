@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/getPreorden" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/getPreorden" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="getPreordenInput" type="getPreordenInput"/>
+   <xs:complexType name="getPreordenInput">
+      <xs:sequence/>
+   </xs:complexType>
+   <xs:element name="getPreordenOutputCollection" type="getPreordenOutputCollection"/>
+   <xs:complexType name="getPreordenOutputCollection">
+      <xs:sequence>
+         <xs:element name="getPreordenOutput" type="getPreordenOutput" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="getPreordenOutput">
+      <xs:sequence>
+         <xs:element name="PREORDEN" type="xs:decimal" nillable="true"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

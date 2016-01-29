@@ -1,0 +1,12 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<properties>
+   <entry key="AG}-449a2e3e:14cdca275f9:-7a57">RulePlatino</entry>
+   <entry key="DG}-449a2e3e:14cdca275f9:-7a57">Si el cliente es “Platino”, todas sus órdenes serán aprobadas</entry>
+   <entry key="AG}-449a2e3e:14cdca275f9:-7a54">RuleDoradoAp</entry>
+   <entry key="AG}-449a2e3e:14cdca275f9:-7a53">RuleDoradoPre</entry>
+   <entry key="AG}-449a2e3e:14cdca275f9:-7a52">RulePlateado</entry>
+   <entry key="AG}-449a2e3e:14cdca275f9:-7a61">RulesetOrden</entry>
+   <entry key="DG}-449a2e3e:14cdca275f9:-7a53">Si el cliente es “Dorado” y el monto de la orden es mayor al monto establecido por la Gerencia Comercial, debe pasar por el analista de ventas para ser aprobada</entry>
+   <entry key="DG}-449a2e3e:14cdca275f9:-7a54">Si el cliente es “Dorado” y el monto de la orden es menor al monto establecido por la Gerencia Comercial, la orden será aprobada</entry>
+   <entry key="DG}-449a2e3e:14cdca275f9:-7a52">Si el cliente es “Plateado”, sus órdenes deben pasar por el analista de ventas para ser aprobadas</entry>
+</properties>

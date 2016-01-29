@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="82e9a520-fe92-4d3e-9127-291db403d938" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://25.5.55.200:7002/OSBKallsonys/ProxyService/ProxyCompra?WSDL" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ProxyCompra1.wsdl" MetadataType="Wsdl" ID="40b569e2-622e-4517-91de-196a8cf5188a" SourceId="1" SourceUrl="http://25.5.55.200:7002/OSBKallsonys/ProxyService/ProxyCompra?WSDL" />
+    <MetadataFile FileName="ProxyCompra.xsd" MetadataType="Schema" ID="8c26b6f7-a843-4c8b-b126-b37d1a13254d" SourceId="1" SourceUrl="http://25.5.55.200:7002/OSBKallsonys/ProxyService/ProxyCompra?SCHEMA%2FOSBCompras%2FXSD%2FXMLSchema_-117231711" />
+    <MetadataFile FileName="ProxyCompra1.xsd" MetadataType="Schema" ID="a144a766-c909-4ad4-ae63-18201939cef3" SourceId="1" SourceUrl="http://25.5.55.200:7002/OSBKallsonys/ProxyService/ProxyCompra?SCHEMA%2FOSBCompras%2FXSD%2FXMLSchema_-1317862737" />
+    <MetadataFile FileName="ProxyCompra2.xsd" MetadataType="Schema" ID="336130bf-3ed8-4a21-adf9-b5a3e3970e72" SourceId="1" SourceUrl="http://25.5.55.200:7002/OSBKallsonys/ProxyService/ProxyCompra?SCHEMA%2FOSBCompras%2FXSD%2FXMLSchema_1135929342" />
+    <MetadataFile FileName="ProxyCompra3.xsd" MetadataType="Schema" ID="1928315d-4969-4c3a-ae5b-1d436c54f142" SourceId="1" SourceUrl="http://25.5.55.200:7002/OSBKallsonys/ProxyService/ProxyCompra?SCHEMA%2FOSBCompras%2FXSD%2FXMLSchema_1830050591" />
+    <MetadataFile FileName="ProxyCompra4.xsd" MetadataType="Schema" ID="ef9c9e10-6f06-421f-90c0-3d962134921f" SourceId="1" SourceUrl="http://25.5.55.200:7002/OSBKallsonys/ProxyService/ProxyCompra?SCHEMA%2FOSBCompras%2FXSD%2FXMLSchema_53277509" />
+    <MetadataFile FileName="ProxyCompra5.xsd" MetadataType="Schema" ID="51835438-baae-48d4-af9e-7ca9c06b492a" SourceId="1" SourceUrl="http://25.5.55.200:7002/OSBKallsonys/ProxyService/ProxyCompra?SCHEMA%2FOSBCompras%2FXSD%2FXMLSchema_949873123" />
+    <MetadataFile FileName="ProxyCompra6.xsd" MetadataType="Schema" ID="d2024f36-0f55-4eb5-9c41-b6a38fb9ff2e" SourceId="1" SourceUrl="http://25.5.55.200:7002/OSBKallsonys/ProxyService/ProxyCompra?SCHEMA%2FOSBCompras%2FXSD%2FXMLSchema_1688443068" />
+    <MetadataFile FileName="ProxyCompra7.xsd" MetadataType="Schema" ID="e2ee26d2-5845-457a-b8e8-2473ecc360b2" SourceId="1" SourceUrl="http://25.5.55.200:7002/OSBKallsonys/ProxyService/ProxyCompra?SCHEMA%2FOSBCompras%2FXSD%2FXMLSchema_-1420568389" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

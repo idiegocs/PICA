@@ -1,0 +1,28 @@
+<?binding.jca setCompaniaEnvio_db.jca?>
+<wsdl:definitions name="setCompaniaEnvio" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/Appkallsonys/ProjectEnvio/setCompaniaEnvio" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/Appkallsonys/ProjectEnvio/setCompaniaEnvio" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/setCompaniaEnvio">
+    <plt:partnerLinkType name="setCompaniaEnvio_plt">
+        <plt:role name="setCompaniaEnvio_role">
+            <plt:portType name="tns:setCompaniaEnvio_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/setCompaniaEnvio" schemaLocation="xsd/setCompaniaEnvio_table.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="EnvioCollection_msg">
+        <wsdl:part name="EnvioCollection" element="top:EnvioCollection"/>
+    </wsdl:message>
+    <wsdl:message name="setCompaniaEnvioSelect_inputParameters">
+        <wsdl:part name="setCompaniaEnvioSelect_inputParameters" element="top:setCompaniaEnvioSelect_idOrdenInputParameters"/>
+    </wsdl:message>
+    <wsdl:portType name="setCompaniaEnvio_ptt">
+        <wsdl:operation name="update">
+            <wsdl:input message="tns:EnvioCollection_msg"/>
+        </wsdl:operation>
+        <wsdl:operation name="setCompaniaEnvioSelect">
+            <wsdl:input message="tns:setCompaniaEnvioSelect_inputParameters"/>
+            <wsdl:output message="tns:EnvioCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

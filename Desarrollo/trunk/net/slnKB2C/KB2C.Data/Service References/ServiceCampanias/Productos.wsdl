@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WL5G3N0:definitions xmlns:WL5G3N2="http://www.kallsony.com/util/falta" xmlns:WL5G3N1="http://www.kallsony.com/operacion/consultacampania" xmlns:WL5G3N4="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:WL5G3N3="http://www.kallsony.com/final/operacion/consultacampanias" name="Productos" targetNamespace="http://www.kallsony.com/final/operacion/consultacampanias" xmlns:WL5G3N0="http://schemas.xmlsoap.org/wsdl/">
+  <WL5G3N0:documentation>
+        http://DiegoPC:8001/soa-infra/services/default/ProjectCampanias!1.0/Campanias.wsdl
+    </WL5G3N0:documentation>
+  <WL5G3N0:types>
+    <xsd:schema xmlns:ns2="http://www.kallsony.com/entidad/campania" xmlns:wkcam="http://www.kallsony.com/operacion/consultacampania" xmlns:tns="http://www.kallsony.com/final/operacion/consultacampanias" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wkcaf="http://www.kallsony.com/util/falta" xmlns:ns1="http://www.kallsony.com/entidad/producto" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" elementFormDefault="qualified" targetNamespace="http://www.kallsony.com/final/operacion/consultacampanias" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:import schemaLocation="http://192.168.2.6:7002/OSBKallsonys/ProxyService/ProxyCampanias?SCHEMA%2FOSBCampanias%2FXSD%2FXMLSchema_1587993482" namespace="http://www.kallsony.com/operacion/consultacampania" />
+      <xsd:import schemaLocation="http://192.168.2.6:7002/OSBKallsonys/ProxyService/ProxyCampanias?SCHEMA%2FOSBCampanias%2FXSD%2FXMLSchema_-1189704069" namespace="http://www.kallsony.com/util/falta" />
+    </xsd:schema>
+    <xsd:schema xmlns:ns2="http://www.kallsony.com/entidad/campania" xmlns:wkcam="http://www.kallsony.com/operacion/consultacampania" xmlns:tns="http://www.kallsony.com/final/operacion/consultacampanias" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wkcaf="http://www.kallsony.com/util/falta" xmlns:ns1="http://www.kallsony.com/entidad/producto" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:import schemaLocation="http://192.168.2.6:7002/OSBKallsonys/ProxyService/ProxyCampanias?SCHEMA%2FOSBCampanias%2FXSD%2FXMLSchema_-1807607771" namespace="http://www.kallsony.com/entidad/producto" />
+    </xsd:schema>
+    <xsd:schema xmlns:ns2="http://www.kallsony.com/entidad/campania" xmlns:wkcam="http://www.kallsony.com/operacion/consultacampania" xmlns:tns="http://www.kallsony.com/final/operacion/consultacampanias" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wkcaf="http://www.kallsony.com/util/falta" xmlns:ns1="http://www.kallsony.com/entidad/producto" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:import schemaLocation="http://192.168.2.6:7002/OSBKallsonys/ProxyService/ProxyCampanias?SCHEMA%2FOSBCampanias%2FXSD%2FXMLSchema_175690175" namespace="http://www.kallsony.com/entidad/campania" />
+    </xsd:schema>
+  </WL5G3N0:types>
+  <WL5G3N0:message name="Campanias_ConsultaCampaniasEntrada">
+    <WL5G3N0:part name="partEntrada" element="WL5G3N1:consultaCampaniaEntrada" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="Campanias_ConsultaCaampaniasSalida">
+    <WL5G3N0:part name="partSalida" element="WL5G3N1:consultaCampaniaSalida" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="Campanias_FaltaCampania">
+    <WL5G3N0:part name="part" element="WL5G3N2:falta" />
+  </WL5G3N0:message>
+  <WL5G3N0:portType name="CampaniasPort">
+    <WL5G3N0:operation name="ConsultarCampanias">
+      <WL5G3N0:input message="WL5G3N3:Campanias_ConsultaCampaniasEntrada" />
+      <WL5G3N0:output message="WL5G3N3:Campanias_ConsultaCaampaniasSalida" />
+      <WL5G3N0:fault name="FaltaCampanias" message="WL5G3N3:Campanias_FaltaCampania" />
+    </WL5G3N0:operation>
+  </WL5G3N0:portType>
+  <WL5G3N0:binding name="CampaniasPortSOAP11Binding" type="WL5G3N3:CampaniasPort">
+    <WL5G3N4:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <WL5G3N0:operation name="ConsultarCampanias">
+      <WL5G3N4:operation soapAction="http://www.kallsony.com/final/operacion/consultacampanias/ConsultarCampanias" style="document" />
+      <WL5G3N0:input>
+        <WL5G3N4:body use="literal" parts="partEntrada" />
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N4:body use="literal" parts="partSalida" />
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="FaltaCampanias">
+        <WL5G3N4:fault use="literal" name="FaltaCampanias" namespace="" />
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+  </WL5G3N0:binding>
+  <WL5G3N0:service name="ServiceCampanias">
+    <WL5G3N0:port name="CampaniasPort_pt" binding="WL5G3N3:CampaniasPortSOAP11Binding">
+      <WL5G3N4:address location="http://DiegoPC:7002/OSBKallsonys/ProxyService/ProxyCampanias" />
+    </WL5G3N0:port>
+  </WL5G3N0:service>
+</WL5G3N0:definitions>

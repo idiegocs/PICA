@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-persistence xmlns="http://www.eclipse.org/eclipselink/xsds/persistence" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:eclipselink="http://www.eclipse.org/eclipselink/xsds/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="Eclipse Persistence Services - 2.1.3.v20110304-r9073">
+   <name>getUsuario-OR</name>
+   <class-mapping-descriptors>
+      <class-mapping-descriptor xsi:type="object-relational-class-mapping-descriptor">
+         <class>getUsuario.Usuario</class>
+         <alias>USUARIO</alias>
+         <primary-key>
+            <field table="USUARIO" name="IDUSUARIO" xsi:type="column"/>
+         </primary-key>
+         <events/>
+         <querying>
+            <queries>
+               <query name="getUsuarioSelect" xsi:type="read-all-query">
+                  <arguments>
+                     <argument name="paramUsername">
+                        <type>java.lang.String</type>
+                     </argument>
+                  </arguments>
+                  <call xsi:type="sql-call">
+                     <sql>SELECT IDUSUARIO, NOMBRES, APELLIDOS, EMAIL, PASSWORD, TIPODOCUMENTO, NUMERODOCUMENTO, IDDIRECCION, USERNAME, TELEFONO, COMPRAENCOLOMBIA, IDCATEGORIA FROM USUARIO WHERE (USERNAME = #paramUsername)</sql>
+                  </call>
+                  <reference-class>getUsuario.Usuario</reference-class>
+                  <container xsi:type="list-container-policy">
+                     <collection-type>java.util.Vector</collection-type>
+                  </container>
+               </query>
+            </queries>
+         </querying>
+         <attribute-mappings>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>idusuario</attribute-name>
+               <field table="USUARIO" name="IDUSUARIO" xsi:type="column"/>
+               <attribute-classification>java.lang.Long</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>nombres</attribute-name>
+               <field table="USUARIO" name="NOMBRES" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>apellidos</attribute-name>
+               <field table="USUARIO" name="APELLIDOS" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>email</attribute-name>
+               <field table="USUARIO" name="EMAIL" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>password</attribute-name>
+               <field table="USUARIO" name="PASSWORD" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>tipodocumento</attribute-name>
+               <field table="USUARIO" name="TIPODOCUMENTO" xsi:type="column"/>
+               <attribute-classification>java.math.BigDecimal</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>numerodocumento</attribute-name>
+               <field table="USUARIO" name="NUMERODOCUMENTO" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>iddireccion</attribute-name>
+               <field table="USUARIO" name="IDDIRECCION" xsi:type="column"/>
+               <attribute-classification>java.lang.Long</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>username</attribute-name>
+               <field table="USUARIO" name="USERNAME" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>telefono</attribute-name>
+               <field table="USUARIO" name="TELEFONO" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>compraencolombia</attribute-name>
+               <field table="USUARIO" name="COMPRAENCOLOMBIA" xsi:type="column"/>
+               <attribute-classification>java.math.BigDecimal</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>idcategoria</attribute-name>
+               <field table="USUARIO" name="IDCATEGORIA" xsi:type="column"/>
+               <attribute-classification>java.math.BigDecimal</attribute-classification>
+            </attribute-mapping>
+         </attribute-mappings>
+         <descriptor-type>independent</descriptor-type>
+         <caching>
+            <cache-type>weak-reference</cache-type>
+            <cache-size>-1</cache-size>
+            <always-refresh>true</always-refresh>
+         </caching>
+         <remote-caching>
+            <cache-type>weak-reference</cache-type>
+            <cache-size>-1</cache-size>
+         </remote-caching>
+         <instantiation/>
+         <copying xsi:type="instantiation-copy-policy"/>
+         <tables>
+            <table name="USUARIO"/>
+         </tables>
+         <structure>structureName</structure>
+      </class-mapping-descriptor>
+   </class-mapping-descriptors>
+   <login xsi:type="database-login">
+      <platform-class>org.eclipse.persistence.platform.database.oracle.Oracle9Platform</platform-class>
+      <user-name></user-name>
+      <connection-url></connection-url>
+   </login>
+</object-persistence>

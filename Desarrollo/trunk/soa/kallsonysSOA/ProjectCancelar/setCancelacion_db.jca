@@ -1,0 +1,15 @@
+<adapter-config name="setCancelacion" adapter="Database Adapter" wsdlLocation="setCancelacion.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/DB/omsordenDatabase" UIConnectionName="OMSOrden" adapterRef=""/>
+  <endpoint-interaction portType="setCancelacion_ptt" operation="insert">
+    <interaction-spec className="oracle.tip.adapter.db.DBWriteInteractionSpec">
+      <property name="DescriptorName" value="setCancelacion.Ordencancelada"/>
+      <property name="DmlType" value="insert"/>
+      <property name="MappingsMetaDataURL" value="setCancelacion-or-mappings.xml"/>
+      <property name="DetectOmissions" value="true"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+      <property name="OutputCompletedXml" value="true"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

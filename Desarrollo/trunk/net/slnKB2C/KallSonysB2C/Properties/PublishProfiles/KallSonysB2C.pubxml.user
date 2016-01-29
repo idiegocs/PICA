@@ -1,0 +1,820 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>D:\Inetpub\KallSonysWebSite</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="About.aspx">
+      <publishTime>03/25/2015 16:52:41</publishTime>
+    </File>
+    <File Include="Account/AddPhoneNumber.aspx">
+      <publishTime>03/06/2015 16:18:44</publishTime>
+    </File>
+    <File Include="Account/Confirm.aspx">
+      <publishTime>03/06/2015 16:18:44</publishTime>
+    </File>
+    <File Include="Account/Forgot.aspx">
+      <publishTime>03/24/2015 22:53:45</publishTime>
+    </File>
+    <File Include="Account/Lockout.aspx">
+      <publishTime>03/06/2015 16:18:44</publishTime>
+    </File>
+    <File Include="Account/Login.aspx">
+      <publishTime>03/25/2015 17:47:27</publishTime>
+    </File>
+    <File Include="Account/Manage.aspx">
+      <publishTime>03/06/2015 16:18:44</publishTime>
+    </File>
+    <File Include="Account/ManageLogins.aspx">
+      <publishTime>03/06/2015 16:18:44</publishTime>
+    </File>
+    <File Include="Account/ManagePassword.aspx">
+      <publishTime>03/06/2015 16:18:44</publishTime>
+    </File>
+    <File Include="Account/OpenAuthProviders.ascx">
+      <publishTime>03/06/2015 16:18:44</publishTime>
+    </File>
+    <File Include="Account/Register.aspx">
+      <publishTime>04/26/2015 20:12:31</publishTime>
+    </File>
+    <File Include="Account/RegisterExternalLogin.aspx">
+      <publishTime>03/06/2015 16:18:44</publishTime>
+    </File>
+    <File Include="Account/ResetPassword.aspx">
+      <publishTime>03/06/2015 16:18:44</publishTime>
+    </File>
+    <File Include="Account/ResetPasswordConfirmation.aspx">
+      <publishTime>03/06/2015 16:18:44</publishTime>
+    </File>
+    <File Include="Account/TwoFactorAuthenticationSignIn.aspx">
+      <publishTime>03/06/2015 16:18:44</publishTime>
+    </File>
+    <File Include="Account/VerifyPhoneNumber.aspx">
+      <publishTime>03/06/2015 16:18:44</publishTime>
+    </File>
+    <File Include="Account/Web.config">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="AddToCart.aspx">
+      <publishTime>03/06/2015 16:18:44</publishTime>
+    </File>
+    <File Include="Admin/AdminPage.aspx">
+      <publishTime>03/12/2015 01:36:25</publishTime>
+    </File>
+    <File Include="Admin/Web.config">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="App_Readme/Elmah.txt">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="bin/Antlr3.Runtime.dll">
+      <publishTime>09/09/2014 22:08:10</publishTime>
+    </File>
+    <File Include="bin/AspNet.ScriptManager.bootstrap.dll">
+      <publishTime>09/09/2014 22:08:10</publishTime>
+    </File>
+    <File Include="bin/AspNet.ScriptManager.jQuery.dll">
+      <publishTime>09/09/2014 22:08:10</publishTime>
+    </File>
+    <File Include="bin/DependencyInjector.dll">
+      <publishTime>06/03/2015 18:27:18</publishTime>
+    </File>
+    <File Include="bin/Elmah.dll">
+      <publishTime>09/09/2014 22:08:10</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>09/09/2014 22:08:10</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.SqlServer.dll">
+      <publishTime>09/09/2014 22:08:10</publishTime>
+    </File>
+    <File Include="bin/KallSonysB2C.dll">
+      <publishTime>06/03/2015 18:27:19</publishTime>
+    </File>
+    <File Include="bin/KB2C.Business.dll">
+      <publishTime>06/03/2015 18:27:18</publishTime>
+    </File>
+    <File Include="bin/KB2C.Data.dll">
+      <publishTime>06/03/2015 18:27:18</publishTime>
+    </File>
+    <File Include="bin/KB2C.DTO.dll">
+      <publishTime>06/03/2015 15:35:00</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNet.FriendlyUrls.dll">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNet.Identity.Core.dll">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNet.Identity.EntityFramework.dll">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNet.Identity.Owin.dll">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="bin/Microsoft.AspNet.Web.Optimization.WebForms.dll">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.dll">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Host.SystemWeb.dll">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Security.Cookies.dll">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Security.dll">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Security.Facebook.dll">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Security.Google.dll">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Security.MicrosoftAccount.dll">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Security.OAuth.dll">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Owin.Security.Twitter.dll">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Practices.Unity.Configuration.dll">
+      <publishTime>04/13/2015 22:52:50</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Practices.Unity.dll">
+      <publishTime>04/13/2015 22:52:50</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Practices.Unity.RegistrationByConvention.dll">
+      <publishTime>04/13/2015 22:52:50</publishTime>
+    </File>
+    <File Include="bin/Microsoft.ScriptManager.MSAjax.dll">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="bin/Microsoft.ScriptManager.WebForms.dll">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="bin/Oracle.ManagedDataAccess.dll">
+      <publishTime>04/25/2015 18:59:15</publishTime>
+    </File>
+    <File Include="bin/Owin.dll">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="bin/System.Web.Optimization.dll">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="bin/System.Web.Providers.dll">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="bin/Unity.WebForms.dll">
+      <publishTime>04/13/2015 22:55:03</publishTime>
+    </File>
+    <File Include="bin/WebActivator.dll">
+      <publishTime>04/13/2015 22:55:03</publishTime>
+    </File>
+    <File Include="bin/WebGrease.dll">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="Bundle.config">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="Checkout/CheckoutCancel.aspx">
+      <publishTime>03/19/2015 19:38:33</publishTime>
+    </File>
+    <File Include="Checkout/CheckoutComplete.aspx">
+      <publishTime>03/20/2015 18:50:05</publishTime>
+    </File>
+    <File Include="Checkout/CheckoutError.aspx">
+      <publishTime>03/19/2015 19:38:33</publishTime>
+    </File>
+    <File Include="Checkout/CheckoutReview.aspx">
+      <publishTime>05/22/2015 19:56:14</publishTime>
+    </File>
+    <File Include="Checkout/CheckoutStart.aspx">
+      <publishTime>03/06/2015 16:18:44</publishTime>
+    </File>
+    <File Include="Checkout/Web.config">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="Contact.aspx">
+      <publishTime>04/25/2015 19:21:36</publishTime>
+    </File>
+    <File Include="Content/bootstrap-original.css">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="Content/bootstrap-original.min.css">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="Content/bootstrap.css">
+      <publishTime>03/25/2015 16:49:43</publishTime>
+    </File>
+    <File Include="Content/bootstrap.min.css">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="Content/Site.css">
+      <publishTime>03/25/2015 16:50:18</publishTime>
+    </File>
+    <File Include="DealsDetails.aspx">
+      <publishTime>05/23/2015 16:30:43</publishTime>
+    </File>
+    <File Include="DealsList.aspx">
+      <publishTime>05/23/2015 16:30:06</publishTime>
+    </File>
+    <File Include="Default.aspx">
+      <publishTime>05/02/2015 22:36:02</publishTime>
+    </File>
+    <File Include="ErrorPage.aspx">
+      <publishTime>03/06/2015 16:18:44</publishTime>
+    </File>
+    <File Include="favicon.ico">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.eot">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.svg">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.ttf">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="fonts/glyphicons-halflings-regular.woff">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>03/06/2015 16:18:44</publishTime>
+    </File>
+    <File Include="Images/Campanias/CAMPANIA_01.png">
+      <publishTime>03/11/2015 15:10:24</publishTime>
+    </File>
+    <File Include="Images/Campanias/CAMPANIA_02.png">
+      <publishTime>03/11/2015 15:10:28</publishTime>
+    </File>
+    <File Include="Images/Campanias/CAMPANIA_03.png">
+      <publishTime>03/11/2015 14:22:02</publishTime>
+    </File>
+    <File Include="Images/Campanias/CAMPANIA_04.png">
+      <publishTime>03/11/2015 14:22:31</publishTime>
+    </File>
+    <File Include="Images/Campanias/CAMPANIA_05.png">
+      <publishTime>03/11/2015 14:20:15</publishTime>
+    </File>
+    <File Include="Images/Campanias/CAMPANIA_06.png">
+      <publishTime>03/11/2015 14:25:55</publishTime>
+    </File>
+    <File Include="Images/Campanias/CAMPANIA_07.png">
+      <publishTime>03/11/2015 14:30:55</publishTime>
+    </File>
+    <File Include="Images/Campanias/CAMPANIA_08.png">
+      <publishTime>03/11/2015 15:05:32</publishTime>
+    </File>
+    <File Include="Images/Campanias/CAMPANIA_09.png">
+      <publishTime>03/11/2015 15:11:10</publishTime>
+    </File>
+    <File Include="Images/Campanias/CAMPANIA_10.png">
+      <publishTime>03/11/2015 15:14:23</publishTime>
+    </File>
+    <File Include="Images/KStore.png">
+      <publishTime>03/25/2015 16:51:41</publishTime>
+    </File>
+    <File Include="Images/logo.png">
+      <publishTime>03/06/2015 16:49:28</publishTime>
+    </File>
+    <File Include="Images/Productos/ESTUFA001.png">
+      <publishTime>03/01/2015 14:23:11</publishTime>
+    </File>
+    <File Include="Images/Productos/ESTUFA002.png">
+      <publishTime>03/01/2015 14:23:13</publishTime>
+    </File>
+    <File Include="Images/Productos/ESTUFA003.png">
+      <publishTime>03/01/2015 14:23:15</publishTime>
+    </File>
+    <File Include="Images/Productos/ESTUFA004.png">
+      <publishTime>03/01/2015 14:23:17</publishTime>
+    </File>
+    <File Include="Images/Productos/ESTUFA005.png">
+      <publishTime>03/01/2015 14:23:19</publishTime>
+    </File>
+    <File Include="Images/Productos/ESTUFA006.png">
+      <publishTime>03/01/2015 14:23:21</publishTime>
+    </File>
+    <File Include="Images/Productos/ESTUFA007.png">
+      <publishTime>03/01/2015 14:23:23</publishTime>
+    </File>
+    <File Include="Images/Productos/ESTUFA008.png">
+      <publishTime>03/01/2015 14:23:26</publishTime>
+    </File>
+    <File Include="Images/Productos/ESTUFA009.png">
+      <publishTime>03/01/2015 14:23:28</publishTime>
+    </File>
+    <File Include="Images/Productos/ESTUFA010.png">
+      <publishTime>03/01/2015 14:23:30</publishTime>
+    </File>
+    <File Include="Images/Productos/ESTUFA011.png">
+      <publishTime>03/01/2015 14:23:31</publishTime>
+    </File>
+    <File Include="Images/Productos/ESTUFA012.png">
+      <publishTime>03/01/2015 14:23:34</publishTime>
+    </File>
+    <File Include="Images/Productos/ESTUFA013.png">
+      <publishTime>03/01/2015 14:23:36</publishTime>
+    </File>
+    <File Include="Images/Productos/ESTUFA014.png">
+      <publishTime>03/01/2015 14:23:37</publishTime>
+    </File>
+    <File Include="Images/Productos/ESTUFA015.png">
+      <publishTime>03/01/2015 14:23:40</publishTime>
+    </File>
+    <File Include="Images/Productos/ESTUFA016.png">
+      <publishTime>03/01/2015 14:23:43</publishTime>
+    </File>
+    <File Include="Images/Productos/ESTUFA017.png">
+      <publishTime>03/01/2015 14:23:46</publishTime>
+    </File>
+    <File Include="Images/Productos/ESTUFA018.png">
+      <publishTime>03/01/2015 14:23:48</publishTime>
+    </File>
+    <File Include="Images/Productos/ESTUFA019.png">
+      <publishTime>03/01/2015 14:23:50</publishTime>
+    </File>
+    <File Include="Images/Productos/ESTUFA020.png">
+      <publishTime>03/01/2015 14:23:53</publishTime>
+    </File>
+    <File Include="Images/Productos/ESTUFA021.png">
+      <publishTime>03/01/2015 14:23:55</publishTime>
+    </File>
+    <File Include="Images/Productos/LAVADORA1.png">
+      <publishTime>03/01/2015 14:23:58</publishTime>
+    </File>
+    <File Include="Images/Productos/LAVADORA10.png">
+      <publishTime>03/01/2015 14:24:01</publishTime>
+    </File>
+    <File Include="Images/Productos/LAVADORA11.png">
+      <publishTime>03/01/2015 14:24:03</publishTime>
+    </File>
+    <File Include="Images/Productos/LAVADORA12.png">
+      <publishTime>03/01/2015 14:24:05</publishTime>
+    </File>
+    <File Include="Images/Productos/LAVADORA13.png">
+      <publishTime>03/01/2015 14:24:07</publishTime>
+    </File>
+    <File Include="Images/Productos/LAVADORA14.png">
+      <publishTime>03/01/2015 14:24:08</publishTime>
+    </File>
+    <File Include="Images/Productos/LAVADORA15.png">
+      <publishTime>03/01/2015 14:24:10</publishTime>
+    </File>
+    <File Include="Images/Productos/LAVADORA16.png">
+      <publishTime>03/01/2015 14:24:13</publishTime>
+    </File>
+    <File Include="Images/Productos/LAVADORA17.png">
+      <publishTime>03/01/2015 14:24:15</publishTime>
+    </File>
+    <File Include="Images/Productos/LAVADORA18.png">
+      <publishTime>03/01/2015 14:24:17</publishTime>
+    </File>
+    <File Include="Images/Productos/LAVADORA19.png">
+      <publishTime>03/01/2015 14:24:19</publishTime>
+    </File>
+    <File Include="Images/Productos/LAVADORA2.png">
+      <publishTime>03/01/2015 14:24:20</publishTime>
+    </File>
+    <File Include="Images/Productos/LAVADORA20.png">
+      <publishTime>03/01/2015 14:24:22</publishTime>
+    </File>
+    <File Include="Images/Productos/LAVADORA21.png">
+      <publishTime>03/01/2015 14:24:34</publishTime>
+    </File>
+    <File Include="Images/Productos/LAVADORA22.png">
+      <publishTime>03/01/2015 14:24:37</publishTime>
+    </File>
+    <File Include="Images/Productos/LAVADORA23.png">
+      <publishTime>03/01/2015 14:24:39</publishTime>
+    </File>
+    <File Include="Images/Productos/LAVADORA24.png">
+      <publishTime>03/01/2015 14:24:40</publishTime>
+    </File>
+    <File Include="Images/Productos/LAVADORA25.png">
+      <publishTime>03/01/2015 14:24:42</publishTime>
+    </File>
+    <File Include="Images/Productos/LAVADORA3.png">
+      <publishTime>03/01/2015 14:24:44</publishTime>
+    </File>
+    <File Include="Images/Productos/LAVADORA4.png">
+      <publishTime>03/01/2015 14:24:46</publishTime>
+    </File>
+    <File Include="Images/Productos/LAVADORA5.png">
+      <publishTime>03/01/2015 14:24:47</publishTime>
+    </File>
+    <File Include="Images/Productos/LAVADORA6.png">
+      <publishTime>03/01/2015 14:24:49</publishTime>
+    </File>
+    <File Include="Images/Productos/LAVADORA7.png">
+      <publishTime>03/01/2015 14:24:51</publishTime>
+    </File>
+    <File Include="Images/Productos/LAVADORA8.png">
+      <publishTime>03/01/2015 14:24:54</publishTime>
+    </File>
+    <File Include="Images/Productos/LAVADORA9.png">
+      <publishTime>03/01/2015 14:24:56</publishTime>
+    </File>
+    <File Include="Images/Productos/LICUADORA001.png">
+      <publishTime>03/01/2015 14:24:58</publishTime>
+    </File>
+    <File Include="Images/Productos/LICUADORA002.png">
+      <publishTime>03/01/2015 14:25:00</publishTime>
+    </File>
+    <File Include="Images/Productos/LICUADORA003.png">
+      <publishTime>03/01/2015 14:25:03</publishTime>
+    </File>
+    <File Include="Images/Productos/LICUADORA004.png">
+      <publishTime>03/01/2015 14:25:05</publishTime>
+    </File>
+    <File Include="Images/Productos/LICUADORA005.png">
+      <publishTime>03/01/2015 14:25:07</publishTime>
+    </File>
+    <File Include="Images/Productos/LICUADORA006.png">
+      <publishTime>03/01/2015 14:25:09</publishTime>
+    </File>
+    <File Include="Images/Productos/LICUADORA007.png">
+      <publishTime>03/01/2015 14:25:11</publishTime>
+    </File>
+    <File Include="Images/Productos/LICUADORA008.png">
+      <publishTime>03/01/2015 14:25:13</publishTime>
+    </File>
+    <File Include="Images/Productos/LICUADORA009.png">
+      <publishTime>03/01/2015 14:25:16</publishTime>
+    </File>
+    <File Include="Images/Productos/LICUADORA010.png">
+      <publishTime>03/01/2015 14:25:18</publishTime>
+    </File>
+    <File Include="Images/Productos/LICUADORA011.png">
+      <publishTime>03/01/2015 14:25:20</publishTime>
+    </File>
+    <File Include="Images/Productos/LICUADORA012.png">
+      <publishTime>03/01/2015 14:25:21</publishTime>
+    </File>
+    <File Include="Images/Productos/LICUADORA013.png">
+      <publishTime>03/01/2015 14:25:22</publishTime>
+    </File>
+    <File Include="Images/Productos/LICUADORA014.png">
+      <publishTime>03/01/2015 14:25:24</publishTime>
+    </File>
+    <File Include="Images/Productos/LICUADORA015.png">
+      <publishTime>03/01/2015 14:25:26</publishTime>
+    </File>
+    <File Include="Images/Productos/LICUADORA016.png">
+      <publishTime>03/01/2015 14:25:27</publishTime>
+    </File>
+    <File Include="Images/Productos/LICUADORA017.png">
+      <publishTime>03/01/2015 14:25:28</publishTime>
+    </File>
+    <File Include="Images/Productos/LICUADORA018.png">
+      <publishTime>03/01/2015 14:25:30</publishTime>
+    </File>
+    <File Include="Images/Productos/LICUADORA019.png">
+      <publishTime>03/01/2015 14:25:33</publishTime>
+    </File>
+    <File Include="Images/Productos/LICUADORA020.png">
+      <publishTime>03/01/2015 14:25:34</publishTime>
+    </File>
+    <File Include="Images/Productos/LICUADORA021.png">
+      <publishTime>03/01/2015 14:25:36</publishTime>
+    </File>
+    <File Include="Images/Productos/MICRO001.png">
+      <publishTime>03/01/2015 14:25:38</publishTime>
+    </File>
+    <File Include="Images/Productos/MICRO002.png">
+      <publishTime>03/01/2015 14:25:40</publishTime>
+    </File>
+    <File Include="Images/Productos/MICRO003.png">
+      <publishTime>03/01/2015 14:25:41</publishTime>
+    </File>
+    <File Include="Images/Productos/MICRO004.png">
+      <publishTime>03/01/2015 14:25:43</publishTime>
+    </File>
+    <File Include="Images/Productos/MICRO005.png">
+      <publishTime>03/01/2015 14:25:46</publishTime>
+    </File>
+    <File Include="Images/Productos/MICRO006.png">
+      <publishTime>03/01/2015 14:25:49</publishTime>
+    </File>
+    <File Include="Images/Productos/MICRO007.png">
+      <publishTime>03/01/2015 14:25:50</publishTime>
+    </File>
+    <File Include="Images/Productos/MICRO008.png">
+      <publishTime>03/01/2015 14:25:52</publishTime>
+    </File>
+    <File Include="Images/Productos/MICRO009.png">
+      <publishTime>03/01/2015 14:25:54</publishTime>
+    </File>
+    <File Include="Images/Productos/MICRO010.png">
+      <publishTime>03/01/2015 14:25:56</publishTime>
+    </File>
+    <File Include="Images/Productos/MICRO011.png">
+      <publishTime>03/01/2015 14:25:59</publishTime>
+    </File>
+    <File Include="Images/Productos/MICRO012.png">
+      <publishTime>03/01/2015 14:26:01</publishTime>
+    </File>
+    <File Include="Images/Productos/MICRO013.png">
+      <publishTime>03/01/2015 14:26:03</publishTime>
+    </File>
+    <File Include="Images/Productos/MICRO014.png">
+      <publishTime>03/01/2015 14:26:04</publishTime>
+    </File>
+    <File Include="Images/Productos/MICRO015.png">
+      <publishTime>03/01/2015 14:26:06</publishTime>
+    </File>
+    <File Include="Images/Productos/MICRO016.png">
+      <publishTime>03/01/2015 14:26:08</publishTime>
+    </File>
+    <File Include="Images/Productos/MICRO017.png">
+      <publishTime>03/01/2015 14:26:09</publishTime>
+    </File>
+    <File Include="Images/Productos/MICRO018.png">
+      <publishTime>03/01/2015 14:26:11</publishTime>
+    </File>
+    <File Include="Images/Productos/MICRO019.png">
+      <publishTime>03/01/2015 14:26:12</publishTime>
+    </File>
+    <File Include="Images/Productos/MICRO020.png">
+      <publishTime>03/01/2015 14:26:14</publishTime>
+    </File>
+    <File Include="Images/Productos/MICRO021.png">
+      <publishTime>03/01/2015 14:26:16</publishTime>
+    </File>
+    <File Include="Images/Productos/MICRO022.png">
+      <publishTime>03/01/2015 14:26:18</publishTime>
+    </File>
+    <File Include="Images/Productos/NEVERA001.png">
+      <publishTime>03/01/2015 14:26:20</publishTime>
+    </File>
+    <File Include="Images/Productos/NEVERA002.png">
+      <publishTime>03/01/2015 14:26:21</publishTime>
+    </File>
+    <File Include="Images/Productos/NEVERA003.png">
+      <publishTime>03/01/2015 14:26:22</publishTime>
+    </File>
+    <File Include="Images/Productos/NEVERA004.png">
+      <publishTime>03/01/2015 14:26:24</publishTime>
+    </File>
+    <File Include="Images/Productos/NEVERA005.png">
+      <publishTime>03/01/2015 14:26:25</publishTime>
+    </File>
+    <File Include="Images/Productos/NEVERA006.png">
+      <publishTime>03/01/2015 14:26:27</publishTime>
+    </File>
+    <File Include="Images/Productos/NEVERA007.png">
+      <publishTime>03/01/2015 14:26:29</publishTime>
+    </File>
+    <File Include="Images/Productos/NEVERA008.png">
+      <publishTime>03/01/2015 14:26:31</publishTime>
+    </File>
+    <File Include="Images/Productos/NEVERA009.png">
+      <publishTime>03/01/2015 14:26:32</publishTime>
+    </File>
+    <File Include="Images/Productos/NEVERA010.png">
+      <publishTime>03/01/2015 14:26:39</publishTime>
+    </File>
+    <File Include="Images/Productos/NEVERA011.png">
+      <publishTime>03/01/2015 14:26:41</publishTime>
+    </File>
+    <File Include="Images/Productos/NEVERA012.png">
+      <publishTime>03/01/2015 14:26:42</publishTime>
+    </File>
+    <File Include="Images/Productos/NEVERA013.png">
+      <publishTime>03/01/2015 14:26:46</publishTime>
+    </File>
+    <File Include="Images/Productos/NEVERA014.png">
+      <publishTime>03/01/2015 14:26:51</publishTime>
+    </File>
+    <File Include="Images/Productos/NEVERA015.png">
+      <publishTime>03/01/2015 14:26:53</publishTime>
+    </File>
+    <File Include="Images/Productos/NEVERA016.png">
+      <publishTime>03/01/2015 14:26:54</publishTime>
+    </File>
+    <File Include="Images/Productos/NEVERA017.png">
+      <publishTime>03/01/2015 14:26:56</publishTime>
+    </File>
+    <File Include="Images/Productos/NEVERA018.png">
+      <publishTime>03/01/2015 14:26:59</publishTime>
+    </File>
+    <File Include="Images/Productos/NEVERA019.png">
+      <publishTime>03/01/2015 14:27:01</publishTime>
+    </File>
+    <File Include="Images/Productos/NEVERA020.png">
+      <publishTime>03/01/2015 14:27:03</publishTime>
+    </File>
+    <File Include="Images/Productos/NEVERA021.png">
+      <publishTime>03/01/2015 14:27:05</publishTime>
+    </File>
+    <File Include="Images/Productos/NEVERA022.png">
+      <publishTime>03/01/2015 14:27:07</publishTime>
+    </File>
+    <File Include="Images/Productos/NEVERA024.png">
+      <publishTime>03/01/2015 14:27:08</publishTime>
+    </File>
+    <File Include="Images/Productos/PLANCHA001.png">
+      <publishTime>03/01/2015 14:27:09</publishTime>
+    </File>
+    <File Include="Images/Productos/PLANCHA002.png">
+      <publishTime>03/01/2015 14:27:11</publishTime>
+    </File>
+    <File Include="Images/Productos/PLANCHA003.png">
+      <publishTime>03/01/2015 14:27:12</publishTime>
+    </File>
+    <File Include="Images/Productos/PLANCHA004.png">
+      <publishTime>03/01/2015 14:27:14</publishTime>
+    </File>
+    <File Include="Images/Productos/PLANCHA005.png">
+      <publishTime>03/01/2015 14:27:16</publishTime>
+    </File>
+    <File Include="Images/Productos/PLANCHA006.png">
+      <publishTime>03/01/2015 14:27:18</publishTime>
+    </File>
+    <File Include="Images/Productos/PLANCHA007.png">
+      <publishTime>03/01/2015 14:27:19</publishTime>
+    </File>
+    <File Include="Images/Productos/PLANCHA008.png">
+      <publishTime>03/01/2015 14:27:21</publishTime>
+    </File>
+    <File Include="Images/Productos/PLANCHA009.png">
+      <publishTime>03/01/2015 14:27:23</publishTime>
+    </File>
+    <File Include="Images/Productos/PLANCHA010.png">
+      <publishTime>03/01/2015 14:27:24</publishTime>
+    </File>
+    <File Include="Images/Productos/PLANCHA011.png">
+      <publishTime>03/01/2015 14:27:26</publishTime>
+    </File>
+    <File Include="Images/Productos/PLANCHA012.png">
+      <publishTime>03/01/2015 14:27:28</publishTime>
+    </File>
+    <File Include="Images/Productos/PLANCHA013.png">
+      <publishTime>03/01/2015 14:27:30</publishTime>
+    </File>
+    <File Include="Images/Productos/PLANCHA014.png">
+      <publishTime>03/01/2015 14:27:31</publishTime>
+    </File>
+    <File Include="Images/Productos/PLANCHA015.png">
+      <publishTime>03/01/2015 14:27:34</publishTime>
+    </File>
+    <File Include="Images/Productos/PLANCHA016.png">
+      <publishTime>03/01/2015 14:27:35</publishTime>
+    </File>
+    <File Include="Images/Productos/PLANCHA017.png">
+      <publishTime>03/01/2015 14:27:37</publishTime>
+    </File>
+    <File Include="Images/Productos/PLANCHA018.png">
+      <publishTime>03/01/2015 14:27:39</publishTime>
+    </File>
+    <File Include="Images/Productos/PLANCHA019.png">
+      <publishTime>03/01/2015 14:27:41</publishTime>
+    </File>
+    <File Include="Images/Productos/PLANCHA020.png">
+      <publishTime>03/01/2015 14:27:43</publishTime>
+    </File>
+    <File Include="Images/Productos/PLANCHA021.png">
+      <publishTime>03/01/2015 14:27:45</publishTime>
+    </File>
+    <File Include="Images/Productos/Xproducto.png">
+      <publishTime>03/01/2015 14:27:47</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>04/21/2015 01:39:28</publishTime>
+    </File>
+    <File Include="ProductDetails.aspx">
+      <publishTime>05/23/2015 16:29:44</publishTime>
+    </File>
+    <File Include="ProductList.aspx">
+      <publishTime>05/23/2015 16:29:07</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.js">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="Scripts/bootstrap.min.js">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.10.2.js">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.10.2.min.js">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.10.2.min.map">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="Scripts/modernizr-2.6.2.js">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="Scripts/respond.js">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="Scripts/respond.min.js">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/DetailsView.js">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/Focus.js">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/GridView.js">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/Menu.js">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/MenuStandards.js">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/MSAjax/MicrosoftAjax.js">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/MSAjax/MicrosoftAjaxApplicationServices.js">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/MSAjax/MicrosoftAjaxComponentModel.js">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/MSAjax/MicrosoftAjaxCore.js">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/MSAjax/MicrosoftAjaxGlobalization.js">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/MSAjax/MicrosoftAjaxHistory.js">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/MSAjax/MicrosoftAjaxNetwork.js">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/MSAjax/MicrosoftAjaxSerialization.js">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/MSAjax/MicrosoftAjaxTimer.js">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/MSAjax/MicrosoftAjaxWebForms.js">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/MSAjax/MicrosoftAjaxWebServices.js">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/SmartNav.js">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/TreeView.js">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/WebForms.js">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/WebParts.js">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="Scripts/WebForms/WebUIValidation.js">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="Scripts/_references.js">
+      <publishTime>09/09/2014 22:08:12</publishTime>
+    </File>
+    <File Include="ShoppingCart.aspx">
+      <publishTime>05/22/2015 19:48:55</publishTime>
+    </File>
+    <File Include="Site.Master">
+      <publishTime>05/20/2015 00:03:03</publishTime>
+    </File>
+    <File Include="Site.Mobile.Master">
+      <publishTime>03/06/2015 16:18:44</publishTime>
+    </File>
+    <File Include="UserOrders/OrderDetail.aspx">
+      <publishTime>05/17/2015 09:53:45</publishTime>
+    </File>
+    <File Include="UserOrders/OrderList.aspx">
+      <publishTime>05/17/2015 17:24:28</publishTime>
+    </File>
+    <File Include="ViewSwitcher.ascx">
+      <publishTime>03/06/2015 16:18:44</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>06/03/2015 18:27:19</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,82 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="BPELOrdenCompra"
+     targetNamespace="http://xmlns.oracle.com/Appkallsonys/ProjectOrden/BPELOrdenCompra"
+     xmlns:fk="http://www.kallsony.com/util/falta"
+     xmlns:ns2="http://www.kallsony.com/entidad/orden"
+     xmlns:ns1="http://www.kallsony.com/operacion/registrarcompra"
+     xmlns:ns4="http://www.kallsony.com.destino"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:ns3="http://www.kallsonys.com"
+     xmlns:client="http://xmlns.oracle.com/Appkallsonys/ProjectOrden/BPELOrdenCompra"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:ns5="http://www.kallsony.com.monto"
+    >
+    <plnk:partnerLinkType name="BPELOrdenCompra">
+        <plnk:role name="BPELOrdenCompraProvider">
+            <plnk:portType name="client:BPELOrdenCompra"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.kallsony.com/entidad/orden"
+             xmlns:ns1="http://www.kallsony.com/operacion/registrarcompra" xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+             xmlns:client="http://xmlns.oracle.com/Appkallsonys/ProjectOrden/BPELOrdenCompra"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns3="http://www.kallsonys.com"
+             xmlns:fk="http://www.kallsony.com/util/falta" xmlns:ns4="http://www.kallsony.com.destino"
+             xmlns:ns5="http://www.kallsony.com.monto">
+            <import namespace="http://www.kallsony.com/operacion/registrarcompra" schemaLocation="xsd/RegistrarCompra.xsd"/>
+            <import namespace="http://www.kallsony.com/util/falta" schemaLocation="xsd/Falta.xsd"/>
+        </schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.kallsony.com/entidad/orden"
+             xmlns:ns1="http://www.kallsony.com/operacion/registrarcompra" xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+             xmlns:client="http://xmlns.oracle.com/Appkallsonys/ProjectOrden/BPELOrdenCompra"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns3="http://www.kallsonys.com"
+             xmlns:ns4="http://www.kallsony.com.destino" xmlns:fk="http://www.kallsony.com/util/falta"
+             xmlns:ns5="http://www.kallsony.com.monto">
+            <xsd:import namespace="http://www.kallsony.com/entidad/orden" schemaLocation="xsd/Orden.xsd"/>
+        </xsd:schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.kallsony.com/entidad/orden"
+             xmlns:ns1="http://www.kallsony.com/operacion/registrarcompra" xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+             xmlns:ns3="http://www.kallsonys.com" xmlns:client="http://xmlns.oracle.com/Appkallsonys/ProjectOrden/BPELOrdenCompra"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns4="http://www.kallsony.com.destino"
+             xmlns:fk="http://www.kallsony.com/util/falta" xmlns:ns5="http://www.kallsony.com.monto">
+            <xsd:import namespace="http://www.kallsonys.com" schemaLocation="xsd/ValidarOrden.xsd"/>
+        </xsd:schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns2="http://www.kallsony.com/entidad/orden"
+             xmlns:ns1="http://www.kallsony.com/operacion/registrarcompra" xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+             xmlns:ns4="http://www.kallsony.com.destino" xmlns:ns3="http://www.kallsonys.com"
+             xmlns:client="http://xmlns.oracle.com/Appkallsonys/ProjectOrden/BPELOrdenCompra"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:fk="http://www.kallsony.com/util/falta"
+             xmlns:ns5="http://www.kallsony.com.monto">
+            <xsd:import namespace="http://www.kallsony.com.destino" schemaLocation="xsd/ValidarDestino.xsd"/>
+        </xsd:schema>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fk="http://www.kallsony.com/util/falta"
+             xmlns:ns2="http://www.kallsony.com/entidad/orden" xmlns:ns1="http://www.kallsony.com/operacion/registrarcompra"
+             xmlns:ns4="http://www.kallsony.com.destino" xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+             xmlns:ns3="http://www.kallsonys.com" xmlns:client="http://xmlns.oracle.com/Appkallsonys/ProjectOrden/BPELOrdenCompra"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns5="http://www.kallsony.com.monto"/>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fk="http://www.kallsony.com/util/falta"
+             xmlns:ns2="http://www.kallsony.com/entidad/orden" xmlns:ns1="http://www.kallsony.com/operacion/registrarcompra"
+             xmlns:ns4="http://www.kallsony.com.destino" xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+             xmlns:ns3="http://www.kallsonys.com" xmlns:client="http://xmlns.oracle.com/Appkallsonys/ProjectOrden/BPELOrdenCompra"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns5="http://www.kallsony.com.monto"/>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:fk="http://www.kallsony.com/util/falta"
+             xmlns:ns2="http://www.kallsony.com/entidad/orden" xmlns:ns1="http://www.kallsony.com/operacion/registrarcompra"
+             xmlns:ns4="http://www.kallsony.com.destino" xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+             xmlns:ns3="http://www.kallsonys.com" xmlns:client="http://xmlns.oracle.com/Appkallsonys/ProjectOrden/BPELOrdenCompra"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns5="http://www.kallsony.com.monto">
+            <xsd:import namespace="http://www.kallsony.com.monto" schemaLocation="xsd/ValidarMonto.xsd"/>
+        </xsd:schema>
+    </wsdl:types>
+    <wsdl:message name="BPELOrdenCompraRequestMessage">
+        <wsdl:part name="payload" element="ns1:registrarCompraEntrada"/>
+    </wsdl:message>
+    <wsdl:message name="BpelOrdenlFalta">
+        <wsdl:part name="patFalta" element="fk:falta"/>
+    </wsdl:message>
+    <wsdl:portType name="BPELOrdenCompra">
+        <wsdl:operation name="process">
+            <wsdl:input message="client:BPELOrdenCompraRequestMessage"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

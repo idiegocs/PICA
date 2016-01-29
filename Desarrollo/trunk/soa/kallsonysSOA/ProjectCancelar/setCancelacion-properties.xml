@@ -1,0 +1,25 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+   <entry key="ORDENCANCELADA:db_column_4">FECHA</entry>
+   <entry key="ORDENCANCELADA.IDORDEN:db_column_not_null">false</entry>
+   <entry key="ORDENCANCELADA:db_column_3">COMENTARIO</entry>
+   <entry key="ORDENCANCELADA:db_column_2">USUARIO</entry>
+   <entry key="ORDENCANCELADA:db_column_1">IDORDEN</entry>
+   <entry key="ORDENCANCELADA:db_column_0">IDCANCELADA</entry>
+   <entry key="ORDENCANCELADA.COMENTARIO:db_column_not_null">false</entry>
+   <entry key="ORDENCANCELADA.IDCANCELADA:db_column_type">NUMBER</entry>
+   <entry key="ORDENCANCELADA.FECHA:db_column_type">DATE</entry>
+   <entry key="ORDENCANCELADA.USUARIO:db_column_size">50</entry>
+   <entry key="ORDENCANCELADA.COMENTARIO:db_column_size">80</entry>
+   <entry key="ORDENCANCELADA.USUARIO:db_column_not_null">false</entry>
+   <entry key="ORDENCANCELADA.IDORDEN:db_column_type">NUMBER</entry>
+   <entry key="ORDENCANCELADA.IDORDEN:db_column_precision">0</entry>
+   <entry key="ORDENCANCELADA.IDCANCELADA:db_column_precision">0</entry>
+   <entry key="ORDENCANCELADA:db_table_type">TABLE</entry>
+   <entry key="root_descriptor_alias">ORDENCANCELADA</entry>
+   <entry key="ORDENCANCELADA.FECHA:db_column_not_null">false</entry>
+   <entry key="ORDENCANCELADA.USUARIO:db_column_type">VARCHAR2</entry>
+   <entry key="ORDENCANCELADA.IDCANCELADA:db_column_not_null">true</entry>
+   <entry key="ORDENCANCELADA.COMENTARIO:db_column_type">VARCHAR2</entry>
+</properties>

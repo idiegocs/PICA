@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<object-persistence xmlns="http://www.eclipse.org/eclipselink/xsds/persistence" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:eclipselink="http://www.eclipse.org/eclipselink/xsds/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="Eclipse Persistence Services - 2.3.1.v20111018-r10243">
+   <name>getCampanias-OR</name>
+   <class-mapping-descriptors>
+      <class-mapping-descriptor xsi:type="object-relational-class-mapping-descriptor">
+         <class>getCampanias.Campania</class>
+         <alias>Producto.Campania</alias>
+         <primary-key>
+            <field table="Campania" name="IdCampania" xsi:type="column"/>
+         </primary-key>
+         <events/>
+         <querying>
+            <queries>
+               <query name="getCampaniasSelect" xsi:type="read-all-query">
+                  <criteria operator="equal" xsi:type="relation-expression">
+                     <left name="Estado" xsi:type="query-key-expression">
+                        <base xsi:type="base-expression"/>
+                     </left>
+                     <right xsi:type="parameter-expression">
+                        <parameter name="estadoCampania" xsi:type="column"/>
+                     </right>
+                  </criteria>
+                  <arguments>
+                     <argument name="estadoCampania">
+                        <type>java.lang.String</type>
+                     </argument>
+                  </arguments>
+                  <reference-class>getCampanias.Campania</reference-class>
+                  <container xsi:type="list-container-policy">
+                     <collection-type>java.util.Vector</collection-type>
+                  </container>
+               </query>
+            </queries>
+         </querying>
+         <attribute-mappings>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>IdCampania</attribute-name>
+               <field table="Campania" name="IdCampania" xsi:type="column"/>
+               <attribute-classification>java.lang.Integer</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>Nombre</attribute-name>
+               <field table="Campania" name="Nombre" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>FechaInicio</attribute-name>
+               <field table="Campania" name="FechaInicio" xsi:type="column"/>
+               <attribute-classification>java.sql.Timestamp</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>FechaFin</attribute-name>
+               <field table="Campania" name="FechaFin" xsi:type="column"/>
+               <attribute-classification>java.sql.Timestamp</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>Estado</attribute-name>
+               <field table="Campania" name="Estado" xsi:type="column"/>
+               <attribute-classification>java.lang.Boolean</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>NombreImagenCampania</attribute-name>
+               <field table="Campania" name="NombreImagenCampania" xsi:type="column"/>
+               <attribute-classification>java.lang.String</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="one-to-many-mapping">
+               <attribute-name>ProductoxCampaniaCollection</attribute-name>
+               <reference-class>getCampanias.ProductoxCampania</reference-class>
+               <private-owned>true</private-owned>
+               <target-foreign-key>
+                  <field-reference>
+                     <source-field table="ProductoxCampania" name="IdCampania" xsi:type="column"/>
+                     <target-field table="Campania" name="IdCampania" xsi:type="column"/>
+                  </field-reference>
+               </target-foreign-key>
+               <batch-reading>true</batch-reading>
+               <container xsi:type="list-container-policy">
+                  <collection-type>org.eclipse.persistence.indirection.IndirectList</collection-type>
+               </container>
+               <indirection xsi:type="value-holder-indirection-policy"/>
+               <selection-query xsi:type="read-all-query">
+                  <reference-class>getCampanias.ProductoxCampania</reference-class>
+                  <container xsi:type="list-container-policy">
+                     <collection-type>org.eclipse.persistence.indirection.IndirectList</collection-type>
+                  </container>
+               </selection-query>
+            </attribute-mapping>
+         </attribute-mappings>
+         <descriptor-type>independent</descriptor-type>
+         <sequencing>
+            <sequence-name>SEQ</sequence-name>
+            <sequence-field table="Campania" name="IdCampania"/>
+         </sequencing>
+         <caching>
+            <cache-type>weak-reference</cache-type>
+            <cache-size>-1</cache-size>
+            <always-refresh>true</always-refresh>
+         </caching>
+         <remote-caching>
+            <cache-type>weak-reference</cache-type>
+            <cache-size>-1</cache-size>
+         </remote-caching>
+         <instantiation/>
+         <copying xsi:type="instantiation-copy-policy"/>
+         <tables>
+            <table name="Producto.Campania"/>
+         </tables>
+         <structure>structureName</structure>
+      </class-mapping-descriptor>
+      <class-mapping-descriptor xsi:type="object-relational-class-mapping-descriptor">
+         <class>getCampanias.ProductoxCampania</class>
+         <alias>Producto.ProductoxCampania</alias>
+         <primary-key>
+            <field table="ProductoxCampania" name="IdProductoxCampania" xsi:type="column"/>
+         </primary-key>
+         <events/>
+         <querying>
+            <queries>
+               <query name="getCampaniasSelect" xsi:type="read-all-query">
+                  <reference-class>getCampanias.ProductoxCampania</reference-class>
+                  <container xsi:type="list-container-policy">
+                     <collection-type>java.util.Vector</collection-type>
+                  </container>
+               </query>
+            </queries>
+         </querying>
+         <attribute-mappings>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>IdProductoxCampania</attribute-name>
+               <field table="ProductoxCampania" name="IdProductoxCampania" xsi:type="column"/>
+               <attribute-classification>java.lang.Integer</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>IdCampania</attribute-name>
+               <read-only>true</read-only>
+               <properties>
+                  <property name="fkPlaceholder">
+                     <value>true</value>
+                  </property>
+               </properties>
+               <field table="ProductoxCampania" name="IdCampania" xsi:type="column"/>
+               <attribute-classification>java.lang.Integer</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>IdProducto</attribute-name>
+               <field table="ProductoxCampania" name="IdProducto" xsi:type="column"/>
+               <attribute-classification>java.lang.Integer</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="direct-mapping">
+               <attribute-name>PorcentajeDescuento</attribute-name>
+               <field table="ProductoxCampania" name="PorcentajeDescuento" xsi:type="column"/>
+               <attribute-classification>java.lang.Integer</attribute-classification>
+            </attribute-mapping>
+            <attribute-mapping xsi:type="one-to-one-mapping">
+               <attribute-name>IdCampania</attribute-name>
+               <reference-class>getCampanias.Campania</reference-class>
+               <private-owned>true</private-owned>
+               <foreign-key>
+                  <field-reference>
+                     <source-field table="ProductoxCampania" name="IdCampania" xsi:type="column"/>
+                     <target-field table="Campania" name="IdCampania" xsi:type="column"/>
+                  </field-reference>
+               </foreign-key>
+               <foreign-key-fields>
+                  <field table="ProductoxCampania" name="IdCampania" xsi:type="column"/>
+               </foreign-key-fields>
+               <batch-reading>true</batch-reading>
+               <indirection xsi:type="value-holder-indirection-policy"/>
+               <selection-query xsi:type="read-object-query">
+                  <reference-class>getCampanias.Campania</reference-class>
+               </selection-query>
+            </attribute-mapping>
+         </attribute-mappings>
+         <descriptor-type>independent</descriptor-type>
+         <sequencing>
+            <sequence-name>SEQ</sequence-name>
+            <sequence-field table="ProductoxCampania" name="IdProductoxCampania"/>
+         </sequencing>
+         <caching>
+            <cache-type>weak-reference</cache-type>
+            <cache-size>-1</cache-size>
+            <always-refresh>true</always-refresh>
+         </caching>
+         <remote-caching>
+            <cache-type>weak-reference</cache-type>
+            <cache-size>-1</cache-size>
+         </remote-caching>
+         <instantiation/>
+         <copying xsi:type="instantiation-copy-policy"/>
+         <tables>
+            <table name="Producto.ProductoxCampania"/>
+         </tables>
+         <structure>structureName</structure>
+      </class-mapping-descriptor>
+   </class-mapping-descriptors>
+   <login xsi:type="database-login">
+      <platform-class>org.eclipse.persistence.platform.database.SQLServerPlatform</platform-class>
+      <connection-url></connection-url>
+   </login>
+</object-persistence>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="5a8f4b1f-ec79-4b07-bf23-45587f592d57" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://ETB2:8088/mockProductosPortSOAP11Binding?wsdl" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="Productos.wsdl" MetadataType="Wsdl" ID="bf6927d9-a5ef-4624-a026-93462960383e" SourceId="1" SourceUrl="http://etb2:8088/mockProductosPortSOAP11Binding?wsdl" />
+    <MetadataFile FileName="mockProductosPortSOAP11Binding.xsd" MetadataType="Schema" ID="37abc725-8f62-4531-80a5-e6da33c7d377" SourceId="1" SourceUrl="http://etb2:8088/mockProductosPortSOAP11Binding?WSDL&amp;interface=ProductosPortSOAP11Binding&amp;part=Falta.xsd" />
+    <MetadataFile FileName="mockProductosPortSOAP11Binding1.xsd" MetadataType="Schema" ID="62c25cbb-a9d6-4dcc-9506-8259b3957fe0" SourceId="1" SourceUrl="http://etb2:8088/mockProductosPortSOAP11Binding?WSDL&amp;interface=ProductosPortSOAP11Binding&amp;part=Producto.xsd" />
+    <MetadataFile FileName="mockProductosPortSOAP11Binding2.xsd" MetadataType="Schema" ID="9ef467be-fe53-41c3-8e80-f528d0c78aed" SourceId="1" SourceUrl="http://etb2:8088/mockProductosPortSOAP11Binding?WSDL&amp;interface=ProductosPortSOAP11Binding&amp;part=Filtro.xsd" />
+    <MetadataFile FileName="mockProductosPortSOAP11Binding3.xsd" MetadataType="Schema" ID="c856633c-6043-4696-8c47-fb93c23fe99f" SourceId="1" SourceUrl="http://etb2:8088/mockProductosPortSOAP11Binding?WSDL&amp;interface=ProductosPortSOAP11Binding&amp;part=ConsultaProductos.xsd" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

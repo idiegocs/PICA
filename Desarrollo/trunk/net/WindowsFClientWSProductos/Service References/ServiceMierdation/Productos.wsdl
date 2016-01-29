@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wkcuf="http://www.kallsony.com/util/falta" xmlns:tns="http://www.kallsony.com/final/operacion/consultaproducto" xmlns:wkcoc="http://www.kallsony.com/operacion/consultaproducto" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="Productos" targetNamespace="http://www.kallsony.com/final/operacion/consultaproducto" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema targetNamespace="http://www.kallsony.com/final/operacion/consultaproducto">
+      <xsd:import schemaLocation="mockProductosPortSOAP11Binding?WSDL&amp;interface=ProductosPortSOAP11Binding&amp;part=ConsultaProductos.xsd" namespace="http://www.kallsony.com/operacion/consultaproducto" />
+      <xsd:import schemaLocation="mockProductosPortSOAP11Binding?WSDL&amp;interface=ProductosPortSOAP11Binding&amp;part=Falta.xsd" namespace="http://www.kallsony.com/util/falta" />
+    </xsd:schema>
+  </types>
+  <message name="ProductoDetalle_ConsultaProductoSalida">
+    <part name="ConsultaProductosSalida" element="wkcoc:consultaProductoSalida" />
+  </message>
+  <message name="ProductoDetalle_ConsultaProductoEntrada">
+    <part name="ConsultaProductosEntrada" element="wkcoc:consultaProductoEntrada" />
+  </message>
+  <message name="ProductoDeralle_FaltaProducto">
+    <part name="ConsultaProductosFalta" element="wkcuf:falta" />
+  </message>
+  <portType name="ProductosPort">
+    <operation name="ConsultarProductos">
+      <input message="tns:ProductoDetalle_ConsultaProductoEntrada" />
+      <output message="tns:ProductoDetalle_ConsultaProductoSalida" />
+      <fault name="FaltaProductos" message="tns:ProductoDeralle_FaltaProducto" />
+    </operation>
+  </portType>
+  <binding name="ProductosPortSOAP11Binding" type="tns:ProductosPort">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="ConsultarProductos">
+      <soap:operation soapAction="pro:Producto/ConsultarProductos" style="document" />
+      <input>
+        <soap:body use="literal" parts="ConsultaProductosEntrada" />
+      </input>
+      <output>
+        <soap:body use="literal" parts="ConsultaProductosSalida" />
+      </output>
+      <fault name="FaltaProductos">
+        <soap:fault use="literal" name="FaltaProductos" namespace="" />
+      </fault>
+    </operation>
+  </binding>
+  <service name="ProductosPort">
+    <port name="ProductosPortPort" binding="tns:ProductosPortSOAP11Binding">
+      <soap:address location="http://ETB2:8088/mockProductosPortSOAP11Binding" />
+    </port>
+  </service>
+</definitions>

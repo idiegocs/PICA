@@ -1,0 +1,22 @@
+<?binding.jca setItemOrden_db.jca?>
+<wsdl:definitions name="setItemOrden" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/Appkallsonys/ProjectGuardarOrden/setItemOrden" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/Appkallsonys/ProjectGuardarOrden/setItemOrden" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/setItemOrden">
+    <plt:partnerLinkType name="setItemOrden_plt">
+        <plt:role name="setItemOrden_role">
+            <plt:portType name="tns:setItemOrden_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/setItemOrden" schemaLocation="xsd/setItemOrden_table.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="ItemOrdenCollection_msg">
+        <wsdl:part name="ItemOrdenCollection" element="top:ItemOrdenCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="setItemOrden_ptt">
+        <wsdl:operation name="insert">
+            <wsdl:input message="tns:ItemOrdenCollection_msg"/>
+            <wsdl:output message="tns:ItemOrdenCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

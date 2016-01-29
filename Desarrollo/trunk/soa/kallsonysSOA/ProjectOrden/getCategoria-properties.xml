@@ -1,0 +1,15 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+   <entry key="CATEGORIA_CLIENTE.IDCATEGORIA:db_column_not_null">true</entry>
+   <entry key="CATEGORIA_CLIENTE.NOMBRE_CATEGORIA:db_column_size">128</entry>
+   <entry key="CATEGORIA_CLIENTE.IDCATEGORIA:db_column_scale">0</entry>
+   <entry key="CATEGORIA_CLIENTE:db_column_1">NOMBRE_CATEGORIA</entry>
+   <entry key="CATEGORIA_CLIENTE:db_column_0">IDCATEGORIA</entry>
+   <entry key="CATEGORIA_CLIENTE:db_table_type">TABLE</entry>
+   <entry key="root_descriptor_alias">CATEGORIA_CLIENTE</entry>
+   <entry key="CATEGORIA_CLIENTE.NOMBRE_CATEGORIA:db_column_not_null">false</entry>
+   <entry key="CATEGORIA_CLIENTE.IDCATEGORIA:db_column_type">NUMBER</entry>
+   <entry key="CATEGORIA_CLIENTE.IDCATEGORIA:db_column_precision">18</entry>
+   <entry key="CATEGORIA_CLIENTE.NOMBRE_CATEGORIA:db_column_type">VARCHAR2</entry>
+</properties>

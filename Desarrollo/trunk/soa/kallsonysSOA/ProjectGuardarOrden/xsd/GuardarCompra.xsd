@@ -1,0 +1,22 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:rc="http://www.kallsony.com/operacion/guardarcompra"
+        xmlns:cp="http://www.kallsony.com/entidad/compra"
+        targetNamespace="http://www.kallsony.com/operacion/guardarcompra"
+        elementFormDefault="qualified">
+    <import schemaLocation="Compra.xsd"
+            namespace="http://www.kallsony.com/entidad/compra"/>
+    <complexType name="GuardarCompraEntrada">
+        <sequence>
+            <element name="compra" type="cp:Compra"/>
+        </sequence>
+    </complexType>
+    <complexType name="GuardarCompraSalida">
+        <sequence>
+            <element name="idPreOrden" type="integer" minOccurs="1"/>
+            <element name="estadoTarjeta" type="boolean" minOccurs="1"/>
+        </sequence>
+    </complexType>
+    <element name="guardarCompraEntrada" type="rc:GuardarCompraEntrada"/>
+    <element name="guardarCompraSalida" type="rc:GuardarCompraSalida"/>
+</schema>

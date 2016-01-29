@@ -1,0 +1,13 @@
+<schema targetNamespace="http://www.kallsony.com/entidad/compra" xmlns="http://www.w3.org/2001/XMLSchema" xmlns:cm="http://www.kallsony.com/entidad/compra" xmlns:ev="http://www.kallsony.com/entidad/usuario" xmlns:tj="http://www.kallsony.com/entidad/tarjeta" xmlns:od="http://www.kallsony.com/entidad/orden">
+    <import schemaLocation="XMLSchema_1830050591.xsd" namespace="http://www.kallsony.com/entidad/usuario"/>
+    <import schemaLocation="XMLSchema_1135929342.xsd" namespace="http://www.kallsony.com/entidad/tarjeta"/>
+    <import schemaLocation="XMLSchema_-1420568389.xsd" namespace="http://www.kallsony.com/entidad/orden"/>
+    <complexType name="Compra">
+        <sequence>
+            <element name="tarjeta" type="tj:Tarjeta" minOccurs="0"/>
+            <element name="envioTitular" type="boolean" minOccurs="0"/>
+            <element name="usuarioEnvio" type="ev:Usuario" minOccurs="0"/>
+            <element name="orden" type="od:Orden" minOccurs="0"/>
+        </sequence>
+    </complexType>
+</schema>

@@ -1,0 +1,97 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Wed Apr 29 10:07:09 COT 2015
+  Author:  Diego
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="BPELProcessOrdenes"
+               targetNamespace="http://xmlns.oracle.com/Appkallsonys/ProjectConsultaOrdenes/BPELProcessOrdenes"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/Appkallsonys/ProjectConsultaOrdenes/BPELProcessOrdenes"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:ns1="http://www.kallsony.com/final/operacion/consultaorden"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/Appkallsonys/ProjectConsultaOrdenes/getOrdenes"
+         xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/db/top/getOrdenes"
+         xmlns:ns3="http://www.kallsony.com/operacion/consultaorden">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="bpelprocessordenes_client" partnerLinkType="ns1:BPELProcessOrdenes" myRole="PortOrden"/>
+    <partnerLink name="getOrdenes" partnerLinkType="ns2:getOrdenes_plt"
+                 partnerRole="getOrdenes_role"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="ns1:Orden_ConsultaEntrada"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="ns1:Orden_ConsultaSalida"/>
+    <variable name="InvokeOrdenes_InputVariable"
+              messageType="ns2:getOrdenesSelect_inputParameters"/>
+    <variable name="InvokeOrdenes_OutputVariable"
+              messageType="ns2:OrdenCollection_msg"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in BPELProcessOrdenes.wsdl) -->
+    <receive name="receiveInput" partnerLink="bpelprocessordenes_client" portType="ns1:PortOrden" operation="consultarOrden" variable="inputVariable" createInstance="yes"/>
+    <assign name="TransformGetOrdenes">
+      <bpelx:annotation>
+        <bpelx:pattern>transformation</bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from expression="ora:doXSLTransformForDoc('xsl/Transformation_GetOrdenes.xsl', $inputVariable.partEntrada)"/>
+        <to variable="InvokeOrdenes_InputVariable"
+            part="getOrdenesSelect_inputParameters"/>
+      </copy>
+    </assign>
+    <invoke name="InvokeOrdenes"
+            inputVariable="InvokeOrdenes_InputVariable"
+            outputVariable="InvokeOrdenes_OutputVariable"
+            partnerLink="getOrdenes" portType="ns2:getOrdenes_ptt"
+            operation="getOrdenesSelect" bpelx:invokeAsDetail="no"/>
+    <assign name="TransformOrdenes">
+      <bpelx:annotation>
+        <bpelx:pattern>transformation</bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from expression="ora:doXSLTransformForDoc('xsl/Transformation_Ordenes3.xsl', $InvokeOrdenes_OutputVariable.OrdenCollection)"/>
+        <to variable="outputVariable" part="partSalida"/>
+      </copy>
+    </assign>
+    <!-- Generate reply to synchronous request -->
+    <reply name="replyOutput" partnerLink="bpelprocessordenes_client" portType="ns1:PortOrden" operation="consultarOrden" variable="outputVariable"/>
+  </sequence>
+</process>

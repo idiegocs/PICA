@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema xmlns:dr="http://www.kallsony.com/entidad/direccion" targetNamespace="http://www.kallsony.com/entidad/usuario" xmlns="http://www.w3.org/2001/XMLSchema">
+  <import schemaLocation="http://25.5.55.200:7002/OSBKallsonys/ProxyService/ProxyCompra?SCHEMA%2FOSBCompras%2FXSD%2FXMLSchema_-117231711" namespace="http://www.kallsony.com/entidad/direccion" />
+  <complexType xmlns:us="http://www.kallsony.com/entidad/usuario" name="Usuario">
+    <sequence>
+      <element minOccurs="0" name="nombreUsuario" type="string" />
+      <element minOccurs="0" name="nombre" type="string" />
+      <element minOccurs="0" name="apellido" type="string" />
+      <element minOccurs="0" name="tipoDocumento" type="string" />
+      <element minOccurs="0" name="numeroDocumento" type="string" />
+      <element minOccurs="0" name="correoElectronico" type="string" />
+      <element minOccurs="0" name="telefono" type="string" />
+      <element minOccurs="0" name="direccion" type="dr:Direccion" />
+    </sequence>
+  </complexType>
+</schema>

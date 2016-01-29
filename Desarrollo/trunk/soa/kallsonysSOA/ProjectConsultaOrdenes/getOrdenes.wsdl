@@ -1,0 +1,25 @@
+<?binding.jca getOrdenes_db.jca?>
+<wsdl:definitions name="getOrdenes" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/Appkallsonys/ProjectConsultaOrdenes/getOrdenes" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/Appkallsonys/ProjectConsultaOrdenes/getOrdenes" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/getOrdenes">
+    <plt:partnerLinkType name="getOrdenes_plt">
+        <plt:role name="getOrdenes_role">
+            <plt:portType name="tns:getOrdenes_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/getOrdenes" schemaLocation="xsd/getOrdenes_table.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="getOrdenesSelect_inputParameters">
+        <wsdl:part name="getOrdenesSelect_inputParameters" element="top:getOrdenesSelect_idPreOrden_estadoOrden_userNameInputParameters"/>
+    </wsdl:message>
+    <wsdl:message name="OrdenCollection_msg">
+        <wsdl:part name="OrdenCollection" element="top:OrdenCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="getOrdenes_ptt">
+        <wsdl:operation name="getOrdenesSelect">
+            <wsdl:input message="tns:getOrdenesSelect_inputParameters"/>
+            <wsdl:output message="tns:OrdenCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

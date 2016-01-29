@@ -1,0 +1,14 @@
+<adapter-config name="getOrden" adapter="Database Adapter" wsdlLocation="getOrden.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/DB/omsordenDatabase" UIConnectionName="OMSOrden" adapterRef=""/>
+  <endpoint-interaction portType="getOrden_ptt" operation="getOrdenSelect">
+    <interaction-spec className="oracle.tip.adapter.db.DBReadInteractionSpec">
+      <property name="DescriptorName" value="getOrden.Orden"/>
+      <property name="QueryName" value="getOrdenSelect"/>
+      <property name="MappingsMetaDataURL" value="getOrden-or-mappings.xml"/>
+      <property name="ReturnSingleResultSet" value="false"/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+  </endpoint-interaction>
+
+</adapter-config>

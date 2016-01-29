@@ -1,0 +1,231 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Mon Mar 02 11:51:01 COT 2015
+  Author:  Diego
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="BPELProductos"
+               targetNamespace="http://xmlns.oracle.com/kallSonysApp/productos/BPELProductos"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/kallSonysApp/productos/BPELProductos"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:ns1="http://www.kallsony.com/final/operacion/consultaproducto"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/kallSonysApp/productos/getProductos"
+         xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns5="http://www.kallsony.com/entidad/producto"
+         xmlns:ns4="http://www.kallsony.com/util/filtro"
+         xmlns:ns6="http://xmlns.oracle.com/pcbpel/adapter/db/top/getProductos"
+         xmlns:ns3="http://www.kallsony.com/operacion/consultaproducto"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns7="http://xmlns.oracle.com/pcbpel/adapter/db/kallSonysApp/productos/getCountProductos"
+         xmlns:ns8="http://xmlns.oracle.com/pcbpel/adapter/db/top/getCountProductos"
+         xmlns:ns9="http://xmlns.oracle.com/pcbpel/adapter/db/kallSonysApp/productos/getCountProduct"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ns10="http://xmlns.oracle.com/pcbpel/adapter/db/getCountProduct">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="bpelproductos_client" partnerLinkType="ns1:BPELProductos" myRole="ProductosPort"/>
+    <partnerLink name="getProductos" partnerLinkType="ns2:getProductos_plt"
+                 partnerRole="getProductos_role"/>
+    <partnerLink name="getCountProduct"
+                 partnerLinkType="ns9:getCountProduct_plt"
+                 partnerRole="getCountProduct_role"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="ns1:ProductoDetalle_ConsultaProductoEntrada"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="ns1:ProductoDetalle_ConsultaProductoSalida"/>
+    <variable name="Invokeproductos_InputVariable"
+              messageType="ns2:getProductosSelect_inputParameters"/>
+    <variable name="Invokeproductos_OutputVariable"
+              messageType="ns2:ProductoCollection_msg"/>
+    <variable name="maxPaginado" type="xsd:int"/>
+    <variable name="Invoke_getCountProduct_InputVariable"
+              messageType="ns9:getCountProductInput_msg"/>
+    <variable name="Invoke_getCountProduct_OutputVariable"
+              messageType="ns9:getCountProductOutput_msg"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in BPELProductos.wsdl) -->
+    <receive name="receiveInput" partnerLink="bpelproductos_client" portType="ns1:ProductosPort" operation="ConsultarProductos" variable="inputVariable" createInstance="yes"/>
+    <assign name="AssignTamnioPagina">
+      <copy>
+        <from expression="number('50')"/>
+        <to variable="maxPaginado"/>
+      </copy>
+    </assign>
+    <assign name="AssignCountProductos">
+      <copy>
+        <from variable="inputVariable" part="ConsultaProductosEntrada"
+              query="/ns3:consultaProductoEntrada/ns3:filtroProducto/ns4:tipoFiltro"/>
+        <to variable="Invoke_getCountProduct_InputVariable"
+            part="getCountProductInput_msg"
+            query="/ns10:getCountProductInput/ns10:tipoBusquedaN"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="ConsultaProductosEntrada"
+              query="/ns3:consultaProductoEntrada/ns3:filtroProducto/ns4:tipoFiltro"/>
+        <to variable="Invoke_getCountProduct_InputVariable"
+            part="getCountProductInput_msg"
+            query="/ns10:getCountProductInput/ns10:tipoBusquedaS"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="ConsultaProductosEntrada"
+              query="/ns3:consultaProductoEntrada/ns3:filtroProducto/ns4:valorFiltro"/>
+        <to variable="Invoke_getCountProduct_InputVariable"
+            part="getCountProductInput_msg"
+            query="/ns10:getCountProductInput/ns10:valorBusquedaS"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="ConsultaProductosEntrada"
+              query="/ns3:consultaProductoEntrada/ns3:filtroProducto/ns4:tipoFiltro"/>
+        <to variable="Invoke_getCountProduct_InputVariable"
+            part="getCountProductInput_msg"
+            query="/ns10:getCountProductInput/ns10:tipoBusquedaC"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="ConsultaProductosEntrada"
+              query="/ns3:consultaProductoEntrada/ns3:filtroProducto/ns4:tipoFiltro"/>
+        <to variable="Invoke_getCountProduct_InputVariable"
+            part="getCountProductInput_msg"
+            query="/ns10:getCountProductInput/ns10:tipoBusquedaD"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="ConsultaProductosEntrada"
+              query="/ns3:consultaProductoEntrada/ns3:filtroProducto/ns4:tipoFiltro"/>
+        <to variable="Invoke_getCountProduct_InputVariable"
+            part="getCountProductInput_msg"
+            query="/ns10:getCountProductInput/ns10:tipoBusquedaA"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="ConsultaProductosEntrada"
+              query="/ns3:consultaProductoEntrada/ns3:filtroProducto/ns4:valorFiltro"/>
+        <to variable="Invoke_getCountProduct_InputVariable"
+            part="getCountProductInput_msg"
+            query="/ns10:getCountProductInput/ns10:valorBusquedaN"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="ConsultaProductosEntrada"
+              query="/ns3:consultaProductoEntrada/ns3:filtroProducto/ns4:valorFiltro"/>
+        <to variable="Invoke_getCountProduct_InputVariable"
+            part="getCountProductInput_msg"
+            query="/ns10:getCountProductInput/ns10:valorBusquedaC"/>
+      </copy>
+      <copy>
+        <from variable="inputVariable" part="ConsultaProductosEntrada"
+              query="/ns3:consultaProductoEntrada/ns3:filtroProducto/ns4:valorFiltro"/>
+        <to variable="Invoke_getCountProduct_InputVariable"
+            part="getCountProductInput_msg"
+            query="/ns10:getCountProductInput/ns10:valorBusquedaD"/>
+      </copy>
+    </assign>
+    <invoke name="InvokeCountProductos"
+            inputVariable="Invoke_getCountProduct_InputVariable"
+            outputVariable="Invoke_getCountProduct_OutputVariable"
+            partnerLink="getCountProduct" portType="ns9:getCountProduct_ptt"
+            operation="getCountProduct" bpelx:invokeAsDetail="no"/>
+    <switch name="Switch1">
+      <case condition="bpws:getVariableData('Invoke_getCountProduct_OutputVariable','getCountProductOutput','/ns10:getCountProductOutput/ns10:total')>0">
+        <bpelx:annotation>
+          <bpelx:general>
+            <bpelx:property name="userLabel">
+              <![CDATA[Elementos>0]]>
+            </bpelx:property>
+          </bpelx:general>
+        </bpelx:annotation>
+        <sequence name="Sequence1">
+          <assign name="AssignEntradaProductos">
+            <copy>
+              <from variable="maxPaginado"/>
+              <to variable="Invokeproductos_InputVariable"
+                  part="getProductosSelect_inputParameters"
+                  query="/ns6:getProductosSelect_tipoBusqueda_valorBusqueda_tamanioPagina_paginaInputParameters/ns6:tamanioPagina"/>
+            </copy>
+            <copy>
+              <from variable="inputVariable" part="ConsultaProductosEntrada"
+                    query="/ns3:consultaProductoEntrada/ns3:filtroProducto/ns4:pagina"/>
+              <to variable="Invokeproductos_InputVariable"
+                  part="getProductosSelect_inputParameters"
+                  query="/ns6:getProductosSelect_tipoBusqueda_valorBusqueda_tamanioPagina_paginaInputParameters/ns6:pagina"/>
+            </copy>
+            <copy>
+              <from variable="inputVariable" part="ConsultaProductosEntrada"
+                    query="/ns3:consultaProductoEntrada/ns3:filtroProducto/ns4:valorFiltro"/>
+              <to variable="Invokeproductos_InputVariable"
+                  part="getProductosSelect_inputParameters"
+                  query="/ns6:getProductosSelect_tipoBusqueda_valorBusqueda_tamanioPagina_paginaInputParameters/ns6:valorBusqueda"/>
+            </copy>
+            <copy>
+              <from variable="inputVariable" part="ConsultaProductosEntrada"
+                    query="/ns3:consultaProductoEntrada/ns3:filtroProducto/ns4:tipoFiltro"/>
+              <to variable="Invokeproductos_InputVariable"
+                  part="getProductosSelect_inputParameters"
+                  query="/ns6:getProductosSelect_tipoBusqueda_valorBusqueda_tamanioPagina_paginaInputParameters/ns6:tipoBusqueda"/>
+            </copy>
+          </assign>
+          <invoke name="Invokeproductos"
+                  inputVariable="Invokeproductos_InputVariable"
+                  outputVariable="Invokeproductos_OutputVariable"
+                  partnerLink="getProductos" portType="ns2:getProductos_ptt"
+                  operation="getProductosSelect" bpelx:invokeAsDetail="no"/>
+        </sequence>
+      </case>
+      <otherwise/>
+    </switch>
+    <assign name="TransformProductos">
+      <bpelx:annotation>
+        <bpelx:pattern>transformation</bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from expression="ora:doXSLTransformForDoc('xsl/Transformation_Productos.xsl', $inputVariable.ConsultaProductosEntrada, 'Invokeproductos_OutputVariable.ProductoCollection', $Invokeproductos_OutputVariable.ProductoCollection, 'Invoke_getCountProduct_OutputVariable.getCountProductOutput', $Invoke_getCountProduct_OutputVariable.getCountProductOutput)"/>
+        <to variable="outputVariable" part="ConsultaProductosSalida"/>
+      </copy>
+    </assign>
+    <!-- Generate reply to synchronous request -->
+    <reply name="replyOutput" partnerLink="bpelproductos_client" portType="ns1:ProductosPort" operation="ConsultarProductos" variable="outputVariable"/>
+  </sequence>
+</process>

@@ -1,0 +1,319 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Mon Jun 01 16:55:21 COT 2015
+  Author:  Diego
+  Type: BPEL 1.1 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="BPELEnvio"
+               targetNamespace="http://xmlns.oracle.com/Appkallsonys/ProjectEnvio/BPELEnvio"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/Appkallsonys/ProjectEnvio/BPELEnvio"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ns1="http://www.kallsony.com/operacion/enviarcompra"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/file/Appkallsonys/ProjectEnvio/setDHL"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/file/Appkallsonys/ProjectEnvio/setDeprisaFile"
+         xmlns:ns4="http://xmlns.oracle.com/pcbpel/adapter/db/Appkallsonys/ProjectEnvio/setServientrega"
+         xmlns:ns5="http://tempuri.org/"
+         xmlns:ns6="http://xmlns.oracle.com/pcbpel/adapter/db/Appkallsonys/ProjectEnvio/setCompaniaEnvio"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ns7="http://xmlns.oracle.com/pcbpel/adapter/db/top/setCompaniaEnvio">
+
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="ServiceEnvio" partnerLinkType="client:BPELEnvio" myRole="BPELEnvioProvider"/>
+    <partnerLink name="setDeprisaFile" partnerLinkType="ns3:Write_plt"
+                 partnerRole="Write_role"/>
+    <partnerLink name="setServientrega"
+                 partnerLinkType="ns4:setServientrega_plt"
+                 partnerRole="setServientrega_role"/>
+    <partnerLink name="ServiceDHLProxy" partnerLinkType="ns5:ServiceDHLProxy"
+                 partnerRole="IService1"/>
+    <partnerLink name="setCompaniaEnvio"
+                 partnerLinkType="ns6:setCompaniaEnvio_plt"
+                 partnerRole="setCompaniaEnvio_role"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:BPELEnvioRequestMessage"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="client:BPELEnvioResponseMessage"/>
+    <variable name="Invoke1_Write_InputVariable" messageType="ns3:Write_msg"/>
+    <variable name="InvokeServientrega_insert_InputVariable"
+              messageType="ns4:KallsonysShipmentCollection_msg"/>
+    <variable name="InvokeDHL_fullfillShipment_InputVariable"
+              messageType="ns5:IService1_fullfillShipment_InputMessage"/>
+    <variable name="InvokeDHL_fullfillShipment_OutputVariable"
+              messageType="ns5:IService1_fullfillShipment_OutputMessage"/>
+    <variable name="SetCompania_update_InputVariable"
+              messageType="ns6:EnvioCollection_msg"/>
+    <variable name="getIdEnvio_setCompaniaEnvioSelect_InputVariable"
+              messageType="ns6:setCompaniaEnvioSelect_inputParameters"/>
+    <variable name="getIdEnvio_setCompaniaEnvioSelect_OutputVariable"
+              messageType="ns6:EnvioCollection_msg"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in BPELEnvio.wsdl) -->
+    <receive name="receiveInput" partnerLink="ServiceEnvio" portType="client:BPELEnvio" operation="enviarCompra" variable="inputVariable" createInstance="yes"/>
+    <scope name="Scope1">
+      <faultHandlers>
+        <catchAll>
+          <assign name="AssignFallo">
+            <copy>
+              <from expression="1=2"/>
+              <to variable="outputVariable" part="payload"
+                  query="/ns1:enviarCompraSalida/ns1:estadoEnvio"/>
+            </copy>
+            <copy>
+              <from variable="inputVariable" part="payload"
+                    query="/ns1:enviarCompraEntrada/ns1:nombreEnvio"/>
+              <to variable="outputVariable" part="payload"
+                  query="/ns1:enviarCompraSalida/ns1:proveedor"/>
+            </copy>
+          </assign>
+        </catchAll>
+      </faultHandlers>
+      <sequence name="Sequence2">
+        <switch name="SwitchCopEnvio">
+          <case condition="bpws:getVariableData('inputVariable','payload','/ns1:enviarCompraEntrada/ns1:nombreEnvio')=&quot;DHL&quot;">
+            <bpelx:annotation>
+              <bpelx:general>
+                <bpelx:property name="userLabel">
+                  <![CDATA[DHL_WS]]>
+                </bpelx:property>
+              </bpelx:general>
+            </bpelx:annotation>
+            <sequence name="Sequence4">
+              <assign name="TransformDHL">
+                <bpelx:annotation>
+                  <bpelx:pattern>transformation</bpelx:pattern>
+                </bpelx:annotation>
+                <copy>
+                  <from expression="ora:doXSLTransformForDoc('xsl/Transformation_DHL.xsl', $inputVariable.payload)"/>
+                  <to variable="InvokeDHL_fullfillShipment_InputVariable"
+                      part="parameters"/>
+                </copy>
+              </assign>
+              <invoke name="InvokeDHL"
+                      partnerLink="ServiceDHLProxy" portType="ns5:IService1"
+                      operation="fullfillShipment"
+                      inputVariable="InvokeDHL_fullfillShipment_InputVariable"
+                      outputVariable="InvokeDHL_fullfillShipment_OutputVariable"
+                      bpelx:invokeAsDetail="no"/>
+            </sequence>
+          </case>
+          <case condition="bpws:getVariableData('inputVariable','payload','/ns1:enviarCompraEntrada/ns1:nombreEnvio')=&quot;SERVIENTREGA&quot;">
+            <bpelx:annotation>
+              <bpelx:general>
+                <bpelx:property name="userLabel">
+                  <![CDATA[SERVIENTREGA_BD]]>
+                </bpelx:property>
+              </bpelx:general>
+            </bpelx:annotation>
+            <sequence name="Sequence3">
+              <assign name="TransformServientrega">
+                <bpelx:annotation>
+                  <bpelx:pattern>transformation</bpelx:pattern>
+                </bpelx:annotation>
+                <copy>
+                  <from expression="ora:doXSLTransformForDoc('xsl/Transformation_Servientrega.xsl', $inputVariable.payload)"/>
+                  <to variable="InvokeServientrega_insert_InputVariable"
+                      part="KallsonysShipmentCollection"/>
+                </copy>
+              </assign>
+              <invoke name="InvokeServientrega"
+                      inputVariable="InvokeServientrega_insert_InputVariable"
+                      partnerLink="setServientrega"
+                      portType="ns4:setServientrega_ptt" operation="insert"
+                      bpelx:invokeAsDetail="no"/>
+            </sequence>
+          </case>
+          <case condition="bpws:getVariableData('inputVariable','payload','/ns1:enviarCompraEntrada/ns1:nombreEnvio')=&quot;DEPRISA&quot;">
+            <bpelx:annotation>
+              <bpelx:general>
+                <bpelx:property name="userLabel">
+                  <![CDATA[DEPRISA_FILE]]>
+                </bpelx:property>
+              </bpelx:general>
+            </bpelx:annotation>
+            <sequence name="Sequence1">
+              <assign name="TransformDeprisa">
+                <bpelx:annotation>
+                  <bpelx:pattern>transformation</bpelx:pattern>
+                </bpelx:annotation>
+                <copy>
+                  <from expression="ora:doXSLTransformForDoc('xsl/Transformation_Deprisa.xsl', $inputVariable.payload)"/>
+                  <to variable="Invoke1_Write_InputVariable" part="body"/>
+                </copy>
+              </assign>
+              <invoke name="InvokeDeprisaFile"
+                      inputVariable="Invoke1_Write_InputVariable"
+                      partnerLink="setDeprisaFile" portType="ns3:Write_ptt"
+                      operation="Write" bpelx:invokeAsDetail="no"/>
+            </sequence>
+          </case>
+          <otherwise><assign name="AssignFallo"
+                             xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/">
+              <copy>
+                <from expression="3=2"/>
+                <to variable="outputVariable" part="payload"
+                    query="/ns1:enviarCompraSalida/ns1:estadoEnvio"/>
+              </copy>
+            </assign></otherwise>
+        </switch>
+        <scope name="Scope2">
+          <bpelx:annotation>
+            <bpelx:general>
+              <bpelx:property name="userLabel">
+                <![CDATA[ScopeActualizarOrdenEnvio]]>
+              </bpelx:property>
+            </bpelx:general>
+          </bpelx:annotation>
+          <faultHandlers>
+            <catchAll><assign name="AssignFallo"
+                              xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/">
+      
+   <copy>
+         <from expression="3=2"/>
+         <to variable="outputVariable" part="payload"
+             query="/ns1:enviarCompraSalida/ns1:estadoEnvio"/>
+      </copy></assign></catchAll>
+          </faultHandlers>
+          <sequence name="SequenceActualizarEnvio">
+            <assign name="AssignIdOrdenEnvio">
+              <copy>
+                <from variable="inputVariable" part="payload"
+                      query="/ns1:enviarCompraEntrada/ns1:idOrden"/>
+                <to variable="getIdEnvio_setCompaniaEnvioSelect_InputVariable"
+                    part="setCompaniaEnvioSelect_inputParameters"
+                    query="/ns7:setCompaniaEnvioSelect_idOrdenInputParameters/ns7:idOrden"/>
+              </copy>
+            </assign>
+            <invoke name="getIdEnvio"
+                    inputVariable="getIdEnvio_setCompaniaEnvioSelect_InputVariable"
+                    outputVariable="getIdEnvio_setCompaniaEnvioSelect_OutputVariable"
+                    partnerLink="setCompaniaEnvio"
+                    portType="ns6:setCompaniaEnvio_ptt"
+                    operation="setCompaniaEnvioSelect"
+                    bpelx:invokeAsDetail="no"/>
+            <switch name="Switch1">
+              <case condition="bpws:getVariableData('getIdEnvio_setCompaniaEnvioSelect_OutputVariable','EnvioCollection','/ns7:EnvioCollection/ns7:Envio/ns7:idenvio')>0">
+                <bpelx:annotation>
+                  <bpelx:general>
+                    <bpelx:property name="userLabel">
+                      <![CDATA[EnvioOrden]]>
+                    </bpelx:property>
+                  </bpelx:general>
+                </bpelx:annotation>
+                <sequence>
+                  <assign name="AssignCompaniaEnvio">
+                    <copy>
+                      <from variable="getIdEnvio_setCompaniaEnvioSelect_OutputVariable"
+                            part="EnvioCollection"
+                            query="/ns7:EnvioCollection/ns7:Envio/ns7:idenvio"/>
+                      <to variable="SetCompania_update_InputVariable"
+                          part="EnvioCollection"
+                          query="/ns7:EnvioCollection/ns7:Envio/ns7:idenvio"/>
+                    </copy>
+                    <copy>
+                      <from variable="getIdEnvio_setCompaniaEnvioSelect_OutputVariable"
+                            part="EnvioCollection"
+                            query="/ns7:EnvioCollection/ns7:Envio/ns7:idorden"/>
+                      <to variable="SetCompania_update_InputVariable"
+                          part="EnvioCollection"
+                          query="/ns7:EnvioCollection/ns7:Envio/ns7:idorden"/>
+                    </copy>
+                    <copy>
+                      <from expression="1"/>
+                      <to variable="SetCompania_update_InputVariable"
+                          part="EnvioCollection"
+                          query="/ns7:EnvioCollection/ns7:Envio/ns7:enviado"/>
+                    </copy>
+                    <copy>
+                      <from variable="inputVariable" part="payload"
+                            query="/ns1:enviarCompraEntrada/ns1:nombreEnvio"/>
+                      <to variable="SetCompania_update_InputVariable"
+                          part="EnvioCollection"
+                          query="/ns7:EnvioCollection/ns7:Envio/ns7:companiaenvio"/>
+                    </copy>
+                  </assign>
+                  <invoke name="SetCompania"
+                          inputVariable="SetCompania_update_InputVariable"
+                          partnerLink="setCompaniaEnvio"
+                          portType="ns6:setCompaniaEnvio_ptt" operation="update"
+                          bpelx:invokeAsDetail="no"/>
+                  <assign name="AssignOk">
+                    <copy>
+                      <from expression="boolean('true')"/>
+                      <to variable="outputVariable" part="payload"
+                          query="/ns1:enviarCompraSalida/ns1:estadoEnvio"/>
+                    </copy>
+                    <copy>
+                      <from variable="inputVariable" part="payload"
+                            query="/ns1:enviarCompraEntrada/ns1:nombreEnvio"/>
+                      <to variable="outputVariable" part="payload"
+                          query="/ns1:enviarCompraSalida/ns1:proveedor"/>
+                    </copy>
+                  </assign>
+                </sequence>
+              </case>
+              <otherwise><assign name="AssignFallo"
+                                 xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/">
+      
+   <copy>
+         <from expression="3=2"/>
+         <to variable="outputVariable" part="payload"
+             query="/ns1:enviarCompraSalida/ns1:estadoEnvio"/>
+      </copy></assign></otherwise>
+            </switch>
+          </sequence>
+        </scope>
+      </sequence>
+    </scope>
+    <!-- Generate reply to synchronous request -->
+    <reply name="replyOutput" partnerLink="ServiceEnvio" portType="client:BPELEnvio" operation="enviarCompra" variable="outputVariable"/>
+  </sequence>
+</process>

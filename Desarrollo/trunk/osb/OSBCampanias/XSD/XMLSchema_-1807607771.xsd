@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:pr="http://www.kallsony.com/entidad/producto"
+     targetNamespace="http://www.kallsony.com/entidad/producto">
+    <complexType name="Producto">
+        <sequence>
+            <element name="idProducto" type="long" minOccurs="0"/>
+            <element name="codigoProducto" type="string" minOccurs="0"/>
+            <element name="nombreProducto" type="string" minOccurs="0"/>
+            <element name="descripcionProducto" type="string" minOccurs="0"/>
+            <element name="fabricanteProducto" type="string" minOccurs="0"/>
+            <element name="nombreImagenProducto" type="string" minOccurs="0"/>
+            <element name="precioProducto" type="float" minOccurs="0"/>
+            <element name="tipoProducto" type="pr:TipoProducto" minOccurs="0"/>
+        </sequence>
+    </complexType>
+    <complexType name="Tipo">
+        <sequence>
+            <element name="idTipo" type="int" minOccurs="0"/>
+            <element name="nombreTipo" type="string" minOccurs="0"/>
+        </sequence>
+    </complexType>
+    <complexType name="TipoProducto">
+        <sequence>
+            <element name="categoria" type="pr:Tipo" minOccurs="0"/>
+            <element name="subCategoria" type="pr:Tipo" minOccurs="0"/>
+        </sequence>
+    </complexType>
+    <element name="UnProducto" type="pr:Producto"/>
+</schema>

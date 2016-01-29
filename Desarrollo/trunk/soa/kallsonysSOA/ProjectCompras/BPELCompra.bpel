@@ -1,0 +1,186 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Wed Mar 25 09:04:32 COT 2015
+  Author:  Diego
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="BPELCompra"
+               targetNamespace="http://xmlns.oracle.com/Appkallsonys/ProjectCompras/BPELCompra"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/Appkallsonys/ProjectCompras/BPELCompra"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+               xmlns:ns1="http://www.kallsony.com/final/operacion/registrarcompra"
+               xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns2="http://www.kallsony.com/final/operacion/validartarjeta"
+         xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/file/Appkallsonys/ProjectCompras/setCompra"
+         xmlns:ns5="http://www.kallsony.com/operacion/validartarjeta"
+         xmlns:ns4="http://www.kallsony.com/operacion/registrarcompra"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns6="http://xmlns.oracle.com/pcbpel/adapter/db/Appkallsonys/ProjectCompras/getPreorden"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:ns7="http://xmlns.oracle.com/pcbpel/adapter/db/getPreorden"
+         xmlns:ns8="http://xmlns.oracle.com/pcbpel/adapter/jms/Appkallsonys/ProjectCompras/JMS_COMPRA"
+         xmlns:ns9="http://www.kallsony.com/entidad/orden">
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      PARTNERLINKS                                                      
+      List of services participating in this BPEL process               
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="bpelcompra_client" partnerLinkType="ns1:BPELCompra" myRole="PortCompra"/>
+    <partnerLink name="ServiceTarjeta" partnerLinkType="ns2:ServiceTarjeta"
+                 partnerRole="portTarjerta"/>
+    <partnerLink name="setCompra" partnerLinkType="ns3:WriteCompra_plt"
+                 partnerRole="WriteCompra_role"/>
+    <partnerLink name="getPreorden" partnerLinkType="ns6:getPreorden_plt"
+                 partnerRole="getPreorden_role"/>
+    <partnerLink name="JMS_COMPRA" partnerLinkType="ns8:Produce_Message_plt"
+                 partnerRole="Produce_Message_role"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="ns1:Compra_Entrada"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="ns1:Compra_Salida"/>
+    <variable name="Invoke1_validarTarjeta_InputVariable"
+              messageType="ns2:Tarjeta_validarEntrada"/>
+    <variable name="Invoke1_validarTarjeta_OutputVariable"
+              messageType="ns2:Tarjeta_validarSalida"/>
+    <variable name="InvokeFile_WriteCompra_InputVariable"
+              messageType="ns3:WriteCompra_msg"/>
+    <variable name="InvokePreOrden_getPreorden_InputVariable"
+              messageType="ns6:getPreordenInput_msg"/>
+    <variable name="InvokePreOrden_getPreorden_OutputVariable"
+              messageType="ns6:getPreordenOutputCollection_msg"/>
+    <variable name="InvokeJMSComp_Produce_Message_InputVariable"
+              messageType="ns8:Produce_Message_msg"/>
+    <variable name="unaOrden" element="ns9:unaOrden"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in BPELCompra.wsdl) -->
+    <receive name="receiveInput" partnerLink="bpelcompra_client" portType="ns1:PortCompra" operation="registrarCompra" variable="inputVariable" createInstance="yes"/>
+    <assign name="TransformTarjeta">
+      <bpelx:annotation>
+        <bpelx:pattern>transformation</bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from expression="ora:doXSLTransformForDoc('xsl/Transformation.xsl', $inputVariable.partEntrada)"/>
+        <to variable="Invoke1_validarTarjeta_InputVariable" part="partEntrada"/>
+      </copy>
+    </assign>
+    <invoke name="InvokeTarjeta" bpelx:invokeAsDetail="no"
+            inputVariable="Invoke1_validarTarjeta_InputVariable"
+            outputVariable="Invoke1_validarTarjeta_OutputVariable"
+            partnerLink="ServiceTarjeta" portType="ns2:portTarjerta"
+            operation="validarTarjeta"/>
+    <switch name="Switch1">
+      <case condition="contains(bpws:getVariableData('Invoke1_validarTarjeta_OutputVariable','partSalida','/ns5:validarTarjetaSalida/ns5:estado'),'true')">
+        <bpelx:annotation>
+          <bpelx:general>
+            <bpelx:property name="userLabel">
+              <![CDATA[Trajeta Valida]]>
+            </bpelx:property>
+          </bpelx:general>
+        </bpelx:annotation>
+        <sequence name="Sequence1">
+          <scope name="Scope2">
+            <sequence>
+              <invoke name="InvokePreOrden"
+                      inputVariable="InvokePreOrden_getPreorden_InputVariable"
+                      outputVariable="InvokePreOrden_getPreorden_OutputVariable"
+                      partnerLink="getPreorden" portType="ns6:getPreorden_ptt"
+                      operation="getPreorden" bpelx:invokeAsDetail="no"/>
+              <assign name="AssignPreOrden">
+                <copy>
+                  <from variable="InvokePreOrden_getPreorden_OutputVariable"
+                        part="getPreordenOutputCollection"
+                        query="/ns7:getPreordenOutputCollection/ns7:getPreordenOutput/ns7:PREORDEN"/>
+                  <to variable="unaOrden" query="/ns9:unaOrden/idOrden"/>
+                </copy>
+              </assign>
+              <assign name="TransformFile">
+                <bpelx:annotation>
+                  <bpelx:pattern>transformation</bpelx:pattern>
+                </bpelx:annotation>
+                <copy>
+                  <from expression="ora:doXSLTransformForDoc('xsl/Transformation_File.xsl', $inputVariable.partEntrada, 'unaOrden', $unaOrden)"/>
+                  <to variable="InvokeFile_WriteCompra_InputVariable"
+                      part="body"/>
+                </copy>
+              </assign>
+              <invoke name="InvokeFile" partnerLink="setCompra"
+                      portType="ns3:WriteCompra_ptt" operation="WriteCompra"
+                      bpelx:invokeAsDetail="no"
+                      inputVariable="InvokeFile_WriteCompra_InputVariable"/>
+              <assign name="TransformJMS">
+                <bpelx:annotation>
+                  <bpelx:pattern>transformation</bpelx:pattern>
+                </bpelx:annotation>
+                <copy>
+                  <from expression="ora:doXSLTransformForDoc('xsl/Transformation_JMS.xsl', $inputVariable.partEntrada, 'unaOrden', $unaOrden)"/>
+                  <to variable="InvokeJMSComp_Produce_Message_InputVariable"
+                      part="body"/>
+                </copy>
+              </assign>
+              <invoke name="InvokeJMSComp"
+                      inputVariable="InvokeJMSComp_Produce_Message_InputVariable"
+                      partnerLink="JMS_COMPRA"
+                      portType="ns8:Produce_Message_ptt"
+                      operation="Produce_Message" bpelx:invokeAsDetail="no"/>
+            </sequence>
+          </scope>
+        </sequence>
+      </case>
+      <otherwise/>
+    </switch>
+    <assign name="TransformRespuesta">
+      <bpelx:annotation>
+        <bpelx:pattern>transformation</bpelx:pattern>
+      </bpelx:annotation>
+      <copy>
+        <from expression="ora:doXSLTransformForDoc('xsl/Transformation_res.xsl', $Invoke1_validarTarjeta_OutputVariable.partSalida, 'InvokePreOrden_getPreorden_OutputVariable.getPreordenOutputCollection', $InvokePreOrden_getPreorden_OutputVariable.getPreordenOutputCollection)"/>
+        <to variable="outputVariable" part="partSalida"/>
+      </copy>
+    </assign>
+    <!-- Generate reply to synchronous request -->
+    <reply name="replyOutput" partnerLink="bpelcompra_client" portType="ns1:PortCompra" operation="registrarCompra" variable="outputVariable"/>
+  </sequence>
+</process>

@@ -1,0 +1,10 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<properties>
+   <entry key="AG}5d769dc0:14ce136a2a8:-7c29">RuleDeprisa</entry>
+   <entry key="AG}5d769dc0:14ce136a2a8:-7c2d">RuleDHL</entry>
+   <entry key="AG}5d769dc0:14ce136a2a8:-7c2a">RuleServientrega</entry>
+   <entry key="DG}5d769dc0:14ce136a2a8:-7c29">Si la orden tiene destino nacional y se seleccionó el fabricante SONY, se selecciona DEPRISA</entry>
+   <entry key="DG}5d769dc0:14ce136a2a8:-7c2d">Si la orden tiene destino internacional, se selecciona DHL</entry>
+   <entry key="AG}5d769dc0:14ce136a2a8:-7c33">RulesetDestino</entry>
+   <entry key="DG}5d769dc0:14ce136a2a8:-7c2a">Si la orden tiene destino nacional y se seleccionó el fabricante RapidService, se selecciona SERVIENTREGA</entry>
+</properties>

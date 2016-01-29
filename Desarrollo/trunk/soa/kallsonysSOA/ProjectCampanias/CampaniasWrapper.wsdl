@@ -1,0 +1,17 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<wsdl:definitions
+     name="Productos"
+     targetNamespace="http://www.kallsony.com/final/operacion/consultacampanias"
+     xmlns:plnk="http://schemas.xmlsoap.org/ws/2003/05/partner-link/"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://www.kallsony.com/final/operacion/consultacampanias"
+     xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    >
+    <plnk:partnerLinkType name="BPELProcessCampanias">
+        <plnk:role name="CampaniasPort">
+            <plnk:portType name="tns:CampaniasPort"/>
+        </plnk:role>
+    </plnk:partnerLinkType>
+    <wsdl:import namespace="http://www.kallsony.com/final/operacion/consultacampanias" location="Campanias.wsdl"/>
+</wsdl:definitions>

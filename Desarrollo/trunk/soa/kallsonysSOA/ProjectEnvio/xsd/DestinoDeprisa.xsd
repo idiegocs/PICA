@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        xmlns:ds="http://www.kallsony.com.destino.deprisa"
+        targetNamespace="http://www.kallsony.com.destino.deprisa"
+        elementFormDefault="qualified">
+  <element name="ValidarDestinoEntrada">
+    <complexType>
+      <sequence>
+        <element name="encabezado" type="string"/>
+        <element name="items" type="ds:listaItem"/>
+      </sequence>
+    </complexType>
+  </element>
+  <complexType name="listaItem">
+    <sequence>
+      <element name="item" type="ds:items" minOccurs="0" maxOccurs="unbounded"/>
+    </sequence>
+  </complexType>
+  <complexType name="items">
+    <sequence>
+      <element name="detalle" type="string"/>
+    </sequence>
+  </complexType>
+</schema>

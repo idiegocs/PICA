@@ -1,0 +1,33 @@
+<?xml version= '1.0' encoding= 'UTF-8' ?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:or="http://www.kallsony.com/entidad/orden"
+     xmlns:cl="http://www.kallsony.com/entidad/usuario" xmlns:pr="http://www.kallsony.com/entidad/producto"
+     targetNamespace="http://www.kallsony.com/entidad/orden">
+    <import schemaLocation="Usuario.xsd" namespace="http://www.kallsony.com/entidad/usuario"/>
+    <import schemaLocation="Producto.xsd" namespace="http://www.kallsony.com/entidad/producto"/>
+    <complexType name="Orden">
+        <sequence>
+            <element name="idOrden" type="int" minOccurs="0"/>
+            <element name="idPreOrden" type="int" minOccurs="0"/>
+            <element name="fechaOrden" minOccurs="0" type="dateTime"/>
+            <element name="estadoOrden" type="string" minOccurs="0"/>
+            <element name="idEstadoOrden" type="int" minOccurs="0"/>
+            <element name="numeroItems" minOccurs="0" type="int"/>
+            <element name="total" type="double" minOccurs="0"/>
+            <element name="cliente" type="cl:Usuario" minOccurs="0"/>
+            <element name="listaItems" type="or:Items" minOccurs="0"/>
+        </sequence>
+    </complexType>
+    <complexType name="Item">
+        <sequence>
+            <element name="cantidad" type="int"/>
+            <element name="tipo" type="boolean"/>
+            <element name="idCampania" minOccurs="0" type="int"/>
+            <element name="producto" type="pr:Producto" minOccurs="0"/>
+        </sequence>
+    </complexType>
+    <complexType name="Items">
+        <sequence>
+            <element name="items" type="or:Item" minOccurs="0" maxOccurs="unbounded"/>
+        </sequence>
+    </complexType>
+</schema>

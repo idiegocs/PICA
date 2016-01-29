@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions
+    
+     targetNamespace="http://www.kallsony.com/final/operacion/validartarjeta"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://www.kallsony.com/final/operacion/validartarjeta"
+     xmlns:wktj="http://www.kallsony.com/operacion/validartarjeta"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+     xmlns:wktf="http://www.kallsony.com/util/falta"
+    >
+    <types>
+        <xsd:schema targetNamespace="http://www.kallsony.com/final/operacion/validartarjeta" elementFormDefault="qualified">
+            <xsd:import schemaLocation="xsd/ValidarTarjeta.xsd" namespace="http://www.kallsony.com/operacion/validartarjeta"/>
+            <xsd:import schemaLocation="xsd/Falta.xsd" namespace="http://www.kallsony.com/util/falta"/>
+        </xsd:schema>
+    </types>
+    <message name="Tarjeta_validarEntrada">
+        <part name="partEntrada" element="wktj:validarTarjetaEntrada"/>
+    </message>
+    <message name="Tarjeta_validarSalida">
+        <part name="partSalida" element="wktj:validarTarjetaSalida"/>
+    </message>
+    <message name="Tarjeta_Falta">
+        <part name="partFalta" element="wktf:falta"/>
+    </message>
+    <portType name="portTarjerta">
+        <operation name="validarTarjeta">
+            <input message="tns:Tarjeta_validarEntrada"/>
+            <output message="tns:Tarjeta_validarSalida"/>
+            <fault name="FaltaTarjeta" message="tns:Tarjeta_Falta"/>
+        </operation>
+    </portType>
+    <binding name="portTarjertaSOAP11Binding" type="tns:portTarjerta">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="validarTarjeta">
+            <soap:operation style="document" soapAction="http://www.kallsony.com/final/operacion/validartarjeta/validarTarjeta"/>
+            <input>
+                <soap:body use="literal" parts="partEntrada"/>
+            </input>
+            <output>
+                <soap:body use="literal" parts="partSalida"/>
+            </output>
+            <fault name="FaltaTarjeta">
+                <soap:fault name="FaltaTarjeta" use="literal"/>
+            </fault>
+        </operation>
+    </binding>
+    <service name="portTarjerta">
+        <port name="portTarjertaPort" binding="tns:portTarjertaSOAP11Binding">
+            <soap:address location="http://www.kallsony.com"/>
+        </port>
+    </service>
+</definitions>

@@ -1,0 +1,21 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/setServientrega" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/setServientrega" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="KallsonysShipmentCollection" type="KallsonysShipmentCollection"/>
+   <xs:complexType name="KallsonysShipmentCollection">
+      <xs:sequence>
+         <xs:element name="KallsonysShipment" type="KallsonysShipment" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="KallsonysShipment">
+      <xs:sequence>
+         <xs:element name="orderid" type="xs:long"/>
+         <xs:element name="fname" type="xs:string"/>
+         <xs:element name="lname" type="xs:string"/>
+         <xs:element name="street" type="xs:string"/>
+         <xs:element name="city" type="xs:string"/>
+         <xs:element name="state" type="xs:string" nillable="true"/>
+         <xs:element name="zipcode" type="xs:string" nillable="true"/>
+         <xs:element name="Estado" type="xs:string"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

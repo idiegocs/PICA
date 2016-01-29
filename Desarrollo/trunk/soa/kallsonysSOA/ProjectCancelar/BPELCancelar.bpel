@@ -1,0 +1,200 @@
+<?xml version = "1.0" encoding = "UTF-8" ?>
+<!--
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  Oracle JDeveloper BPEL Designer 
+  
+  Created: Tue Jun 02 17:46:50 COT 2015
+  Author:  Diego
+  Type: BPEL 1.1 Process
+  Purpose: Synchronous BPEL Process
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->
+<process name="BPELCancelar"
+               targetNamespace="http://xmlns.oracle.com/Appkallsonys/ProjectCancelar/BPELCancelar"
+               xmlns="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+               xmlns:client="http://xmlns.oracle.com/Appkallsonys/ProjectCancelar/BPELCancelar"
+               xmlns:ora="http://schemas.oracle.com/xpath/extension"
+               xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:ns1="http://xmlns.oracle.com/pcbpel/adapter/db/Appkallsonys/ProjectCancelar/getOrden"
+         xmlns:ns2="http://xmlns.oracle.com/pcbpel/adapter/db/Appkallsonys/ProjectCancelar/setCancelacion"
+         xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:ns3="http://xmlns.oracle.com/pcbpel/adapter/db/top/getOrden"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap"
+         xmlns:ns4="http://www.kallsony.com/operacion/cancelarcompra"
+         xmlns:ns5="http://xmlns.oracle.com/ias/pcbpel/NotificationService"
+         xmlns:ns6="http://xmlns.oracle.com/pcbpel/adapter/jms/Appkallsonys/ProjectCancelar/setCancelacionJMS">
+
+    <!-- 
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        PARTNERLINKS                                                      
+        List of services participating in this BPEL process               
+      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    --> 
+  <partnerLinks>
+    <!-- 
+      The 'client' role represents the requester of this service. It is 
+      used for callback. The location and correlation information associated
+      with the client role are automatically set using WS-Addressing.
+    -->
+    <partnerLink name="ServiceCancelarOrden" partnerLinkType="client:BPELCancelar" myRole="BPELCancelarProvider"/>
+    <partnerLink name="getOrden" partnerLinkType="ns1:getOrden_plt"
+                 partnerRole="getOrden_role"/>
+    <partnerLink name="setCancelacion" partnerLinkType="ns2:setCancelacion_plt"
+                 partnerRole="setCancelacion_role"/>
+    <partnerLink name="setCancelacionJMS"
+                 partnerLinkType="ns6:Produce_Message_plt"
+                 partnerRole="Produce_Message_role"/>
+  </partnerLinks>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      VARIABLES                                                        
+      List of messages and XML documents used within this BPEL process 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <variables>
+    <!-- Reference to the message passed as input during initiation -->
+    <variable name="inputVariable" messageType="client:BPELCancelarRequestMessage"/>
+
+    <!-- Reference to the message that will be returned to the requester-->
+    <variable name="outputVariable" messageType="client:BPELCancelarResponseMessage"/>
+    <variable name="InvokeGetOrden_getOrdenSelect_InputVariable"
+              messageType="ns1:getOrdenSelect_inputParameters"/>
+    <variable name="InvokeGetOrden_getOrdenSelect_OutputVariable"
+              messageType="ns1:OrdenCollection_msg"/>
+    <variable name="InvokeSetCancelacion_insert_InputVariable"
+              messageType="ns2:OrdencanceladaCollection_msg"/>
+    <variable name="InvokeSetCancelacion_insert_OutputVariable"
+              messageType="ns2:OrdencanceladaCollection_msg"/>
+    <variable name="InvokeCancelarJMS_Produce_Message_InputVariable"
+              messageType="ns6:Produce_Message_msg"/>
+  </variables>
+
+  <!-- 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     ORCHESTRATION LOGIC                                               
+     Set of activities coordinating the flow of messages across the    
+     services integrated within this business process                  
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  -->
+  <sequence name="main">
+
+    <!-- Receive input from requestor. (Note: This maps to operation defined in BPELCancelar.wsdl) -->
+    <scope name="Scope1">
+      <faultHandlers>
+        <catchAll>
+          <assign name="AssignError">
+            <copy>
+              <from expression="1=2"/>
+              <to variable="outputVariable" part="payload"
+                  query="/ns4:cancelarSalida/ns4:estado"/>
+            </copy>
+          </assign>
+        </catchAll>
+      </faultHandlers>
+      <sequence>
+        <receive name="receiveInput" partnerLink="ServiceCancelarOrden"
+                 portType="client:BPELCancelar" operation="cancelarOrden"
+                 variable="inputVariable" createInstance="yes"/>
+        <assign name="TransformGetOrden">
+          <bpelx:annotation>
+            <bpelx:pattern>transformation</bpelx:pattern>
+          </bpelx:annotation>
+          <copy>
+            <from expression="ora:doXSLTransformForDoc('xsl/Transformation_Orden.xsl', $inputVariable.payload)"/>
+            <to variable="InvokeGetOrden_getOrdenSelect_InputVariable"
+                part="getOrdenSelect_inputParameters"/>
+          </copy>
+        </assign>
+        <invoke name="InvokeGetOrden"
+                inputVariable="InvokeGetOrden_getOrdenSelect_InputVariable"
+                outputVariable="InvokeGetOrden_getOrdenSelect_OutputVariable"
+                partnerLink="getOrden" portType="ns1:getOrden_ptt"
+                operation="getOrdenSelect" bpelx:invokeAsDetail="no"/>
+        <switch name="Switch1">
+          <case condition="bpws:getVariableData('InvokeGetOrden_getOrdenSelect_OutputVariable','OrdenCollection','/ns3:OrdenCollection/ns3:Orden/ns3:idorden')>0">
+            <bpelx:annotation>
+              <bpelx:general>
+                <bpelx:property name="userLabel">
+                  <![CDATA[OrdenExiste]]>
+                </bpelx:property>
+              </bpelx:general>
+            </bpelx:annotation>
+            <sequence name="Sequence2">
+              <assign name="TransformCancelacion">
+                <bpelx:annotation>
+                  <bpelx:pattern>transformation</bpelx:pattern>
+                </bpelx:annotation>
+                <copy>
+                  <from expression="ora:doXSLTransformForDoc('xsl/Transformation_Cancelar.xsl', $inputVariable.payload, 'InvokeGetOrden_getOrdenSelect_OutputVariable.OrdenCollection', $InvokeGetOrden_getOrdenSelect_OutputVariable.OrdenCollection)"/>
+                  <to variable="InvokeSetCancelacion_insert_InputVariable"
+                      part="OrdencanceladaCollection"/>
+                </copy>
+              </assign>
+              <invoke name="InvokeSetCancelacion"
+                      inputVariable="InvokeSetCancelacion_insert_InputVariable"
+                      partnerLink="setCancelacion"
+                      portType="ns2:setCancelacion_ptt" operation="insert"
+                      outputVariable="InvokeSetCancelacion_insert_OutputVariable"
+                      bpelx:invokeAsDetail="no"/>
+              <assign name="AssignJMS">
+                <copy>
+                  <from variable="inputVariable" part="payload"
+                        query="/ns4:cancelarEntrada/ns4:idOrden"/>
+                  <to variable="InvokeCancelarJMS_Produce_Message_InputVariable"
+                      part="body" query="/ns4:cancelarEntrada/ns4:idOrden"/>
+                </copy>
+                <copy>
+                  <from variable="inputVariable" part="payload"
+                        query="/ns4:cancelarEntrada/ns4:nombreUsuario"/>
+                  <to variable="InvokeCancelarJMS_Produce_Message_InputVariable"
+                      part="body"
+                      query="/ns4:cancelarEntrada/ns4:nombreUsuario"/>
+                </copy>
+                <copy>
+                  <from variable="inputVariable" part="payload"
+                        query="/ns4:cancelarEntrada/ns4:comentario"/>
+                  <to variable="InvokeCancelarJMS_Produce_Message_InputVariable"
+                      part="body" query="/ns4:cancelarEntrada/ns4:comentario"/>
+                </copy>
+              </assign>
+              <invoke name="InvokeCancelarJMS"
+                      inputVariable="InvokeCancelarJMS_Produce_Message_InputVariable"
+                      partnerLink="setCancelacionJMS"
+                      portType="ns6:Produce_Message_ptt"
+                      operation="Produce_Message" bpelx:invokeAsDetail="no"/>
+              <assign name="AssignSalida">
+                <copy>
+                  <from expression="1=1"/>
+                  <to variable="outputVariable" part="payload"
+                      query="/ns4:cancelarSalida/ns4:estado"/>
+                </copy>
+              </assign>
+            </sequence>
+          </case>
+          <otherwise>
+            <assign name="AssignSalidafallida">
+              <copy>
+                <from expression="1=2"/>
+                <to variable="outputVariable" part="payload"
+                    query="/ns4:cancelarSalida/ns4:estado"/>
+              </copy>
+            </assign>
+          </otherwise>
+        </switch>
+      </sequence>
+    </scope>
+    <!-- Generate reply to synchronous request -->
+    <reply name="replyOutput" partnerLink="ServiceCancelarOrden" portType="client:BPELCancelar" operation="cancelarOrden" variable="outputVariable"/>
+  </sequence>
+</process>

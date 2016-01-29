@@ -1,0 +1,25 @@
+<?binding.jca getCategorias_db.jca?>
+<wsdl:definitions name="getCategorias" targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/kallSonysApp/categorias/getCategorias" xmlns:tns="http://xmlns.oracle.com/pcbpel/adapter/db/kallSonysApp/categorias/getCategorias" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:plt="http://schemas.xmlsoap.org/ws/2003/05/partner-link/" xmlns:top="http://xmlns.oracle.com/pcbpel/adapter/db/top/getCategorias">
+    <plt:partnerLinkType name="getCategorias_plt">
+        <plt:role name="getCategorias_role">
+            <plt:portType name="tns:getCategorias_ptt"/>
+        </plt:role>
+    </plt:partnerLinkType>
+    <wsdl:types>
+        <schema xmlns="http://www.w3.org/2001/XMLSchema">
+            <import namespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/getCategorias" schemaLocation="xsd/getCategorias_table.xsd"/>
+        </schema>
+    </wsdl:types>
+    <wsdl:message name="getCategoriasSelect_inputParameters">
+        <wsdl:part name="getCategoriasSelect_inputParameters" element="top:getCategoriasSelect_tipoFiltro_valorFiltro_paginaInputParameters"/>
+    </wsdl:message>
+    <wsdl:message name="CategoriaCollection_msg">
+        <wsdl:part name="CategoriaCollection" element="top:CategoriaCollection"/>
+    </wsdl:message>
+    <wsdl:portType name="getCategorias_ptt">
+        <wsdl:operation name="getCategoriasSelect">
+            <wsdl:input message="tns:getCategoriasSelect_inputParameters"/>
+            <wsdl:output message="tns:CategoriaCollection_msg"/>
+        </wsdl:operation>
+    </wsdl:portType>
+</wsdl:definitions>

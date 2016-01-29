@@ -1,0 +1,13 @@
+<adapter-config name="getCountProduct" adapter="Database Adapter" wsdlLocation="getCountProduct.wsdl" xmlns="http://platform.integration.oracle/blocks/adapter/fw/metadata">
+  
+  <connection-factory location="eis/DB/productosDatabase" UIConnectionName="ProductosDB" adapterRef=""/>
+  <endpoint-interaction portType="getCountProduct_ptt" operation="getCountProduct">
+    <interaction-spec className="oracle.tip.adapter.db.DBPureSQLInteractionSpec">
+      <property name="SqlString" value="SELECT count(t1.IdProducto) as total  FROM Producto.Producto t1   WHERE  ( 'N'=#tipoBusquedaN  AND UPPER(t1.NombreProducto) LIKE UPPER(concat('%', #valorBusquedaN, '%')) ) OR ( 'C'=#tipoBusquedaC  AND UPPER(t1.CodigoProducto) LIKE UPPER(concat('%', #valorBusquedaC, '%')) ) OR ( 'D'=#tipoBusquedaD  AND UPPER(t1.DescripcionProducto) LIKE UPPER(concat('%', #valorBusquedaD, '%')) ) OR ( 'S'=#tipoBusquedaS  AND UPPER(t1.IdSubcategoria) LIKE UPPER(concat('%', #valorBusquedaS, '%')) ) OR ( 'A'=#tipoBusquedaA)  "/>
+      <property name="GetActiveUnitOfWork" value="false"/>
+    </interaction-spec>
+    <input/>
+    <output/>
+  </endpoint-interaction>
+
+</adapter-config>

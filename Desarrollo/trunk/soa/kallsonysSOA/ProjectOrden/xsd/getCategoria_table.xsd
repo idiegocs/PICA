@@ -1,0 +1,27 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<xs:schema targetNamespace="http://xmlns.oracle.com/pcbpel/adapter/db/top/getCategoria" xmlns="http://xmlns.oracle.com/pcbpel/adapter/db/top/getCategoria" elementFormDefault="qualified" attributeFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+   <xs:element name="CategoriaClienteCollection" type="CategoriaClienteCollection"/>
+   <xs:complexType name="CategoriaClienteCollection">
+      <xs:sequence>
+         <xs:element name="CategoriaCliente" type="CategoriaCliente" minOccurs="0" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="CategoriaCliente">
+      <xs:sequence>
+         <xs:element name="idcategoria" type="xs:long"/>
+         <xs:element name="nombreCategoria" minOccurs="0" nillable="true">
+            <xs:simpleType>
+               <xs:restriction base="xs:string">
+                  <xs:maxLength value="128"/>
+               </xs:restriction>
+            </xs:simpleType>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="CategoriaClientePrimaryKey" type="CategoriaClientePrimaryKey"/>
+   <xs:complexType name="CategoriaClientePrimaryKey">
+      <xs:sequence>
+         <xs:element name="idcategoria" type="xs:long" minOccurs="1" maxOccurs="1"/>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>
