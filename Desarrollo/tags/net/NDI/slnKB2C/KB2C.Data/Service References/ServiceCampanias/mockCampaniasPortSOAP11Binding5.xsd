@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema xmlns:cam="http://www.kallsony.com/operacion/consultacampania" xmlns:ft="http://www.kallsony.com/util/filtro" xmlns:cp="http://www.kallsony.com/entidad/campania" elementFormDefault="qualified" targetNamespace="http://www.kallsony.com/operacion/consultacampania" xmlns="http://www.w3.org/2001/XMLSchema">
+  <import schemaLocation="mockCampaniasPortSOAP11Binding?WSDL&amp;interface=CampaniasPortSOAP11Binding&amp;part=Filtro.xsd" namespace="http://www.kallsony.com/util/filtro" />
+  <import schemaLocation="mockCampaniasPortSOAP11Binding?WSDL&amp;interface=CampaniasPortSOAP11Binding&amp;part=Campania.xsd" namespace="http://www.kallsony.com/entidad/campania" />
+  <complexType name="ConsultaCampaniaEntrada">
+    <sequence>
+      <element name="filtroCampania" type="ft:FiltroCampania" />
+    </sequence>
+  </complexType>
+  <complexType name="ConsultaCampaniaSalida">
+    <sequence>
+      <element name="campanias" type="cam:Campanias" />
+    </sequence>
+  </complexType>
+  <complexType name="Campanias">
+    <sequence>
+      <element minOccurs="0" maxOccurs="unbounded" name="campania" type="cp:Campania" />
+    </sequence>
+  </complexType>
+  <element name="consultaCampaniaEntrada" type="cam:ConsultaCampaniaEntrada" />
+  <element name="consultaCampaniaSalida" type="cam:ConsultaCampaniaSalida" />
+</schema>

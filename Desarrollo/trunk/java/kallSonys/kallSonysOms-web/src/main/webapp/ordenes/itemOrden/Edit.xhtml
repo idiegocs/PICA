@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ItemOrdenEditDlg" widgetVar="ItemOrdenEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleOrdenes.EditItemOrdenTitle}">
+            <h:form id="ItemOrdenEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{itemOrdenController.selected != null}">
+                        <p:outputLabel value="#{bundleOrdenes.EditItemOrdenLabel_iditem}" for="iditem" />
+                        <p:inputText id="iditem" value="#{itemOrdenController.selected.iditem}" title="#{bundleOrdenes.EditItemOrdenTitle_iditem}" required="true" requiredMessage="#{bundleOrdenes.EditItemOrdenRequiredMessage_iditem}"/>
+                        <p:outputLabel value="#{bundleOrdenes.EditItemOrdenLabel_tipoitem}" for="tipoitem" />
+                        <p:inputText id="tipoitem" value="#{itemOrdenController.selected.tipoitem}" title="#{bundleOrdenes.EditItemOrdenTitle_tipoitem}" required="true" requiredMessage="#{bundleOrdenes.EditItemOrdenRequiredMessage_tipoitem}"/>
+                        <p:outputLabel value="#{bundleOrdenes.EditItemOrdenLabel_idproducto}" for="idproducto" />
+                        <p:inputText id="idproducto" value="#{itemOrdenController.selected.idproducto}" title="#{bundleOrdenes.EditItemOrdenTitle_idproducto}" required="true" requiredMessage="#{bundleOrdenes.EditItemOrdenRequiredMessage_idproducto}"/>
+                        <p:outputLabel value="#{bundleOrdenes.EditItemOrdenLabel_codigoproducto}" for="codigoproducto" />
+                        <p:inputText id="codigoproducto" value="#{itemOrdenController.selected.codigoproducto}" title="#{bundleOrdenes.EditItemOrdenTitle_codigoproducto}" />
+                        <p:outputLabel value="#{bundleOrdenes.EditItemOrdenLabel_nombreproducto}" for="nombreproducto" />
+                        <p:inputText id="nombreproducto" value="#{itemOrdenController.selected.nombreproducto}" title="#{bundleOrdenes.EditItemOrdenTitle_nombreproducto}" />
+                        <p:outputLabel value="#{bundleOrdenes.EditItemOrdenLabel_cantidaditem}" for="cantidaditem" />
+                        <p:inputText id="cantidaditem" value="#{itemOrdenController.selected.cantidaditem}" title="#{bundleOrdenes.EditItemOrdenTitle_cantidaditem}" />
+                        <p:outputLabel value="#{bundleOrdenes.EditItemOrdenLabel_valorunitarioitem}" for="valorunitarioitem" />
+                        <p:inputText id="valorunitarioitem" value="#{itemOrdenController.selected.valorunitarioitem}" title="#{bundleOrdenes.EditItemOrdenTitle_valorunitarioitem}" required="true" requiredMessage="#{bundleOrdenes.EditItemOrdenRequiredMessage_valorunitarioitem}"/>
+                        <p:outputLabel value="#{bundleOrdenes.EditItemOrdenLabel_idorden}" for="idorden" />
+                        <p:selectOneMenu id="idorden" value="#{itemOrdenController.selected.idorden}" required="true" requiredMessage="#{bundleOrdenes.EditItemOrdenRequiredMessage_idorden}">
+                            <f:selectItem itemLabel="#{bundleOrdenes.SelectOneMessage}"/>
+                            <f:selectItems value="#{ordenController.itemsAvailableSelectOne}"
+                                           var="idordenItem"
+                                           itemValue="#{idordenItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{itemOrdenController.update}" value="#{bundleOrdenes.Save}" update="display,:ItemOrdenListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ItemOrdenEditDialog');"/>
+                    <p:commandButton value="#{bundleOrdenes.Cancel}" onclick="ItemOrdenEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

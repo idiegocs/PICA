@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="b91f9766-d837-4183-bba9-2cf2f269b3d2" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://192.168.2.6:7002/OSBKallsonys/ProxyService/ProxyCategorias?WSDL" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="ProxyCategorias4.xsd" MetadataType="Schema" ID="d3e70467-078a-494c-b184-49eaa07e5550" SourceId="1" SourceUrl="http://192.168.2.6:7002/OSBKallsonys/ProxyService/ProxyCategorias?SCHEMA%2FOSBCategorias%2FXSD%2FXMLSchema_-1361984100" />
+    <MetadataFile FileName="ProxyCategorias41.xsd" MetadataType="Schema" ID="1220a4ed-7536-496f-a1d6-7139319c4d07" SourceId="1" SourceUrl="http://192.168.2.6:7002/OSBKallsonys/ProxyService/ProxyCategorias?SCHEMA%2FOSBCategorias%2FXSD%2FXMLSchema_15904041" />
+    <MetadataFile FileName="ProxyCategorias1.wsdl" MetadataType="Wsdl" ID="3bcbddb2-3336-4595-8bd8-bccfd3035155" SourceId="1" SourceUrl="http://192.168.2.6:7002/OSBKallsonys/ProxyService/ProxyCategorias?WSDL" />
+    <MetadataFile FileName="ProxyCategorias42.xsd" MetadataType="Schema" ID="fd8771da-3ab7-4ceb-90cb-00aee7c9bfdc" SourceId="1" SourceUrl="http://192.168.2.6:7002/OSBKallsonys/ProxyService/ProxyCategorias?SCHEMA%2FOSBCategorias%2FXSD%2FXMLSchema_1355224743" />
+    <MetadataFile FileName="ProxyCategorias43.xsd" MetadataType="Schema" ID="d814deda-7b58-4aa7-b96e-192d66d04b32" SourceId="1" SourceUrl="http://192.168.2.6:7002/OSBKallsonys/ProxyService/ProxyCategorias?SCHEMA%2FOSBCategorias%2FXSD%2FXMLSchema_2109404818" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

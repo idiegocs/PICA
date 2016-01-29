@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProductoxCampaniaCreateDlg" widgetVar="ProductoxCampaniaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleCampanias.CreateProductoxCampaniaTitle}">
+            <h:form id="ProductoxCampaniaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{productoxCampaniaController.selected != null}">
+                       <p:outputLabel value="#{bundleCampanias.CreateProductoxCampaniaLabel_idProducto}" for="idProducto" />
+                        <p:inputText id="idProducto" value="#{productoxCampaniaController.selected.idProducto}" title="#{bundleCampanias.CreateProductoxCampaniaTitle_idProducto}" required="true" requiredMessage="#{bundleCampanias.CreateProductoxCampaniaRequiredMessage_idProducto}"/>
+                        <p:outputLabel value="#{bundleCampanias.CreateProductoxCampaniaLabel_porcentajeDescuento}" for="porcentajeDescuento" />
+                        <p:inputText id="porcentajeDescuento" value="#{productoxCampaniaController.selected.porcentajeDescuento}" title="#{bundleCampanias.CreateProductoxCampaniaTitle_porcentajeDescuento}" required="true" requiredMessage="#{bundleCampanias.CreateProductoxCampaniaRequiredMessage_porcentajeDescuento}"/>
+                        <p:outputLabel value="#{bundleCampanias.CreateProductoxCampaniaLabel_idCampania}" for="idCampania" />
+                        <p:selectOneMenu id="idCampania" value="#{productoxCampaniaController.selected.idCampania}" required="true" requiredMessage="#{bundleCampanias.EditProductoxCampaniaRequiredMessage_idCampania}">
+                            <f:selectItems value="#{campaniaController.itemsAvailableSelectOne}"
+                                           var="idCampaniaItem" itemLabel="#{idCampaniaItem.nombre}"
+                                           itemValue="#{idCampaniaItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{productoxCampaniaController.create}" value="#{bundleCampanias.Save}" update="display,:ProductoxCampaniaListForm:datalist,:growl" oncomplete="handleSubmit(args,'ProductoxCampaniaCreateDialog');"/>
+                    <p:commandButton value="#{bundleCampanias.Cancel}" onclick="ProductoxCampaniaCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

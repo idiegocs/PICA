@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:tns="http://www.kallsony.com/final/operacion/consultaproducto" xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:wkcoc="http://www.kallsony.com/operacion/consultaproducto"
+             xmlns:wkcuf="http://www.kallsony.com/util/falta" name="Productos"
+             targetNamespace="http://www.kallsony.com/final/operacion/consultaproducto">
+  <!--
+             xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+             xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+             -->
+  <types>
+    <xsd:schema targetNamespace="http://www.kallsony.com/final/operacion/consultaproducto">
+      <xsd:import schemaLocation="../xsd/Operacion/ConsultaProductos.xsd"
+                  namespace="http://www.kallsony.com/operacion/consultaproducto"/>
+      <xsd:import schemaLocation="../xsd/Util/Falta.xsd"
+                  namespace="http://www.kallsony.com/util/falta"/>
+    </xsd:schema>
+  </types>
+  
+  <message name="ProductoDetalle_ConsultaProductoEntrada">
+    <part name="ConsultaProductosEntrada"
+          element="wkcoc:consultaProductoEntrada"/>
+  </message>
+  <message name="ProductoDetalle_ConsultaProductoSalida">
+    <part name="ConsultaProductosSalida"
+          element="wkcoc:consultaProductoSalida"/>
+  </message>
+  <message name="ProductoDeralle_FaltaProducto">
+    <part name="ConsultaProductosFalta"
+          element="wkcuf:falta"/>
+  </message>
+  
+  <portType name="ProductosPort">
+    <operation name="ConsultarProductos">
+      <input message="tns:ProductoDetalle_ConsultaProductoEntrada"/>
+      <output message="tns:ProductoDetalle_ConsultaProductoSalida"/>
+      <fault message="tns:ProductoDeralle_FaltaProducto" name="FaltaProductos"/>
+    </operation>
+  </portType>
+  
+  <binding name="ProductosPortSOAP11Binding" type="tns:ProductosPort">
+    <soap:binding style="document"
+                  transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="ConsultarProductos">
+      <soap:operation style="document"
+                      soapAction="pro:Producto/ConsultarProductos"/>
+      <input>
+        <soap:body use="literal" parts="ConsultaProductosEntrada"/>
+      </input>
+      <output>
+        <soap:body use="literal" parts="ConsultaProductosSalida"/>
+      </output>
+      <fault name="FaltaProductos">
+        <soap:fault name="FaltaProductos" use="literal"/>
+      </fault>
+    </operation>
+  </binding>
+  <service name="ProductosPort">
+    <port name="ProductosPortPort" binding="tns:ProductosPortSOAP11Binding">
+      <soap:address location="http://www.kallsony.com"/>
+    </port>
+  </service>
+</definitions>

@@ -1,0 +1,147 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      >
+
+    <body>
+
+        <ui:composition template="./WEB-INF/templates/principalTemplate.xhtml">
+
+            <ui:define name="content">
+                <h:form>
+
+                    <br></br>
+                    <br></br>
+                    <br></br>
+                    <!--
+                    Welcome to <h:outputText  value="#{facesContext.externalContext.initParameterMap['kallsony.paramNombre']}" />
+                    <br/>
+                    
+                    <h:panelGrid columns="1" >
+                        <p:inputText id="wmensaje" value="#{echoJSFManagedBean.mensaje}" />
+                        <p:commandButton value="Prueba"  action="#{echoJSFManagedBean.pruebaSaludo()}" update="wmensaje" />
+                    </h:panelGrid>
+                    -->
+
+                    <div class="ui-grid ui-grid-responsive">
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-1">
+
+                            </div>
+                            <div class="ui-grid-col-1">
+                                <p:imageSwitch effect="turnDown" slideshowSpeed="10" >
+
+                                    <p:graphicImage value="/resources/images/K.png"/>
+                                    <p:graphicImage value="/resources/images/KN.png"/>
+
+                                </p:imageSwitch>
+                            </div>
+                            <div class="ui-grid-col-1">
+                                <p:imageSwitch effect="turnDown" slideshowSpeed="20" >
+
+                                    <p:graphicImage value="/resources/images/A.png"/>
+                                    <p:graphicImage value="/resources/images/AN.png"/>
+
+                                </p:imageSwitch>
+                            </div>
+                            <div class="ui-grid-col-1">
+                                <p:imageSwitch effect="turnDown"  slideshowSpeed="30">
+
+                                    <p:graphicImage value="/resources/images/L.png"/>
+                                    <p:graphicImage value="/resources/images/LN.png"/>
+
+                                </p:imageSwitch>
+                            </div>
+                            <div class="ui-grid-col-1">
+                                <p:imageSwitch effect="turnDown" slideshowSpeed="40" >
+
+                                    <p:graphicImage value="/resources/images/LL.png"/>
+                                    <p:graphicImage value="/resources/images/LLN.png"/>
+
+                                </p:imageSwitch>
+                            </div>
+                            <div class="ui-grid-col-1">
+                                <p:imageSwitch effect="turnDown" slideshowSpeed="50" >
+
+                                    <p:graphicImage value="/resources/images/SN.png"/>
+                                    <p:graphicImage value="/resources/images/S.png"/>
+
+                                </p:imageSwitch>
+                            </div>
+                            <div class="ui-grid-col-1">
+                                <p:imageSwitch effect="turnDown" slideshowSpeed="60">
+
+                                    <p:graphicImage value="/resources/images/ON.png"/>
+                                    <p:graphicImage value="/resources/images/O.png"/>
+
+                                </p:imageSwitch>
+                            </div>
+                            <div class="ui-grid-col-1">
+                                <p:imageSwitch effect="turnDown" slideshowSpeed="70">
+
+                                    <p:graphicImage value="/resources/images/NN.png"/>
+                                    <p:graphicImage value="/resources/images/N.png"/>
+
+                                </p:imageSwitch>
+                            </div>
+                            <div class="ui-grid-col-1"><p:imageSwitch effect="turnDown" slideshowSpeed="80" >
+
+                                    <p:graphicImage value="/resources/images/YN.png"/>
+                                    <p:graphicImage value="/resources/images/Y.png"/>
+
+                                </p:imageSwitch></div>
+                            <div class="ui-grid-col-1">
+                                <p:imageSwitch effect="turnDown" slideshowSpeed="90">
+
+                                    <p:graphicImage value="/resources/images/SSN.png"/>
+                                    <p:graphicImage value="/resources/images/SS.png"/>
+
+                                </p:imageSwitch>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="ui-grid ui-grid-responsive">
+                        <div class="ui-grid-row">
+                            <div class="ui-grid-col-3"></div>
+                            <div class="ui-grid-col-6">
+                                <p:imageSwitch effect="shuffle"  >
+
+                                    <p:graphicImage value="/resources/images/KStore.png"/>
+                                    <p:graphicImage value="/resources/images/KSbl.png"/>
+
+
+                                </p:imageSwitch>
+                            </div>
+
+                            <div class="ui-grid-col-3"></div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

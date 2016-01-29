@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+    <persistence-unit name="kallsonysOmsProductos" transaction-type="JTA">
+        <jta-data-source>jdbc/produc</jta-data-source>
+        <class>com.kallsony.entity.producto.Producto</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <properties/>
+    </persistence-unit>
+    <persistence-unit name="kallsonysOmsOrdenes" transaction-type="JTA">
+        <jta-data-source>jdbc/ordenes</jta-data-source>
+        <class>com.kallsony.entity.orden.CategoriaCliente</class>
+        <class>com.kallsony.entity.orden.Ciudad</class>
+        <class>com.kallsony.entity.orden.Departamento</class>
+        <class>com.kallsony.entity.orden.Direccion</class>
+        <class>com.kallsony.entity.orden.EstadoOrden</class>
+        <class>com.kallsony.entity.orden.Fabricante</class>
+        <class>com.kallsony.entity.orden.ItemOrden</class>
+        <class>com.kallsony.entity.orden.Orden</class>
+        <class>com.kallsony.entity.orden.Pais</class>
+        <class>com.kallsony.entity.orden.ProvMensajeria</class>
+        <class>com.kallsony.entity.orden.Usuario</class>
+        <class>com.kallsony.entity.orden.Envio</class>
+        <class>com.kallsony.entity.orden.Ordencancelada</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <properties>
+            <!--
+            <property name="eclipselink.weaving.changetracking" value="true"/>
+            <property name="eclipselink.weaving.lazy" value="true"/>
+            <property name="eclipselink.weaving.eager" value="true"/>
+            <property name="eclipselink.weaving.fetchgroups" value="true"/>
+            <property name="eclipselink.weaving.internal" value="false"/>
+            -->
+            <property name="eclipselink.logging.level" value="FINE"/>
+            <property name="eclipselink.logging.level.sql" value="FINE"/>
+            <property name="eclipselink.logging.parameters" value="true"/>
+            <property name="eclipselink.target-server" value="GlassFish"/>
+        </properties>
+    </persistence-unit>
+    <persistence-unit name="kallsonysOmsCampanias" transaction-type="JTA">
+        <jta-data-source>jdbc/campanias</jta-data-source>
+        <class>com.kallsony.entity.campania.Campania</class>
+        <class>com.kallsony.entity.campania.Categoria</class>
+        <class>com.kallsony.entity.campania.ProductoxCampania</class>
+        <class>com.kallsony.entity.campania.Subcategoria</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <properties/>
+    </persistence-unit>
+</persistence>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="file:/C:/JDeveloper/picas/ProjectKallSonyWSDL/WSDL/Producto.wsdl" uri="wsdl/Producto.wsdl"/>
+    <system systemId="file:/C:/JDeveloper/picas/ProjectKallSonyWSDL/xsd/Operacion/ConsultaProductos.xsd" uri="xml-resources/web-service-references/Producto/xsd/Operacion/ConsultaProductos.xsd"/>
+    <system systemId="file:/C:/JDeveloper/picas/ProjectKallSonyWSDL/xsd/Util/Falta.xsd" uri="xml-resources/web-service-references/Producto/xsd/Util/Falta.xsd"/>
+    <system systemId="file:/C:/JDeveloper/picas/ProjectKallSonyWSDL/xsd/Negocio/Producto.xsd" uri="xml-resources/web-service-references/Producto/xsd/Negocio/Producto.xsd"/>
+    <system systemId="file:/C:/JDeveloper/picas/ProjectKallSonyWSDL/xsd/Negocio/Filtro.xsd" uri="xml-resources/web-service-references/Producto/xsd/Negocio/Filtro.xsd"/>
+    <system systemId="file:/C:/Users/Diego/Documents/wsdlPicas/WSDL/Producto.wsdl" uri="wsdl/Producto.wsdl"/>
+    <system systemId="file:/C:/Users/Diego/Documents/wsdlPicas/xsd/Operacion/ConsultaProductos.xsd" uri="xml-resources/web-service-references/Producto/xsd/Operacion/ConsultaProductos.xsd"/>
+    <system systemId="file:/C:/Users/Diego/Documents/wsdlPicas/xsd/Util/Falta.xsd" uri="xml-resources/web-service-references/Producto/xsd/Util/Falta.xsd"/>
+    <system systemId="file:/C:/Users/Diego/Documents/wsdlPicas/xsd/Negocio/Producto.xsd" uri="xml-resources/web-service-references/Producto/xsd/Negocio/Producto.xsd"/>
+    <system systemId="file:/C:/Users/Diego/Documents/wsdlPicas/xsd/Negocio/Filtro.xsd" uri="xml-resources/web-service-references/Producto/xsd/Negocio/Filtro.xsd"/>
+</catalog>

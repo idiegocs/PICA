@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema xmlns:ft="http://www.kallsony.com/util/falta" elementFormDefault="qualified" targetNamespace="http://www.kallsony.com/util/falta" xmlns="http://www.w3.org/2001/XMLSchema">
+  <complexType name="Falta">
+    <sequence minOccurs="1">
+      <element minOccurs="0" name="idError" type="long" />
+      <element minOccurs="0" name="nombreError" type="string" />
+      <element minOccurs="0" name="descripcionError" type="string" />
+    </sequence>
+  </complexType>
+  <element name="falta" type="ft:Falta" />
+</schema>

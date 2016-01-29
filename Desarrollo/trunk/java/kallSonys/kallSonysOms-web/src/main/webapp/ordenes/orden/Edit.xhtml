@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OrdenEditDlg" widgetVar="OrdenEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleOrdenes.EditOrdenTitle}">
+            <h:form id="OrdenEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{ordenController.selected != null}">
+                        <p:outputLabel value="#{bundleOrdenes.EditOrdenLabel_idorden}" for="idorden" />
+                        <p:outputLabel id="idorden" value="#{ordenController.selected.idorden}" title="#{bundleOrdenes.EditOrdenTitle_idorden}" />
+                        <p:outputLabel value="#{bundleOrdenes.EditOrdenLabel_fechaorden}" for="fechaorden"   />
+                        <p:calendar id="fechaorden" pattern="MM/dd/yyyy" value="#{ordenController.selected.fechaorden}" title="#{bundleOrdenes.EditOrdenTitle_fechaorden}"  showOn="button" required="true" requiredMessage="Fecha Orden es Requerida"/>
+                        <p:outputLabel value="#{bundleOrdenes.EditOrdenLabel_cantitemorden}" for="cantitemorden" />
+                        <p:outputLabel id="cantitemorden" value="#{ordenController.selected.cantitemorden}" title="#{bundleOrdenes.EditOrdenTitle_cantitemorden}" />
+                        <p:outputLabel value="#{bundleOrdenes.EditOrdenLabel_totalorden}" for="totalorden" />
+                        <p:outputLabel id="totalorden" value="#{ordenController.selected.totalorden}" title="#{bundleOrdenes.EditOrdenTitle_totalorden}" />
+                        <p:outputLabel value="#{bundleOrdenes.EditOrdenLabel_numpreorden}" for="numpreorden" />
+                        <p:outputLabel id="numpreorden" value="#{ordenController.selected.numpreorden}" title="#{bundleOrdenes.EditOrdenTitle_numpreorden}" />
+                        <p:outputLabel value="#{bundleOrdenes.EditOrdenLabel_idestadoorden}" for="idestadoorden" />
+                        <p:selectOneMenu id="idestadoorden" value="#{ordenController.selected.idestadoorden}" disabled="true" required="true" requiredMessage="#{bundleOrdenes.EditOrdenRequiredMessage_idestadoorden}">
+                            <f:selectItem itemLabel="#{bundleOrdenes.SelectOneMessage}"/>
+                            <f:selectItems value="#{estadoOrdenController.itemsAvailableSelectOne}"
+                                           var="idestadoordenItem" itemLabel="#{idestadoordenItem.nombreestadoorden}"
+                                           itemValue="#{idestadoordenItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundleOrdenes.EditOrdenLabel_idcliente}" for="idcliente" />
+                        <p:selectOneMenu id="idcliente" value="#{ordenController.selected.idcliente}" required="true" requiredMessage="#{bundleOrdenes.EditOrdenRequiredMessage_idcliente}">
+                            <f:selectItem itemLabel="#{bundleOrdenes.SelectOneMessage}"/>
+                            <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
+                                           var="idclienteItem" itemLabel="#{idclienteItem.nombres} #{idclienteItem.apellidos}"
+                                           itemValue="#{idclienteItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{ordenController.update}" value="#{bundleOrdenes.Save}" update="display,:OrdenListForm:datalist,:growl" oncomplete="handleSubmit(args, 'OrdenEditDialog');"/>
+                    <p:commandButton value="#{bundleOrdenes.Cancel}" onclick="OrdenEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

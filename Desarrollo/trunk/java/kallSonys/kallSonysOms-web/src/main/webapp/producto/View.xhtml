@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProductoViewDlg" widgetVar="ProductoViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleProducto.ViewProductoTitle}">
+            <h:form id="ProductoViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{productoController.selected != null}">
+                        <h:outputText value="#{bundleProducto.ViewProductoLabel_idProducto}"/>
+                        <h:outputText value="#{productoController.selected.idProducto}" title="#{bundleProducto.ViewProductoTitle_idProducto}"/>
+                        <h:outputText value="#{bundleProducto.ViewProductoLabel_codigoProducto}"/>
+                        <h:outputText value="#{productoController.selected.codigoProducto}" title="#{bundleProducto.ViewProductoTitle_codigoProducto}"/>
+                        <h:outputText value="#{bundleProducto.ViewProductoLabel_nombreProducto}"/>
+                        <h:outputText value="#{productoController.selected.nombreProducto}" title="#{bundleProducto.ViewProductoTitle_nombreProducto}"/>
+                        <h:outputText value="#{bundleProducto.ViewProductoLabel_descripcionProducto}"/>
+                        <h:outputText value="#{productoController.selected.descripcionProducto}" title="#{bundleProducto.ViewProductoTitle_descripcionProducto}"/>
+                        <h:outputText value="#{bundleProducto.ViewProductoLabel_nombreFabricante}"/>
+                        <h:outputText value="#{productoController.selected.nombreFabricante}" title="#{bundleProducto.ViewProductoTitle_nombreFabricante}"/>
+                        <h:outputText value="#{bundleProducto.ViewProductoLabel_nombreImagenProducto}"/>
+                        <h:outputText value="#{productoController.selected.nombreImagenProducto}" title="#{bundleProducto.ViewProductoTitle_nombreImagenProducto}"/>
+                        <h:outputText value="#{bundleProducto.ViewProductoLabel_idSubcategoria}"/>
+                     
+                        <p:selectOneMenu  value="#{productoController.selected.idSubcategoria}" disabled="true"  >  
+                            <f:selectItems value="#{productoController.listaSubcategorias}"  
+                                           var="sub" itemLabel="#{sub.nombreSubcategoria}"  
+                                           itemValue="#{sub.idSubcategoria}"/>  
+                        </p:selectOneMenu>  
+                        <h:outputText value="#{bundleProducto.ViewProductoLabel_precioUnitario}"/>
+                        <h:outputText value="#{productoController.selected.precioUnitario}" title="#{bundleProducto.ViewProductoTitle_precioUnitario}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundleProducto.Close}" onclick="ProductoViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,136 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="KallSonysB2C.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head id="Head1" runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%: Page.Title %> - KallSonys</title>
+
+    <asp:PlaceHolder ID="PlaceHolder1" runat="server">
+        <%: Scripts.Render("~/bundles/modernizr") %>
+    </asp:PlaceHolder>
+    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+</head>
+<body>
+    <form id="Form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePageMethods="false">
+            <Scripts>
+                <%--To learn more about bundling scripts in ScriptManager see http://go.microsoft.com/fwlink/?LinkID=301884 --%>
+                <%--Framework Scripts--%>
+                <asp:ScriptReference Name="MsAjaxBundle" />
+                <asp:ScriptReference Name="jquery" />
+                <asp:ScriptReference Name="bootstrap" />
+                <asp:ScriptReference Name="respond" />
+                <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
+                <asp:ScriptReference Name="WebUIValidation.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebUIValidation.js" />
+                <asp:ScriptReference Name="MenuStandards.js" Assembly="System.Web" Path="~/Scripts/WebForms/MenuStandards.js" />
+                <asp:ScriptReference Name="GridView.js" Assembly="System.Web" Path="~/Scripts/WebForms/GridView.js" />
+                <asp:ScriptReference Name="DetailsView.js" Assembly="System.Web" Path="~/Scripts/WebForms/DetailsView.js" />
+                <asp:ScriptReference Name="TreeView.js" Assembly="System.Web" Path="~/Scripts/WebForms/TreeView.js" />
+                <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
+                <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
+                <asp:ScriptReference Name="WebFormsBundle" />
+                <%--Site Scripts--%>
+            </Scripts>
+        </asp:ScriptManager>
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a id="A1" class="navbar-brand" runat="server" href="~/">KallSonys sin DI</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a runat="server" id="adminLink" visible="false" 
+                          href="~/Admin/AdminPage">Admin</a></li>
+                        <!--<li><a runat="server" href="~/">Inicio</a></li>-->
+                        <li><a id="A2" runat="server" href="~/ProductList">Productos</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="~/ProductList">Categorias <span class="caret"></span></a>
+                            <asp:repeater ID="rptCategories" runat="server" SelectMethod="GetCategories">
+                                 <headertemplate>
+                                   <ul class="dropdown-menu">
+                                </headertemplate>
+                                <itemtemplate>
+                                    <li>
+                                        <a href="<%#: GetRouteUrl("ProductsByCategoryRoute", new {categoryName =Eval("IdSubcategoria")}) %>">
+                                            <%#: Eval("NombreSubcategoria") %></a>
+                                    </li>
+                                </itemtemplate>
+                            <footertemplate>
+                                   </ul>
+                            </footertemplate>
+                            </asp:repeater>
+                        </li>
+                        <li><a id="A3" runat="server" href="~/DealsList">Campañas</a></li>
+                        <li><a runat="server" href="~/UserOrders/OrderList" id="ordersUser">Mis Ordenes</a></li>
+                        <li><a runat="server" href="~/ShoppingCart" ID="cartCount">&nbsp;</a></li>
+                    </ul>
+                    <asp:LoginView ID="LoginView1" runat="server" ViewStateMode="Disabled">
+                        <AnonymousTemplate>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a id="A4" runat="server" href="~/Account/Register">Crea tu Cuenta</a></li>
+                                <li><a id="A5" runat="server" href="~/Account/Login">Ingresa</a></li>
+                                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="~/About">Acerca de <span class="caret"></span></a>
+                                  <ul class="dropdown-menu">
+                                    <li><a id="A6" runat="server" href="~/About">Acerca de KallSonys</a></li>
+                                    <li><a id="A7" runat="server" href="~/Contact">Contactenos</a></li>
+                                  </ul>
+                                </li>
+                            </ul>
+                        </AnonymousTemplate>
+                        <LoggedInTemplate>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a id="A8" runat="server" href="~/Account/Manage" title="Manage your account">Hola, <%: Context.User.Identity.GetUserName()  %> !</a></li>
+                                <li>
+                                    <asp:LoginStatus ID="LoginStatus1" runat="server" LogoutAction="Redirect" LogoutText="Cerrar Sesión" LogoutPageUrl="~/" OnLoggingOut="Unnamed_LoggingOut" />
+                                </li>
+                            </ul>
+                        </LoggedInTemplate>
+                    </asp:LoginView>
+                </div>
+            </div>
+        </div>
+        <div id="TitleContent" style="text-align: center" class="img-responsive2 center-block">
+            <br />
+            <a id="A9" runat="server" href="~/">
+                <asp:Image  ID="Image1" CssClass="img-responsive2 center-block" runat="server" ImageUrl="~/Images/logo.png" BorderStyle="None" />
+            </a>  
+            <br />  
+        </div>
+        <!--
+        <div id="CategoryMenu" style="text-align: center">       
+            <asp:ListView ID="categoryList"
+                runat="server"
+                SelectMethod="GetCategories" >
+                <ItemTemplate>
+                    <b style="font-size: large; font-style: normal; ">
+                    <a href="<%#: GetRouteUrl("ProductsByCategoryRoute", new {categoryName =Eval("IdSubcategoria")}) %>">
+                        <%#: Eval("NombreSubcategoria") %>
+                    </a>
+                    </b>
+                </ItemTemplate>
+                <ItemSeparatorTemplate>  |  </ItemSeparatorTemplate>
+            </asp:ListView>
+        </div>
+        -->
+        <div class="container body-content">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+            <hr />
+            <footer>
+                <p>&copy; <%: DateTime.Now.Year %> - KallSonys</p>
+            </footer>
+        </div>
+    </form>
+</body>
+</html>

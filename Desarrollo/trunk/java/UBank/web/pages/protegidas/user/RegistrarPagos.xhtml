@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>Registrar Pago Prestamo</title>
+    </h:head>
+    <h:body>
+
+        <ui:composition template="/WEB-INF/bankTemplate.xhtml">
+
+            <ui:define name="content">
+                <h:form>
+                    <rich:panel header="Registro Pagos Prestamo ">
+
+                        <h:panelGrid columns="2">
+                            <h:commandButton value="Refrescar Prestamos" action="#{clienteManagedBean.consultarPresatamos()}" />
+                            <br/>
+
+                        </h:panelGrid>
+
+                        <rich:dataTable value="#{clienteManagedBean.listaPrestamos}" var="pre" >
+
+
+
+                            <f:facet name="header">
+
+                                <h:outputText value="Prestamos" />
+
+                            </f:facet>
+
+                            <rich:column>
+
+                                <f:facet name="header">id Prestamo</f:facet>
+
+                                <h:outputLabel value="#{pre.idPrestamo}"/>
+
+
+                            </rich:column>
+                            <rich:column>
+
+                                <f:facet name="header">Entidad Bancaria</f:facet>
+
+                                <h:outputLabel value="#{pre.entidadPrestamo.nombreEntidad}"/>
+
+
+                            </rich:column>
+                            <rich:column>
+
+                                <f:facet name="header">Pais Entidad</f:facet>
+
+                                <h:outputLabel value="#{pre.entidadPrestamo.pais}"/>
+
+
+                            </rich:column>
+                            <rich:column>
+
+                                <f:facet name="header">Id Cliente</f:facet>
+
+                                <h:outputLabel value="#{pre.clientePrestamo.idCliente}"/>
+
+
+                            </rich:column>
+                            <rich:column>
+
+                                <f:facet name="header">Nombre Cliente</f:facet>
+
+                                <h:outputLabel value="#{pre.clientePrestamo.nombre} #{pre.clientePrestamo.apellido}"/>
+
+
+                            </rich:column>
+                            <rich:column>
+
+                                <f:facet name="header">Valor Prestamo</f:facet>
+
+                                <h:outputLabel value="#{pre.valorPrestamo}"/>
+
+
+                            </rich:column>
+                            
+                             <rich:column>
+
+                                <f:facet name="header">Saldo Actual</f:facet>
+
+                                <h:outputLabel value="#{pre.saldoActual}"/>
+
+
+                            </rich:column>
+                             <rich:column>
+
+                                <f:facet name="header">Tasa Interes</f:facet>
+
+                                <h:outputLabel value="#{pre.tasaInteres}"/>
+
+
+                            </rich:column>
+                           
+                             <rich:column>
+
+                                <f:facet name="header">Valor A Pagar</f:facet>
+
+                                <h:inputText value="#{pre.valorPagar}"/>
+
+                            </rich:column>
+                            
+                            <rich:column>
+
+                                <f:facet name="header">Pagar Prestamo</f:facet>
+
+                                <h:commandButton value="Registrar Pago" action="#{clienteManagedBean.realizarPagoPrestamo(pre.entidadPrestamo.idEntidad, pre.clientePrestamo.idCliente,pre.idPrestamo, pre.valorPagar)}" />
+
+
+                            </rich:column>
+
+
+
+
+                        </rich:dataTable>
+
+
+                    </rich:panel>
+
+                    <h:messages globalOnly="true" errorClass="err" warnClass="warn" infoClass="info"> </h:messages>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </h:body>
+</html>

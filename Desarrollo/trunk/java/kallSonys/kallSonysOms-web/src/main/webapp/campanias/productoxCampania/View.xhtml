@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ProductoxCampaniaViewDlg" widgetVar="ProductoxCampaniaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleCampanias.ViewProductoxCampaniaTitle}">
+            <h:form id="ProductoxCampaniaViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{productoxCampaniaController.selected != null}">
+                        <h:outputText value="#{bundleCampanias.ViewProductoxCampaniaLabel_idProductoxCampania}"/>
+                        <h:outputText value="#{productoxCampaniaController.selected.idProductoxCampania}" title="#{bundleCampanias.ViewProductoxCampaniaTitle_idProductoxCampania}"/>
+                        <h:outputText value="#{bundleCampanias.ViewProductoxCampaniaLabel_idProducto}"/>
+                        <h:outputText value="#{productoxCampaniaController.selected.idProducto}" title="#{bundleCampanias.ViewProductoxCampaniaTitle_idProducto}"/>
+                        <h:outputText value="#{bundleCampanias.ViewProductoxCampaniaLabel_porcentajeDescuento}"/>
+                        <h:outputText value="#{productoxCampaniaController.selected.porcentajeDescuento}" title="#{bundleCampanias.ViewProductoxCampaniaTitle_porcentajeDescuento}"/>
+                        <h:outputText value="#{bundleCampanias.ViewProductoxCampaniaLabel_idCampania}"/>
+                        <h:outputText value="#{productoxCampaniaController.selected.idCampania.nombre}" title="#{bundleCampanias.ViewProductoxCampaniaTitle_idCampania}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundleCampanias.Close}" onclick="ProductoxCampaniaViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

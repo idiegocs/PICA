@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OrdenCreateDlg" widgetVar="OrdenCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleOrdenes.CreateOrdenTitle}">
+            <h:form id="OrdenCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{ordenController.selected != null}">
+                         
+                        <p:outputLabel value="#{bundleOrdenes.CreateOrdenLabel_fechaorden}" for="fechaorden" />
+                        <p:calendar id="fechaorden" pattern="MM/dd/yyyy HH:mm:ss" value="#{ordenController.selected.fechaorden}" title="#{bundleOrdenes.EditOrdenTitle_fechaorden}"  showOn="button"/>
+                        <p:outputLabel value="#{bundleOrdenes.CreateOrdenLabel_cantitemorden}" for="cantitemorden" />
+                        <p:inputText id="cantitemorden" value="#{ordenController.selected.cantitemorden}" title="#{bundleOrdenes.CreateOrdenTitle_cantitemorden}" />
+                        <p:outputLabel value="#{bundleOrdenes.CreateOrdenLabel_totalorden}" for="totalorden" />
+                        <p:inputText id="totalorden" value="#{ordenController.selected.totalorden}" title="#{bundleOrdenes.CreateOrdenTitle_totalorden}" />
+                        <p:outputLabel value="#{bundleOrdenes.CreateOrdenLabel_numpreorden}" for="numpreorden" />
+                        <p:inputText id="numpreorden" value="#{ordenController.selected.numpreorden}" title="#{bundleOrdenes.CreateOrdenTitle_numpreorden}" required="true" requiredMessage="#{bundleOrdenes.CreateOrdenRequiredMessage_numpreorden}"/>
+                        <p:outputLabel value="#{bundleOrdenes.CreateOrdenLabel_idestadoorden}" for="idestadoorden" />
+                        <p:selectOneMenu id="idestadoorden" value="#{ordenController.selected.idestadoorden}" required="true" requiredMessage="#{bundleOrdenes.EditOrdenRequiredMessage_idestadoorden}">
+                            <f:selectItems value="#{estadoOrdenController.itemsAvailableSelectOne}"
+                                           var="idestadoordenItem"
+                                           itemValue="#{idestadoordenItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundleOrdenes.CreateOrdenLabel_idcliente}" for="idcliente" />
+                        <p:selectOneMenu id="idcliente" value="#{ordenController.selected.idcliente}" required="true" requiredMessage="#{bundleOrdenes.EditOrdenRequiredMessage_idcliente}">
+                            <f:selectItems value="#{usuarioController.itemsAvailableSelectOne}"
+                                           var="idclienteItem"
+                                           itemValue="#{idclienteItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{ordenController.create}" value="#{bundleOrdenes.Save}" update="display,:OrdenListForm:datalist,:growl" oncomplete="handleSubmit(args,'OrdenCreateDialog');"/>
+                    <p:commandButton value="#{bundleOrdenes.Cancel}" onclick="OrdenCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

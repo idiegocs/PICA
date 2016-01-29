@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:a4j="http://richfaces.org/a4j">
+    <h:head>
+        <title>Richfaces Welcome Page</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/WEB-INF/bankTemplate.xhtml">
+
+            <ui:define name="content">
+
+
+                <h:outputStylesheet>
+                    .pic-normal {
+                    width: 240px;
+                    border: 2px solid #ACBECE;
+                    }
+
+                    .wrap1 {
+                    width: 380px;
+                    height: 160px;
+                    float: left;
+                    }
+                </h:outputStylesheet>
+
+
+                <br />
+
+                <a4j:outputPanel id="gallery">
+                    <h:panelGrid columns="2">
+                        <h:panelGroup>
+                            <p> <b> Productos Diferenciales</b></p>
+                            <p>Ponemos a su disposición una oferta global de productos adaptados a sus necesidades y a las de su familia</p> 
+
+                            <h:graphicImage value="/resources/css/img/ProductosDiferenciales.jpg" alt="pic" />
+
+                        </h:panelGroup>
+
+                        <h:panelGroup>
+                            <p> <b> Atención Personalizada</b></p>
+                            <p>A través de su gestor Select, un especialista altamente cualificado que le atenderá personalmente</p> 
+
+                            <h:graphicImage value="/resources/css/img/AtencionPersonalizada.jpg" alt="pic" />
+                        </h:panelGroup>
+                        <h:panelGroup>
+
+                            <p> <b> Servicios de Banca Preferentes</b></p>
+                            <p>Extracto Integrado Select, informe diario y mensual de mercados...</p> 
+
+                            <h:graphicImage value="/resources/css/img/ServiciosBancaPreferentes.jpg" alt="pic" />
+                        </h:panelGroup>
+                        <h:panelGroup>
+                            <p> <b> Servicios En Linea</b></p>
+                            <h:graphicImage value="/resources/css/img/BANCAONLINE.jpg"  />
+                        </h:panelGroup>
+                    </h:panelGrid>
+
+
+                </a4j:outputPanel>
+
+
+
+
+
+                <rich:jQuery selector="#gallery img" query="addClass('pic-normal')" />
+                <rich:jQuery selector="#gallery img" query="wrap('&lt;div class=\'wrap1\'&gt;&lt;/div&gt;')" />
+                <rich:jQuery selector="#gallery img" event="mouseover" query="jQuery(this).stop().animate({width:'360px'})" />
+                <rich:jQuery selector="#gallery img" event="mouseout" query="jQuery(this).stop().animate({width:'240px'})" />
+
+
+            </ui:define>
+
+        </ui:composition>
+    </h:body>
+</html>
+
+

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WL5G3N0:definitions xmlns:WL5G3N2="http://www.kallsony.com/util/falta" xmlns:WL5G3N1="http://www.kallsony.com/operacion/consultarcategorias" xmlns:WL5G3N4="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:WL5G3N3="http://www.kallsony.com/final/operacion/consultacategorias" targetNamespace="http://www.kallsony.com/final/operacion/consultacategorias" xmlns:WL5G3N0="http://schemas.xmlsoap.org/wsdl/">
+  <WL5G3N0:documentation>
+        http://DiegoPC:8001/soa-infra/services/default/ProjectCategorias!1.0/Categorias.wsdl
+    </WL5G3N0:documentation>
+  <WL5G3N0:types>
+    <xsd:schema xmlns:wkct="http://www.kallsony.com/operacion/consultarcategorias" xmlns:tns="http://www.kallsony.com/final/operacion/consultacategorias" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wkctf="http://www.kallsony.com/util/falta" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" elementFormDefault="qualified" targetNamespace="http://www.kallsony.com/final/operacion/consultacategorias" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:import schemaLocation="http://192.168.2.6:7002/OSBKallsonys/ProxyService/ProxyCategorias?SCHEMA%2FOSBCategorias%2FXSD%2FXMLSchema_-1361984100" namespace="http://www.kallsony.com/operacion/consultarcategorias" />
+      <xsd:import schemaLocation="http://192.168.2.6:7002/OSBKallsonys/ProxyService/ProxyCategorias?SCHEMA%2FOSBCategorias%2FXSD%2FXMLSchema_1355224743" namespace="http://www.kallsony.com/util/falta" />
+    </xsd:schema>
+  </WL5G3N0:types>
+  <WL5G3N0:message name="Categorias_ConsultaEntrada">
+    <WL5G3N0:part name="partEntrada" element="WL5G3N1:consultaCategoriaEntrada" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="Categoria_ConsultaSalida">
+    <WL5G3N0:part name="partSalida" element="WL5G3N1:consultaCategoriaSalida" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="Categorias_Falta">
+    <WL5G3N0:part name="partFalta" element="WL5G3N2:falta" />
+  </WL5G3N0:message>
+  <WL5G3N0:portType name="portCategorias">
+    <WL5G3N0:operation name="consultaCategorias">
+      <WL5G3N0:input message="WL5G3N3:Categorias_ConsultaEntrada" />
+      <WL5G3N0:output message="WL5G3N3:Categoria_ConsultaSalida" />
+      <WL5G3N0:fault name="FaltaCategorias" message="WL5G3N3:Categorias_Falta" />
+    </WL5G3N0:operation>
+  </WL5G3N0:portType>
+  <WL5G3N0:binding name="portCategoriasSOAP11Binding" type="WL5G3N3:portCategorias">
+    <WL5G3N4:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <WL5G3N0:operation name="consultaCategorias">
+      <WL5G3N4:operation soapAction="http://www.kallsony.com/final/operacion/consultacategorias/consultaCategorias" style="document" />
+      <WL5G3N0:input>
+        <WL5G3N4:body use="literal" parts="partEntrada" />
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N4:body use="literal" parts="partSalida" />
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="FaltaCategorias">
+        <WL5G3N4:fault use="literal" name="FaltaCategorias" namespace="" />
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+  </WL5G3N0:binding>
+  <WL5G3N0:service name="ServiceCategorias">
+    <WL5G3N0:port name="portCategorias_pt" binding="WL5G3N3:portCategoriasSOAP11Binding">
+      <WL5G3N4:address location="http://DiegoPC:7002/OSBKallsonys/ProxyService/ProxyCategorias" />
+    </WL5G3N0:port>
+  </WL5G3N0:service>
+</WL5G3N0:definitions>

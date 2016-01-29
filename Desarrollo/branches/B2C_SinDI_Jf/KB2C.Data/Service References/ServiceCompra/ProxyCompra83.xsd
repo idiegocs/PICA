@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema xmlns:cl="http://www.kallsony.com/entidad/usuario" xmlns:pr="http://www.kallsony.com/entidad/producto" xmlns:or="http://www.kallsony.com/entidad/orden" targetNamespace="http://www.kallsony.com/entidad/orden" xmlns="http://www.w3.org/2001/XMLSchema">
+  <import schemaLocation="http://192.168.2.6:7002/OSBKallsonys/ProxyService/ProxyCompra?SCHEMA%2FOSBCompras%2FXSD%2FXMLSchema_1844260427" namespace="http://www.kallsony.com/entidad/usuario" />
+  <import schemaLocation="http://192.168.2.6:7002/OSBKallsonys/ProxyService/ProxyCompra?SCHEMA%2FOSBCompras%2FXSD%2FXMLSchema_-806119835" namespace="http://www.kallsony.com/entidad/producto" />
+  <complexType name="Orden">
+    <sequence>
+      <element minOccurs="0" name="idOrden" type="int" />
+      <element minOccurs="0" name="fechaOrden" type="dateTime" />
+      <element minOccurs="0" name="estadoOrden" type="string" />
+      <element minOccurs="0" name="idEstadoOrden" type="int" />
+      <element minOccurs="0" name="numeroItems" type="int" />
+      <element minOccurs="0" name="total" type="double" />
+      <element minOccurs="0" name="cliente" type="cl:Usuario" />
+      <element minOccurs="0" name="listaItems" type="or:Items" />
+    </sequence>
+  </complexType>
+  <complexType name="Item">
+    <sequence>
+      <element name="cantidad" type="int" />
+      <element name="tipo" type="boolean" />
+      <element minOccurs="0" name="idCampania" type="int" />
+      <element minOccurs="0" name="producto" type="pr:Producto" />
+    </sequence>
+  </complexType>
+  <complexType name="Items">
+    <sequence>
+      <element minOccurs="0" maxOccurs="unbounded" name="items" type="or:Item" />
+    </sequence>
+  </complexType>
+</schema>

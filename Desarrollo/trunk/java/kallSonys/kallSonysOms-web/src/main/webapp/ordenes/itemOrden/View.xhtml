@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ItemOrdenViewDlg" widgetVar="ItemOrdenViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleOrdenes.ViewItemOrdenTitle}">
+            <h:form id="ItemOrdenViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{itemOrdenController.selected != null}">
+                        <h:outputText value="#{bundleOrdenes.ViewItemOrdenLabel_iditem}"/>
+                        <h:outputText value="#{itemOrdenController.selected.iditem}" title="#{bundleOrdenes.ViewItemOrdenTitle_iditem}"/>
+                        <h:outputText value="#{bundleOrdenes.ViewItemOrdenLabel_tipoitem}"/>
+                        <h:outputText value="#{itemOrdenController.selected.tipoitem}" title="#{bundleOrdenes.ViewItemOrdenTitle_tipoitem}"/>
+                        <h:outputText value="#{bundleOrdenes.ViewItemOrdenLabel_idproducto}"/>
+                        <h:outputText value="#{itemOrdenController.selected.idproducto}" title="#{bundleOrdenes.ViewItemOrdenTitle_idproducto}"/>
+                        <h:outputText value="#{bundleOrdenes.ViewItemOrdenLabel_codigoproducto}"/>
+                        <h:outputText value="#{itemOrdenController.selected.codigoproducto}" title="#{bundleOrdenes.ViewItemOrdenTitle_codigoproducto}"/>
+                        <h:outputText value="#{bundleOrdenes.ViewItemOrdenLabel_nombreproducto}"/>
+                        <h:outputText value="#{itemOrdenController.selected.nombreproducto}" title="#{bundleOrdenes.ViewItemOrdenTitle_nombreproducto}"/>
+                        <h:outputText value="#{bundleOrdenes.ViewItemOrdenLabel_cantidaditem}"/>
+                        <h:outputText value="#{itemOrdenController.selected.cantidaditem}" title="#{bundleOrdenes.ViewItemOrdenTitle_cantidaditem}"/>
+                        <h:outputText value="#{bundleOrdenes.ViewItemOrdenLabel_valorunitarioitem}"/>
+                        <h:outputText value="#{itemOrdenController.selected.valorunitarioitem}" title="#{bundleOrdenes.ViewItemOrdenTitle_valorunitarioitem}"/>
+                        <h:outputText value="#{bundleOrdenes.ViewItemOrdenLabel_idorden}"/>
+                        <h:outputText value="#{itemOrdenController.selected.idorden}" title="#{bundleOrdenes.ViewItemOrdenTitle_idorden}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundleOrdenes.Close}" onclick="ItemOrdenViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

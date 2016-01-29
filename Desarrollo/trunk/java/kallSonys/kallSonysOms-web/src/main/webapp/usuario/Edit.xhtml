@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UsuarioEditDlg" widgetVar="UsuarioEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleOrdenes.EditUsuarioTitle}">
+            <h:form id="UsuarioEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{usuarioController.selected != null}">
+                        <p:outputLabel value="#{bundleOrdenes.EditUsuarioLabel_nombres}" for="nombres" />
+                        <p:inputText id="nombres" value="#{usuarioController.selected.nombres}" title="#{bundleOrdenes.EditUsuarioTitle_nombres}" required="true" requiredMessage="#{bundleOrdenes.EditUsuarioRequiredMessage_nombres}"/>
+                        <p:outputLabel value="#{bundleOrdenes.EditUsuarioLabel_apellidos}" for="apellidos" />
+                        <p:inputText id="apellidos" value="#{usuarioController.selected.apellidos}" title="#{bundleOrdenes.EditUsuarioTitle_apellidos}" required="true" requiredMessage="#{bundleOrdenes.EditUsuarioRequiredMessage_apellidos}"/>
+                        <p:outputLabel value="#{bundleOrdenes.EditUsuarioLabel_email}" for="email" />
+                        <p:inputText id="email" value="#{usuarioController.selected.email}" title="#{bundleOrdenes.EditUsuarioTitle_email}"  required="true" requiredMessage="Email es requerido"/>
+                        <p:outputLabel value="#{bundleOrdenes.EditUsuarioLabel_tipodocumento}" for="tipodocumento" />
+                        <p:selectOneMenu id="tipodocumento" value="#{usuarioController.selected.tipodocumento}"  required="true" requiredMessage="#{bundleOrdenes.EditUsuarioRequiredMessage_tipodocumento}">
+                            <f:selectItem itemLabel="#{bundleOrdenes.SelectOneMessage}"/>
+                            <f:selectItem itemLabel="CC" itemValue="1"/>
+                            <f:selectItem itemLabel="NA" itemValue="0"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundleOrdenes.EditUsuarioLabel_numerodocumento}" for="numerodocumento" />
+                        <p:inputText id="numerodocumento" value="#{usuarioController.selected.numerodocumento}" title="#{bundleOrdenes.EditUsuarioTitle_numerodocumento}" required="true" requiredMessage="#{bundleOrdenes.EditUsuarioRequiredMessage_numerodocumento}"/>
+                        <p:outputLabel value="#{bundleOrdenes.EditUsuarioLabel_iddireccion}" for="iddireccion" />
+                        <p:inputText id="iddireccion" value="#{usuarioController.selected.direccion.numerodireccion}" title="#{bundleOrdenes.EditUsuarioTitle_iddireccion}" required="true" requiredMessage="Direccion es requerido" />
+                        <p:outputLabel value="#{bundleOrdenes.EditUsuarioLabel_username}" for="username" />
+                        <p:outputLabel id="username" value="#{usuarioController.selected.username}" title="#{bundleOrdenes.EditUsuarioTitle_username}"/>
+                        <p:outputLabel value="#{bundleOrdenes.EditUsuarioLabel_telefono}" for="telefono" />
+                        <p:inputText id="telefono" value="#{usuarioController.selected.telefono}" title="#{bundleOrdenes.EditUsuarioTitle_telefono}" required="true" requiredMessage="Telefono es requerido" />
+                        <p:outputLabel value="#{bundleOrdenes.EditUsuarioLabel_idcategoria}" for="idcategoria" />
+                        <p:selectOneMenu id="idcategoria" value="#{usuarioController.selected.idcategoria}"  disabled="true" required="true" requiredMessage="Categoria es Requerido">
+                            <f:selectItem itemLabel="#{bundleOrdenes.SelectOneMessage}"/>
+                            <f:selectItems value="#{usuarioController.listaCategorias}"
+                                           var="idcategoriaItem" itemLabel="#{idcategoriaItem.nombreCategoria}"
+                                           itemValue="#{idcategoriaItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{usuarioController.update}" value="#{bundleOrdenes.Save}" update="display,:UsuarioListForm:datalist,:growl" oncomplete="handleSubmit(args, 'UsuarioEditDialog');"/>
+                    <p:commandButton value="#{bundleOrdenes.Cancel}" onclick="UsuarioEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

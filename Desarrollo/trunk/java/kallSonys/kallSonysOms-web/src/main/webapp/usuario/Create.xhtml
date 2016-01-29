@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UsuarioCreateDlg" widgetVar="UsuarioCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleOrdenes.CreateUsuarioTitle}">
+            <h:form id="UsuarioCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{usuarioController.selected != null}">
+                        <p:outputLabel value="#{bundleOrdenes.CreateUsuarioLabel_nombres}" for="nombres" />
+                        <p:inputText id="nombres" value="#{usuarioController.selected.nombres}" title="#{bundleOrdenes.CreateUsuarioTitle_nombres}" required="true" requiredMessage="#{bundleOrdenes.CreateUsuarioRequiredMessage_nombres}"/>
+                        <p:outputLabel value="#{bundleOrdenes.CreateUsuarioLabel_apellidos}" for="apellidos" />
+                        <p:inputText id="apellidos" value="#{usuarioController.selected.apellidos}" title="#{bundleOrdenes.CreateUsuarioTitle_apellidos}" required="true" requiredMessage="#{bundleOrdenes.CreateUsuarioRequiredMessage_apellidos}"/>
+                        <p:outputLabel value="#{bundleOrdenes.CreateUsuarioLabel_email}" for="email" />
+                        <p:inputText id="email" value="#{usuarioController.selected.email}" title="#{bundleOrdenes.CreateUsuarioTitle_email}" required="true" requiredMessage="Email Requerido" />
+                        <p:outputLabel value="#{bundleOrdenes.CreateUsuarioLabel_password}" for="password" />
+                        <p:password id="password" value="#{usuarioController.selected.password}"  required="true" requiredMessage="#{bundleOrdenes.CreateUsuarioRequiredMessage_password}"/>
+                        <p:outputLabel value="#{bundleOrdenes.CreateUsuarioLabel_tipodocumento}" for="tipodocumento" />
+                         <p:selectOneMenu id="tipodocumento" value="#{usuarioController.selected.tipodocumento}"  required="true" requiredMessage="#{bundleOrdenes.EditUsuarioRequiredMessage_tipodocumento}">
+                            <f:selectItem itemLabel="#{bundleOrdenes.SelectOneMessage}"/>
+                            <f:selectItem itemLabel="CC" itemValue="1"/>
+                             <f:selectItem itemLabel="NA" itemValue="0"/>
+                        </p:selectOneMenu>
+                        
+                        <p:outputLabel value="#{bundleOrdenes.CreateUsuarioLabel_numerodocumento}" for="numerodocumento" />
+                        <p:inputText id="numerodocumento" value="#{usuarioController.selected.numerodocumento}" title="#{bundleOrdenes.CreateUsuarioTitle_numerodocumento}" required="true" requiredMessage="#{bundleOrdenes.CreateUsuarioRequiredMessage_numerodocumento}"/>
+                         <p:outputLabel value="Ciudad" for="idciudad" />
+                         <p:selectOneMenu id="idciudad" value="#{usuarioController.selected.direccion.idciudad.idciudad}"  required="true" requiredMessage="ciudad Requerida">
+                            <f:selectItem itemLabel="#{bundleOrdenes.SelectOneMessage}"/>
+                            <f:selectItems value="#{usuarioController.listaCiudades}"
+                                           var="idciudadItem" itemLabel="#{idciudadItem.nombreciudad} - #{idciudadItem.iddepartamento.nombredepartamento} "
+                                           itemValue="#{idciudadItem.idciudad}"/>
+                            
+                        </p:selectOneMenu>
+                        
+                        <p:outputLabel value="#{bundleOrdenes.CreateUsuarioLabel_iddireccion}" for="iddireccion" />
+                        <p:inputText id="iddireccion" value="#{usuarioController.selected.direccion.numerodireccion}" title="#{bundleOrdenes.CreateUsuarioTitle_iddireccion}" required="true" requiredMessage="Direccion Requerida" />
+                        <p:outputLabel value="#{bundleOrdenes.CreateUsuarioLabel_username}" for="username" />
+                        <p:inputText id="username" value="#{usuarioController.selected.username}" title="#{bundleOrdenes.CreateUsuarioTitle_username}" required="true" requiredMessage="#{bundleOrdenes.CreateUsuarioRequiredMessage_username}"/>
+                        <p:outputLabel value="#{bundleOrdenes.CreateUsuarioLabel_telefono}" for="telefono" />
+                        <p:inputText id="telefono" value="#{usuarioController.selected.telefono}" title="#{bundleOrdenes.CreateUsuarioTitle_telefono}"  required="true" requiredMessage="Telefono Requerido"/>
+                        <p:outputLabel value="#{bundleOrdenes.CreateUsuarioLabel_idcategoria}" for="idcategoria" />
+                        <p:selectOneMenu id="idcategoria" value="#{usuarioController.selected.idcategoria.idcategoria}" required="true" requiredMessage="Categoria Requerida" >
+                            <f:selectItems value="#{usuarioController.listaCategorias}"
+                                           var="idcategoriaItem" itemLabel="#{idcategoriaItem.nombreCategoria}"
+                                           itemValue="#{idcategoriaItem.idcategoria}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{usuarioController.create}" value="#{bundleOrdenes.Save}" update="display,:UsuarioListForm:datalist,:growl" oncomplete="handleSubmit(args,'UsuarioCreateDialog');"/>
+                    <p:commandButton value="#{bundleOrdenes.Cancel}" onclick="UsuarioCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

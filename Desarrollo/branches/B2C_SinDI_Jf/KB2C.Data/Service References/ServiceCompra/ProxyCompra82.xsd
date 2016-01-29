@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema xmlns:od="http://www.kallsony.com/entidad/orden" xmlns:tj="http://www.kallsony.com/entidad/tarjeta" xmlns:cm="http://www.kallsony.com/entidad/compra" xmlns:ev="http://www.kallsony.com/entidad/usuario" targetNamespace="http://www.kallsony.com/entidad/compra" xmlns="http://www.w3.org/2001/XMLSchema">
+  <import schemaLocation="http://192.168.2.6:7002/OSBKallsonys/ProxyService/ProxyCompra?SCHEMA%2FOSBCompras%2FXSD%2FXMLSchema_1844260427" namespace="http://www.kallsony.com/entidad/usuario" />
+  <import schemaLocation="http://192.168.2.6:7002/OSBKallsonys/ProxyService/ProxyCompra?SCHEMA%2FOSBCompras%2FXSD%2FXMLSchema_-586034676" namespace="http://www.kallsony.com/entidad/tarjeta" />
+  <import schemaLocation="http://192.168.2.6:7002/OSBKallsonys/ProxyService/ProxyCompra?SCHEMA%2FOSBCompras%2FXSD%2FXMLSchema_904175407" namespace="http://www.kallsony.com/entidad/orden" />
+  <complexType name="Compra">
+    <sequence>
+      <element minOccurs="0" name="tarjeta" type="tj:Tarjeta" />
+      <element minOccurs="0" name="envioTitular" type="boolean" />
+      <element minOccurs="0" name="usuarioEnvio" type="ev:Usuario" />
+      <element minOccurs="0" name="orden" type="od:Orden" />
+    </sequence>
+  </complexType>
+</schema>

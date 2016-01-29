@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="./css/default.css"/>
+        <h:outputStylesheet name="./css/cssLayout.css"/>
+        <title>Universal Bank</title>
+    </h:head>
+
+    <h:body>
+
+        <div id="top">
+            <ui:insert name="top">
+                <h:form>
+                    <h:panelGrid columns="2">
+                        <h:commandLink   action="/pages/publicas/index?faces-redirect=true">
+                            <h:graphicImage  value="/resources/css/img/logo-universal-bank.png" width="170" height="90" />
+                            <!--
+                                             <img src="{request.contextPath}/resources/css/img/logo-universal-bank.png" width="170" height="90" alt="logo-universal-bank"/>
+                            -->
+                        </h:commandLink>
+                            
+                            <h:panelGrid columns="1">
+                            <h:outputLabel value="#{request.userPrincipal.name}"/>
+                            <h:commandLink value="Cerrar Sesion" action="#{loginManagedBean.cerrarSesion()}"/>
+                            </h:panelGrid>
+                            
+                       
+                    </h:panelGrid>
+                </h:form>
+            </ui:insert>
+
+        </div>
+        <div>
+            <div id="left">
+                <ui:insert name="left">
+
+                    <h:form>                  
+                        <rich:panelMenu 
+
+                            topGroupExpandedRightIcon="chevronUp"
+
+                            topGroupCollapsedRightIcon="chevronDown"
+
+                            groupExpandedLeftIcon="disc"
+
+                            groupCollapsedLeftIcon="disc">
+
+                            <rich:panelMenuGroup label="Administrador"  >
+
+                                 <rich:panelMenuItem label="Servicios Admin" action="/pages/protegidas/admin/serviciosAdministrador?faces-redirect=true"/>
+                               
+
+
+                            </rich:panelMenuGroup>
+
+                            <rich:panelMenuGroup label="Clientes" >
+
+                                <rich:panelMenuItem label="Consultar Saldo" action="/pages/protegidas/user/consultarCuenta?faces-redirect=true"/>
+                                <rich:panelMenuItem label="Consultar Prestamos" action="/pages/protegidas/user/consultarPrestamos?faces-redirect=true"/>
+                                <rich:panelMenuItem label="Consultar Pagos" action="/pages/protegidas/user/consultarPagos?faces-redirect=true"/>
+                                <rich:panelMenuItem label="Registrar Pagos" action="/pages/protegidas/user/RegistrarPagos?faces-redirect=true"/>
+                            </rich:panelMenuGroup>
+
+
+
+
+
+                        </rich:panelMenu>
+                    </h:form>
+
+                </ui:insert>
+            </div>
+            <div id="content" class="left_content">
+
+                <ui:insert name="content">Content</ui:insert>
+            </div>
+        </div>
+        <!--
+        <div id="bottom">
+            <ui:insert name="bottom">Bottom</ui:insert>
+        </div>
+        -->
+
+    </h:body>
+
+</html>

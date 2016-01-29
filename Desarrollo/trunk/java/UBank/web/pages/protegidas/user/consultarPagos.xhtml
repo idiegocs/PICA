@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>Pagos</title>
+    </h:head>
+    <h:body>
+
+        <ui:composition template="/WEB-INF/bankTemplate.xhtml">
+
+            <ui:define name="content">
+                <h:form>
+                    <rich:panel header="Consulta Pagos">
+
+                        <h:panelGrid columns="2">
+                            <h:commandButton value="Refrescar Pagos" action="#{clienteManagedBean.consultarPagos()}" />
+                            <br/>
+
+                        </h:panelGrid>
+
+                        <rich:dataTable value="#{clienteManagedBean.listaPagos}" var="pag" >
+
+
+
+                            <f:facet name="header">
+
+                                <h:outputText value="Pagos" />
+
+                            </f:facet>
+
+                            <rich:column>
+
+                                <f:facet name="header">id Pago</f:facet>
+
+                                <h:outputLabel value="#{pag.idPago}"/>
+
+
+                            </rich:column>
+                            <rich:column>
+
+                                <f:facet name="header">Entidad Bancaria</f:facet>
+
+                                <h:outputLabel value="#{pag.entidadPago.nombreEntidad}"/>
+
+
+                            </rich:column>
+                            <rich:column>
+
+                                <f:facet name="header">Pais Entidad</f:facet>
+
+                                <h:outputLabel value="#{pag.entidadPago.pais}"/>
+
+
+                            </rich:column>
+                            <rich:column>
+
+                                <f:facet name="header">Id Cliente</f:facet>
+
+                                <h:outputLabel value="#{pag.clientePago.idCliente}"/>
+
+
+                            </rich:column>
+                            <rich:column>
+
+                                <f:facet name="header">Nombre Cliente</f:facet>
+
+                                <h:outputLabel value="#{pag.clientePago.nombre} #{pag.clientePago.apellido}"/>
+
+
+                            </rich:column>
+                            <!--
+                            <rich:column>
+
+                                <f:facet name="header">Valor Pago</f:facet>
+
+                                <h:outputLabel value="#{pag.valorPago}"/>
+
+
+                            </rich:column>
+                            -->
+                            
+                             <rich:column>
+
+                                <f:facet name="header">Fecha Programada</f:facet>
+
+                                <rich:calendar value="#{pag.fechaProgramada}" />
+
+
+                            </rich:column>
+                            
+                             <rich:column>
+
+                                <f:facet name="header">Pagar</f:facet>
+
+                                <h:commandButton value="Programar Pago" action="#{clienteManagedBean.realizarPago(pag.entidadPago.idEntidad, pag.clientePago.idCliente,pag.idPago, pag.fechaProgramada)}" />
+
+
+                            </rich:column>
+                            
+
+
+
+
+                        </rich:dataTable>
+
+
+                    </rich:panel>
+
+                    <h:messages globalOnly="true" errorClass="err" warnClass="warn" infoClass="info"> </h:messages>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </h:body>
+</html>

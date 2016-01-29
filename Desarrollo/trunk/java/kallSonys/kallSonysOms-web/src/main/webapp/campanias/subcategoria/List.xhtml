@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+   <ui:composition template="./../../WEB-INF/templates/principalTemplate.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundleCampanias.ListSubcategoriaTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="content">
+            <h:form id="SubcategoriaListForm">
+                <p:panel header="#{bundleCampanias.ListSubcategoriaTitle}">
+                    <p:dataTable id="datalist" value="#{subcategoriaController.items}" var="item"
+                                 selectionMode="single" selection="#{subcategoriaController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.idSubcategoria}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundleCampanias.ListSubcategoriaTitle_idSubcategoria}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idSubcategoria}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundleCampanias.ListSubcategoriaTitle_nombreSubcategoria}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombreSubcategoria}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundleCampanias.ListSubcategoriaTitle_idCategoria}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idCategoria.nombreCategoria}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundleCampanias.Create}" actionListener="#{subcategoriaController.prepareCreate}" update=":SubcategoriaCreateForm" oncomplete="PF('SubcategoriaCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundleCampanias.View}" update=":SubcategoriaViewForm" oncomplete="PF('SubcategoriaViewDialog').show()" disabled="#{empty subcategoriaController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundleCampanias.Edit}" update=":SubcategoriaEditForm" oncomplete="PF('SubcategoriaEditDialog').show()" disabled="#{empty subcategoriaController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundleCampanias.Delete}" actionListener="#{subcategoriaController.destroy}" update=":growl,datalist" disabled="#{empty subcategoriaController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.kallsony.com/final/operacion/registrarcompra" xmlns:wkrcf="http://www.kallsony.com/util/falta" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wkrc="http://www.kallsony.com/operacion/registrarcompra" targetNamespace="http://www.kallsony.com/final/operacion/registrarcompra" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema elementFormDefault="qualified" targetNamespace="http://www.kallsony.com/final/operacion/registrarcompra">
+      <xsd:import schemaLocation="mockPortCompraSOAP11Binding?WSDL&amp;interface=PortCompraSOAP11Binding&amp;part=RegistrarCompra.xsd" namespace="http://www.kallsony.com/operacion/registrarcompra" />
+      <xsd:import schemaLocation="mockPortCompraSOAP11Binding?WSDL&amp;interface=PortCompraSOAP11Binding&amp;part=Falta.xsd" namespace="http://www.kallsony.com/util/falta" />
+    </xsd:schema>
+  </types>
+  <message name="Compra_Falta">
+    <part name="partFalta" element="wkrcf:falta" />
+  </message>
+  <message name="Compra_Entrada">
+    <part name="partEntrada" element="wkrc:registrarCompraEntrada" />
+  </message>
+  <message name="Compra_Salida">
+    <part name="partSalida" element="wkrc:registrarCompraSalida" />
+  </message>
+  <portType name="PortCompra">
+    <operation name="registrarCompra">
+      <input message="tns:Compra_Entrada" />
+      <output message="tns:Compra_Salida" />
+      <fault name="FaltaCompra" message="tns:Compra_Falta" />
+    </operation>
+  </portType>
+  <binding name="PortCompraSOAP11Binding" type="tns:PortCompra">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="registrarCompra">
+      <soap:operation soapAction="http://www.kallsony.com/final/operacion/registrarcompra/registrarCompra" style="document" />
+      <input>
+        <soap:body use="literal" parts="partEntrada" />
+      </input>
+      <output>
+        <soap:body use="literal" parts="partSalida" />
+      </output>
+      <fault name="FaltaCompra">
+        <soap:fault use="literal" name="FaltaCompra" namespace="" />
+      </fault>
+    </operation>
+  </binding>
+  <service name="PortCompra">
+    <port name="PortCompraPort" binding="tns:PortCompraSOAP11Binding">
+      <soap:address location="http://acxp01:8088/mockPortCompraSOAP11Binding" />
+    </port>
+  </service>
+</definitions>

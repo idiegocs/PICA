@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SubcategoriaEditDlg" widgetVar="SubcategoriaEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleCampanias.EditSubcategoriaTitle}">
+            <h:form id="SubcategoriaEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{subcategoriaController.selected != null}">
+                        <p:outputLabel value="#{bundleCampanias.EditSubcategoriaLabel_nombreSubcategoria}" for="nombreSubcategoria" />
+                        <p:inputText id="nombreSubcategoria" value="#{subcategoriaController.selected.nombreSubcategoria}" title="#{bundleCampanias.EditSubcategoriaTitle_nombreSubcategoria}" required="true" requiredMessage="#{bundleCampanias.EditSubcategoriaRequiredMessage_nombreSubcategoria}"/>
+                        <p:outputLabel value="#{bundleCampanias.EditSubcategoriaLabel_idCategoria}" for="idCategoria" />
+                        <p:selectOneMenu id="idCategoria" value="#{subcategoriaController.selected.idCategoria}" required="true" requiredMessage="#{bundleCampanias.EditSubcategoriaRequiredMessage_idCategoria}">
+                            <f:selectItem itemLabel="#{bundleCampanias.SelectOneMessage}"/>
+                            <f:selectItems value="#{categoriaController.itemsAvailableSelectOne}"
+                                           var="idCategoriaItem" itemLabel="#{idCategoriaItem.nombreCategoria}"
+                                           itemValue="#{idCategoriaItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{subcategoriaController.update}" value="#{bundleCampanias.Save}" update="display,:SubcategoriaListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SubcategoriaEditDialog');"/>
+                    <p:commandButton value="#{bundleCampanias.Cancel}" onclick="SubcategoriaEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

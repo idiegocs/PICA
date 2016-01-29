@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.kallsony.com/final/operacion/consultaorden" xmlns:wkcor="http://www.kallsony.com/operacion/consultaorden" xmlns:wkcof="http://www.kallsony.com/util/falta" targetNamespace="http://www.kallsony.com/final/operacion/consultaorden" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema targetNamespace="http://www.kallsony.com/final/operacion/consultaorden">
+      <xsd:import schemaLocation="mockPortOrdenSOAP11Binding?WSDL&amp;interface=PortOrdenSOAP11Binding&amp;part=ConsultaOrden.xsd" namespace="http://www.kallsony.com/operacion/consultaorden" />
+      <xsd:import schemaLocation="mockPortOrdenSOAP11Binding?WSDL&amp;interface=PortOrdenSOAP11Binding&amp;part=Falta.xsd" namespace="http://www.kallsony.com/util/falta" />
+    </xsd:schema>
+  </types>
+  <message name="Orden_Falta">
+    <part name="partFalta" element="wkcof:falta" />
+  </message>
+  <message name="Orden_ConsultaEntrada">
+    <part name="partEntrada" element="wkcor:consultaOrdenEntrada" />
+  </message>
+  <message name="Orden_ConsultaSalida">
+    <part name="partSalida" element="wkcor:consultaOrdenSalida" />
+  </message>
+  <portType name="PortOrden">
+    <operation name="consultarOrden">
+      <input message="tns:Orden_ConsultaEntrada" />
+      <output message="tns:Orden_ConsultaSalida" />
+      <fault name="faltaOrden" message="tns:Orden_Falta" />
+    </operation>
+  </portType>
+  <binding name="PortOrdenSOAP11Binding" type="tns:PortOrden">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="consultarOrden">
+      <soap:operation soapAction="http://www.kallsony.com/final/operacion/consultaorden/consultarOrden" style="document" />
+      <input>
+        <soap:body use="literal" parts="partEntrada" />
+      </input>
+      <output>
+        <soap:body use="literal" parts="partSalida" />
+      </output>
+      <fault name="faltaOrden">
+        <soap:fault use="literal" name="faltaOrden" namespace="" />
+      </fault>
+    </operation>
+  </binding>
+  <service name="PortOrden">
+    <port name="PortOrdenPort" binding="tns:PortOrdenSOAP11Binding">
+      <soap:address location="http://acxp01:8088/mockPortOrdenSOAP11Binding" />
+    </port>
+  </service>
+</definitions>

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <context-param>
+        <param-name>kallsony.paramNombre</param-name>
+        <param-value>Kallsonys V_1.0</param-value>
+    </context-param>
+     <context-param>
+        <param-name>kallsony.ipimages</param-name>
+        <param-value>192.168.1.6</param-value>
+    </context-param>
+     <context-param>
+        <param-name>kallsony.paginacion</param-name>
+        <param-value>20</param-value>
+    </context-param>
+      <context-param>
+        <param-name>kallsony.ipservproductos</param-name>
+        <param-value>http://localhost:8001/soa-infra/services/default/ProjectProductos/ServiceProductos?WSDL</param-value>
+    </context-param>
+    <context-param>
+        <param-name>kallsony.ipservcancelar</param-name>
+        <param-value>http://localhost:8001/soa-infra/services/default/ProjectCancelar/ServiceCancelarOrden?WSDL</param-value>
+    </context-param>
+    <context-param>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Development</param-value>
+    </context-param>
+    <!--
+    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>bootstrap</param-value>
+    </context-param>
+    -->
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>/faces/*</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>faces/welcome.xhtml</welcome-file>
+    </welcome-file-list>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/faces/error/errorPrivilegios.xhtml</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/faces/error/error.xhtml</location>
+    </error-page>
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/faces/error/error.xhtml</location>
+    </error-page>
+
+    <security-constraint>
+        <display-name>ConstraintAdmin</display-name>
+        <web-resource-collection>
+            <web-resource-name>Recursos Admin</web-resource-name>
+            <description>acciones administrativas</description>
+            <url-pattern>/faces/admin/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>ADMIN</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>ConstraintProdAdmin</display-name>
+        <web-resource-collection>
+            <web-resource-name>Recursos Productos Admin</web-resource-name>
+            <description>acciones administrativas sobre Productos</description>
+            <url-pattern>/faces/producto/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>ADMIN</role-name>
+            <role-name>PROD_ADMIN</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>ConstraintProdConsult</display-name>
+        <web-resource-collection>
+            <web-resource-name>Recursos   Productos Consulta</web-resource-name>
+            <description>acciones de consulta sobre Productos</description>
+            <url-pattern>/faces/productoConsulta/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>ADMIN</role-name>
+            <role-name>PROD_ADMIN</role-name>
+            <role-name>PROD_CONSUL</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>ConstraintCampAdmin</display-name>
+        <web-resource-collection>
+            <web-resource-name>Recursos Campanias Admin</web-resource-name>
+            <description>acciones administrativas sobre Campanias</description>
+            <url-pattern>/faces/campanias/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>ADMIN</role-name>
+            <role-name>CAMP_ADMIN</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>ConstraintOrdenAdmin</display-name>
+        <web-resource-collection>
+            <web-resource-name>Recursos Ordenes Admin</web-resource-name>
+            <description>acciones administrativas sobre Ordenes</description>
+            <url-pattern>/faces/ordenes/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>ADMIN</role-name>
+            <role-name>ORDE_ADMIN</role-name>
+        </auth-constraint>
+    </security-constraint>
+      <security-constraint>
+        <display-name>ConstraintOrdenConsult</display-name>
+        <web-resource-collection>
+            <web-resource-name>Recursos de consulta Ordenes</web-resource-name>
+            <description>accionesde consulta sobre Ordenes</description>
+            <url-pattern>/faces/ordenesConsulta/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>ADMIN</role-name>
+            <role-name>ORDE_ADMIN</role-name>
+             <role-name>ORDE_CONSUL</role-name>  
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>ConstraintCliAdmin</display-name>
+        <web-resource-collection>
+            <web-resource-name>Recursos Clientes Admin</web-resource-name>
+            <description>acciones administrativas sobre Clientes</description>
+            <url-pattern>/faces/usuario/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>ADMIN</role-name>
+            <role-name>CLIE_ADMIN</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <!--
+        <realm-name>kallsonysRealm</realm-name>
+        -->
+        <realm-name>kallSonyLDAPRealm</realm-name>
+        <form-login-config>
+            <form-login-page>/faces/login.xhtml</form-login-page>
+            <form-error-page>/faces/loginError.xhtml</form-error-page>
+        </form-login-config>
+    </login-config>
+    <security-role>
+        <description>Administrador Kallsonys</description>
+        <role-name>ADMIN</role-name>
+    </security-role>
+    <security-role>
+        <description>Administrador Productos Kallsonys</description>
+        <role-name>PROD_ADMIN</role-name>
+    </security-role>
+    <security-role>
+        <description>Analista Consulta Productos Kallsonys</description>
+        <role-name>PROD_CONSUL</role-name>
+    </security-role>
+    <security-role>
+        <description>Administrador Campanias Kallsonys</description>
+        <role-name>CAMP_ADMIN</role-name>
+    </security-role>
+    <security-role>
+        <description>Administrador Ordenes Kallsonys</description>
+        <role-name>ORDE_ADMIN</role-name>
+    </security-role>
+    <security-role>
+        <description>Analistata Consulta Ordenes Kallsonys</description>
+        <role-name>ORDE_CONSUL</role-name>
+    </security-role>
+    <security-role>
+        <description>Administrador Clientes Kallsonys</description>
+        <role-name>CLIE_ADMIN</role-name>
+    </security-role>
+</web-app>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="82e9a520-fe92-4d3e-9127-291db403d938" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:8088/mockPortCompraSOAP11Binding?wsdl" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="mockPortCompraSOAP11Binding4.xsd" MetadataType="Schema" ID="05460e89-5da6-4826-a214-26add7922c01" SourceId="1" SourceUrl="http://localhost:8088/mockPortCompraSOAP11Binding?WSDL&amp;interface=PortCompraSOAP11Binding&amp;part=Orden.xsd" />
+    <MetadataFile FileName="mockPortCompraSOAP11Binding.xsd" MetadataType="Schema" ID="059ca011-aa19-4c39-9024-8979ad8d5a14" SourceId="1" SourceUrl="http://localhost:8088/mockPortCompraSOAP11Binding?WSDL&amp;interface=PortCompraSOAP11Binding&amp;part=Producto.xsd" />
+    <MetadataFile FileName="mockPortCompraSOAP11Binding1.xsd" MetadataType="Schema" ID="92a4e7a1-f35e-4058-b469-77bcdfc64d5d" SourceId="1" SourceUrl="http://localhost:8088/mockPortCompraSOAP11Binding?WSDL&amp;interface=PortCompraSOAP11Binding&amp;part=Usuario.xsd" />
+    <MetadataFile FileName="mockPortCompraSOAP11Binding2.xsd" MetadataType="Schema" ID="d3462296-4f2c-49ea-b964-a77bde362713" SourceId="1" SourceUrl="http://localhost:8088/mockPortCompraSOAP11Binding?WSDL&amp;interface=PortCompraSOAP11Binding&amp;part=Direccion.xsd" />
+    <MetadataFile FileName="mockPortCompraSOAP11Binding3.xsd" MetadataType="Schema" ID="00a1258f-4740-4c74-b583-ab150f21ea42" SourceId="1" SourceUrl="http://localhost:8088/mockPortCompraSOAP11Binding?WSDL&amp;interface=PortCompraSOAP11Binding&amp;part=Tarjeta.xsd" />
+    <MetadataFile FileName="mockPortCompraSOAP11Binding1.wsdl" MetadataType="Wsdl" ID="1c766d52-9ac6-4437-a935-b315438a6846" SourceId="1" SourceUrl="http://localhost:8088/mockPortCompraSOAP11Binding?wsdl" />
+    <MetadataFile FileName="mockPortCompraSOAP11Binding5.xsd" MetadataType="Schema" ID="42b099f7-422a-4793-ade5-72ca2d8db7fd" SourceId="1" SourceUrl="http://localhost:8088/mockPortCompraSOAP11Binding?WSDL&amp;interface=PortCompraSOAP11Binding&amp;part=RegistrarCompra.xsd" />
+    <MetadataFile FileName="mockPortCompraSOAP11Binding6.xsd" MetadataType="Schema" ID="b27a6f6f-860a-4e45-8241-db88be2f6572" SourceId="1" SourceUrl="http://localhost:8088/mockPortCompraSOAP11Binding?WSDL&amp;interface=PortCompraSOAP11Binding&amp;part=Compra.xsd" />
+    <MetadataFile FileName="mockPortCompraSOAP11Binding7.xsd" MetadataType="Schema" ID="9a3e82fa-ab94-4891-b95c-20c078feb7e3" SourceId="1" SourceUrl="http://localhost:8088/mockPortCompraSOAP11Binding?WSDL&amp;interface=PortCompraSOAP11Binding&amp;part=Falta.xsd" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

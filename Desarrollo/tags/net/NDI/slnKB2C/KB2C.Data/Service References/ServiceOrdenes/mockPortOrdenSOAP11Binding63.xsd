@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema xmlns:co="http://www.kallsony.com/operacion/consultaorden" xmlns:us="http://www.kallsony.com/entidad/usuario" xmlns:or="http://www.kallsony.com/entidad/orden" elementFormDefault="qualified" targetNamespace="http://www.kallsony.com/operacion/consultaorden" xmlns="http://www.w3.org/2001/XMLSchema">
+  <import schemaLocation="mockPortOrdenSOAP11Binding?WSDL&amp;interface=PortOrdenSOAP11Binding&amp;part=Orden.xsd" namespace="http://www.kallsony.com/entidad/orden" />
+  <import schemaLocation="mockPortOrdenSOAP11Binding?WSDL&amp;interface=PortOrdenSOAP11Binding&amp;part=Usuario.xsd" namespace="http://www.kallsony.com/entidad/usuario" />
+  <complexType name="ConsultaOrdenEntrada">
+    <sequence>
+      <element minOccurs="0" name="idOrden" type="int" />
+      <element minOccurs="0" name="cliente" type="us:Usuario" />
+    </sequence>
+  </complexType>
+  <complexType name="ConsultaOrdenSalida">
+    <sequence>
+      <element name="listaOrdenes" type="co:Ordenes" />
+    </sequence>
+  </complexType>
+  <complexType name="Ordenes">
+    <sequence>
+      <element minOccurs="0" maxOccurs="unbounded" name="orden" type="or:Orden" />
+    </sequence>
+  </complexType>
+  <element name="consultaOrdenEntrada" type="co:ConsultaOrdenEntrada" />
+  <element name="consultaOrdenSalida" type="co:ConsultaOrdenSalida" />
+</schema>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="./../WEB-INF/templates/principalTemplate.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="Administracion Productos"></h:outputText>
+        </ui:define>
+
+        <ui:define name="content">
+            <h:form id="ProductoListForm">
+
+
+                <p:panel header="Filtro Productos" id="pfiltro">
+                    <p:panelGrid  columns="2" styleClass="panelNoBorder">
+                        <h:outputLabel value="Tipo Filtro "  />
+                        <p:selectOneMenu id="console" value="#{productoController.tipoFiltro}" disabled="#{productoController.filtroActivo}">
+                            <f:selectItem itemLabel="Seleccione Uno" itemValue="A" />
+                            <f:selectItem itemLabel="Nombre" itemValue="N" />
+                            <f:selectItem itemLabel="Codigo" itemValue="C" />
+                            <f:selectItem itemLabel="Descripci&oacute;n" itemValue="D" />
+                            <f:selectItem itemLabel="Fabricante" itemValue="F" />
+
+                        </p:selectOneMenu>
+                        <h:outputLabel value="Valor Filtro " for="idvalor" />
+                        <h:inputText id="idvalor" value="#{productoController.valorFiltro}" disabled="#{productoController.filtroActivo}" />
+                    </p:panelGrid>
+                    <p:commandButton value="Filtrar Productos" action="#{productoController.conseguirItems()}" disabled="#{productoController.filtroActivo}"  update=":growl,datalist,pfiltro" />
+                    <p:commandButton value="Reiniciar" action="#{productoController.reiniciarProductos()}"   update="datalist,pfiltro"/>
+
+                </p:panel>
+                <p:dataTable id="datalist" value="#{productoController.items}" var="item"
+                             selectionMode="single" selection="#{productoController.selected}"
+                             paginator="true"
+                             rowKey="#{item.idProducto}"
+                             rows="5"
+                             rowsPerPageTemplate="5,10,20,30,40,50"
+                             >
+                    <f:facet name="header">
+                        <h:panelGrid columns="1" styleClass="panelNoBorder" >
+                            <h:outputText id="output" value="Grupo Producto #{productoController.grupoProducto} / #{productoController.maximaPagina} " />
+                            <h:inputHidden id="txt2" value="#{productoController.grupoProducto}" />
+                            <p:slider for="txt2" display="output" style="width: 200px" displayTemplate="Buscar Grupo # {value}" minValue="1" maxValue="#{productoController.maximaPagina}" >
+                                <p:ajax update="datalist" process="@this,txt2" listener="#{productoController.conseguirItemsGrupo()}" />
+                            </p:slider>
+                        </h:panelGrid>
+
+                    </f:facet>
+                    <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                    <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleProducto.ListProductoTitle_idProducto}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idProducto}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleProducto.ListProductoTitle_codigoProducto}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.codigoProducto}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleProducto.ListProductoTitle_nombreProducto}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nombreProducto}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleProducto.ListProductoTitle_descripcionProducto}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.descripcionProducto}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleProducto.ListProductoTitle_nombreFabricante}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nombreFabricante}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleProducto.ListProductoTitle_nombreImagenProducto}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nombreImagenProducto}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleProducto.ListProductoTitle_idSubcategoria}"/>
+                        </f:facet>
+                        
+                        <p:selectOneMenu  value="#{item.idSubcategoria}" disabled="true"  >  
+                            <f:selectItems value="#{productoController.listaSubcategorias}"  
+                                           var="sub" itemLabel="#{sub.nombreSubcategoria}"  
+                                           itemValue="#{sub.idSubcategoria}"/>  
+                        </p:selectOneMenu>  
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleProducto.ListProductoTitle_precioUnitario}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.precioUnitario}">
+                            <f:convertNumber  pattern="¤#,##0.00" currencySymbol="$" type="currency"/>
+                        </h:outputText>
+                    </p:column>
+                    <f:facet name="footer">
+                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundleProducto.Create}" actionListener="#{productoController.prepareCreate}" update=":ProductoCreateForm" oncomplete="PF('ProductoCreateDialog').show()"/>
+                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundleProducto.View}" update=":ProductoViewForm" oncomplete="PF('ProductoViewDialog').show()" disabled="#{empty productoController.selected}"/>
+                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundleProducto.Edit}" update=":ProductoEditForm" oncomplete="PF('ProductoEditDialog').show()" disabled="#{empty productoController.selected}"/>
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundleProducto.Delete}"  action="#{productoController.destroy}" update=":growl,datalist" disabled="#{empty productoController.selected}">
+                            <p:confirm header="Confirmaci&oacute;n" message="Esta Seguro?" icon="ui-icon-alert" />
+                        </p:commandButton>
+                    </f:facet>
+                </p:dataTable>
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+                    <p:commandButton value="Si"  type="button"  styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                    <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                </p:confirmDialog>
+
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

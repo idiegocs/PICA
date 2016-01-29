@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CampaniaCreateDlg" widgetVar="CampaniaCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleCampanias.CreateCampaniaTitle}">
+            <h:form id="CampaniaCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{campaniaController.selected != null}">
+                         <p:outputLabel value="#{bundleCampanias.CreateCampaniaLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{campaniaController.selected.nombre}" title="#{bundleCampanias.CreateCampaniaTitle_nombre}" required="true" requiredMessage="#{bundleCampanias.CreateCampaniaRequiredMessage_nombre}"/>
+                        <p:outputLabel value="#{bundleCampanias.CreateCampaniaLabel_fechaInicio}" for="fechaInicio" />
+                        <p:calendar id="fechaInicio" pattern="MM/dd/yyyy" value="#{campaniaController.selected.fechaInicio}" title="#{bundleCampanias.EditCampaniaTitle_fechaInicio}" required="true" requiredMessage="#{bundleCampanias.EditCampaniaRequiredMessage_fechaInicio}" showOn="button"/>
+                        <p:outputLabel value="#{bundleCampanias.CreateCampaniaLabel_fechaFin}" for="fechaFin" />
+                        <p:calendar id="fechaFin" pattern="MM/dd/yyyy" value="#{campaniaController.selected.fechaFin}" title="#{bundleCampanias.EditCampaniaTitle_fechaFin}" required="true" requiredMessage="#{bundleCampanias.EditCampaniaRequiredMessage_fechaFin}" showOn="button"/>
+                        <p:outputLabel value="#{bundleCampanias.CreateCampaniaLabel_estado}" for="estado" />
+                        <p:selectBooleanCheckbox id="estado" value="#{campaniaController.selected.estado}" required="true" requiredMessage="#{bundleCampanias.EditCampaniaRequiredMessage_estado}"/>
+                        <p:outputLabel value="#{bundleCampanias.CreateCampaniaLabel_nombreImagenCampania}" for="nombreImagenCampania" />
+                        <p:inputText id="nombreImagenCampania" value="#{campaniaController.selected.nombreImagenCampania}" title="#{bundleCampanias.CreateCampaniaTitle_nombreImagenCampania}" required="true" requiredMessage="#{bundleCampanias.CreateCampaniaRequiredMessage_nombreImagenCampania}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{campaniaController.create}" value="#{bundleCampanias.Save}" update="display,:CampaniaListForm:datalist,:growl" oncomplete="handleSubmit(args,'CampaniaCreateDialog');"/>
+                    <p:commandButton value="#{bundleCampanias.Cancel}" onclick="CampaniaCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

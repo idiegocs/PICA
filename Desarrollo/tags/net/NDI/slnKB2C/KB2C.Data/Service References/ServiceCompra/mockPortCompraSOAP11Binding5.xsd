@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema xmlns:cp="http://www.kallsony.com/entidad/compra" xmlns:rc="http://www.kallsony.com/operacion/registrarcompra" elementFormDefault="qualified" targetNamespace="http://www.kallsony.com/operacion/registrarcompra" xmlns="http://www.w3.org/2001/XMLSchema">
+  <import schemaLocation="mockPortCompraSOAP11Binding?WSDL&amp;interface=PortCompraSOAP11Binding&amp;part=Compra.xsd" namespace="http://www.kallsony.com/entidad/compra" />
+  <complexType name="RegistrarCompraEntrada">
+    <sequence>
+      <element name="compra" type="cp:Compra" />
+    </sequence>
+  </complexType>
+  <complexType name="RegistrarCompraSalida">
+    <sequence>
+      <element minOccurs="1" name="idPreOrden" type="integer" />
+      <element minOccurs="1" name="estadoTarjeta" type="boolean" />
+    </sequence>
+  </complexType>
+  <element name="registrarCompraEntrada" type="rc:RegistrarCompraEntrada" />
+  <element name="registrarCompraSalida" type="rc:RegistrarCompraSalida" />
+</schema>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="./../WEB-INF/templates/principalTemplate.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="Consulta Ordenes"></h:outputText>
+        </ui:define>
+
+        <ui:define name="content">
+            <h:form id="OrdenListForm">
+                <p:panel id="pfiltroorden" header="Consulta Ordenes">
+                    <p:panelGrid  columns="2" styleClass="panelNoBorder">
+                        <h:outputLabel value="Tipo Filtro "  />
+                        <p:selectOneMenu id="console" value="#{ordenConsultaController.tipoFiltro}" disabled="#{ordenConsultaController.filtroActivo}">
+                            <f:selectItem itemLabel="Seleccione Uno" itemValue="A" />
+                            <f:selectItem itemLabel="No PreOrden" itemValue="N" />
+                            <f:selectItem itemLabel="Username" itemValue="U" />
+                           
+
+                        </p:selectOneMenu>
+                        <h:outputLabel value="Valor Filtro " for="idvalor" />
+                        <h:inputText id="idvalor" value="#{ordenConsultaController.valorFiltro}" disabled="#{ordenConsultaController.filtroActivo}" />
+                    </p:panelGrid>
+                    <p:commandButton value="Filtrar Ordenes" action="#{ordenConsultaController.conseguirItems()}" disabled="#{ordenConsultaController.filtroActivo}"  update=":growl,datalist,pfiltroorden" />
+                    <p:commandButton value="Reiniciar" action="#{ordenConsultaController.reiniciarOrdenes()}"   update="datalist,pfiltroorden"/>
+
+                </p:panel>
+
+                <p:dataTable id="datalist" value="#{ordenConsultaController.items}" var="item"
+                             selectionMode="single" selection="#{ordenConsultaController.selected}"
+                             paginator="true"
+                             rowKey="#{item.idorden}"
+                             rows="5"
+                             rowsPerPageTemplate="5,10,20,30,40,50"
+                             >
+                    <f:facet name="header">
+                        <h:panelGrid columns="1" styleClass="panelNoBorder" >
+                            <h:outputText id="output" value="Grupo Producto #{ordenConsultaController.grupoOrden} / #{ordenConsultaController.maximaPagina} " />
+                            <h:inputHidden id="txt2" value="#{ordenConsultaController.grupoOrden}" />
+                            <p:slider for="txt2" display="output" style="width: 200px" displayTemplate="Buscar Grupo # {value}" minValue="1" maxValue="#{ordenConsultaController.maximaPagina}" >
+                                <p:ajax update="datalist" process="@this,txt2" listener="#{ordenConsultaController.conseguirItemsGrupo()}" />
+                            </p:slider>
+                        </h:panelGrid>
+
+                    </f:facet>
+
+                    <p:ajax event="rowSelect"   update="viewButton"/>
+                    <p:ajax event="rowUnselect" update="viewButton"/>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleOrdenes.ListOrdenTitle_idorden}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idorden}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleOrdenes.ListOrdenTitle_fechaorden}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.fechaorden}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column  >
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleOrdenes.ListOrdenTitle_cantitemorden}"/>
+                        </f:facet>
+
+                        <p:commandLink id="ajax" update=":growl"  value="#{item.cantitemorden}"  action="#{ordenConsultaController.envioItem()}">
+                            <f:setPropertyActionListener target="#{itemOrdenController.idOrden}" value="#{item.idorden}" />
+                        </p:commandLink>
+
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleOrdenes.ListOrdenTitle_totalorden}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.totalorden}">
+                            <f:convertNumber  pattern="¤ #,##0.00" currencySymbol="$" type="currency"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleOrdenes.ListOrdenTitle_numpreorden}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.numpreorden}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleOrdenes.ListOrdenTitle_idestadoorden}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idestadoorden.nombreestadoorden} "/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleOrdenes.ListOrdenTitle_idcliente}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idcliente.nombres} #{item.idcliente.apellidos}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="Username"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idcliente.username}"/>
+                    </p:column>
+
+                    <f:facet name="footer">
+
+                  
+                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundleOrdenes.View}" update=":OrdenViewForm" oncomplete="PF('OrdenViewDialog').show()" disabled="#{empty ordenConsultaController.selected}"/>
+                      
+
+                    </f:facet>
+                </p:dataTable>
+
+            </h:form>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

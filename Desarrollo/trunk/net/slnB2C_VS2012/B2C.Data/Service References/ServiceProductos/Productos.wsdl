@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wkcuf="http://www.kallsony.com/util/falta" xmlns:tns="http://www.kallsony.com/final/operacion/consultaproducto" xmlns:wkcoc="http://www.kallsony.com/operacion/consultaproducto" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/wsdl/" name="Productos" targetNamespace="http://www.kallsony.com/final/operacion/consultaproducto" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <documentation>
+    <abstractWSDL>http://DiegoPC:8001/soa-infra/services/default/productos!2.0/Producto.wsdl</abstractWSDL>
+  </documentation>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.kallsony.com/final/operacion/consultaproducto">
+      <xsd:import schemaLocation="http://25.5.55.200:8001/soa-infra/services/default/productos/ServiceProductos?XSD=xsd/ConsultaProductos.xsd" namespace="http://www.kallsony.com/operacion/consultaproducto" />
+      <xsd:import schemaLocation="http://25.5.55.200:8001/soa-infra/services/default/productos/ServiceProductos?XSD=xsd/Falta.xsd" namespace="http://www.kallsony.com/util/falta" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ProductoDetalle_ConsultaProductoEntrada">
+    <wsdl:part name="ConsultaProductosEntrada" element="wkcoc:consultaProductoEntrada" />
+  </wsdl:message>
+  <wsdl:message name="ProductoDetalle_ConsultaProductoSalida">
+    <wsdl:part name="ConsultaProductosSalida" element="wkcoc:consultaProductoSalida" />
+  </wsdl:message>
+  <wsdl:message name="ProductoDeralle_FaltaProducto">
+    <wsdl:part name="ConsultaProductosFalta" element="wkcuf:falta" />
+  </wsdl:message>
+  <wsdl:portType name="ProductosPort">
+    <wsdl:operation name="ConsultarProductos">
+      <wsdl:input message="tns:ProductoDetalle_ConsultaProductoEntrada" />
+      <wsdl:output message="tns:ProductoDetalle_ConsultaProductoSalida" />
+      <wsdl:fault name="FaltaProductos" message="tns:ProductoDeralle_FaltaProducto" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ProductosPortSOAP11Binding" type="tns:ProductosPort">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ConsultarProductos">
+      <soap:operation soapAction="pro:Producto/ConsultarProductos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" parts="ConsultaProductosEntrada" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" parts="ConsultaProductosSalida" />
+      </wsdl:output>
+      <wsdl:fault name="FaltaProductos">
+        <soap:fault use="literal" name="FaltaProductos" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ServiceProductos">
+    <wsdl:port name="ProductosPort_pt" binding="tns:ProductosPortSOAP11Binding">
+      <soap:address location="http://25.5.55.200:8001/soa-infra/services/default/productos/ServiceProductos" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://DiegoPC:8001/soa-infra/services/default/ProjectProductos/ServiceProductos?WSDL" uri="wsdl/DiegoPC_8001/soa-infra/services/default/ProjectProductos/ServiceProductos.wsdl"/>
+    <system systemId="http://DiegoPC:8001/soa-infra/services/default/ProjectProductos/ServiceProductos?XSD=xsd/ConsultaProductos.xsd" uri="wsdl/DiegoPC_8001/soa-infra/services/default/ProjectProductos/ServiceProductos.XSD_xsd/ConsultaProductos.xsd"/>
+    <system systemId="http://DiegoPC:8001/soa-infra/services/default/ProjectProductos/ServiceProductos?XSD=xsd/Falta.xsd" uri="wsdl/DiegoPC_8001/soa-infra/services/default/ProjectProductos/ServiceProductos.XSD_xsd/Falta.xsd"/>
+    <system systemId="http://DiegoPC:8001/soa-infra/services/default/ProjectProductos/ServiceProductos?XSD=xsd/Producto.xsd" uri="wsdl/DiegoPC_8001/soa-infra/services/default/ProjectProductos/ServiceProductos.XSD_xsd/Producto.xsd"/>
+    <system systemId="http://DiegoPC:8001/soa-infra/services/default/ProjectProductos/ServiceProductos?XSD=xsd/Filtro.xsd" uri="wsdl/DiegoPC_8001/soa-infra/services/default/ProjectProductos/ServiceProductos.XSD_xsd/Filtro.xsd"/>
+    <system systemId="http://localhost:8001/soa-infra/services/default/ProjectCancelar/ServiceCancelarOrden?WSDL" uri="wsdl/localhost_8001/soa-infra/services/default/ProjectCancelar/ServiceCancelarOrden.wsdl"/>
+    <system systemId="http://localhost:8001/soa-infra/services/default/ProjectCancelar/ServiceCancelarOrden?XSD=xsd/Cancelacion.xsd" uri="wsdl/localhost_8001/soa-infra/services/default/ProjectCancelar/ServiceCancelarOrden.XSD_xsd/Cancelacion.xsd"/>
+</catalog>

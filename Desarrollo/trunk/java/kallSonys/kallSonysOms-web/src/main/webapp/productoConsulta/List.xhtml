@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="./../WEB-INF/templates/principalTemplate.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="Consulta Productos"></h:outputText>
+        </ui:define>
+
+        <ui:define name="content">
+            <h:form id="ProductoConsultaForm">
+                <p:panel header="Filtro Productos" id="pfiltro">
+                    <p:panelGrid columns="2" styleClass="panelNoBorder">
+                        <h:outputLabel value="Tipo Filtro " />
+                        <p:selectOneMenu id="console" value="#{productoConsultaController.tipoFiltro}"  >
+                            <f:selectItem itemLabel="Seleccione Uno" itemValue="A" />
+                            <f:selectItem itemLabel="Nombre" itemValue="N" />
+                            <f:selectItem itemLabel="Codigo" itemValue="C" />
+                            <f:selectItem itemLabel="Descripci&oacute;n" itemValue="D" />
+                            <f:selectItem itemLabel="Ranking Vendidos " itemValue="R" />
+                            <p:ajax update="@this,pfiltro" />
+                        </p:selectOneMenu>
+                        <h:outputLabel value="Valor Filtro " for="idvalor" />
+                        <h:inputText id="idvalor" value="#{productoConsultaController.valorFiltro}" rendered="#{productoConsultaController.tipoFiltro ne 'R'?true:false}"/>
+                        <p:panelGrid id="pfechas" columns="2" rendered="#{productoConsultaController.tipoFiltro eq 'R'?true:false}">
+                            <h:outputLabel value="Fecha Inicial: " for="fechaIni" />
+                            <p:calendar id="fechaIni" pattern="dd/MM/yyyy" value="#{productoConsultaController.fechaIni}"  required="true" requiredMessage="Fecha Inicial es Requerida" showOn="button"/>
+                            <h:outputLabel value="Fecha Final: " for="fechaFin" />
+                            <p:calendar id="fechaFin" pattern="dd/MM/yyyy" value="#{productoConsultaController.fechaFin}"  required="true" requiredMessage="Fecha Fin es requerida" showOn="button"/>
+                        </p:panelGrid>
+                                     
+                    </p:panelGrid>
+                    <p:commandButton value="Filtrar Productos" action="#{productoConsultaController.conseguirItems()}"   update=":growl,lproduc" />
+                    <p:commandButton value="Reiniciar" action="#{productoConsultaController.reiniciarProductos()}"   update="lproduc,pfiltro"/>
+
+                </p:panel>
+                <p:dataGrid  var="prod" value="#{productoConsultaController.items}" columns="3" layout="grid" first="#{productoConsultaController.page}"
+                             rows="9" paginator="true" id="lproduc"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             rowsPerPageTemplate="6,12,16,30,60">
+                    <f:facet name="header">
+
+                        
+                        <h:panelGrid columns="1" >
+                            <h:outputText id="output" value="Grupo Producto #{productoConsultaController.grupoProducto} / #{productoConsultaController.maximaPagina} " />
+                            <h:inputHidden id="txt2" value="#{productoConsultaController.grupoProducto}" />
+                            <p:slider for="txt2" display="output" style="width: 200px" displayTemplate="Buscar Grupo # {value}" minValue="1" maxValue="#{productoConsultaController.maximaPagina}" >
+                                <p:ajax update="lproduc" process="@this,txt2" listener="#{productoConsultaController.conseguirItemsGrupo()}" />
+                            </p:slider>
+                        </h:panelGrid>
+
+                    </f:facet>
+
+                    <p:panel header="#{prod.codigoProducto}" style="text-align:center">
+                        <h:panelGrid columns="1" style="width:100%">
+
+                            <p:graphicImage  width="100px" height="100px" url="http://#{initParam['kallsony.ipimages']}/KB2C_Images/Productos/#{prod.nombreImagenProducto}"  alt="Imagen #{prod.codigoProducto}" title="#{prod.nombreProducto}" />
+
+
+                            <h:outputText value="#{prod.nombreProducto}" />
+                            <h:outputText value="#{prod.precioUnitario}" >
+                                <f:convertNumber  pattern="¤#,##0.00" currencySymbol="$" type="currency"/>
+                            </h:outputText>
+
+                            <p:commandLink update=":ProductoConsultaForm:prodDetail" oncomplete="PF('prodDialog').show()" title="Ver Detalle">
+                                <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />
+                                <f:setPropertyActionListener value="#{prod}" target="#{productoConsultaController.productoSeleccionado}" />
+                            </p:commandLink>
+                        </h:panelGrid>
+                    </p:panel>
+
+                </p:dataGrid>
+
+
+                <p:dialog header="Detalle Producto" widgetVar="prodDialog" modal="true" appendTo="@(body)" showEffect="fade" hideEffect="fade" resizable="false">
+                    <p:outputPanel id="prodDetail" style="text-align:center;">
+                        <p:panelGrid  columns="2" rendered="#{not empty productoConsultaController.items}" columnClasses="label,value">
+                            <f:facet name="header">
+
+                                <p:graphicImage url="http://#{initParam['kallsony.ipimages']}/KB2C_Images/Productos/#{productoConsultaController.productoSeleccionado.nombreImagenProducto}" alt="Imagen #{productoConsultaController.productoSeleccionado.codigoProducto}" title="#{productoConsultaController.productoSeleccionado.nombreProducto}"/>
+
+                            </f:facet>
+
+                            <h:outputText value="Id:" />
+
+                            <h:outputText value="#{productoConsultaController.productoSeleccionado.idProducto}" />
+                            <h:outputText value="Nombre:" />
+                            <h:outputText value="#{productoConsultaController.productoSeleccionado.nombreProducto}" />
+                            <h:outputText value="Descripci&oacute;n:" />
+                            <h:outputText value="#{productoConsultaController.productoSeleccionado.descripcionProducto}" />
+                            <h:outputText value="Precio:" />
+                            <h:outputText value="#{productoConsultaController.productoSeleccionado.precioUnitario}" >
+                                <f:convertNumber  pattern="¤#,##0.00" currencySymbol="$" type="currency"/>
+                            </h:outputText>
+                            <h:outputText value="Nombre Fabricante:" />
+                            <h:outputText value="#{productoConsultaController.productoSeleccionado.nombreFabricante}" />
+                            <h:outputText value="Nombre Imagen:" />
+                            <h:outputText value="#{productoConsultaController.productoSeleccionado.nombreImagenProducto}" />
+                            <h:outputText value="SubCategoria:" />
+                            <h:outputText value="#{productoConsultaController.productoSeleccionado.idSubcategoria}"/>
+
+                        </p:panelGrid>
+                    </p:outputPanel>
+                </p:dialog>
+
+
+            </h:form>
+
+
+
+        </ui:define>
+    </ui:composition>
+
+</html>

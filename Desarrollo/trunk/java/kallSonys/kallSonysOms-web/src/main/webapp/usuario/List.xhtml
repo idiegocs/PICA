@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="./../WEB-INF/templates/principalTemplate.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundleOrdenes.ListUsuarioTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="content">
+            <h:form id="UsuarioListForm">
+                <p:panel id="pfiltrouser" header="#{bundleOrdenes.ListUsuarioTitle}">
+
+                    <p:panelGrid  columns="2" styleClass="panelNoBorder">
+                        <h:outputLabel value="Tipo Filtro "  />
+                        <p:selectOneMenu id="console" value="#{usuarioController.tipoFiltro}" disabled="#{usuarioController.filtroActivo}">
+                            <f:selectItem itemLabel="Seleccione Uno" itemValue="A" />
+                            <f:selectItem itemLabel="Username" itemValue="U" />
+                            <f:selectItem itemLabel="No Documento" itemValue="N" />
+
+                        </p:selectOneMenu>
+                        <h:outputLabel value="Valor Filtro " for="idvalor" />
+                        <h:inputText id="idvalor" value="#{usuarioController.valorFiltro}" disabled="#{usuarioController.filtroActivo}" />
+                    </p:panelGrid>
+                    <p:commandButton value="Filtrar Ordenes" action="#{usuarioController.conseguirItems()}" disabled="#{usuarioController.filtroActivo}"  update=":growl,datalist,pfiltrouser" />
+                    <p:commandButton value="Reiniciar" action="#{usuarioController.reiniciarOrdenes()}"   update="datalist,pfiltrouser"/>
+
+                </p:panel>
+                <p:dataTable id="datalist" value="#{usuarioController.items}" var="item"
+                             selectionMode="single" selection="#{usuarioController.selected}"
+                             paginator="true"
+                             rowKey="#{item.idusuario}"
+                             rows="5"
+                             rowsPerPageTemplate="5,10,20,30,40,50"
+                             >
+                    <f:facet name="header">
+                        <h:panelGrid columns="1" styleClass="panelNoBorder" >
+                            <h:outputText id="output" value="Grupo Producto #{usuarioController.grupoOrden} / #{usuarioController.maximaPagina} " />
+                            <h:inputHidden id="txt2" value="#{usuarioController.grupoOrden}" />
+                            <p:slider for="txt2" display="output" style="width: 200px" displayTemplate="Buscar Grupo # {value}" minValue="1" maxValue="#{usuarioController.maximaPagina}" >
+                                <p:ajax update="datalist" process="@this,txt2" listener="#{usuarioController.conseguirItemsGrupo()}" />
+                            </p:slider>
+                        </h:panelGrid>
+
+                    </f:facet>
+
+                    <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                    <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleOrdenes.ListUsuarioTitle_idusuario}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idusuario}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleOrdenes.ListUsuarioTitle_nombres}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nombres}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleOrdenes.ListUsuarioTitle_apellidos}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.apellidos}"/>
+                    </p:column>
+                    <!--
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleOrdenes.ListUsuarioTitle_email}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.email}"/>
+                    </p:column>
+                    -->
+                   <!--
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleOrdenes.ListUsuarioTitle_password}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.password}"/>
+                    </p:column>
+                   -->
+                   
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleOrdenes.ListUsuarioTitle_tipodocumento}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.tipodocumento eq 1 ? 'CC':'NA'}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleOrdenes.ListUsuarioTitle_numerodocumento}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.numerodocumento}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleOrdenes.ListUsuarioTitle_iddireccion}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.direccion.numerodireccion}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleOrdenes.ListUsuarioTitle_username}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.username}"/>
+                    </p:column>
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleOrdenes.ListUsuarioTitle_telefono}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.telefono}"/>
+                    </p:column>
+                   <!--
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleOrdenes.ListUsuarioTitle_compraencolombia}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.compraencolombia}"/>
+                    </p:column>
+                   -->
+                    <p:column>
+                        <f:facet name="header">
+                            <h:outputText value="#{bundleOrdenes.ListUsuarioTitle_idcategoria}"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idcategoria.nombreCategoria}"/>
+                    </p:column>
+                    <f:facet name="footer">
+                        <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundleOrdenes.Create}" actionListener="#{usuarioController.prepareCreate}" update=":UsuarioCreateForm" oncomplete="PF('UsuarioCreateDialog').show()"/>
+                        <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundleOrdenes.View}" update=":UsuarioViewForm" oncomplete="PF('UsuarioViewDialog').show()" disabled="#{empty usuarioController.selected}"/>
+                        <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundleOrdenes.Edit}" update=":UsuarioEditForm" oncomplete="PF('UsuarioEditDialog').show()" disabled="#{empty usuarioController.selected}"/>
+                        <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundleOrdenes.Delete}" actionListener="#{usuarioController.destroy}" update=":growl,datalist" disabled="#{empty usuarioController.selected}"/>
+                    </f:facet>
+                </p:dataTable>
+
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema xmlns:pr="http://www.kallsony.com/entidad/producto" xmlns:cp="http://www.kallsony.com/entidad/campania" targetNamespace="http://www.kallsony.com/entidad/campania" xmlns="http://www.w3.org/2001/XMLSchema">
+  <import schemaLocation="mockCampaniasPortSOAP11Binding?WSDL&amp;interface=CampaniasPortSOAP11Binding&amp;part=Producto.xsd" namespace="http://www.kallsony.com/entidad/producto" />
+  <complexType name="Campania">
+    <sequence>
+      <element minOccurs="0" name="idCampania" type="int" />
+      <element minOccurs="0" name="nombreCampania" type="string" />
+      <element minOccurs="0" name="fechaInicioCampania" type="dateTime" />
+      <element minOccurs="0" name="fechaFinCampania" type="dateTime" />
+      <element minOccurs="0" name="estadoCampania" type="boolean" />
+      <element minOccurs="0" name="imagenCampania" type="string" />
+      <element minOccurs="0" name="valorCampania" type="double" />
+      <element name="listaProductosCampanias" type="cp:ProductosCampanias" />
+    </sequence>
+  </complexType>
+  <complexType name="ProductoCampania">
+    <sequence>
+      <element minOccurs="0" name="descuentoCampania" type="int" />
+      <element minOccurs="0" name="productoCampania" type="pr:Producto" />
+    </sequence>
+  </complexType>
+  <complexType name="ProductosCampanias">
+    <sequence>
+      <element minOccurs="0" maxOccurs="unbounded" name="productoCampania" type="cp:ProductoCampania" />
+    </sequence>
+  </complexType>
+</schema>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WL5G3N0:definitions xmlns:WL5G3N2="http://www.kallsony.com/util/falta" xmlns:WL5G3N1="http://www.kallsony.com/operacion/registrarcompra" xmlns:WL5G3N4="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:WL5G3N3="http://www.kallsony.com/final/operacion/registrarcompra" targetNamespace="http://www.kallsony.com/final/operacion/registrarcompra" xmlns:WL5G3N0="http://schemas.xmlsoap.org/wsdl/">
+  <WL5G3N0:documentation>
+        http://DiegoPC:8001/soa-infra/services/default/ProjectCompras!1.0/Compra.wsdl
+    </WL5G3N0:documentation>
+  <WL5G3N0:types>
+    <xsd:schema xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.kallsony.com/final/operacion/registrarcompra" xmlns:wkrcf="http://www.kallsony.com/util/falta" xmlns:wkrc="http://www.kallsony.com/operacion/registrarcompra" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" elementFormDefault="qualified" targetNamespace="http://www.kallsony.com/final/operacion/registrarcompra" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:import schemaLocation="http://192.168.2.6:7002/OSBKallsonys/ProxyService/ProxyCompra?SCHEMA%2FOSBCompras%2FXSD%2FXMLSchema_-649387378" namespace="http://www.kallsony.com/operacion/registrarcompra" />
+      <xsd:import schemaLocation="http://192.168.2.6:7002/OSBKallsonys/ProxyService/ProxyCompra?SCHEMA%2FOSBCompras%2FXSD%2FXMLSchema_-188216133" namespace="http://www.kallsony.com/util/falta" />
+    </xsd:schema>
+  </WL5G3N0:types>
+  <WL5G3N0:message name="Compra_Entrada">
+    <WL5G3N0:part name="partEntrada" element="WL5G3N1:registrarCompraEntrada" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="Compra_Salida">
+    <WL5G3N0:part name="partSalida" element="WL5G3N1:registrarCompraSalida" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="Compra_Falta">
+    <WL5G3N0:part name="partFalta" element="WL5G3N2:falta" />
+  </WL5G3N0:message>
+  <WL5G3N0:portType name="PortCompra">
+    <WL5G3N0:operation name="registrarCompra">
+      <WL5G3N0:input message="WL5G3N3:Compra_Entrada" />
+      <WL5G3N0:output message="WL5G3N3:Compra_Salida" />
+      <WL5G3N0:fault name="FaltaCompra" message="WL5G3N3:Compra_Falta" />
+    </WL5G3N0:operation>
+  </WL5G3N0:portType>
+  <WL5G3N0:binding name="PortCompraSOAP11Binding" type="WL5G3N3:PortCompra">
+    <WL5G3N4:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <WL5G3N0:operation name="registrarCompra">
+      <WL5G3N4:operation soapAction="http://www.kallsony.com/final/operacion/registrarcompra/registrarCompra" style="document" />
+      <WL5G3N0:input>
+        <WL5G3N4:body use="literal" parts="partEntrada" />
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N4:body use="literal" parts="partSalida" />
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="FaltaCompra">
+        <WL5G3N4:fault use="literal" name="FaltaCompra" namespace="" />
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+  </WL5G3N0:binding>
+  <WL5G3N0:service name="Service1">
+    <WL5G3N0:port name="PortCompra_pt" binding="WL5G3N3:PortCompraSOAP11Binding">
+      <WL5G3N4:address location="http://DiegoPC:7002/OSBKallsonys/ProxyService/ProxyCompra" />
+    </WL5G3N0:port>
+  </WL5G3N0:service>
+</WL5G3N0:definitions>

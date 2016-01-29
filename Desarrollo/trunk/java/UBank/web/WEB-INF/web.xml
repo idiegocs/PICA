@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <context-param>
+        <param-name>javax.faces.PROJECT_STAGE</param-name>
+        <param-value>Development</param-value>
+    </context-param>
+    <context-param>
+        <param-name>org.richfaces.skin</param-name>
+        <param-value>deepMarine</param-value>
+    </context-param>
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>/faces/*</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+    <!-- Protected Areas -->
+    <error-page>
+        <error-code>401</error-code>
+        <location>/error_login.html</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error_login.html</location>
+    </error-page>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/error_login.html</location>
+    </error-page>
+    <security-constraint>
+        <display-name>Constrain ADMIN</display-name>
+        <web-resource-collection>
+            <web-resource-name>Unicamente Admin</web-resource-name>
+            <description>Paginas protegidas admin</description>
+            <url-pattern>/faces/pages/protegidas/admin/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>ADMINROLE</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>Constrain USER</display-name>
+        <web-resource-collection>
+            <web-resource-name>Users and admins</web-resource-name>
+            <description/>
+            <url-pattern>/faces/pages/protegidas/user/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>USERROLE</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <!-- Allowed Roles -->
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>BancoJAAS</realm-name>
+        <form-login-config>
+            <form-login-page>/login.html</form-login-page>
+            <form-error-page>/error_login.html</form-error-page>
+        </form-login-config>
+    </login-config>
+    <security-role>
+        <role-name>ADMINROLE</role-name>
+    </security-role>
+    <security-role>
+        <role-name>USERROLE</role-name>
+    </security-role>
+</web-app>

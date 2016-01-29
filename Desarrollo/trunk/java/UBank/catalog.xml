@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://DiegoPC:8088/mockMainframeAdapterSOAP" uri="src/conf/xml-resources/web-service-references/mockMainframeAdapterSOAP_1/wsdl/DiegoPC_8088/mockMainframeAdapterSOAP"/>
+    <system systemId="http://diegopc:8088/mockMainframeAdapterSOAP?WSDL" uri="src/conf/xml-resources/web-service-references/mockMainframeAdapterSOAP_3/wsdl/diegopc_8088/mockMainframeAdapterSOAP.wsdl"/>
+    <system systemId="http://diegopc:8088/mockMainframeAdapterSOAP?WSDL&amp;interface=MainframeAdapterSOAP&amp;part=OperacionesCuenta.xsd" uri="src/conf/xml-resources/web-service-references/mockMainframeAdapterSOAP_3/wsdl/diegopc_8088/mockMainframeAdapterSOAP.WSDL_interface_MainframeAdapterSOAP_part_OperacionesCuenta.xsd"/>
+    <system systemId="http://diegopc:8088/mockMainframeAdapterSOAP?WSDL&amp;interface=MainframeAdapterSOAP&amp;part=RespuestaGeneral.xsd" uri="src/conf/xml-resources/web-service-references/mockMainframeAdapterSOAP_3/wsdl/diegopc_8088/mockMainframeAdapterSOAP.WSDL_interface_MainframeAdapterSOAP_part_RespuestaGeneral.xsd"/>
+    <system systemId="http://diegopc:8088/mockMainframeAdapterSOAP?WSDL&amp;interface=MainframeAdapterSOAP&amp;part=Cuenta.xsd" uri="src/conf/xml-resources/web-service-references/mockMainframeAdapterSOAP_3/wsdl/diegopc_8088/mockMainframeAdapterSOAP.WSDL_interface_MainframeAdapterSOAP_part_Cuenta.xsd"/>
+    <system systemId="http://diegopc:8088/mockMainframeAdapterSOAP?WSDL&amp;interface=MainframeAdapterSOAP&amp;part=Cliente.xsd" uri="src/conf/xml-resources/web-service-references/mockMainframeAdapterSOAP_3/wsdl/diegopc_8088/mockMainframeAdapterSOAP.WSDL_interface_MainframeAdapterSOAP_part_Cliente.xsd"/>
+</catalog>

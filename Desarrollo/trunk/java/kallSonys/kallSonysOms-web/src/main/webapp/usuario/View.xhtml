@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UsuarioViewDlg" widgetVar="UsuarioViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleOrdenes.ViewUsuarioTitle}">
+            <h:form id="UsuarioViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{usuarioController.selected != null}">
+                        <h:outputText value="#{bundleOrdenes.ViewUsuarioLabel_idusuario}"/>
+                        <h:outputText value="#{usuarioController.selected.idusuario}" title="#{bundleOrdenes.ViewUsuarioTitle_idusuario}"/>
+                        <h:outputText value="#{bundleOrdenes.ViewUsuarioLabel_nombres}"/>
+                        <h:outputText value="#{usuarioController.selected.nombres}" title="#{bundleOrdenes.ViewUsuarioTitle_nombres}"/>
+                        <h:outputText value="#{bundleOrdenes.ViewUsuarioLabel_apellidos}"/>
+                        <h:outputText value="#{usuarioController.selected.apellidos}" title="#{bundleOrdenes.ViewUsuarioTitle_apellidos}"/>
+                        
+                       <h:outputText value="#{bundleOrdenes.ViewUsuarioLabel_tipodocumento}"/>
+                        <h:outputText value="#{usuarioController.selected.tipodocumento eq 1 ? 'CC':'NA'}" title="#{bundleOrdenes.ViewUsuarioTitle_tipodocumento}"/>
+                        <h:outputText value="#{bundleOrdenes.ViewUsuarioLabel_numerodocumento}"/>
+                        <h:outputText value="#{usuarioController.selected.numerodocumento}" title="#{bundleOrdenes.ViewUsuarioTitle_numerodocumento}"/>
+                        <h:outputText value="#{bundleOrdenes.ViewUsuarioLabel_iddireccion}"/>
+                        <h:outputText value="#{usuarioController.selected.direccion.numerodireccion}" title="#{bundleOrdenes.ViewUsuarioTitle_iddireccion}"/>
+                        <h:outputText value="#{bundleOrdenes.ViewUsuarioLabel_username}"/>
+                        <h:outputText value="#{usuarioController.selected.username}" title="#{bundleOrdenes.ViewUsuarioTitle_username}"/>
+                        <h:outputText value="#{bundleOrdenes.ViewUsuarioLabel_telefono}"/>
+                        <h:outputText value="#{usuarioController.selected.telefono}" title="#{bundleOrdenes.ViewUsuarioTitle_telefono}"/>
+                      <h:outputText value="#{bundleOrdenes.ViewUsuarioLabel_idcategoria}"/>
+                      <h:outputText value="#{usuarioController.selected.idcategoria.nombreCategoria}" title="#{bundleOrdenes.ViewUsuarioTitle_idcategoria}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundleOrdenes.Close}" onclick="UsuarioViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

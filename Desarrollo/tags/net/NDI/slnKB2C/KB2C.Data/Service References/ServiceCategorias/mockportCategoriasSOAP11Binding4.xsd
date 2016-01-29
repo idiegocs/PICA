@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema xmlns:ccs="http://www.kallsony.com/operacion/consultarcategorias" xmlns:cat="http://www.kallsony.com/entidad/categoria" xmlns:flc="http://www.kallsony.com/util/filtro" elementFormDefault="qualified" targetNamespace="http://www.kallsony.com/operacion/consultarcategorias" xmlns="http://www.w3.org/2001/XMLSchema">
+  <import schemaLocation="mockportCategoriasSOAP11Binding?WSDL&amp;interface=portCategoriasSOAP11Binding&amp;part=Categoria.xsd" namespace="http://www.kallsony.com/entidad/categoria" />
+  <import schemaLocation="mockportCategoriasSOAP11Binding?WSDL&amp;interface=portCategoriasSOAP11Binding&amp;part=Filtro.xsd" namespace="http://www.kallsony.com/util/filtro" />
+  <complexType name="ConsultaCategoriaEntrada">
+    <sequence>
+      <element name="filtroCategoria" type="flc:Filtro" />
+    </sequence>
+  </complexType>
+  <complexType name="ConsultaCategoriaSalida">
+    <sequence>
+      <element minOccurs="0" name="listaCategorias" type="cat:Categorias" />
+    </sequence>
+  </complexType>
+  <element name="consultaCategoriaEntrada" type="ccs:ConsultaCategoriaEntrada" />
+  <element name="consultaCategoriaSalida" type="ccs:ConsultaCategoriaSalida" />
+</schema>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sun-web-app PUBLIC "-//Sun Microsystems, Inc.//DTD GlassFish Application Server 3.0 Servlet 3.0//EN" "http://www.sun.com/software/appserver/dtds/sun-web-app_3_0-0.dtd">
+<sun-web-app error-url="">
+  <security-role-mapping>
+    <role-name>ADMIN</role-name>
+    <group-name>ADMINISTRADOR</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>PROD_ADMIN</role-name>
+    <group-name>PRODUCTOS_ADMON</group-name>
+  </security-role-mapping>
+   <security-role-mapping>
+    <role-name>PROD_CONSUL</role-name>
+    <group-name>PRODUCTOS_CONSULTA</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>CAMP_ADMIN</role-name>
+    <group-name>CAMPANNAS</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>ORDE_ADMIN</role-name>
+    <group-name>ORDENES_ADMON</group-name>
+  </security-role-mapping>
+   <security-role-mapping>
+    <role-name>ORDE_CONSUL</role-name>
+    <group-name>ORDENES_CONSULTA</group-name>
+  </security-role-mapping>
+  <security-role-mapping>
+    <role-name>CLIE_ADMIN</role-name>
+    <group-name>CLIENTES_ADMON</group-name>
+  </security-role-mapping>
+
+</sun-web-app>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<definitions
+     name="Productos"
+     targetNamespace="http://www.kallsony.com/final/operacion/consultaproducto"
+     xmlns="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:wkcoc="http://www.kallsony.com/operacion/consultaproducto"
+     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+     xmlns:tns="http://www.kallsony.com/final/operacion/consultaproducto"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+     xmlns:wkcuf="http://www.kallsony.com/util/falta"
+    >
+    <documentation>
+        <abstractWSDL>http://DiegoPC:8001/soa-infra/services/default/ProjectProductos!1.0/Producto.wsdl</abstractWSDL>
+    </documentation>
+    <types>
+        <xsd:schema targetNamespace="http://www.kallsony.com/final/operacion/consultaproducto">
+            <xsd:import schemaLocation="http://DiegoPC:8001/soa-infra/services/default/ProjectProductos/ServiceProductos?XSD=xsd/ConsultaProductos.xsd"
+                 namespace="http://www.kallsony.com/operacion/consultaproducto"/>
+            <xsd:import schemaLocation="http://DiegoPC:8001/soa-infra/services/default/ProjectProductos/ServiceProductos?XSD=xsd/Falta.xsd"
+                 namespace="http://www.kallsony.com/util/falta"/>
+        </xsd:schema>
+    </types>
+    <message name="ProductoDetalle_ConsultaProductoEntrada">
+        <part name="ConsultaProductosEntrada" element="wkcoc:consultaProductoEntrada"/>
+    </message>
+    <message name="ProductoDetalle_ConsultaProductoSalida">
+        <part name="ConsultaProductosSalida" element="wkcoc:consultaProductoSalida"/>
+    </message>
+    <message name="ProductoDeralle_FaltaProducto">
+        <part name="ConsultaProductosFalta" element="wkcuf:falta"/>
+    </message>
+    <portType name="ProductosPort">
+        <operation name="ConsultarProductos">
+            <input message="tns:ProductoDetalle_ConsultaProductoEntrada"/>
+            <output message="tns:ProductoDetalle_ConsultaProductoSalida"/>
+            <fault name="FaltaProductos" message="tns:ProductoDeralle_FaltaProducto"/>
+        </operation>
+    </portType>
+    <binding name="ProductosPortSOAP11Binding" type="tns:ProductosPort">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <operation name="ConsultarProductos">
+            <soap:operation style="document" soapAction="pro:Producto/ConsultarProductos"/>
+            <input>
+                <soap:body use="literal" parts="ConsultaProductosEntrada"/>
+            </input>
+            <output>
+                <soap:body use="literal" parts="ConsultaProductosSalida"/>
+            </output>
+            <fault name="FaltaProductos">
+                <soap:fault name="FaltaProductos" use="literal"/>
+            </fault>
+        </operation>
+    </binding>
+    <service name="ServiceProductos">
+        <port name="ProductosPort_pt" binding="tns:ProductosPortSOAP11Binding">
+            <soap:address location="http://localhost:8001/soa-infra/services/default/ProjectProductos/ServiceProductos"/>
+        </port>
+    </service>
+</definitions>

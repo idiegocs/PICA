@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CampaniaViewDlg" widgetVar="CampaniaViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleCampanias.ViewCampaniaTitle}">
+            <h:form id="CampaniaViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{campaniaController.selected != null}">
+                        <h:outputText value="#{bundleCampanias.ViewCampaniaLabel_idCampania}"/>
+                        <h:outputText value="#{campaniaController.selected.idCampania}" title="#{bundleCampanias.ViewCampaniaTitle_idCampania}"/>
+                        <h:outputText value="#{bundleCampanias.ViewCampaniaLabel_nombre}"/>
+                        <h:outputText value="#{campaniaController.selected.nombre}" title="#{bundleCampanias.ViewCampaniaTitle_nombre}"/>
+                        <h:outputText value="#{bundleCampanias.ViewCampaniaLabel_fechaInicio}"/>
+                        <h:outputText value="#{campaniaController.selected.fechaInicio}" title="#{bundleCampanias.ViewCampaniaTitle_fechaInicio}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundleCampanias.ViewCampaniaLabel_fechaFin}"/>
+                        <h:outputText value="#{campaniaController.selected.fechaFin}" title="#{bundleCampanias.ViewCampaniaTitle_fechaFin}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundleCampanias.ViewCampaniaLabel_estado}"/>
+                        <p:selectBooleanCheckbox value="#{campaniaController.selected.estado}" disabled="true"/>
+                        <h:outputText value="#{bundleCampanias.ViewCampaniaLabel_nombreImagenCampania}"/>
+                        <h:outputText value="#{campaniaController.selected.nombreImagenCampania}" title="#{bundleCampanias.ViewCampaniaTitle_nombreImagenCampania}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundleCampanias.Close}" onclick="CampaniaViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

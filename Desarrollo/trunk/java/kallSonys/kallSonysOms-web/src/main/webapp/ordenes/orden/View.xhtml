@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="OrdenViewDlg" widgetVar="OrdenViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleOrdenes.ViewOrdenTitle}">
+            <h:form id="OrdenViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{ordenController.selected != null}">
+                        <h:outputText value="#{bundleOrdenes.ViewOrdenLabel_idorden}"/>
+                        <h:outputText value="#{ordenController.selected.idorden}" title="#{bundleOrdenes.ViewOrdenTitle_idorden}"/>
+                        <h:outputText value="#{bundleOrdenes.ViewOrdenLabel_fechaorden}"/>
+                        <h:outputText value="#{ordenController.selected.fechaorden}" title="#{bundleOrdenes.ViewOrdenTitle_fechaorden}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundleOrdenes.ViewOrdenLabel_cantitemorden}"/>
+                        <h:outputText value="#{ordenController.selected.cantitemorden}" title="#{bundleOrdenes.ViewOrdenTitle_cantitemorden}"/>
+                        <h:outputText value="#{bundleOrdenes.ViewOrdenLabel_totalorden}"/>
+                        <h:outputText value="#{ordenController.selected.totalorden}" title="#{bundleOrdenes.ViewOrdenTitle_totalorden}">
+                            <f:convertNumber  pattern="¤ #,##0.00" currencySymbol="$" type="currency"/>
+                        </h:outputText>
+                        <h:outputText value="#{bundleOrdenes.ViewOrdenLabel_numpreorden}"/>
+                        <h:outputText value="#{ordenController.selected.numpreorden}" title="#{bundleOrdenes.ViewOrdenTitle_numpreorden}"/>
+                        <h:outputText value="#{bundleOrdenes.ViewOrdenLabel_idestadoorden}"/>
+                        <h:outputText value="#{ordenController.selected.idestadoorden.nombreestadoorden}" title="#{bundleOrdenes.ViewOrdenTitle_idestadoorden}"/>
+                        <h:outputText value="#{bundleOrdenes.ViewOrdenLabel_idcliente}"/>
+                        <h:outputText value="#{ordenController.selected.idcliente.nombres} #{ordenController.selected.idcliente.apellidos}" title="#{bundleOrdenes.ViewOrdenTitle_idcliente}"/>
+                    </p:panelGrid>
+                    <p:dataTable id="enviolist" value="#{ordenController.selected.envioList}" var="item"  >
+                        <f:facet name="header">
+                            <h:outputText id="output" value="Datos Envio" />
+
+
+                        </f:facet>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Nombre"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nombres}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Apellido"/>
+                            </f:facet>
+                            <h:outputText value="#{item.apellidos}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Email"/>
+                            </f:facet>
+                            <h:outputText value="#{item.email}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Direccion"/>
+                            </f:facet>
+                            <h:outputText value="#{item.numerodrirec}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Telefono"/>
+                            </f:facet>
+                            <h:outputText value="#{item.telefono}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Tarjeta"/>
+                            </f:facet>
+                            <h:outputText value="#{item.numerotarjeta}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Envio"/>
+                            </f:facet>
+                            <h:outputText value="#{item.companiaenvio}"/>
+                        </p:column>
+                    </p:dataTable>
+                    <p:commandButton value="#{bundleOrdenes.Close}" onclick="OrdenViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

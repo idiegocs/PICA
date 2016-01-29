@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EstadoOrdenCreateDlg" widgetVar="EstadoOrdenCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundleOrdenes.CreateEstadoOrdenTitle}">
+            <h:form id="EstadoOrdenCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{estadoOrdenController.selected != null}">
+                        <p:outputLabel value="#{bundleOrdenes.CreateEstadoOrdenLabel_idestadoorden}" for="idestadoorden" />
+                        <p:inputText id="idestadoorden" value="#{estadoOrdenController.selected.idestadoorden}" title="#{bundleOrdenes.CreateEstadoOrdenTitle_idestadoorden}" required="true" requiredMessage="#{bundleOrdenes.CreateEstadoOrdenRequiredMessage_idestadoorden}"/>
+                        <p:outputLabel value="#{bundleOrdenes.CreateEstadoOrdenLabel_nombreestadoorden}" for="nombreestadoorden" />
+                        <p:inputText id="nombreestadoorden" value="#{estadoOrdenController.selected.nombreestadoorden}" title="#{bundleOrdenes.CreateEstadoOrdenTitle_nombreestadoorden}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{estadoOrdenController.create}" value="#{bundleOrdenes.Save}" update="display,:EstadoOrdenListForm:datalist,:growl" oncomplete="handleSubmit(args,'EstadoOrdenCreateDialog');"/>
+                    <p:commandButton value="#{bundleOrdenes.Cancel}" onclick="EstadoOrdenCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
